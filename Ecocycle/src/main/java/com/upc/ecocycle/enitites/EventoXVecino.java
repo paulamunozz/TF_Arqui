@@ -24,11 +24,4 @@ public class EventoXVecino {
 
     @Column(name = "comentario", nullable = false)
     private Integer comentario;
-
-    @Column(name = "vecino_id_vecino", nullable = false)
-    private Integer vecinoIdVecino;
-
-    @Column(name = "evento_id_evento", nullable = false)
-    private Integer eventoIdEvento;
-
 }
