@@ -10,13 +10,13 @@ import lombok.Setter;
 @Table(name = "vecino")
 public class Vecino {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vecino", nullable = false)
     private Integer id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_vecino", nullable = false)
-    private Usuario usuario;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private Usuario idUsuario;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;

@@ -3,10 +3,9 @@ package com.upc.ecocycle.controllers;
 import com.upc.ecocycle.dto.UsuarioDTO;
 import com.upc.ecocycle.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -15,7 +14,28 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/ecocycle/usuario/registrar")
-    public UsuarioDTO registrar(@RequestBody UsuarioDTO usuarioDTO) {
+    public String registrar(@RequestBody UsuarioDTO usuarioDTO) {
         return usuarioService.registrar(usuarioDTO);
+    }
+
+    @PutMapping("/ecocycle/usuario/modificar")
+    public String modificar(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.modificar(usuarioDTO);
+    }
+
+    @DeleteMapping("/ecocycle/usuario/eliminar")
+    public String eliminar(@RequestBody String codigoUsuario) {
+        return usuarioService.eliminar(codigoUsuario);
+    }
+
+    @GetMapping("/ecocycle/usuario/buscar")
+    public UsuarioDTO buscarPorCodigo(@RequestBody String codigoUsuario) {
+        return usuarioService.buscarPorCodigo(codigoUsuario);
+    }
+
+
+    @GetMapping("/ecocycle/usuario/listar")
+    public List<UsuarioDTO> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
 }
