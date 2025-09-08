@@ -9,4 +9,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     Optional<Usuario> findByCodigo(String codigoUsuario);
 
     boolean existsByCodigo(String codigo);
+
+    void deleteByCodigo(String codigo);
 }

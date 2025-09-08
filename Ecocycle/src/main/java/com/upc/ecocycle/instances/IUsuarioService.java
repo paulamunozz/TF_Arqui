@@ -7,7 +7,7 @@ import java.util.List;
 public interface IUsuarioService {
     public String registrar(UsuarioDTO usuarioDTO);
     public String modificar(UsuarioDTO usuarioDTO);
-    public String eliminar(String codigoUsuario);
+    public String eliminar(String codigo);
     public UsuarioDTO buscarPorCodigo(String codigoUsuario);
     public List<UsuarioDTO> listarUsuarios();
 }

@@ -4,6 +4,7 @@ import com.upc.ecocycle.dto.UsuarioDTO;
 import com.upc.ecocycle.enitites.Usuario;
 import com.upc.ecocycle.instances.IUsuarioService;
 import com.upc.ecocycle.repositories.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,7 @@ public class UsuarioService implements IUsuarioService {
         }
     }
 
-    @Override
+    @Override @Transactional
     public String eliminar(String codigoUsuario) {
         if (codigoUsuario.isBlank()) {
             return "Seleccione un usuario";
@@ -68,7 +69,7 @@ public class UsuarioService implements IUsuarioService {
             return "El usuario no existe";
         }
         else {
-            usuarioRepository.deleteById(codigoUsuario);
+            usuarioRepository.deleteByCodigo(codigoUsuario);
             return "Usuario eliminado correctamente";
         }
     }
