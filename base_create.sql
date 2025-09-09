@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2025-09-07 20:01:49.424
+-- Last modification date: 2025-09-08 15:43:21.018
 
 -- tables
 -- Table: Evento
@@ -70,6 +70,7 @@ CREATE TABLE Vecino (
     Distrito varchar(50)  NOT NULL,
     Direccion varchar(150)  NOT NULL,
     PuntajeTotal int  NOT NULL,
+    Puesto int  NOT NULL,
     Icono int  NOT NULL,
     CONSTRAINT Vecino_pk PRIMARY KEY (ID_Vecino)
 );

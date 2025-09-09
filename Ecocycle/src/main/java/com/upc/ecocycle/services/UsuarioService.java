@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,22 +39,25 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public String modificar(UsuarioDTO usuarioDTO) {
-        if (usuarioDTO.getCodigo().isBlank()|| usuarioDTO.getContrasena().isBlank()) {
-            return "Ingrese todos los datos";
-        }
-        else if (!usuarioDTO.getCodigo().matches("[0-9]{8}")) {
-            return "Ingrese su DNI correctamente";
-        }
-        else if (!usuarioRepository.existsByCodigo(usuarioDTO.getCodigo())) {
+        if (usuarioDTO.getIdUsuario() == null || !usuarioRepository.existsById(usuarioDTO.getIdUsuario())) {
             return "El usuario no existe";
         }
-        else  {
-            Usuario usuario = modelMapper.map(usuarioDTO, Usuario.class);
-            usuario.setId(usuarioRepository.findByCodigo(usuarioDTO.getCodigo()).get().getId());
-            usuarioRepository.save(usuario);
-            return "Usuario modificado correctamente";
+
+        Usuario usuario = usuarioRepository.findById(usuarioDTO.getIdUsuario()).orElse(null);
+        usuario.setCodigo((usuarioDTO.getCodigo() != null && !usuarioDTO.getCodigo().isBlank())
+                        ? usuarioDTO.getCodigo() : usuario.getCodigo());
+
+        usuario.setContrasena((usuarioDTO.getContrasena() != null && !usuarioDTO.getContrasena().isBlank())
+                        ? usuarioDTO.getContrasena() : usuario.getContrasena());
+
+        if (!usuario.getCodigo().matches("[0-9]{8}")) {
+            return "Ingrese su DNI correctamente";
         }
+
+        usuarioRepository.save(usuario);
+        return "Usuario modificado correctamente";
     }
+
 
     @Override @Transactional
     public String eliminar(String codigoUsuario) {
@@ -76,9 +78,13 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public UsuarioDTO buscarPorCodigo(String codigoUsuario) {
-        return usuarioRepository.findByCodigo(codigoUsuario)
-                .map(usuario -> modelMapper.map(usuario, UsuarioDTO.class))
-                .orElse(null);
+        Usuario usuario = usuarioRepository.findByCodigo(codigoUsuario);
+        if (usuario == null) {
+            return null;
+        }
+        else  {
+            return modelMapper.map(usuario, UsuarioDTO.class);
+        }
     }
 
 
@@ -87,5 +93,10 @@ public class UsuarioService implements IUsuarioService {
         return usuarioRepository.findAll().stream()
                 .map(usuario -> modelMapper.map(usuario, UsuarioDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UsuarioDTO buscarPorId(Integer idUsuario) {
+        return usuarioRepository.findById(idUsuario).map(usuario -> modelMapper.map(usuario, UsuarioDTO.class)).orElse(null);
     }
 }

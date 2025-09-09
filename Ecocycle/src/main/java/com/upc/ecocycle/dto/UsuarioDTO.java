@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioDTO {
-    private String idUsuario;
+    private Integer idUsuario;
     private String codigo;
     private String contrasena;
 }

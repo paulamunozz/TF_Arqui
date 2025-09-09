@@ -33,7 +33,6 @@ public class UsuarioController {
         return usuarioService.buscarPorCodigo(codigoUsuario);
     }
 
-
     @GetMapping("/ecocycle/usuario/listar")
     public List<UsuarioDTO> listarUsuarios() {
         return usuarioService.listarUsuarios();

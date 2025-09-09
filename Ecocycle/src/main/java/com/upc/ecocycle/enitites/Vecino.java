@@ -16,7 +16,7 @@ public class Vecino {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario idUsuario;
+    private Usuario usuario;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -38,5 +38,8 @@ public class Vecino {
 
     @Column(name = "icono", nullable = false)
     private Integer icono;
+
+    @Column(name = "puesto")
+    private Integer puesto;
 
 }

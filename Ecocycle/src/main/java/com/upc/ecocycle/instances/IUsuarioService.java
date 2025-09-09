@@ -3,11 +3,13 @@ package com.upc.ecocycle.instances;
 import com.upc.ecocycle.dto.UsuarioDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUsuarioService {
-    public String registrar(UsuarioDTO usuarioDTO);
-    public String modificar(UsuarioDTO usuarioDTO);
-    public String eliminar(String codigo);
-    public UsuarioDTO buscarPorCodigo(String codigoUsuario);
-    public List<UsuarioDTO> listarUsuarios();
+    String registrar(UsuarioDTO usuarioDTO);
+    String modificar(UsuarioDTO usuarioDTO);
+    String eliminar(String codigo);
+    UsuarioDTO buscarPorCodigo(String codigoUsuario);
+    UsuarioDTO buscarPorId(Integer idUsuario);
+    List<UsuarioDTO> listarUsuarios();
 }
