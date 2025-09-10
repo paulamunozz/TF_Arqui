@@ -73,22 +73,41 @@ public class VecinoService implements IVecinoService {
 
     @Transactional
     @Override
-    public String eliminar(Integer idVecino) {
-        if (idVecino==null) {
-            return "Seleccione un vecino";
+    public String eliminar(Integer idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+        if (usuario == null) {
+            return "No se encontró el usuario";
         }
-        else {
-            return vecinoRepository.findById(idVecino).map(vecino ->
-            {
-                vecinoRepository.delete(vecino);
-                return "Vecino eliminado exitosamente";
-            }).orElse("No se encontró al vecino");
+
+        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+        if (vecino == null) {
+            return "No se encontró el vecino";
         }
+
+        vecinoRepository.delete(vecino);
+        return "Vecino eliminado exitosamente";
     }
 
     @Override
     public VecinoDTO buscarPorCodigo(String codigoUsuario) {
+        if (codigoUsuario.isBlank()) {
+            return null;
+        }
+
         Usuario usuario = usuarioRepository.findByCodigo(codigoUsuario);
+        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+
+        if (vecino == null) {
+            return null;
+        }
+        else  {
+            return modelMapper.map(vecino, VecinoDTO.class);
+        }
+    }
+
+    @Override
+    public VecinoDTO buscarPorId(Integer idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
         Vecino vecino = vecinoRepository.findByUsuario(usuario);
 
         if (vecino == null) {
@@ -101,13 +120,20 @@ public class VecinoService implements IVecinoService {
 
     @Transactional
     @Override
-    public String actualizacionPuntos(Integer idVecino, Integer puntos) {
-        return vecinoRepository.findById(idVecino).map(vecino ->
-        {
-            vecino.setPuntajetotal(vecino.getPuntajetotal() + puntos);
-            vecinoRepository.save(vecino);
-            return "Puntaje actualizado exitosamente";
-        }).orElse("No se encontró al vecino");
+    public String actualizacionPuntos(Integer idUsuario, Integer puntos) {
+        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
+        if (usuario == null) {
+            return "No se encontró el usuario";
+        }
+
+        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+        if (vecino == null) {
+            return "No se encontró el vecino";
+        }
+
+        vecino.setPuntajetotal(vecino.getPuntajetotal() + puntos);
+        vecinoRepository.save(vecino);
+        return "Puntaje actualizado exitosamente";
     }
 
     @Override

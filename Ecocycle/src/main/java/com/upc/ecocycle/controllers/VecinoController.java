@@ -32,19 +32,24 @@ public class VecinoController {
         return vecinoService.eliminar(idVecino);
     }
 
-    @GetMapping("/ecocycle/vecino/buscar")
+    @GetMapping("/ecocycle/vecino/buscarXcodigo")
     public VecinoDTO buscarPorCodigo(@RequestBody String codigoUsuario) {
         return vecinoService.buscarPorCodigo(codigoUsuario);
     }
 
-    @GetMapping("/ecocycle/vecino/actualizarPuntos")
-    public List<VecinoDTO> actualizacionPuntos(@RequestBody JsonNode datos) {
+    @GetMapping("/ecocycle/vecino/buscarXid")
+    public VecinoDTO buscarPorId(@RequestBody Integer idUsuario){
+        return vecinoService.buscarPorId(idUsuario);
+    }
+
+    @PutMapping("/ecocycle/vecino/actualizarPuntos")
+    public VecinoDTO actualizacionPuntos(@RequestBody JsonNode datos) {
         Integer idVecino = datos.get("idVecino").asInt();
         Integer puntos = datos.get("puntos").asInt();
         vecinoService.actualizacionPuntos(idVecino, puntos);
 
         vecinoService.calcularPuestos();
-        return vecinoService.rankingFiltrado(null, null, 0, 200);
+        return vecinoService.buscarPorId(idVecino);
     }
 
     @GetMapping("/ecocycle/vecino/listar")

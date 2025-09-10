@@ -13,4 +13,5 @@ public class MunicipalidadDTO {
     private Integer usuarioId;
     private String distrito;
     private Integer puntajetotal;
+    private Integer puesto;
 }

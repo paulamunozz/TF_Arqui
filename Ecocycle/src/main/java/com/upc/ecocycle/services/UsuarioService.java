@@ -65,6 +65,10 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public UsuarioDTO buscarPorCodigo(String codigoUsuario) {
+        if (codigoUsuario.isBlank()) {
+            return null;
+        }
+
         Usuario usuario = usuarioRepository.findByCodigo(codigoUsuario);
         if (usuario == null) {
             return null;

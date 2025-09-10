@@ -2,10 +2,14 @@ package com.upc.ecocycle.instances;
 
 import com.upc.ecocycle.dto.MunicipalidadDTO;
 
-public interface IMunicipalidadService {
-    String registrar(MunicipalidadDTO municipalidadDTO);
-    String modificar(MunicipalidadDTO municipalidadDTO);
-    String eliminar(Integer idMunicipalidad);
-    MunicipalidadDTO buscarPorId(Integer idMunicipalidad);
+import java.util.List;
 
+public interface IMunicipalidadService {
+    String actualizacionPuntos(Integer idUsuario, Integer puntos);
+    void calcularPuestos();
+    MunicipalidadDTO buscarPorId(Integer idUsuario);
+    MunicipalidadDTO buscarPorCodigo(String codigoUsuario);
+    MunicipalidadDTO buscarPorDistrito(String distrito);
+    List<MunicipalidadDTO> listarMunicipalidades();
+    List<MunicipalidadDTO> rankingMunicipalidades();
 }

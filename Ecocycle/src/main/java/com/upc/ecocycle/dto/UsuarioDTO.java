@@ -18,7 +18,7 @@ public class UsuarioDTO {
     private Integer idUsuario;
 
     @NotBlank(groups = Create.class, message="Tiene que ingresar su código")
-    @Pattern(groups = {Create.class, Update.class}, regexp = "(^$|\\d{8})", message = "El formato del código ingresado es incorrecto")
+    @Pattern(groups = {Create.class, Update.class}, regexp = "(^$|^.{8}$)", message = "El formato del código ingresado es incorrecto")
     private String codigo;
 
     @NotBlank(groups = Create.class, message="Tiene que ingresar su contraseña")
