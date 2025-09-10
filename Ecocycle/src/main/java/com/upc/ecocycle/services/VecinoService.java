@@ -22,15 +22,7 @@ public class VecinoService implements IVecinoService {
 
     @Override
     public String registrar(VecinoDTO vecinoDTO) {
-        if (vecinoDTO.getUsuarioId() == null
-                || vecinoDTO.getNombre() == null || vecinoDTO.getNombre().isBlank()
-                || vecinoDTO.getDireccion() == null || vecinoDTO.getDireccion().isBlank()
-                || vecinoDTO.getDistrito() == null || vecinoDTO.getDistrito().isBlank()
-                || vecinoDTO.getGenero() == null || vecinoDTO.getGenero().isBlank()
-                || vecinoDTO.getEdad() == null || vecinoDTO.getEdad().isBlank()) {
-            return "Ingrese todos los datos";
-        }
-        else if (!usuarioRepository.existsById(vecinoDTO.getUsuarioId())) {
+        if (!usuarioRepository.existsById(vecinoDTO.getUsuarioId())) {
             return "El usuario no existe";
         }
         else if (vecinoRepository.existsByUsuario(usuarioRepository.findById(
@@ -38,14 +30,14 @@ public class VecinoService implements IVecinoService {
         {
             return "Este vecino ya existe";
         }
-        else if (vecinoDTO.getEdad().matches("[0-9]")) {
-            return "Formato de edad invalido";
-        }
         else {
             Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
             Usuario usuario = usuarioRepository.findById(vecinoDTO.getUsuarioId()).orElse(null);
             vecino.setUsuario(usuario);
-            vecino.setEdad(Integer.parseInt(vecinoDTO.getEdad()));
+            vecino.setEdad(vecinoDTO.getEdad());
+            vecino.setPuntajetotal(0);
+            vecino.setIcono(0);
+            vecino.setPuesto(0);
             vecinoRepository.save(vecino);
             return "Vecino registrado exitosamente";
         }
@@ -67,20 +59,14 @@ public class VecinoService implements IVecinoService {
                         ? vecinoDTO.getNombre() : vecino.getNombre());
         vecino.setGenero((vecinoDTO.getGenero() != null && !vecinoDTO.getGenero().isBlank())
                         ? vecinoDTO.getGenero() : vecino.getGenero());
-        vecino.setEdad((vecinoDTO.getEdad() != null && !vecinoDTO.getEdad().isBlank())
-                        ? Integer.parseInt(vecinoDTO.getEdad()) : vecino.getEdad());
+        vecino.setEdad((vecinoDTO.getEdad() != null)
+                        ? vecinoDTO.getEdad() : vecino.getEdad());
         vecino.setDistrito((vecinoDTO.getDistrito() != null && !vecinoDTO.getDistrito().isBlank())
                         ? vecinoDTO.getDistrito() : vecino.getDistrito());
         vecino.setDireccion((vecinoDTO.getDireccion() != null && !vecinoDTO.getDireccion().isBlank())
                         ? vecinoDTO.getDireccion() : vecino.getDireccion());
         vecino.setIcono(vecinoDTO.getIcono() != null ? vecinoDTO.getIcono() : vecino.getIcono());
 
-        if (vecinoDTO.getEdad().matches("[0-9]")) {
-            return "Formato de edad invalido";
-        }
-        else if (Integer.parseInt(vecinoDTO.getEdad()) < 0 || Integer.parseInt(vecinoDTO.getEdad()) >200) {
-            return "Formato de edad invalido";
-        }
         vecinoRepository.save(vecino);
         return "Vecino modificado exitosamente";
     }

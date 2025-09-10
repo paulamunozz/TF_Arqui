@@ -3,7 +3,10 @@ package com.upc.ecocycle.controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.VecinoDTO;
 import com.upc.ecocycle.services.VecinoService;
+import com.upc.ecocycle.validations.Create;
+import com.upc.ecocycle.validations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +16,14 @@ public class VecinoController {
     @Autowired private VecinoService vecinoService;
 
     @PostMapping("/ecocycle/vecino/registrar")
-    public String registrar(@RequestBody VecinoDTO vecinoDTO) {
-        return vecinoService.registrar(vecinoDTO);
+    public String registrar(@RequestBody @Validated(Create.class) VecinoDTO vecinoDTO) {
+        String mensaje = vecinoService.registrar(vecinoDTO);
+        vecinoService.calcularPuestos();
+        return mensaje;
     }
 
     @PutMapping("/ecocycle/vecino/modificar")
-    public String modificar(@RequestBody VecinoDTO vecinoDTO) {
+    public String modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 
