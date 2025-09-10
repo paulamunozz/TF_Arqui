@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2025-09-08 15:43:21.018
+-- Last modification date: 2025-09-10 04:57:17.528
 
 -- tables
 -- Table: Evento
@@ -37,6 +37,7 @@ CREATE TABLE Municipalidad (
     ID_Usuario int  NOT NULL,
     Distrito varchar(50)  NOT NULL,
     PuntajeTotal int  NOT NULL,
+    Puesto int  NOT NULL,
     CONSTRAINT Municipalidad_pk PRIMARY KEY (ID_Municipalidad)
 );
 
