@@ -34,7 +34,6 @@ public class VecinoService implements IVecinoService {
             Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
             Usuario usuario = usuarioRepository.findById(vecinoDTO.getUsuarioId()).orElse(null);
             vecino.setUsuario(usuario);
-            vecino.setEdad(vecinoDTO.getEdad());
             vecino.setPuntajetotal(0);
             vecino.setIcono(0);
             vecino.setPuesto(0);

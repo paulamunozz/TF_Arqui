@@ -15,11 +15,11 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento", nullable = false)
-    private Integer id;
+    private Integer idEvento;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_municipalidad", nullable = false)
-    private Municipalidad idMunicipalidad;
+    private Municipalidad municipalidad;
 
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
