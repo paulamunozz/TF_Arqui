@@ -12,15 +12,15 @@ public class EventoXVecino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_exv", nullable = false)
-    private Integer id;
+    private Integer idEXV;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_evento", nullable = false)
-    private Evento idEvento;
+    private Evento eventoId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_vecino", nullable = false)
-    private Vecino idVecino;
+    private Vecino vecinoId;
 
     @Column(name = "comentario", nullable = false)
     private Integer comentario;
