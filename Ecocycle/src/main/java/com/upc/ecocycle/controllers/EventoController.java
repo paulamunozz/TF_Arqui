@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -38,15 +39,24 @@ public class EventoController {
         return eventoService.buscarPorId(idEvento);
     }
 
+    @PutMapping("/ecocycle/evento/actualizarPesoActual")
+    public EventoDTO actualizarPesoActual(@RequestBody JsonNode datos) {
+        Integer idEvento = datos.get("idEvento").asInt();
+        BigDecimal pesoTotal = BigDecimal.valueOf(datos.get("pesoTotal").asDouble());
+
+        return  eventoService.actualizarPesoActual(idEvento, pesoTotal);
+    }
+
     @GetMapping("/ecocycle/evento/listarYfiltrar")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String nombre = filtros.has("nombre") ? filtros.get("nombre").asText() : null;
+        String tipo = filtros.has("tipo") ? filtros.get("tipo").asText() : null;
         String estado   = filtros.has("estado") ? filtros.get("estado").asText() : null;
         String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
-        LocalDate fechaInicio = filtros.has("fechaInicio") ? LocalDate.parse(filtros.get("fechaInicio").asText(), formatter) : null;
-        LocalDate fechaFin = filtros.has("fechaFin") ? LocalDate.parse(filtros.get("fechaFin").asText(), formatter) : null;
-        return eventoService.listarEventos(nombre, estado, distrito, fechaInicio, fechaFin);
+        LocalDate fechaInicio = filtros.has("fechaInicio") ? LocalDate.parse(filtros.get("fechaInicio").asText(), formatter) : LocalDate.MIN;
+        LocalDate fechaFin = filtros.has("fechaFin") ? LocalDate.parse(filtros.get("fechaFin").asText(), formatter) : LocalDate.MAX;
+        return eventoService.listarEventos(nombre, tipo, estado, distrito, fechaInicio, fechaFin);
     }
 }

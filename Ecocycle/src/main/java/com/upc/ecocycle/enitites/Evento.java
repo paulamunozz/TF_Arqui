@@ -1,6 +1,8 @@
 package com.upc.ecocycle.enitites;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,23 +19,43 @@ public class Evento {
     @Column(name = "id_evento", nullable = false)
     private Integer idEvento;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_municipalidad", nullable = false)
     private Municipalidad municipalidad;
 
+    @Size(max = 50)
+    @NotNull
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
+    @Size(max = 300)
+    @NotNull
     @Column(name = "descripcion", nullable = false, length = 300)
     private String descripcion;
 
-    @Column(name = "pesoobjetivo", nullable = false, precision = 5, scale = 2)
-    private BigDecimal pesoobjetivo;
+    @NotNull
+    @Column(name = "peso_objetivo", nullable = false, precision = 5, scale = 2)
+    private BigDecimal pesoObjetivo;
 
-    @Column(name = "fechainicio", nullable = false)
-    private LocalDate fechainicio;
+    @NotNull
+    @Column(name = "fecha_inicio", nullable = false)
+    private LocalDate fechaInicio;
 
-    @Column(name = "fechafin", nullable = false)
-    private LocalDate fechafin;
+    @NotNull
+    @Column(name = "fecha_fin", nullable = false)
+    private LocalDate fechaFin;
 
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "tipo", nullable = false, length = 50)
+    private String tipo;
+
+    @NotNull
+    @Column(name = "situacion", nullable = false)
+    private Boolean situacion = false;
+
+    @NotNull
+    @Column(name = "peso_actual", nullable = false, precision = 5, scale = 2)
+    private BigDecimal pesoActual;
 }

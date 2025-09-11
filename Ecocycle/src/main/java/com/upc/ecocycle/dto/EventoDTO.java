@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -36,13 +35,21 @@ public class EventoDTO {
 
     @NotNull(groups = Create.class, message="Tiene que ingresar el peso objetivo")
     @Digits(integer = 5, fraction = 2, message="Formato incorrecto de peso objetivo")
-    private BigDecimal pesoobjetivo;
+    private BigDecimal pesoObjetivo;
+
+    private BigDecimal pesoActual;
 
     @NotNull(groups = Create.class, message="Tiene que ingresar la fecha de inicio")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fechainicio;
+    private LocalDate fechaInicio;
 
     @NotNull(groups = Create.class, message="Tiene que ingresar la fecha de fin")
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate fechafin;
+    private LocalDate fechaFin;
+
+    @NotNull(groups = Create.class, message="Tiene que ingresar el tipo de reciclaje")
+    @Size(groups = {Create.class, Update.class}, max = 50, message="El tipo no puede superar los 50 caracteres")
+    private String tipo;
+
+    private Boolean situacion;
 }
