@@ -15,11 +15,11 @@ public class Reciclaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_reciclaje", nullable = false)
-    private Integer id;
+    private Integer idReciclaje;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_vecino", nullable = false)
-    private Vecino idVecino;
+    private Vecino vecino;
 
     @Column(name = "peso", nullable = false, precision = 5, scale = 2)
     private BigDecimal peso;
@@ -35,5 +35,4 @@ public class Reciclaje {
 
     @Column(name = "puntaje", nullable = false)
     private Integer puntaje;
-
 }

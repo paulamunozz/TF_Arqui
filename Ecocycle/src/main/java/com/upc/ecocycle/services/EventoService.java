@@ -40,8 +40,7 @@ public class EventoService implements IEventoService {
         }
         else {
             Evento evento = modelMapper.map(eventoDTO, Evento.class);
-            Municipalidad municipalidad = municipalidadRepository.findById(eventoDTO.getMunicipalidadId()).orElse(null);
-            evento.setMunicipalidad(municipalidad);
+            evento.setMunicipalidad(municipalidadRepository.findById(eventoDTO.getMunicipalidadId()).orElse(null));
             evento.setSituacion(false);
             eventoRepository.save(evento);
             return "Evento registrado exitosamente";

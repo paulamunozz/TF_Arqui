@@ -20,6 +20,4 @@ public interface VecinoRepository extends JpaRepository<Vecino, Integer> {
     List<Vecino> findRankingFiltrado(String distrito, String genero, Integer edadMin, Integer edadMax);
 
     boolean existsByUsuario(Usuario usuario);
-
-    Integer id(Integer id);
 }

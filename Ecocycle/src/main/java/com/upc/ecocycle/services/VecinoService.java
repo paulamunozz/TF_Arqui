@@ -83,7 +83,7 @@ public class VecinoService implements IVecinoService {
             return "No se encontró el vecino";
         }
 
-        vecinoRepository.delete(vecino);
+        vecinoRepository.deleteById(vecino.getId());
         return "Vecino eliminado exitosamente";
     }
 
