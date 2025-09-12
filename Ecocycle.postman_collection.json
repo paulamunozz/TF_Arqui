@@ -1,0 +1,1031 @@
+{
+	"info": {
+		"_postman_id": "415a1570-2cc1-4070-bcdd-3a7498dca450",
+		"name": "Ecocycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48181431",
+		"_collection_link": "https://u202312321-1040848.postman.co/workspace/Paula's-Workspace~a2481e86-8b0c-4d85-8095-f2f46b78846e/collection/48181431-415a1570-2cc1-4070-bcdd-3a7498dca450?action=share&source=collection_link&creator=48181431"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigo\":\"\",\r\n    \"contrasena\": \"a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": 2,\r\n    \"codigo\": \"\",\r\n    \"contrasena\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "12345678",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por código",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "12345678",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/buscarXcodigo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"buscarXcodigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/usuario/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"usuario",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vecino",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\":6,\r\n    \"nombre\":\"Alli\",\r\n    \"genero\":\"F\",\r\n    \"edad\": null,\r\n    \"distrito\": \"San Borja\",\r\n    \"direccion\": \"Mzn 123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\":4,\r\n    \"nombre\":\"Fressia\",\r\n    \"genero\":\"                     \",\r\n    \"edad\": 201,\r\n    \"distrito\": \"\",\r\n    \"direccion\": \"Mzn 458\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Puntos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idVecino\":3,\r\n    \"puntos\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/actualizarPuntos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"actualizarPuntos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "9",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por código",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "12345678",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/buscarXcodigo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"buscarXcodigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"distrito\":\"San Borja\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/ranking",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"ranking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reciclaje",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\": 3,\r\n    \"peso\": 51,\r\n    \"tipo\": \"Papel\",\r\n    \"metodo\": \"Alguno\",\r\n    \"fecha\": \"11/09/2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "3",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReciclaje\": 1,\r\n    \"peso\": 69,\r\n    \"tipo\": \"Papel\",\r\n    \"metodo\": \"Alguno\",\r\n    \"fecha\": \"11/09/2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logro",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\":3,\r\n    \"nombre\":\"Primer registro de reciclaje!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/logro/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"logro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Municipalidad",
+			"item": [
+				{
+					"name": "Actualizar Puntos",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\":6,\r\n    \"puntos\":10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/actualizarPuntos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"actualizarPuntos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por código",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "SR112025",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/buscarXcodigo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"buscarXcodigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "7",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"distrito\":\"San Borja\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/ranking",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"ranking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evento",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\":6,\r\n    \"nombre\":\"Alli\",\r\n    \"genero\":\"F\",\r\n    \"edad\": null,\r\n    \"distrito\": \"San Borja\",\r\n    \"direccion\": \"Mzn 123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\":4,\r\n    \"nombre\":\"Fressia\",\r\n    \"genero\":\"                     \",\r\n    \"edad\": 201,\r\n    \"distrito\": \"\",\r\n    \"direccion\": \"Mzn 458\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar peso actual",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEvento\":2,\r\n    \"pesoTotal\":100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/actualizarPesoActual",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"actualizarPesoActual"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar y filtrar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/listarYfiltrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"listarYfiltrar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evento x Vecino",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventoId\":2,\r\n    \"vecinoId\":3,\r\n    \"comentario\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por evento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/listarEXVPorEvento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"listarEXVPorEvento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEXV\":1,\r\n    \"comentario\":\"yeii\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
