@@ -34,6 +34,10 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         else if(!vecinoRepository.existsById(eventoXVecinoDTO.getVecinoId())) {
             return "Este vecino no existe";
         }
+        else if (eventoXVecinoRepository.existsByEvento(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null))
+        && eventoXVecinoRepository.existsByVecino(vecinoRepository.findById(eventoXVecinoDTO.getVecinoId()).orElse(null))) {
+            return "Este EXV ya existe";
+        }
 
         EventoXVecino eventoXVecino = modelMapper.map(eventoXVecinoDTO, EventoXVecino.class);
         eventoXVecino.setEvento(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null));

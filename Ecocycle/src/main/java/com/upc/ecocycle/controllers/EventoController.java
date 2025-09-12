@@ -60,4 +60,9 @@ public class EventoController {
 
         return eventoService.listarEventos(nombre, tipo, estado, distrito, fechaInicio, fechaFin);
     }
+
+    @GetMapping("/ecocycle/evento/listarPorVecino")
+    public List<EventoDTO> listarEventosPorVecino(@RequestBody Integer idVecino){
+        return eventoService.listarEventosPorVecino(idVecino);
+    }
 }

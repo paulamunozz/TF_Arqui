@@ -2,16 +2,19 @@ package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.dto.EventoDTO;
-import com.upc.ecocycle.enitites.Municipalidad;
+import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoService;
 import com.upc.ecocycle.repositories.EventoRepository;
+import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.MunicipalidadRepository;
+import com.upc.ecocycle.repositories.VecinoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,6 +25,10 @@ public class EventoService implements IEventoService {
     EventoRepository eventoRepository;
     @Autowired
     MunicipalidadRepository municipalidadRepository;
+    @Autowired
+    EventoXVecinoRepository  eventoXVecinoRepository;
+    @Autowired
+    VecinoRepository vecinoRepository;
     @Autowired
     ModelMapper modelMapper;
 
@@ -151,5 +158,16 @@ public class EventoService implements IEventoService {
                 .collect(Collectors.toList());
 
         return lista.stream().map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EventoDTO> listarEventosPorVecino(Integer idVecino) {
+        List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByVecino(vecinoRepository.findById(idVecino).orElse(null)).stream().toList();
+        List<Evento> eventos = new ArrayList<>();
+
+        for(EventoXVecino exv: listaEXV) {
+            eventos.add(exv.getEvento());
+        }
+        return eventos.stream().map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
     }
 }
