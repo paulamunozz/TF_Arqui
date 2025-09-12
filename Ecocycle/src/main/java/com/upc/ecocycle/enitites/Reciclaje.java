@@ -30,8 +30,8 @@ public class Reciclaje {
     @Column(name = "metodo", nullable = false, length = 50)
     private String metodo;
 
-    @Column(name = "fechahora", nullable = false)
-    private LocalDate fechahora;
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
 
     @Column(name = "puntaje", nullable = false)
     private Integer puntaje;

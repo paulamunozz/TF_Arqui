@@ -81,13 +81,16 @@ public class EventoService implements IEventoService {
 
     @Override
     public String eliminar(Integer idEvento) {
-        Evento evento = eventoRepository.findById(idEvento).orElse(null);
-        if (evento == null) {
-            return "No se encontró el evento";
+        if (idEvento==null) {
+            return "Seleccione un evento";
         }
-
-        eventoRepository.delete(evento);
-        return "Evento eliminado exitosamente";
+        else if (!eventoRepository.existsById(idEvento)) {
+            return "El evento no existe";
+        }
+        else {
+            eventoRepository.deleteById(idEvento);
+            return "Evento eliminado correctamente";
+        }
     }
 
     @Override

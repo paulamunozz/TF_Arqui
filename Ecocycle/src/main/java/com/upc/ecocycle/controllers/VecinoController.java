@@ -62,8 +62,8 @@ public class VecinoController {
     public List<VecinoDTO> rankingFiltrado(@RequestBody JsonNode filtros) {
         vecinoService.calcularPuestos();
 
-        String distrito = filtros.has("distrito") ? filtros.get("distrito").asText(null) : null;
-        String genero   = filtros.has("genero") ? filtros.get("genero").asText(null) : null;
+        String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
+        String genero = filtros.has("genero") ? filtros.get("genero").asText() : null;
         Integer edadMin = filtros.has("edadMin") ? filtros.get("edadMin").asInt() : 0;
         Integer edadMax = filtros.has("edadMax") ? filtros.get("edadMax").asInt() : 200;
 

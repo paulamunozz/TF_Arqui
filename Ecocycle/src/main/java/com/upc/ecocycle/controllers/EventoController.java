@@ -57,6 +57,7 @@ public class EventoController {
         String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
         LocalDate fechaInicio = filtros.has("fechaInicio") ? LocalDate.parse(filtros.get("fechaInicio").asText(), formatter) : LocalDate.MIN;
         LocalDate fechaFin = filtros.has("fechaFin") ? LocalDate.parse(filtros.get("fechaFin").asText(), formatter) : LocalDate.MAX;
+
         return eventoService.listarEventos(nombre, tipo, estado, distrito, fechaInicio, fechaFin);
     }
 }
