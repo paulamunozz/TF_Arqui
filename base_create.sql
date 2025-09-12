@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS public.evento_x_vecino
     id_exv integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     id_evento integer NOT NULL,
     id_vecino integer NOT NULL,
-    comentario integer,
+    comentario character varying(500) COLLATE pg_catalog."default",
     CONSTRAINT evento_x_vecino_pk PRIMARY KEY (id_exv)
 );
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS public.reciclaje
     peso numeric(5, 2) NOT NULL,
     tipo character varying(50) COLLATE pg_catalog."default" NOT NULL,
     metodo character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    fechahora date NOT NULL,
+    fecha date NOT NULL,
     puntaje integer NOT NULL,
     CONSTRAINT reciclaje_pk PRIMARY KEY (id_reciclaje)
 );
