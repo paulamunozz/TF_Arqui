@@ -1,8 +1,7 @@
 package com.upc.ecocycle.services;
 
-import com.upc.ecocycle.dto.EventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
-import com.upc.ecocycle.dto.LogroDTO;
+import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoXVecinoService;
 import com.upc.ecocycle.repositories.EventoRepository;
@@ -34,9 +33,21 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         else if(!vecinoRepository.existsById(eventoXVecinoDTO.getVecinoId())) {
             return "Este vecino no existe";
         }
-        else if (eventoXVecinoRepository.existsByEvento(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null))
-        && eventoXVecinoRepository.existsByVecino(vecinoRepository.findById(eventoXVecinoDTO.getVecinoId()).orElse(null))) {
-            return "Este EXV ya existe";
+        else if (eventoXVecinoRepository.existsByEventoAndVecino(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).get(),
+                vecinoRepository.findById(eventoXVecinoDTO.getVecinoId()).get())){
+            return "Este EXV no existe";
+        }
+
+        Evento evento = eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null);
+        EventoXVecino exv = eventoXVecinoRepository
+                .findByVecinoIdAndEventoTipo(eventoXVecinoDTO.getVecinoId(), evento.getTipo());
+
+        Evento eventoExistente = exv.getEvento();
+
+        if (eventoExistente.getFechaFin().isAfter(evento.getFechaInicio())
+        && eventoExistente.getFechaInicio().isBefore(evento.getFechaFin())) {
+            return "El vecino ya está registrado en un evento de tipo "
+                    + evento.getTipo() + " que aún está en curso.";
         }
 
         EventoXVecino eventoXVecino = modelMapper.map(eventoXVecinoDTO, EventoXVecino.class);

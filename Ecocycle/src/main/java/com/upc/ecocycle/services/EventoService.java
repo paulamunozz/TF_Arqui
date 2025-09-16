@@ -48,6 +48,7 @@ public class EventoService implements IEventoService {
         else {
             Evento evento = modelMapper.map(eventoDTO, Evento.class);
             evento.setMunicipalidad(municipalidadRepository.findById(eventoDTO.getMunicipalidadId()).orElse(null));
+            evento.setPesoActual(BigDecimal.ZERO);
             evento.setSituacion(false);
             eventoRepository.save(evento);
             return "Evento registrado exitosamente";
@@ -65,21 +66,10 @@ public class EventoService implements IEventoService {
                 ? eventoDTO.getNombre() : evento.getNombre());
         evento.setDescripcion((eventoDTO.getDescripcion() != null && !eventoDTO.getDescripcion().isBlank())
                 ? eventoDTO.getDescripcion() : evento.getDescripcion());
-        evento.setTipo((eventoDTO.getTipo() != null && !eventoDTO.getTipo().isBlank())
-                ? eventoDTO.getTipo() : evento.getTipo());
-        evento.setPesoObjetivo((eventoDTO.getPesoObjetivo() != null)
-                ? eventoDTO.getPesoObjetivo() : evento.getPesoObjetivo());
-        evento.setFechaInicio((eventoDTO.getFechaInicio() != null)
-                ? eventoDTO.getFechaInicio() : evento.getFechaInicio());
-        evento.setFechaFin((eventoDTO.getFechaFin() != null)
-                ? eventoDTO.getFechaFin() : evento.getFechaFin());
 
         if (eventoRepository.existsByNombre(eventoDTO.getNombre()) && !Objects.equals(evento.getNombre(), eventoDTO.getNombre()))
         {
             return "Este evento ya existe";
-        }
-        else if (evento.getFechaInicio().isAfter(evento.getFechaFin())) {
-            return "La fecha de inicio tiene que ser antes de la fecha de fin";
         }
 
         eventoRepository.save(evento);

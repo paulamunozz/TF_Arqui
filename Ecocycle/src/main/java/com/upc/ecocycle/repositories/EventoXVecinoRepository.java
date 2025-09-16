@@ -10,6 +10,7 @@ import java.util.List;
 public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, Integer> {
     List<EventoXVecino> findAllByEvento(Evento evento);
     List<EventoXVecino> findAllByVecino(Vecino vecino);
-    boolean existsByEvento(Evento evento);
-    boolean existsByVecino(Vecino vecino);
+    boolean existsByVecinoIdAndEventoTipo(Integer vecinoId, String tipo);
+    EventoXVecino findByVecinoIdAndEventoTipo(Integer vecinoId, String tipo);
+    boolean existsByEventoAndVecino(Evento evento, Vecino vecino);
 }

@@ -4,6 +4,8 @@ import com.upc.ecocycle.dto.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.enitites.Reciclaje;
 import com.upc.ecocycle.instances.IReciclajeService;
+import com.upc.ecocycle.repositories.EventoRepository;
+import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import org.modelmapper.ModelMapper;
@@ -22,6 +24,10 @@ public class ReciclajeService implements IReciclajeService {
     @Autowired
     VecinoRepository  vecinoRepository;
     @Autowired
+    EventoRepository eventoRepository;
+    @Autowired
+    EventoXVecinoRepository eventoXVecinoRepository;
+    @Autowired
     ModelMapper modelMapper;
 
     @Override
@@ -37,6 +43,11 @@ public class ReciclajeService implements IReciclajeService {
         Reciclaje reciclaje =  modelMapper.map(reciclajeDTO, Reciclaje.class);
         reciclaje.setPuntaje((int)Math.floor((reciclajeDTO.getPeso().divide(BigDecimal.TEN)).doubleValue()));
         reciclajeRepository.save(reciclaje);
+
+        if(eventoXVecinoRepository.existsByVecinoIdAndEventoTipo(reciclajeDTO.getVecinoId(), reciclajeDTO.getTipo()))
+        {
+
+        }
 
         return "Reciclaje registrado";
     }
