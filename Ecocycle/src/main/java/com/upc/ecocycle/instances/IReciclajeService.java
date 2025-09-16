@@ -12,5 +12,5 @@ public interface IReciclajeService {
     String eliminar(Integer idReciclaje);
     List<ReciclajeDTO> listarReciclajeVecino(Integer vecinoId);
     List<ReciclajeDTO> listarReciclajeDistrito(String distrito, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin, String genero, Integer edadMin, Integer edadMax);
-    List<CantidadReciclajeDTO> listarCantidadReciclaje();
+    List<CantidadReciclajeDTO> listarCantidadReciclaje(String distrito);
 }

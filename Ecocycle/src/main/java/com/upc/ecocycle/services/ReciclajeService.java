@@ -115,8 +115,8 @@ public class ReciclajeService implements IReciclajeService {
     }
 
     @Override
-    public List<CantidadReciclajeDTO> listarCantidadReciclaje() {
-        return reciclajeRepository.listarCantidadReciclaje().stream()
+    public List<CantidadReciclajeDTO> listarCantidadReciclaje(String distrito) {
+        return reciclajeRepository.listarCantidadReciclaje(distrito).stream()
                 .map(cantidadReciclajeDTO -> modelMapper
                         .map(cantidadReciclajeDTO, CantidadReciclajeDTO.class))
                 .collect(Collectors.toList());

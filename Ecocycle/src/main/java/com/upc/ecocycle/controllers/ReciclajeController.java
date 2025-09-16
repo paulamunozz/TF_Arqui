@@ -3,7 +3,6 @@ package com.upc.ecocycle.controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
-import com.upc.ecocycle.enitites.Reciclaje;
 import com.upc.ecocycle.services.ReciclajeService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
@@ -11,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController @RequestMapping
 public class ReciclajeController {
@@ -58,7 +55,7 @@ public class ReciclajeController {
     }
 
     @GetMapping("ecocycle/reciclaje/listarCantidadXTipo")
-    public List<CantidadReciclajeDTO> listarCantidadReciclaje() {
-        return reciclajeService.listarCantidadReciclaje();
+    public List<CantidadReciclajeDTO> listarCantidadReciclaje(@RequestBody(required = false) String distrito) {
+        return reciclajeService.listarCantidadReciclaje(distrito);
     }
 }
