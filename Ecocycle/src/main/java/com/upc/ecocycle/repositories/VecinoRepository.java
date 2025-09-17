@@ -20,4 +20,9 @@ public interface VecinoRepository extends JpaRepository<Vecino, Integer> {
     List<Vecino> findRankingFiltrado(String distrito, String genero, Integer edadMin, Integer edadMax);
 
     boolean existsByUsuario(Usuario usuario);
+
+    @Query("SELECT SUM(v.puntajetotal) " +
+            "FROM Vecino v " +
+            "WHERE v.distrito = :distrito")
+    Integer sumPuntosByMunicipalidad(String distrito);
 }

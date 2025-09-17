@@ -52,4 +52,11 @@ public class EventoDTO {
     private String tipo;
 
     private Boolean situacion;
+
+    @NotNull(groups = Create.class, message="Tiene que ingresar el la bonificación")
+    private Double bonificacion;
+
+    @NotNull(groups = Create.class, message="Tiene que ingresar el metodo de reciclaje")
+    @Size(groups = {Create.class, Update.class}, max = 50, message="El metodo no puede superar los 50 caracteres")
+    private String metodo;
 }

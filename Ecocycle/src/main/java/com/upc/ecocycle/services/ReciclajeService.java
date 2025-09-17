@@ -2,9 +2,10 @@ package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
+import com.upc.ecocycle.enitites.Evento;
+import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.enitites.Reciclaje;
 import com.upc.ecocycle.instances.IReciclajeService;
-import com.upc.ecocycle.repositories.EventoRepository;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
@@ -20,45 +21,59 @@ import java.util.stream.Collectors;
 @Service
 public class ReciclajeService implements IReciclajeService {
     @Autowired
-    ReciclajeRepository reciclajeRepository;
+    private ReciclajeRepository reciclajeRepository;
     @Autowired
-    VecinoRepository  vecinoRepository;
+    private VecinoRepository  vecinoRepository;
     @Autowired
-    EventoRepository eventoRepository;
+    private EventoXVecinoRepository eventoXVecinoRepository;
     @Autowired
-    EventoXVecinoRepository eventoXVecinoRepository;
-    @Autowired
-    ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     @Override
-    public String registrar(ReciclajeDTO reciclajeDTO) {
-        if(!vecinoRepository.existsById(reciclajeDTO.getVecinoId())) {
-            return "Este vecino no existe";
+    public ReciclajeDTO registrar(ReciclajeDTO reciclajeDTO) {
+        if (!vecinoRepository.existsById(reciclajeDTO.getVecinoId())) {
+            throw new RuntimeException("Este vecino no existe");
         }
-        else if (reciclajeDTO.getFecha().isAfter(LocalDate.now()))
-        {
-            return "No puede ingresar una fecha futura";
+        else if (reciclajeDTO.getFecha().isAfter(LocalDate.now())) {
+            throw new RuntimeException("No puede ingresar una fecha futura");
         }
 
-        Reciclaje reciclaje =  modelMapper.map(reciclajeDTO, Reciclaje.class);
-        reciclaje.setPuntaje((int)Math.floor((reciclajeDTO.getPeso().divide(BigDecimal.TEN)).doubleValue()));
+        Reciclaje reciclaje = modelMapper.map(reciclajeDTO, Reciclaje.class);
+
+        int puntaje = (int) Math.floor(
+                reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
+        );
+
+        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
+                reciclajeDTO.getVecinoId(),
+                reciclajeDTO.getTipo(),
+                reciclajeDTO.getMetodo()
+        );
+        if (exv != null && exv.getEvento() != null) {
+            Evento evento = exv.getEvento();
+            if ((evento.getFechaInicio().isBefore(reciclaje.getFecha()) || evento.getFechaInicio().isEqual(reciclaje.getFecha()))
+                    && (evento.getFechaFin().isAfter(reciclaje.getFecha()) || evento.getFechaFin().isEqual(reciclaje.getFecha()))) {
+                puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+            }
+        }
+
+        reciclaje.setPuntaje(puntaje);
         reciclajeRepository.save(reciclaje);
-
-        if(eventoXVecinoRepository.existsByVecinoIdAndEventoTipo(reciclajeDTO.getVecinoId(), reciclajeDTO.getTipo()))
-        {
-
-        }
-
-        return "Reciclaje registrado";
+        return modelMapper.map(reciclaje, ReciclajeDTO.class);
     }
 
     @Override
-    public String modificar(ReciclajeDTO reciclajeDTO) {
+    public ReciclajeDTO modificar(ReciclajeDTO reciclajeDTO) {
         if (!reciclajeRepository.existsById(reciclajeDTO.getIdReciclaje())) {
-            return "Reciclaje no existe";
+            throw new RuntimeException("Este registro no existe");
+        }
+        else if (reciclajeDTO.getFecha()!=null && reciclajeDTO.getFecha().isAfter(LocalDate.now()))
+        {
+            throw new RuntimeException("No puede ingresar una fecha futura");
         }
 
         Reciclaje reciclaje = reciclajeRepository.findById(reciclajeDTO.getIdReciclaje()).orElse(null);
+
         reciclaje.setPeso((reciclajeDTO.getPeso() != null)
                 ? reciclajeDTO.getPeso() : reciclaje.getPeso());
         reciclaje.setTipo(reciclajeDTO.getTipo() != null && !reciclajeDTO.getTipo().isBlank()
@@ -68,13 +83,28 @@ public class ReciclajeService implements IReciclajeService {
         reciclaje.setFecha(reciclajeDTO.getFecha() != null
                 ? reciclajeDTO.getFecha() : reciclaje.getFecha());
 
-        if (reciclaje.getFecha().isAfter(LocalDate.now()))
-        {
-            return "No puede ingresar una fecha futura";
+        int puntaje = (int) Math.floor(
+                reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
+        );
+
+        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
+                reciclaje.getVecino().getId(),
+                reciclaje.getTipo(),
+                reciclaje.getMetodo()
+        );
+
+        if (exv != null && exv.getEvento() != null) {
+            Evento evento = exv.getEvento();
+
+            if ((evento.getFechaInicio().isBefore(reciclaje.getFecha()) || evento.getFechaInicio().isEqual(reciclaje.getFecha()))
+                    && (evento.getFechaFin().isAfter(reciclaje.getFecha()) || evento.getFechaFin().isEqual(reciclaje.getFecha()))) {
+                puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+            }
         }
 
+        reciclaje.setPuntaje(puntaje);
         reciclajeRepository.save(reciclaje);
-        return "Reciclaje modificado";
+        return modelMapper.map(reciclaje, ReciclajeDTO.class);
     }
 
     @Override
@@ -92,6 +122,13 @@ public class ReciclajeService implements IReciclajeService {
     }
 
     @Override
+    public ReciclajeDTO buscarPorId(Integer idReciclaje) {
+        return reciclajeRepository.findById(idReciclaje)
+                .map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class))
+                .orElseThrow(() -> new RuntimeException("Registro no existe"));
+    }
+
+    @Override
     public List<ReciclajeDTO> listarReciclajeVecino(Integer vecinoId) {
         if (vecinoId == null) {
             return null;
@@ -100,7 +137,7 @@ public class ReciclajeService implements IReciclajeService {
             return null;
         }
 
-        return reciclajeRepository.findAllByVecino(vecinoRepository.findById(vecinoId).orElse(null))
+        return reciclajeRepository.findAllByVecinoId(vecinoId)
                 .stream().map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class))
                 .collect(Collectors.toList());
     }

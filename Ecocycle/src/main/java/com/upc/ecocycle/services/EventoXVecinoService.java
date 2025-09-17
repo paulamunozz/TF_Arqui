@@ -3,6 +3,7 @@ package com.upc.ecocycle.services;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
+import com.upc.ecocycle.enitites.Vecino;
 import com.upc.ecocycle.instances.IEventoXVecinoService;
 import com.upc.ecocycle.repositories.EventoRepository;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
@@ -27,48 +28,47 @@ public class EventoXVecinoService implements IEventoXVecinoService {
 
     @Override
     public String registrar(EventoXVecinoDTO eventoXVecinoDTO) {
-        if(!eventoRepository.existsById(eventoXVecinoDTO.getEventoId())){
-            return "Este evento no existe";
-        }
-        else if(!vecinoRepository.existsById(eventoXVecinoDTO.getVecinoId())) {
-            return "Este vecino no existe";
-        }
-        else if (eventoXVecinoRepository.existsByEventoAndVecino(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).get(),
-                vecinoRepository.findById(eventoXVecinoDTO.getVecinoId()).get())){
-            return "Este EXV no existe";
+        Evento evento = eventoRepository.findById(eventoXVecinoDTO.getEventoId())
+                .orElseThrow(() -> new RuntimeException("Este evento no existe"));
+        Vecino vecino = vecinoRepository.findById(eventoXVecinoDTO.getVecinoId())
+                .orElseThrow(() -> new RuntimeException("Este vecino no existe"));
+
+        if (eventoXVecinoRepository.existsByEventoAndVecino(evento, vecino)) {
+            return "Ya se ha registrado en este evento";
         }
 
-        Evento evento = eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null);
-        EventoXVecino exv = eventoXVecinoRepository
-                .findByVecinoIdAndEventoTipo(eventoXVecinoDTO.getVecinoId(), evento.getTipo());
+        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
+                eventoXVecinoDTO.getVecinoId(),
+                evento.getTipo(),
+                evento.getMetodo()
+        );
 
-        Evento eventoExistente = exv.getEvento();
+        if (exv != null) {
+            Evento eventoExistente = exv.getEvento();
 
-        if (eventoExistente.getFechaFin().isAfter(evento.getFechaInicio())
-        && eventoExistente.getFechaInicio().isBefore(evento.getFechaFin())) {
-            return "El vecino ya está registrado en un evento de tipo "
-                    + evento.getTipo() + " que aún está en curso.";
+            if (eventoExistente.getFechaFin().isAfter(evento.getFechaInicio())
+                    && eventoExistente.getFechaInicio().isBefore(evento.getFechaFin())) {
+                return "El vecino ya está en un evento de tipo " + evento.getTipo() +
+                        " y método " + evento.getMetodo() + " que aún está activo";
+            }
         }
 
         EventoXVecino eventoXVecino = modelMapper.map(eventoXVecinoDTO, EventoXVecino.class);
-        eventoXVecino.setEvento(eventoRepository.findById(eventoXVecinoDTO.getEventoId()).orElse(null));
-        eventoXVecino.setVecino(vecinoRepository.findById(eventoXVecinoDTO.getVecinoId()).orElse(null));
+        eventoXVecino.setEvento(evento);
+        eventoXVecino.setVecino(vecino);
         eventoXVecinoRepository.save(eventoXVecino);
-
         return "EXV registrado";
     }
 
     @Override
     public String modificar(EventoXVecinoDTO eventoXVecinoDTO) {
-        if(!eventoXVecinoRepository.existsById(eventoXVecinoDTO.getIdEXV())){
-            return "Este EXV no existe";
-        }
+        EventoXVecino eventoXVecino = eventoXVecinoRepository.findById(eventoXVecinoDTO.getIdEXV())
+                .orElseThrow(() -> new RuntimeException("Este EXV no existe"));
 
-        EventoXVecino eventoXVecino = eventoXVecinoRepository.findById(eventoXVecinoDTO.getIdEXV()).orElse(null);
         eventoXVecino.setComentario(eventoXVecinoDTO.getComentario());
         eventoXVecinoRepository.save(eventoXVecino);
 
-        return "EXV modificado";
+        return "Comentario modificado";
     }
 
     @Override

@@ -3,7 +3,10 @@ package com.upc.ecocycle.controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
+import com.upc.ecocycle.services.EventoService;
+import com.upc.ecocycle.services.MunicipalidadService;
 import com.upc.ecocycle.services.ReciclajeService;
+import com.upc.ecocycle.services.VecinoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +21,48 @@ import java.util.List;
 public class ReciclajeController {
     @Autowired
     private ReciclajeService reciclajeService;
+    @Autowired
+    private VecinoService vecinoService;
+    @Autowired
+    private MunicipalidadService municipalidadService;
+    @Autowired
+    private EventoService eventoService;
 
     @PostMapping("ecocycle/reciclaje/registrar")
-    public String registrar(@RequestBody @Validated(Create.class) ReciclajeDTO reciclajeDTO) {
-        return reciclajeService.registrar(reciclajeDTO);
+    public ReciclajeDTO registrar(@RequestBody @Validated(Create.class) ReciclajeDTO reciclajeDTO) {
+
+        ReciclajeDTO reciclaje = reciclajeService.registrar(reciclajeDTO);
+
+        vecinoService.actualizacionPuntos(reciclaje.getVecinoId());
+        vecinoService.calcularPuestos();
+        municipalidadService.actualizacionPuntos(vecinoService.buscarPorId(reciclaje.getVecinoId()).getDistrito());
+        municipalidadService.calcularPuestos();
+        eventoService.actualizarPesoActual();
+        return reciclaje;
     }
 
     @PutMapping("ecocycle/reciclaje/modificar")
-    public String modificar(@RequestBody @Validated(Update.class) ReciclajeDTO reciclajeDTO) {
-        return reciclajeService.modificar(reciclajeDTO);
+    public ReciclajeDTO modificar(@RequestBody @Validated(Update.class) ReciclajeDTO reciclajeDTO) {
+        ReciclajeDTO reciclaje = reciclajeService.modificar(reciclajeDTO);
+
+        vecinoService.actualizacionPuntos(reciclaje.getVecinoId());
+        vecinoService.calcularPuestos();
+        municipalidadService.actualizacionPuntos(vecinoService.buscarPorId(reciclaje.getVecinoId()).getDistrito());
+        municipalidadService.calcularPuestos();
+        eventoService.actualizarPesoActual();
+        return reciclaje;
     }
 
     @DeleteMapping("ecocycle/reciclaje/eliminar")
     public String eliminar(@RequestBody Integer idReciclaje) {
+        ReciclajeDTO reciclaje = reciclajeService.buscarPorId(idReciclaje);
+
+        vecinoService.actualizacionPuntos(reciclaje.getVecinoId());
+        vecinoService.calcularPuestos();
+        municipalidadService.actualizacionPuntos(vecinoService.buscarPorId(reciclaje.getVecinoId()).getDistrito());
+        municipalidadService.calcularPuestos();
+        eventoService.actualizarPesoActual();
+
         return reciclajeService.eliminar(idReciclaje);
     }
 

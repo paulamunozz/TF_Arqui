@@ -14,16 +14,6 @@ import java.util.List;
 public class MunicipalidadController {
     @Autowired MunicipalidadService municipalidadService;
 
-    @PutMapping("/ecocycle/municipalidad/actualizarPuntos")
-    public MunicipalidadDTO actualizacionPuntos(@RequestBody JsonNode datos) {
-        Integer idUsuario = datos.get("idUsuario").asInt();
-        Integer puntos = datos.get("puntos").asInt();
-
-        municipalidadService.actualizacionPuntos(idUsuario, puntos);
-        municipalidadService.calcularPuestos();
-        return municipalidadService.buscarPorId(idUsuario);
-    }
-
     @GetMapping("/ecocycle/municipalidad/buscarXid")
     public MunicipalidadDTO buscarPorId(@RequestBody Integer idUsuario) {
         return municipalidadService.buscarPorId(idUsuario);

@@ -1,13 +1,10 @@
 package com.upc.ecocycle.services;
 
-import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoService;
-import com.upc.ecocycle.repositories.EventoRepository;
-import com.upc.ecocycle.repositories.EventoXVecinoRepository;
-import com.upc.ecocycle.repositories.MunicipalidadRepository;
-import com.upc.ecocycle.repositories.VecinoRepository;
+import com.upc.ecocycle.repositories.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,30 +19,30 @@ import java.util.stream.Collectors;
 @Service
 public class EventoService implements IEventoService {
     @Autowired
-    EventoRepository eventoRepository;
+    private EventoRepository eventoRepository;
     @Autowired
-    MunicipalidadRepository municipalidadRepository;
+    private MunicipalidadRepository municipalidadRepository;
     @Autowired
-    EventoXVecinoRepository  eventoXVecinoRepository;
+    private EventoXVecinoRepository eventoXVecinoRepository;
     @Autowired
-    VecinoRepository vecinoRepository;
+    private ReciclajeRepository reciclajeRepository;
     @Autowired
-    ModelMapper modelMapper;
+    private VecinoRepository vecinoRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
 
     @Override
     public String registrar(EventoDTO eventoDTO) {
         if (!municipalidadRepository.existsById(eventoDTO.getMunicipalidadId())) {
             return "Esta municipalidad no existe";
-        }
-        else if (eventoRepository.existsByNombre(eventoDTO.getNombre()))
-        {
+        } else if (eventoRepository.existsByNombre(eventoDTO.getNombre())) {
             return "Este evento ya existe";
-        }
-        else if (eventoDTO.getFechaInicio().isAfter(eventoDTO.getFechaFin())) {
+        } else if (eventoDTO.getFechaInicio().isAfter(eventoDTO.getFechaFin())) {
             return "La fecha de inicio tiene que ser antes de la fecha de fin";
-        }
-        else {
+        } else if (eventoDTO.getBonificacion() <= 1) {
+            return "La bonificación tiene que ser mayor que 1";
+        } else {
             Evento evento = modelMapper.map(eventoDTO, Evento.class);
             evento.setMunicipalidad(municipalidadRepository.findById(eventoDTO.getMunicipalidadId()).orElse(null));
             evento.setPesoActual(BigDecimal.ZERO);
@@ -66,9 +63,10 @@ public class EventoService implements IEventoService {
                 ? eventoDTO.getNombre() : evento.getNombre());
         evento.setDescripcion((eventoDTO.getDescripcion() != null && !eventoDTO.getDescripcion().isBlank())
                 ? eventoDTO.getDescripcion() : evento.getDescripcion());
+        evento.setBonificacion((eventoDTO.getBonificacion() != null && eventoDTO.getBonificacion() > 1)
+                ? eventoDTO.getBonificacion() : evento.getBonificacion());
 
-        if (eventoRepository.existsByNombre(eventoDTO.getNombre()) && !Objects.equals(evento.getNombre(), eventoDTO.getNombre()))
-        {
+        if (eventoRepository.existsByNombre(eventoDTO.getNombre()) && !Objects.equals(evento.getNombre(), eventoDTO.getNombre())) {
             return "Este evento ya existe";
         }
 
@@ -78,13 +76,11 @@ public class EventoService implements IEventoService {
 
     @Override
     public String eliminar(Integer idEvento) {
-        if (idEvento==null) {
+        if (idEvento == null) {
             return "Seleccione un evento";
-        }
-        else if (!eventoRepository.existsById(idEvento)) {
+        } else if (!eventoRepository.existsById(idEvento)) {
             return "El evento no existe";
-        }
-        else {
+        } else {
             eventoRepository.deleteById(idEvento);
             return "Evento eliminado correctamente";
         }
@@ -96,28 +92,25 @@ public class EventoService implements IEventoService {
 
         if (evento == null) {
             return null;
-        }
-        else {
+        } else {
             return modelMapper.map(evento, EventoDTO.class);
         }
     }
 
-    @Override
-    public EventoDTO actualizarPesoActual(Integer idEvento, BigDecimal peso) {
-        Evento evento = eventoRepository.findById(idEvento).orElse(null);
-        evento.setPesoActual(evento.getPesoActual().add(peso));
-        eventoRepository.save(evento);
+    public void actualizarPesoActual() {
+        List<Evento> eventos = eventoRepository.findAll();
 
-        if(!evento.getSituacion())
-        {
-            BigDecimal resultado = evento.getPesoObjetivo().subtract(evento.getPesoActual());
-            if (resultado.compareTo(BigDecimal.ZERO) <= 0) {
-                evento.setSituacion(true);
+        for (Evento evento : eventos) {
+            if ((evento.getFechaInicio().isBefore(LocalDate.now()) || evento.getFechaInicio().isEqual(LocalDate.now()))
+                    && (evento.getFechaFin().isAfter(LocalDate.now()) || evento.getFechaFin().isEqual(LocalDate.now()))) {
+                BigDecimal peso = reciclajeRepository.calcularPesoPorEvento(evento.getIdEvento());
+                evento.setPesoActual(peso);
+
+                evento.setSituacion(peso.compareTo(evento.getPesoObjetivo()) >= 0);
+
                 eventoRepository.save(evento);
             }
         }
-
-        return modelMapper.map(evento, EventoDTO.class);
     }
 
     @Override

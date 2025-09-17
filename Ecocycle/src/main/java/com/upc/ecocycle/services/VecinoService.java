@@ -1,9 +1,11 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.VecinoDTO;
+import com.upc.ecocycle.enitites.Reciclaje;
 import com.upc.ecocycle.enitites.Usuario;
 import com.upc.ecocycle.enitites.Vecino;
 import com.upc.ecocycle.instances.IVecinoService;
+import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.UsuarioRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import jakarta.transaction.Transactional;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class VecinoService implements IVecinoService {
     @Autowired private VecinoRepository vecinoRepository;
     @Autowired private UsuarioRepository usuarioRepository;
+    @Autowired private ReciclajeRepository reciclajeRepository;
     @Autowired private ModelMapper modelMapper;
 
     @Override
@@ -72,13 +75,8 @@ public class VecinoService implements IVecinoService {
 
     @Transactional
     @Override
-    public String eliminar(Integer idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        if (usuario == null) {
-            return "No se encontró el usuario";
-        }
-
-        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+    public String eliminar(Integer idVecino) {
+        Vecino vecino = vecinoRepository.findById(idVecino).orElse(null);
         if (vecino == null) {
             return "No se encontró el vecino";
         }
@@ -105,9 +103,8 @@ public class VecinoService implements IVecinoService {
     }
 
     @Override
-    public VecinoDTO buscarPorId(Integer idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+    public VecinoDTO buscarPorId(Integer idVecino) {
+        Vecino vecino = vecinoRepository.findById(idVecino).orElse(null);
 
         if (vecino == null) {
             return null;
@@ -117,22 +114,17 @@ public class VecinoService implements IVecinoService {
         }
     }
 
-    @Transactional
     @Override
-    public String actualizacionPuntos(Integer idUsuario, Integer puntos) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        if (usuario == null) {
-            return "No se encontró el usuario";
-        }
+    @Transactional
+    public void actualizacionPuntos(Integer idVecino) {
+        Vecino vecino = vecinoRepository.findById(idVecino)
+                .orElseThrow(() -> new RuntimeException("No se encontró el vecino"));
 
-        Vecino vecino = vecinoRepository.findByUsuario(usuario);
-        if (vecino == null) {
-            return "No se encontró el vecino";
-        }
+        Integer puntajeTotal = reciclajeRepository.sumarPuntajePorVecino(idVecino);
+        if (puntajeTotal == null) { puntajeTotal = 0;}
 
-        vecino.setPuntajetotal(vecino.getPuntajetotal() + puntos);
+        vecino.setPuntajetotal(puntajeTotal);
         vecinoRepository.save(vecino);
-        return "Puntaje actualizado exitosamente";
     }
 
     @Override

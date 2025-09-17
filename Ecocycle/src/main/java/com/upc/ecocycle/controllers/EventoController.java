@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,14 +36,6 @@ public class EventoController {
     @GetMapping("/ecocycle/evento/buscarXid")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         return eventoService.buscarPorId(idEvento);
-    }
-
-    @PutMapping("/ecocycle/evento/actualizarPesoActual")
-    public EventoDTO actualizarPesoActual(@RequestBody JsonNode datos) {
-        Integer idEvento = datos.get("idEvento").asInt();
-        BigDecimal pesoTotal = BigDecimal.valueOf(datos.get("pesoTotal").asDouble());
-
-        return  eventoService.actualizarPesoActual(idEvento, pesoTotal);
     }
 
     @GetMapping("/ecocycle/evento/listarYfiltrar")

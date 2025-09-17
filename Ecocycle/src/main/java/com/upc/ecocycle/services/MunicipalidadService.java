@@ -6,6 +6,7 @@ import com.upc.ecocycle.enitites.Usuario;
 import com.upc.ecocycle.instances.IMunicipalidadService;
 import com.upc.ecocycle.repositories.MunicipalidadRepository;
 import com.upc.ecocycle.repositories.UsuarioRepository;
+import com.upc.ecocycle.repositories.VecinoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,25 +16,24 @@ import java.util.stream.Collectors;
 
 @Service
 public class MunicipalidadService implements IMunicipalidadService {
-    @Autowired MunicipalidadRepository municipalidadRepository;
-    @Autowired UsuarioRepository usuarioRepository;
-    @Autowired ModelMapper modelMapper;
+    @Autowired private MunicipalidadRepository municipalidadRepository;
+    @Autowired private UsuarioRepository usuarioRepository;
+    @Autowired private VecinoRepository  vecinoRepository;
+    @Autowired private ModelMapper modelMapper;
 
     @Override
-    public String actualizacionPuntos(Integer idUsuario, Integer puntos) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        if (usuario == null) {
-            return "No se encontró el usuario";
+    public void actualizacionPuntos(String distrito) {
+        if (!municipalidadRepository.existsByDistritoIgnoreCase(distrito.trim())) {
+            throw new RuntimeException("Esta municipalidad no existe");
         }
 
-        Municipalidad municipalidad = municipalidadRepository.findByUsuario(usuario);
-        if (municipalidad == null) {
-            return "No se encontró el vecino";
+        Integer totalPuntos = vecinoRepository.sumPuntosByMunicipalidad(distrito);
+        if (totalPuntos == null) {
+            totalPuntos = 0;
         }
-
-        municipalidad.setPuntajetotal(municipalidad.getPuntajetotal() + puntos);
+        Municipalidad municipalidad = municipalidadRepository.findByDistritoIgnoreCase(distrito.trim());
+        municipalidad.setPuntajetotal(totalPuntos);
         municipalidadRepository.save(municipalidad);
-        return "Puntaje actualizado exitosamente";
     }
 
     @Override
@@ -76,7 +76,7 @@ public class MunicipalidadService implements IMunicipalidadService {
 
     @Override
     public MunicipalidadDTO buscarPorDistrito(String distrito) {
-        Municipalidad municipalidad = municipalidadRepository.findByDistrito(distrito);
+        Municipalidad municipalidad = municipalidadRepository.findByDistritoIgnoreCase(distrito.trim());
 
         if (municipalidad == null) {
             return null;

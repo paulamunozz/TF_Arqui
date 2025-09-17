@@ -58,4 +58,13 @@ public class Evento {
     @NotNull
     @Column(name = "peso_actual", nullable = false, precision = 5, scale = 2)
     private BigDecimal pesoActual;
+
+    @NotNull
+    @Column(name = "bonificacion", nullable = false)
+    private Double bonificacion;
+
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "metodo", nullable = false, length = 50)
+    private String metodo;
 }

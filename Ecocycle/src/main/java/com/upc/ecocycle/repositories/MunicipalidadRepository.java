@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface MunicipalidadRepository extends JpaRepository<Municipalidad, Integer> {
     Municipalidad findByUsuario(Usuario usuario);
-    Municipalidad findByDistrito(String distrito);
+    boolean existsByDistritoIgnoreCase(String distrito);
+    Municipalidad findByDistritoIgnoreCase(String distrito);
 
     @Query("SELECT m FROM Municipalidad m " + "ORDER BY m.puntajetotal DESC")
     List<Municipalidad> findRanking();
