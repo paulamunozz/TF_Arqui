@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"codigo\":\"\",\r\n    \"contrasena\": \"a\"\r\n}",
+							"raw": "{\r\n    \"codigo\":\"12345670\",\r\n    \"contrasena\": \"123abc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "12345678",
+							"raw": "9",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,7 +107,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "12345678",
+							"raw": "70390517",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -193,7 +193,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\":6,\r\n    \"nombre\":\"Alli\",\r\n    \"genero\":\"F\",\r\n    \"edad\": null,\r\n    \"distrito\": \"San Borja\",\r\n    \"direccion\": \"Mzn 123\"\r\n}",
+							"raw": "{\r\n    \"usuarioId\":12,\r\n    \"nombre\":\"Mae\",\r\n    \"genero\":\"F\",\r\n    \"edad\": \"20\",\r\n    \"distrito\": \"Villa el Salvador\",\r\n    \"direccion\": \"Mzn 123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -222,7 +222,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\":4,\r\n    \"nombre\":\"Fressia\",\r\n    \"genero\":\"                     \",\r\n    \"edad\": 201,\r\n    \"distrito\": \"\",\r\n    \"direccion\": \"Mzn 458\"\r\n}",
+							"raw": "{\r\n    \"usuarioId\":7,\r\n    \"nombre\":\"Camila Gomez\",\r\n    \"genero\":\"F\",\r\n    \"edad\": 21,\r\n    \"distrito\": \"Surco\",\r\n    \"direccion\": \"Mzn 458\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -344,7 +344,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "2",
+							"raw": "10",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -430,7 +430,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"vecinoId\": 3,\r\n    \"peso\": 51,\r\n    \"tipo\": \"Papel\",\r\n    \"metodo\": \"Alguno\",\r\n    \"fecha\": \"11/09/2025\"\r\n}",
+							"raw": "{\r\n    \"vecinoId\": 10,\r\n    \"peso\": 50,\r\n    \"tipo\": \"Plástico\",\r\n    \"metodo\": \"Camión de reciclaje\",\r\n    \"fecha\": \"11/09/2025\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -447,38 +447,6 @@
 								"ecocycle",
 								"reciclaje",
 								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar por vecino",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "3",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/ecocycle/reciclaje/listarPorVecino",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ecocycle",
-								"reciclaje",
-								"listarPorVecino"
 							]
 						}
 					},
@@ -518,6 +486,15 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "30",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/ecocycle/reciclaje/eliminar",
 							"host": [
@@ -528,6 +505,102 @@
 								"ecocycle",
 								"reciclaje",
 								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "10",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por distrito y filtros",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"distrito\":\"San Borja\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarPorDistrito",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarPorDistrito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar cantidad y peso total por tipo de reciclaje",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "Surco",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarCantidadXTipo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarCantidadXTipo"
 							]
 						}
 					},
@@ -569,9 +642,33 @@
 				},
 				{
 					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "6",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/logro/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"logro",
+								"listarPorVecino"
+							]
+						}
 					},
 					"response": []
 				}
@@ -580,35 +677,6 @@
 		{
 			"name": "Municipalidad",
 			"item": [
-				{
-					"name": "Actualizar Puntos",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"idUsuario\":6,\r\n    \"puntos\":10\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/ecocycle/municipalidad/actualizarPuntos",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ecocycle",
-								"municipalidad",
-								"actualizarPuntos"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Buscar por código",
 					"protocolProfileBehavior": {
@@ -737,7 +805,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\":6,\r\n    \"nombre\":\"Alli\",\r\n    \"genero\":\"F\",\r\n    \"edad\": null,\r\n    \"distrito\": \"San Borja\",\r\n    \"direccion\": \"Mzn 123\"\r\n}",
+							"raw": "{\r\n    \"municipalidadId\":4,\r\n    \"nombre\":\"Día sin plástico 2025\",\r\n    \"descripcion\":\"Recicle todo el plástico que pueda durante este mes\",\r\n    \"pesoObjetivo\": 300,\r\n    \"fechaInicio\": \"10/09/2025\",\r\n    \"fechaFin\": \"30/09/2025\",\r\n    \"tipo\":\"Plástico\",\r\n    \"bonificacion\": 1.5,\r\n    \"metodo\": \"Camión de reciclaje\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -766,7 +834,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"usuarioId\":4,\r\n    \"nombre\":\"Fressia\",\r\n    \"genero\":\"                     \",\r\n    \"edad\": 201,\r\n    \"distrito\": \"\",\r\n    \"direccion\": \"Mzn 458\"\r\n}",
+							"raw": "{\r\n    \"idEvento\": 4,\r\n    \"nombre\": \"Día sin plástico 2026\",\r\n    \"descripcion\": \"Recicle todo el plástico que pueda durante este mes\",\r\n    \"bonificacion\": 1.5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -789,39 +857,19 @@
 					"response": []
 				},
 				{
-					"name": "Actualizar peso actual",
+					"name": "Eliminar",
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idEvento\":2,\r\n    \"pesoTotal\":100\r\n}",
+							"raw": "1",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "localhost:8080/ecocycle/evento/actualizarPesoActual",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ecocycle",
-								"evento",
-								"actualizarPesoActual"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar",
-					"request": {
-						"method": "DELETE",
-						"header": [],
 						"url": {
 							"raw": "localhost:8080/ecocycle/evento/eliminar",
 							"host": [
@@ -847,7 +895,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "2",
+							"raw": "3",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -855,14 +903,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/ecocycle/vecino/buscarXid",
+							"raw": "localhost:8080/ecocycle/evento/buscarXid",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"ecocycle",
-								"vecino",
+								"evento",
 								"buscarXid"
 							]
 						}
@@ -900,6 +948,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "3",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -913,7 +993,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"eventoId\":2,\r\n    \"vecinoId\":3,\r\n    \"comentario\":null\r\n}",
+							"raw": "{\r\n    \"eventoId\":5,\r\n    \"vecinoId\":3,\r\n    \"comentario\":null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -930,38 +1010,6 @@
 								"ecocycle",
 								"exv",
 								"registrar"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Listar por evento",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "2",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/ecocycle/exv/listarEXVPorEvento",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"ecocycle",
-								"exv",
-								"listarEXVPorEvento"
 							]
 						}
 					},
@@ -1020,6 +1068,38 @@
 								"ecocycle",
 								"exv",
 								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por evento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/listarEXVPorEvento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"listarEXVPorEvento"
 							]
 						}
 					},

@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS public.evento
     tipo character varying(50) COLLATE pg_catalog."default" NOT NULL,
     situacion boolean NOT NULL,
     peso_actual numeric(5, 2) NOT NULL,
+    bonificacion double precision NOT NULL,
+    metodo character varying(50) COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT evento_pk PRIMARY KEY (id_evento)
 );
 
