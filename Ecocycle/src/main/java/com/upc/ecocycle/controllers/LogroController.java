@@ -20,6 +20,6 @@ public class LogroController {
 
     @GetMapping("/ecocycle/logro/listarPorVecino")
     public List<LogroDTO> listarLogrosVecino(@RequestBody Integer vecinoId) {
-        return logroService.listarLogrosVecino(vecinoId);
+        return logroService.listarLogrosPorVecino(vecinoId);
     }
 }

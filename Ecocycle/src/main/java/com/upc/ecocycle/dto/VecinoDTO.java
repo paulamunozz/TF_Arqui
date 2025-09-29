@@ -14,8 +14,12 @@ import lombok.Setter;
 public class VecinoDTO {
     private Integer idVecino;
 
-    @NotNull(groups = {Create.class, Update.class}, message="Ingrese el usuarioId")
-    private Integer usuarioId;
+    @NotBlank(groups = Create.class, message="Tiene que ingresar su DNI")
+    @Pattern(groups = {Create.class, Update.class}, regexp = "(^$|^.{8}$)", message = "El formato del DNI ingresado es incorrecto")
+    private String dni;
+
+    @NotBlank(groups = Create.class, message="Tiene que ingresar su contraseña")
+    private String contrasena;
 
     @NotBlank(groups = Create.class, message="Ingrese el nombre")
     private String nombre;

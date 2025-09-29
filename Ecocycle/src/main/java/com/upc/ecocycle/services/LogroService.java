@@ -23,15 +23,14 @@ public class LogroService implements ILogroService {
         if(!vecinoRepository.existsById(logroDTO.getVecinoId())) {
             return "Este vecino no existe";
         }
-
         Logro logro =  modelMapper.map(logroDTO, Logro.class);
-        logro.setVecino(vecinoRepository.findById(logroDTO.getVecinoId()).orElse(null));
+        logro.setVecino(vecinoRepository.findById(logroDTO.getVecinoId()).get());
         logroRepository.save(logro);
         return "Logro registrado";
     }
 
     @Override
-    public List<LogroDTO> listarLogrosVecino(Integer vecinoId) {
+    public List<LogroDTO> listarLogrosPorVecino(Integer vecinoId) {
         if (vecinoId == null) {
             return null;
         }
@@ -39,7 +38,7 @@ public class LogroService implements ILogroService {
             return null;
         }
 
-        return logroRepository.findAllByVecino(vecinoRepository.findById(vecinoId).orElse(null))
+        return logroRepository.findAllByVecino_Id(vecinoId)
                 .stream().map(logro -> modelMapper.map(logro, LogroDTO.class))
                 .collect(Collectors.toList());
     }

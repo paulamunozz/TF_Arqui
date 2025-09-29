@@ -7,8 +7,8 @@ import java.util.List;
 public interface IMunicipalidadService {
     void actualizacionPuntos(String distrito);
     void calcularPuestos();
-    MunicipalidadDTO buscarPorId(Integer idUsuario);
-    MunicipalidadDTO buscarPorCodigo(String codigoUsuario);
+    MunicipalidadDTO buscarPorId(Integer id);
+    MunicipalidadDTO buscarPorCodigo(String codigo);
     MunicipalidadDTO buscarPorDistrito(String distrito);
     List<MunicipalidadDTO> listarMunicipalidades();
     List<MunicipalidadDTO> rankingMunicipalidades();

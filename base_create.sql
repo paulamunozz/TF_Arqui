@@ -7,16 +7,16 @@ CREATE TABLE IF NOT EXISTS public.evento
 (
     id_evento integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     id_municipalidad integer NOT NULL,
-    nombre character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    nombre character varying(50) COLLATE pg_catalog."default" NOT NULL UNIQUE,
     descripcion character varying(300) COLLATE pg_catalog."default" NOT NULL,
     peso_objetivo numeric(5, 2) NOT NULL,
+	peso_actual numeric(5, 2) NOT NULL,
     fecha_inicio date NOT NULL,
     fecha_fin date NOT NULL,
     tipo character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    situacion boolean NOT NULL,
-    peso_actual numeric(5, 2) NOT NULL,
-    bonificacion double precision NOT NULL,
     metodo character varying(50) COLLATE pg_catalog."default" NOT NULL,
+	bonificacion double precision NOT NULL,
+    situacion boolean NOT NULL,
     CONSTRAINT evento_pk PRIMARY KEY (id_evento)
 );
 
@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS public.logro
 CREATE TABLE IF NOT EXISTS public.municipalidad
 (
     id_municipalidad integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    id_usuario integer NOT NULL,
+    codigo character varying(8) COLLATE pg_catalog."default" NOT NULL UNIQUE,
+    contrasena character varying(50) COLLATE pg_catalog."default" NOT NULL,
     distrito character varying(50) COLLATE pg_catalog."default" NOT NULL,
     puntajetotal integer NOT NULL,
     puesto integer NOT NULL,
@@ -59,18 +60,11 @@ CREATE TABLE IF NOT EXISTS public.reciclaje
     CONSTRAINT reciclaje_pk PRIMARY KEY (id_reciclaje)
 );
 
-CREATE TABLE IF NOT EXISTS public.usuario
-(
-    id_usuario integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    codigo character varying(8) COLLATE pg_catalog."default" NOT NULL,
-    contrasena character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT usuario_pk PRIMARY KEY (id_usuario)
-);
-
 CREATE TABLE IF NOT EXISTS public.vecino
 (
     id_vecino integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    id_usuario integer NOT NULL,
+    dni character varying(8) COLLATE pg_catalog."default" NOT NULL UNIQUE,
+    contrasena character varying(50) COLLATE pg_catalog."default" NOT NULL,
     nombre character varying(100) COLLATE pg_catalog."default" NOT NULL,
     genero character varying(1) COLLATE pg_catalog."default" NOT NULL,
     edad integer NOT NULL,
@@ -110,23 +104,9 @@ ALTER TABLE IF EXISTS public.logro
     ON DELETE NO ACTION;
 
 
-ALTER TABLE IF EXISTS public.municipalidad
-    ADD CONSTRAINT municipalidad_usuario FOREIGN KEY (id_usuario)
-    REFERENCES public.usuario (id_usuario) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION;
-
-
 ALTER TABLE IF EXISTS public.reciclaje
     ADD CONSTRAINT reciclaje_vecino FOREIGN KEY (id_vecino)
     REFERENCES public.vecino (id_vecino) MATCH SIMPLE
-    ON UPDATE NO ACTION
-    ON DELETE NO ACTION;
-
-
-ALTER TABLE IF EXISTS public.vecino
-    ADD CONSTRAINT vecino_usuario FOREIGN KEY (id_usuario)
-    REFERENCES public.usuario (id_usuario) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION;
 

@@ -68,11 +68,11 @@ public class ReciclajeController {
 
     @GetMapping("ecocycle/reciclaje/listarPorVecino")
     public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody Integer vecinoId) {
-        return reciclajeService.listarReciclajeVecino(vecinoId);
+        return reciclajeService.listarReciclajePorVecino(vecinoId);
     }
 
-    @GetMapping("ecocycle/reciclaje/listarPorDistrito")
-    public List<ReciclajeDTO> listarReciclajeDistrito(@RequestBody JsonNode filtros) {
+    @GetMapping("ecocycle/reciclaje/listarReciclajeFiltrado")
+    public List<ReciclajeDTO> listarReciclajeFiltrado(@RequestBody JsonNode filtros) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
@@ -83,7 +83,7 @@ public class ReciclajeController {
         String genero = filtros.has("genero") ? filtros.get("genero").asText() : null;
         Integer edadMin = filtros.has("edadMin") ? filtros.get("edadMin").asInt() : 0;
         Integer edadMax = filtros.has("edadMax") ? filtros.get("edadMax").asInt() : 200;
-        return reciclajeService.listarReciclajeDistrito(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
+        return reciclajeService.listarReciclajeFiltrado(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
     }
 
     @GetMapping("ecocycle/reciclaje/listarCantidadXTipo")

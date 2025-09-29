@@ -32,31 +32,31 @@ public class ReciclajeService implements IReciclajeService {
     @Override
     public ReciclajeDTO registrar(ReciclajeDTO reciclajeDTO) {
         if (!vecinoRepository.existsById(reciclajeDTO.getVecinoId())) {
-            throw new RuntimeException("Este vecino no existe");
-        }
-        else if (reciclajeDTO.getFecha().isAfter(LocalDate.now())) {
-            throw new RuntimeException("No puede ingresar una fecha futura");
+            throw new RuntimeException("No existe el vecino de id " + reciclajeDTO.getVecinoId());
         }
 
         Reciclaje reciclaje = modelMapper.map(reciclajeDTO, Reciclaje.class);
+        reciclaje.setFecha(LocalDate.now());
 
         int puntaje = (int) Math.floor(
                 reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
         );
 
-        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
-                reciclajeDTO.getVecinoId(),
-                reciclajeDTO.getTipo(),
-                reciclajeDTO.getMetodo()
-        );
-        if (exv != null && exv.getEvento() != null) {
+        List<EventoXVecino> exvs = eventoXVecinoRepository.findAllByVecino_IdAndEventoTipoAndEventoMetodo(
+                        reciclajeDTO.getVecinoId(),
+                        reciclajeDTO.getTipo(),
+                        reciclajeDTO.getMetodo()
+                );
+        for (EventoXVecino exv : exvs) {
             Evento evento = exv.getEvento();
-            if ((evento.getFechaInicio().isBefore(reciclaje.getFecha()) || evento.getFechaInicio().isEqual(reciclaje.getFecha()))
-                    && (evento.getFechaFin().isAfter(reciclaje.getFecha()) || evento.getFechaFin().isEqual(reciclaje.getFecha()))) {
-                puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+            if (evento != null) {
+                if (!evento.getFechaInicio().isAfter(reciclaje.getFecha())
+                        && !evento.getFechaFin().isBefore(reciclaje.getFecha())) {
+                    puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+                    break;
+                }
             }
         }
-
         reciclaje.setPuntaje(puntaje);
         reciclajeRepository.save(reciclaje);
         return modelMapper.map(reciclaje, ReciclajeDTO.class);
@@ -65,76 +65,67 @@ public class ReciclajeService implements IReciclajeService {
     @Override
     public ReciclajeDTO modificar(ReciclajeDTO reciclajeDTO) {
         if (!reciclajeRepository.existsById(reciclajeDTO.getIdReciclaje())) {
-            throw new RuntimeException("Este registro no existe");
+            throw new RuntimeException("No existe el registro de id " + reciclajeDTO.getIdReciclaje());
         }
-        else if (reciclajeDTO.getFecha()!=null && reciclajeDTO.getFecha().isAfter(LocalDate.now()))
-        {
-            throw new RuntimeException("No puede ingresar una fecha futura");
-        }
-
         Reciclaje reciclaje = reciclajeRepository.findById(reciclajeDTO.getIdReciclaje()).orElse(null);
-
         reciclaje.setPeso((reciclajeDTO.getPeso() != null)
                 ? reciclajeDTO.getPeso() : reciclaje.getPeso());
         reciclaje.setTipo(reciclajeDTO.getTipo() != null && !reciclajeDTO.getTipo().isBlank()
                 ? reciclajeDTO.getTipo() : reciclaje.getTipo());
         reciclaje.setMetodo(reciclajeDTO.getMetodo() != null && !reciclajeDTO.getMetodo().isBlank()
                 ? reciclajeDTO.getMetodo() : reciclaje.getMetodo());
-        reciclaje.setFecha(reciclajeDTO.getFecha() != null
-                ? reciclajeDTO.getFecha() : reciclaje.getFecha());
 
         int puntaje = (int) Math.floor(
                 reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
         );
-
-        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
-                reciclaje.getVecino().getId(),
-                reciclaje.getTipo(),
-                reciclaje.getMetodo()
+        List<EventoXVecino> exvs = eventoXVecinoRepository.findAllByVecino_IdAndEventoTipoAndEventoMetodo(
+                reciclajeDTO.getVecinoId(),
+                reciclajeDTO.getTipo(),
+                reciclajeDTO.getMetodo()
         );
-
-        if (exv != null && exv.getEvento() != null) {
+        for (EventoXVecino exv : exvs) {
             Evento evento = exv.getEvento();
-
-            if ((evento.getFechaInicio().isBefore(reciclaje.getFecha()) || evento.getFechaInicio().isEqual(reciclaje.getFecha()))
-                    && (evento.getFechaFin().isAfter(reciclaje.getFecha()) || evento.getFechaFin().isEqual(reciclaje.getFecha()))) {
-                puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+            if (evento != null) {
+                if (!evento.getFechaInicio().isAfter(reciclaje.getFecha())
+                        && !evento.getFechaFin().isBefore(reciclaje.getFecha())) {
+                    puntaje = (int) Math.floor(puntaje * evento.getBonificacion());
+                    break;
+                }
             }
         }
-
         reciclaje.setPuntaje(puntaje);
         reciclajeRepository.save(reciclaje);
         return modelMapper.map(reciclaje, ReciclajeDTO.class);
     }
 
     @Override
-    public String eliminar(Integer idReciclaje) {
-        if (idReciclaje==null) {
+    public String eliminar(Integer id) {
+        if (id ==null) {
             return "Seleccione un registro de reciclaje";
         }
-        else if (!reciclajeRepository.existsById(idReciclaje)) {
-            return "El registro de reciclaje no existe";
+        else if (!reciclajeRepository.existsById(id)) {
+            return "No existe el registro de id " + id;
         }
         else {
-            reciclajeRepository.deleteById(idReciclaje);
-            return "Registro de reciclaje eliminado correctamente";
+            reciclajeRepository.deleteById(id);
+            return "El registro de id " + id + ", ha sido eliminado correctamente";
         }
     }
 
     @Override
-    public ReciclajeDTO buscarPorId(Integer idReciclaje) {
-        return reciclajeRepository.findById(idReciclaje)
+    public ReciclajeDTO buscarPorId(Integer id) {
+        return reciclajeRepository.findById(id)
                 .map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class))
-                .orElseThrow(() -> new RuntimeException("Registro no existe"));
+                .orElseThrow(() -> new RuntimeException("No existe el registro de id " + id));
     }
 
     @Override
-    public List<ReciclajeDTO> listarReciclajeVecino(Integer vecinoId) {
+    public List<ReciclajeDTO> listarReciclajePorVecino(Integer vecinoId) {
         if (vecinoId == null) {
-            return null;
+            throw new RuntimeException("Seleccione un vecino");
         }
         else if(!vecinoRepository.existsById(vecinoId)) {
-            return null;
+            throw new RuntimeException("No existe el vecino de id " + vecinoId);
         }
 
         return reciclajeRepository.findAllByVecinoId(vecinoId)
@@ -143,9 +134,9 @@ public class ReciclajeService implements IReciclajeService {
     }
 
     @Override
-    public List<ReciclajeDTO> listarReciclajeDistrito(String distrito, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin, String genero, Integer edadMin, Integer edadMax) {
+    public List<ReciclajeDTO> listarReciclajeFiltrado(String distrito, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin, String genero, Integer edadMin, Integer edadMax) {
         if (fechaInicio.isAfter(fechaFin)){
-            return null;
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
         }
 
         List<Reciclaje> lista = reciclajeRepository.findAll().stream()
@@ -157,7 +148,7 @@ public class ReciclajeService implements IReciclajeService {
                 .filter(reciclaje -> genero==null || reciclaje.getVecino().getGenero().equals(genero))
                 .filter(reciclaje -> edadMin==null || reciclaje.getVecino().getEdad() >= edadMin)
                 .filter(reciclaje -> edadMax==null || reciclaje.getVecino().getEdad() <= edadMax)
-                .collect(Collectors.toList());
+                .toList();
 
         return lista.stream().map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class)).collect(Collectors.toList());
     }

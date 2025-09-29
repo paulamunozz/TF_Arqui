@@ -17,7 +17,7 @@ public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento", nullable = false)
-    private Integer idEvento;
+    private Integer id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -26,7 +26,7 @@ public class Evento {
 
     @Size(max = 50)
     @NotNull
-    @Column(name = "nombre", nullable = false, length = 50)
+    @Column(name = "nombre", nullable = false, length = 50, unique = true)
     private String nombre;
 
     @Size(max = 300)
@@ -37,6 +37,10 @@ public class Evento {
     @NotNull
     @Column(name = "peso_objetivo", nullable = false, precision = 5, scale = 2)
     private BigDecimal pesoObjetivo;
+
+    @NotNull
+    @Column(name = "peso_actual", nullable = false, precision = 5, scale = 2)
+    private BigDecimal pesoActual;
 
     @NotNull
     @Column(name = "fecha_inicio", nullable = false)
@@ -51,20 +55,17 @@ public class Evento {
     @Column(name = "tipo", nullable = false, length = 50)
     private String tipo;
 
+    @Size(max = 50)
     @NotNull
-    @Column(name = "situacion", nullable = false)
-    private Boolean situacion = false;
-
-    @NotNull
-    @Column(name = "peso_actual", nullable = false, precision = 5, scale = 2)
-    private BigDecimal pesoActual;
+    @Column(name = "metodo", nullable = false, length = 50)
+    private String metodo;
 
     @NotNull
     @Column(name = "bonificacion", nullable = false)
     private Double bonificacion;
 
-    @Size(max = 50)
     @NotNull
-    @Column(name = "metodo", nullable = false, length = 50)
-    private String metodo;
+    @Column(name = "situacion", nullable = false)
+    private Boolean situacion = false;
+
 }

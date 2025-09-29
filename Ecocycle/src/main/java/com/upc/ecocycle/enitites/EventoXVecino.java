@@ -14,7 +14,7 @@ public class EventoXVecino {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_exv", nullable = false)
-    private Integer idEXV;
+    private Integer id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

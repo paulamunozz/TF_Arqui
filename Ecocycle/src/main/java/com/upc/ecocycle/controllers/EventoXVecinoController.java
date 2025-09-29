@@ -1,17 +1,14 @@
 package com.upc.ecocycle.controllers;
 
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
-import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.services.EventoXVecinoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController @RequestMapping
 public class EventoXVecinoController {

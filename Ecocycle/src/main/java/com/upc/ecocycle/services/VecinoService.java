@@ -1,62 +1,59 @@
 package com.upc.ecocycle.services;
 
+import com.upc.ecocycle.dto.EventoDTO;
 import com.upc.ecocycle.dto.VecinoDTO;
-import com.upc.ecocycle.enitites.Reciclaje;
-import com.upc.ecocycle.enitites.Usuario;
+import com.upc.ecocycle.enitites.Evento;
+import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.enitites.Vecino;
 import com.upc.ecocycle.instances.IVecinoService;
+import com.upc.ecocycle.repositories.EventoRepository;
+import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
-import com.upc.ecocycle.repositories.UsuarioRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class VecinoService implements IVecinoService {
     @Autowired private VecinoRepository vecinoRepository;
-    @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private ReciclajeRepository reciclajeRepository;
+    @Autowired private EventoXVecinoRepository eventoXVecinoRepository;
+    @Autowired private EventoRepository eventoRepository;
     @Autowired private ModelMapper modelMapper;
 
     @Override
     public String registrar(VecinoDTO vecinoDTO) {
-        if (!usuarioRepository.existsById(vecinoDTO.getUsuarioId())) {
-            return "El usuario no existe";
-        }
-        else if (vecinoRepository.existsByUsuario(usuarioRepository.findById(
-                vecinoDTO.getUsuarioId()).orElse(null)))
+        if (vecinoRepository.existsByDni(vecinoDTO.getDni()))
         {
             return "Este vecino ya existe";
         }
-        else {
-            Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
-            Usuario usuario = usuarioRepository.findById(vecinoDTO.getUsuarioId()).orElse(null);
-            vecino.setUsuario(usuario);
-            vecino.setPuntajetotal(0);
-            vecino.setIcono(0);
-            vecino.setPuesto(0);
-            vecinoRepository.save(vecino);
-            return "Vecino registrado exitosamente";
-        }
+        Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
+        vecino.setPuntajetotal(0);
+        vecino.setIcono(0);
+        vecino.setPuesto(0);
+        vecinoRepository.save(vecino);
+        return "Vecino registrado exitosamente";
     }
 
     @Override
     public String modificar(VecinoDTO vecinoDTO) {
-        if (!usuarioRepository.existsById(vecinoDTO.getUsuarioId())) {
-            return "El usuario no existe";
+        if (!vecinoRepository.existsById(vecinoDTO.getIdVecino())) {
+            return "El vecino no existe";
         }
-        else if (!vecinoRepository.existsByUsuario(usuarioRepository.findById(
-                vecinoDTO.getUsuarioId()).orElse(null)))
-        {
-            return "Este vecino no existe";
+        Vecino vecino = vecinoRepository.findById(vecinoDTO.getIdVecino()).get();
+        if(vecinoRepository.existsByDni(vecinoDTO.getDni()) && !vecinoDTO.getDni().equals(vecino.getDni())) {
+            return "Este DNI ya ha sido registrado";
         }
-        Usuario usuario = usuarioRepository.findById(vecinoDTO.getUsuarioId()).orElse(null);
-        Vecino vecino = vecinoRepository.findByUsuario(usuario);
+        vecino.setDni((vecinoDTO.getDni() != null && !vecinoDTO.getDni().isBlank())
+                ? vecinoDTO.getDni() : vecino.getDni());
+        vecino.setContrasena((vecinoDTO.getContrasena() != null && !vecinoDTO.getContrasena().isBlank())
+                ? vecinoDTO.getContrasena() : vecino.getContrasena());
         vecino.setNombre((vecinoDTO.getNombre() != null && !vecinoDTO.getNombre().isBlank())
                         ? vecinoDTO.getNombre() : vecino.getNombre());
         vecino.setGenero((vecinoDTO.getGenero() != null && !vecinoDTO.getGenero().isBlank())
@@ -75,52 +72,46 @@ public class VecinoService implements IVecinoService {
 
     @Transactional
     @Override
-    public String eliminar(Integer idVecino) {
-        Vecino vecino = vecinoRepository.findById(idVecino).orElse(null);
+    public String eliminar(Integer id) {
+        Vecino vecino = vecinoRepository.findById(id).orElse(null);
         if (vecino == null) {
             return "No se encontró el vecino";
         }
-
         vecinoRepository.deleteById(vecino.getId());
         return "Vecino eliminado exitosamente";
     }
 
     @Override
-    public VecinoDTO buscarPorCodigo(String codigoUsuario) {
-        if (codigoUsuario.isBlank()) {
+    public VecinoDTO buscarPorDni(String dni) {
+        if (dni.isBlank()) {
             return null;
         }
-
-        Usuario usuario = usuarioRepository.findByCodigo(codigoUsuario);
-        Vecino vecino = vecinoRepository.findByUsuario(usuario);
-
+        Vecino vecino = vecinoRepository.findByDni(dni);
         if (vecino == null) {
             return null;
         }
-        else  {
-            return modelMapper.map(vecino, VecinoDTO.class);
-        }
+        return modelMapper.map(vecino, VecinoDTO.class);
     }
 
     @Override
-    public VecinoDTO buscarPorId(Integer idVecino) {
-        Vecino vecino = vecinoRepository.findById(idVecino).orElse(null);
-
+    public VecinoDTO buscarPorId(Integer id) {
+        if (id==null) {
+            return null;
+        }
+        Vecino vecino = vecinoRepository.findById(id).orElse(null);
         if (vecino == null) {
             return null;
         }
-        else  {
-            return modelMapper.map(vecino, VecinoDTO.class);
-        }
+        return modelMapper.map(vecino, VecinoDTO.class);
     }
 
     @Override
     @Transactional
-    public void actualizacionPuntos(Integer idVecino) {
-        Vecino vecino = vecinoRepository.findById(idVecino)
+    public void actualizacionPuntos(Integer id) {
+        Vecino vecino = vecinoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("No se encontró el vecino"));
 
-        Integer puntajeTotal = reciclajeRepository.sumarPuntajePorVecino(idVecino);
+        Integer puntajeTotal = reciclajeRepository.sumarPuntajePorVecino(id);
         if (puntajeTotal == null) { puntajeTotal = 0;}
 
         vecino.setPuntajetotal(puntajeTotal);
@@ -145,6 +136,20 @@ public class VecinoService implements IVecinoService {
         return vecinoRepository.findAll().stream()
                 .map(vecino -> modelMapper.map(vecino, VecinoDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<VecinoDTO> listarVecinosPorEvento(Integer idEvento) {
+        if (!eventoRepository.existsById(idEvento)) {
+            throw new RuntimeException("Este evento no existe");
+        }
+        List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByEvento_Id(idEvento).stream().toList();
+        List<Vecino> vecinos = new ArrayList<>();
+        for(EventoXVecino exv: listaEXV) {
+            vecinos.add(exv.getVecino());
+        }
+        return vecinos.stream().map(vecino -> modelMapper.map(vecino, VecinoDTO.class)).collect(Collectors.toList());
+
     }
 
     @Override

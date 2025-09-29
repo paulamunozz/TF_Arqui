@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ILogroService {
     String registrarLogro(LogroDTO logroDTO);
-    List<LogroDTO> listarLogrosVecino(Integer vecinoId);
+    List<LogroDTO> listarLogrosPorVecino(Integer vecinoId);
 }

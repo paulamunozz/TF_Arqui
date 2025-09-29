@@ -2,10 +2,8 @@ package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.MunicipalidadDTO;
 import com.upc.ecocycle.enitites.Municipalidad;
-import com.upc.ecocycle.enitites.Usuario;
 import com.upc.ecocycle.instances.IMunicipalidadService;
 import com.upc.ecocycle.repositories.MunicipalidadRepository;
-import com.upc.ecocycle.repositories.UsuarioRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import java.util.stream.Collectors;
 @Service
 public class MunicipalidadService implements IMunicipalidadService {
     @Autowired private MunicipalidadRepository municipalidadRepository;
-    @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private VecinoRepository  vecinoRepository;
     @Autowired private ModelMapper modelMapper;
 
@@ -40,7 +37,6 @@ public class MunicipalidadService implements IMunicipalidadService {
     public void calcularPuestos() {
         List<Municipalidad> municipalidades = municipalidadRepository.findRanking();
         int puesto = 1;
-
         for (Municipalidad m : municipalidades) {
             m.setPuesto(puesto);
             municipalidadRepository.save(m);
@@ -49,12 +45,10 @@ public class MunicipalidadService implements IMunicipalidadService {
     }
 
     @Override
-    public MunicipalidadDTO buscarPorId(Integer idUsuario) {
-        Usuario usuario = usuarioRepository.findById(idUsuario).orElse(null);
-        Municipalidad municipalidad = municipalidadRepository.findByUsuario(usuario);
-
+    public MunicipalidadDTO buscarPorId(Integer id) {
+        Municipalidad municipalidad = municipalidadRepository.findById(id).orElse(null);
         if (municipalidad == null) {
-            return null;
+            throw new RuntimeException("No existe el municipalidad con id: " + id);
         }
         else  {
             return modelMapper.map(municipalidad, MunicipalidadDTO.class);
@@ -62,10 +56,8 @@ public class MunicipalidadService implements IMunicipalidadService {
     }
 
     @Override
-    public MunicipalidadDTO buscarPorCodigo(String codigoUsuario) {
-        Usuario usuario = usuarioRepository.findByCodigo(codigoUsuario);
-        Municipalidad municipalidad = municipalidadRepository.findByUsuario(usuario);
-
+    public MunicipalidadDTO buscarPorCodigo(String codigo) {
+        Municipalidad municipalidad = municipalidadRepository.findByCodigo(codigo);
         if (municipalidad == null) {
             return null;
         }
@@ -77,7 +69,6 @@ public class MunicipalidadService implements IMunicipalidadService {
     @Override
     public MunicipalidadDTO buscarPorDistrito(String distrito) {
         Municipalidad municipalidad = municipalidadRepository.findByDistritoIgnoreCase(distrito.trim());
-
         if (municipalidad == null) {
             return null;
         }

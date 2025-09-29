@@ -28,24 +28,27 @@ public class EventoXVecinoService implements IEventoXVecinoService {
 
     @Override
     public String registrar(EventoXVecinoDTO eventoXVecinoDTO) {
-        Evento evento = eventoRepository.findById(eventoXVecinoDTO.getEventoId())
-                .orElseThrow(() -> new RuntimeException("Este evento no existe"));
-        Vecino vecino = vecinoRepository.findById(eventoXVecinoDTO.getVecinoId())
-                .orElseThrow(() -> new RuntimeException("Este vecino no existe"));
+        int eventoId = eventoXVecinoDTO.getEventoId();
+        int vecinoId = eventoXVecinoDTO.getVecinoId();
 
-        if (eventoXVecinoRepository.existsByEventoAndVecino(evento, vecino)) {
-            return "Ya se ha registrado en este evento";
+        if (!eventoRepository.existsById(eventoId))
+        {
+            throw new RuntimeException("Este evento no existe");
+        }
+        else if (!vecinoRepository.existsById(vecinoId))
+        {
+            throw new RuntimeException("Este vecino no existe");
+        }
+        else if (eventoXVecinoRepository.existsByEvento_IdAndVecino_Id(eventoId, vecinoId)) {
+            throw new RuntimeException("Este vecino no existe");
         }
 
-        EventoXVecino exv = eventoXVecinoRepository.findByVecinoIdAndEventoTipoAndEventoMetodo(
-                eventoXVecinoDTO.getVecinoId(),
-                evento.getTipo(),
-                evento.getMetodo()
-        );
+        Evento evento = eventoRepository.findById(eventoId).get();
+        List<EventoXVecino> exvs = eventoXVecinoRepository
+                .findAllByVecino_IdAndEventoTipoAndEventoMetodo(vecinoId, evento.getTipo(), evento.getMetodo());
 
-        if (exv != null) {
+        for (EventoXVecino exv : exvs) {
             Evento eventoExistente = exv.getEvento();
-
             if (eventoExistente.getFechaFin().isAfter(evento.getFechaInicio())
                     && eventoExistente.getFechaInicio().isBefore(evento.getFechaFin())) {
                 return "El vecino ya está en un evento de tipo " + evento.getTipo() +
@@ -53,6 +56,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
             }
         }
 
+        Vecino vecino = vecinoRepository.findById(vecinoId).get();
         EventoXVecino eventoXVecino = modelMapper.map(eventoXVecinoDTO, EventoXVecino.class);
         eventoXVecino.setEvento(evento);
         eventoXVecino.setVecino(vecino);
@@ -74,13 +78,14 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     @Override
     public String eliminar(Integer idEXV) {
         if (idEXV==null) {
-            return "Seleccione un evento";
+            return "Seleccione un EXV";
         }
         else if(!eventoXVecinoRepository.existsById(idEXV)){
             return "Este EXV no existe";
         }
+        String eventoNombre = eventoRepository.findById(eventoXVecinoRepository.findById(idEXV).get().getEvento().getId()).get().getNombre();
         eventoXVecinoRepository.deleteById(idEXV);
-        return "EXV eliminado";
+        return "Ya no forma parte del evento " + eventoNombre;
     }
 
     @Override
@@ -91,8 +96,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         else if(!eventoRepository.existsById(eventoId)) {
             return null;
         }
-
-        return eventoXVecinoRepository.findAllByEvento(eventoRepository.findById(eventoId).orElse(null))
+        return eventoXVecinoRepository.findAllByEvento_Id(eventoId)
                 .stream().map(exv -> modelMapper.map(exv, EventoXVecinoDTO.class))
                 .collect(Collectors.toList());
     }

@@ -1,7 +1,5 @@
 package com.upc.ecocycle.dto;
 
-import com.upc.ecocycle.enitites.Reciclaje;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

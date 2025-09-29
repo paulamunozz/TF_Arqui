@@ -1,8 +1,7 @@
 package com.upc.ecocycle.enitites;
 
-import com.upc.ecocycle.validations.Create;
-import com.upc.ecocycle.validations.Update;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,13 +14,16 @@ public class Logro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_logro", nullable = false)
-    private Integer idLogro;
+    private Integer id;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_vecino", nullable = false)
     private Vecino vecino;
 
     @Size(max = 50)
+    @NotNull
+    @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
 
 }
