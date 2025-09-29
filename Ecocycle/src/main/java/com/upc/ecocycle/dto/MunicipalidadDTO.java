@@ -10,7 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MunicipalidadDTO {
     private Integer idMunicipalidad;
-    private Integer usuarioId;
+    private String codigo;
+    private String contrasena;
     private String distrito;
     private Integer puntajetotal;
     private Integer puesto;

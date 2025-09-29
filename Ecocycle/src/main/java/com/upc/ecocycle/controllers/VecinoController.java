@@ -2,6 +2,8 @@ package com.upc.ecocycle.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.VecinoDTO;
+import com.upc.ecocycle.enitites.EventoXVecino;
+import com.upc.ecocycle.enitites.Vecino;
 import com.upc.ecocycle.services.VecinoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
@@ -9,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController @RequestMapping
 public class VecinoController {
@@ -32,9 +36,9 @@ public class VecinoController {
         return vecinoService.eliminar(idVecino);
     }
 
-    @GetMapping("/ecocycle/vecino/buscarXcodigo")
-    public VecinoDTO buscarPorCodigo(@RequestBody String codigoUsuario) {
-        return vecinoService.buscarPorCodigo(codigoUsuario);
+    @GetMapping("/ecocycle/vecino/buscarPorDNI")
+    public VecinoDTO buscarPorDni(@RequestBody String dni) {
+        return vecinoService.buscarPorDni(dni);
     }
 
     @GetMapping("/ecocycle/vecino/buscarXid")
@@ -43,19 +47,15 @@ public class VecinoController {
         return vecinoService.buscarPorId(idVecino);
     }
 
-    @PutMapping("/ecocycle/vecino/actualizarPuntos")
-    public VecinoDTO actualizacionPuntos(@RequestBody JsonNode datos) {
-        Integer idVecino = datos.get("idVecino").asInt();
-        vecinoService.actualizacionPuntos(idVecino);
-
-        vecinoService.calcularPuestos();
-        return vecinoService.buscarPorId(idVecino);
-    }
-
     @GetMapping("/ecocycle/vecino/listar")
     public List<VecinoDTO> listarVecinos() {
         vecinoService.calcularPuestos();
         return vecinoService.listarVecinos();
+    }
+
+    @GetMapping("/ecocycle/vecino/listarVecinosPorEvento")
+    public List<VecinoDTO> listarVecinosPorEvento(@RequestBody Integer idEvento) {
+        return vecinoService.listarVecinosPorEvento(idEvento);
     }
 
     @GetMapping("/ecocycle/vecino/ranking")
@@ -69,5 +69,4 @@ public class VecinoController {
 
         return vecinoService.rankingFiltrado(distrito, genero, edadMin, edadMax);
     }
-
 }

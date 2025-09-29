@@ -2,7 +2,6 @@ package com.upc.ecocycle.repositories;
 
 import com.upc.ecocycle.dto.CantidadReciclajeDTO;
 import com.upc.ecocycle.enitites.Reciclaje;
-import com.upc.ecocycle.enitites.Vecino;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,7 +21,7 @@ public interface ReciclajeRepository extends JpaRepository<Reciclaje, Integer> {
     @Query("SELECT COALESCE(SUM(r.peso), 0) " +
             "FROM Reciclaje r " +
             "JOIN EventoXVecino exv ON r.vecino.id = exv.vecino.id " +
-            "WHERE exv.evento.idEvento = :idEvento " +
+            "WHERE exv.evento.id = :idEvento " +
             "AND r.tipo = exv.evento.tipo " +
             "AND r.metodo = exv.evento.metodo " +
             "AND r.fecha BETWEEN exv.evento.fechaInicio AND exv.evento.fechaFin")
