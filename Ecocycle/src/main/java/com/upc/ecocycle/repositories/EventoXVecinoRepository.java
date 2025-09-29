@@ -9,5 +9,6 @@ public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, In
     List<EventoXVecino> findAllByEvento_Id(Integer idEventoId);
     List<EventoXVecino> findAllByVecino_Id(Integer vecinoId);
     boolean existsByEvento_IdAndVecino_Id(Integer eventoId, Integer vecinoId);
+    void deleteAllByEvento_Id(Integer eventoId);
     List<EventoXVecino> findAllByVecino_IdAndEventoTipoAndEventoMetodo(int vecinoId, String tipo, String metodo);
 }

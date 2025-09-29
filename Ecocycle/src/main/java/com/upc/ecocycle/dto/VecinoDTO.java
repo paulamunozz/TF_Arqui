@@ -42,4 +42,5 @@ public class VecinoDTO {
     private Integer puntajetotal;
     private Integer icono;
     private Integer puesto;
+    private Boolean eliminado;
 }

@@ -5,6 +5,7 @@ import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoService;
 import com.upc.ecocycle.repositories.*;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,13 +72,14 @@ public class EventoService implements IEventoService {
         return "Evento modificado exitosamente";
     }
 
-    @Override
+    @Override @Transactional
     public String eliminar(Integer id) {
         if (id == null) {
             return "Seleccione un evento";
         } else if (!eventoRepository.existsById(id)) {
             return "El evento no existe";
         } else {
+            eventoXVecinoRepository.deleteAllByEvento_Id(id);
             eventoRepository.deleteById(id);
             return "Evento eliminado correctamente";
         }
