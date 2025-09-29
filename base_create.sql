@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS public.vecino
     puntajetotal integer NOT NULL,
     icono integer NOT NULL,
     puesto integer NOT NULL,
+	eliminado boolean NOT NULL,
     CONSTRAINT vecino_pk PRIMARY KEY (id_vecino)
 );
 
