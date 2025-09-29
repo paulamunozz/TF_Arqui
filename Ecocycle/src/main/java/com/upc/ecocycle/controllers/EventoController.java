@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController @RequestMapping
 public class EventoController {
@@ -36,6 +37,11 @@ public class EventoController {
     @GetMapping("/ecocycle/evento/buscarXid")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         return eventoService.buscarPorId(idEvento);
+    }
+
+    @GetMapping("/ecocycle/evento/buscarPorNombre")
+    public List<EventoDTO> buscarPorNombre(@RequestBody String nombre) {
+        return eventoService.buscarPorNombre(nombre);
     }
 
     @GetMapping("/ecocycle/evento/listarYfiltrar")

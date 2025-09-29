@@ -10,6 +10,7 @@ public interface IEventoService {
     String eliminar(Integer id);
     EventoDTO buscarPorId(Integer id);
     void actualizarPesoActual();
+    List<EventoDTO> buscarPorNombre(String nombre);
     List<EventoDTO> listarEventos(String nombre, String tipo, String distrito, String estado, LocalDate fechaInicio, LocalDate fechaFin);
     List<EventoDTO> listarEventosPorVecino(Integer idVecino);
 }

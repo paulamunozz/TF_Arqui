@@ -108,6 +108,13 @@ public class EventoService implements IEventoService {
     }
 
     @Override
+    public List<EventoDTO> buscarPorNombre(String nombre) {
+        return eventoRepository.findAllByNombreContainingIgnoreCase(nombre).stream()
+                .map(evento -> modelMapper.map(evento, EventoDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<EventoDTO> listarEventos(String nombre, String tipo, String estado, String distrito, LocalDate fechaInicio, LocalDate fechaFin) {
         if (fechaInicio.isAfter(fechaFin)){
             return null;

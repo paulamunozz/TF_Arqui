@@ -18,7 +18,7 @@ public class Vecino {
 
     @Size(max = 8)
     @NotNull
-    @Column(name = "dni", nullable = false, length = 8, unique = true)
+    @Column(name = "dni", nullable = false, length = 8)
     private String dni;
 
     @Size(max = 50)
@@ -62,4 +62,7 @@ public class Vecino {
     @Column(name = "puesto", nullable = false)
     private Integer puesto;
 
+    @NotNull
+    @Column(name = "eliminado", nullable = false)
+    private Boolean eliminado = false;
 }

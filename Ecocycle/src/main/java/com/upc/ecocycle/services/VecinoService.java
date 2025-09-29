@@ -29,25 +29,25 @@ public class VecinoService implements IVecinoService {
 
     @Override
     public String registrar(VecinoDTO vecinoDTO) {
-        if (vecinoRepository.existsByDni(vecinoDTO.getDni()))
+        if (vecinoRepository.existsByDniAndEliminado((vecinoDTO.getDni()), false))
         {
             return "Este vecino ya existe";
         }
         Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
         vecino.setPuntajetotal(0);
-        vecino.setIcono(0);
         vecino.setPuesto(0);
+        vecino.setIcono(0);
         vecinoRepository.save(vecino);
         return "Vecino registrado exitosamente";
     }
 
     @Override
     public String modificar(VecinoDTO vecinoDTO) {
-        if (!vecinoRepository.existsById(vecinoDTO.getIdVecino())) {
+        if (!vecinoRepository.existsByIdAndEliminado(vecinoDTO.getIdVecino(), false)) {
             return "El vecino no existe";
         }
         Vecino vecino = vecinoRepository.findById(vecinoDTO.getIdVecino()).get();
-        if(vecinoRepository.existsByDni(vecinoDTO.getDni()) && !vecinoDTO.getDni().equals(vecino.getDni())) {
+        if(vecinoRepository.existsByDniAndEliminado((vecinoDTO.getDni()), false) && !vecinoDTO.getDni().equals(vecino.getDni())) {
             return "Este DNI ya ha sido registrado";
         }
         vecino.setDni((vecinoDTO.getDni() != null && !vecinoDTO.getDni().isBlank())
@@ -74,10 +74,10 @@ public class VecinoService implements IVecinoService {
     @Override
     public String eliminar(Integer id) {
         Vecino vecino = vecinoRepository.findById(id).orElse(null);
-        if (vecino == null) {
+        if (vecino == null || vecino.getEliminado() == true) {
             return "No se encontró el vecino";
         }
-        vecinoRepository.deleteById(vecino.getId());
+        vecino.setEliminado(true);
         return "Vecino eliminado exitosamente";
     }
 
