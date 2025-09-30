@@ -62,8 +62,6 @@ public class VecinoService implements IVecinoService {
                         ? vecinoDTO.getEdad() : vecino.getEdad());
         vecino.setDistrito((vecinoDTO.getDistrito() != null && !vecinoDTO.getDistrito().isBlank())
                         ? vecinoDTO.getDistrito() : vecino.getDistrito());
-        vecino.setDireccion((vecinoDTO.getDireccion() != null && !vecinoDTO.getDireccion().isBlank())
-                        ? vecinoDTO.getDireccion() : vecino.getDireccion());
         vecino.setIcono(vecinoDTO.getIcono() != null ? vecinoDTO.getIcono() : vecino.getIcono());
 
         vecinoRepository.save(vecino);

@@ -36,9 +36,6 @@ public class VecinoDTO {
     @NotBlank(groups = Create.class, message="Ingrese el distrito")
     private String distrito;
 
-    @NotBlank(groups = Create.class, message="Ingrese la direccion")
-    private String direccion;
-
     private Integer puntajetotal;
     private Integer icono;
     private Integer puesto;

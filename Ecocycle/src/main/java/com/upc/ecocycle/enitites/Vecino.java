@@ -45,11 +45,6 @@ public class Vecino {
     @Column(name = "distrito", nullable = false, length = 50)
     private String distrito;
 
-    @Size(max = 150)
-    @NotNull
-    @Column(name = "direccion", nullable = false, length = 150)
-    private String direccion;
-
     @NotNull
     @Column(name = "puntajetotal", nullable = false)
     private Integer puntajetotal;
