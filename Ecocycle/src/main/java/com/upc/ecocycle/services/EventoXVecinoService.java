@@ -8,6 +8,7 @@ import com.upc.ecocycle.instances.IEventoXVecinoService;
 import com.upc.ecocycle.repositories.EventoRepository;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +76,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         return "Comentario modificado";
     }
 
-    @Override
+    @Override @Transactional
     public String eliminar(Integer idEXV) {
         if (idEXV==null) {
             return "Seleccione un EXV";

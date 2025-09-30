@@ -12,6 +12,7 @@ public interface VecinoRepository extends JpaRepository<Vecino, Integer> {
             "AND (:genero IS NULL OR v.genero = :genero) " +
             "AND (:edadMin IS NULL OR v.edad >= :edadMin) " +
             "AND (:edadMax IS NULL OR v.edad <= :edadMax) " +
+            "AND (v.eliminado = false)" +
             "ORDER BY v.puntajetotal DESC")
     List<Vecino> findRankingFiltrado(String distrito, String genero, Integer edadMin, Integer edadMax);
 
@@ -20,7 +21,9 @@ public interface VecinoRepository extends JpaRepository<Vecino, Integer> {
             "WHERE v.distrito = :distrito")
     Integer sumPuntosByMunicipalidad(String distrito);
 
-    boolean existsByDni(String dni);
-
     Vecino findByDni(String dni);
+
+    boolean existsByDniAndEliminado(String dni, Boolean eliminado);
+
+    boolean existsByIdAndEliminado(Integer id, Boolean eliminado);
 }

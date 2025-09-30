@@ -9,6 +9,7 @@ import com.upc.ecocycle.instances.IReciclajeService;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,7 +99,7 @@ public class ReciclajeService implements IReciclajeService {
         return modelMapper.map(reciclaje, ReciclajeDTO.class);
     }
 
-    @Override
+    @Override @Transactional
     public String eliminar(Integer id) {
         if (id ==null) {
             return "Seleccione un registro de reciclaje";
@@ -155,9 +156,6 @@ public class ReciclajeService implements IReciclajeService {
 
     @Override
     public List<CantidadReciclajeDTO> listarCantidadReciclaje(String distrito) {
-        return reciclajeRepository.listarCantidadReciclaje(distrito).stream()
-                .map(cantidadReciclajeDTO -> modelMapper
-                        .map(cantidadReciclajeDTO, CantidadReciclajeDTO.class))
-                .collect(Collectors.toList());
+        return reciclajeRepository.listarCantidadReciclaje(distrito);
     }
 }

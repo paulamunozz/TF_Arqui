@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS public.reciclaje
 CREATE TABLE IF NOT EXISTS public.vecino
 (
     id_vecino integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    dni character varying(8) COLLATE pg_catalog."default" NOT NULL UNIQUE,
+    dni character varying(8) COLLATE pg_catalog."default" NOT NULL,
     contrasena character varying(50) COLLATE pg_catalog."default" NOT NULL,
     nombre character varying(100) COLLATE pg_catalog."default" NOT NULL,
     genero character varying(1) COLLATE pg_catalog."default" NOT NULL,
@@ -73,6 +73,7 @@ CREATE TABLE IF NOT EXISTS public.vecino
     puntajetotal integer NOT NULL,
     icono integer NOT NULL,
     puesto integer NOT NULL,
+	eliminado boolean NOT NULL,
     CONSTRAINT vecino_pk PRIMARY KEY (id_vecino)
 );
 
