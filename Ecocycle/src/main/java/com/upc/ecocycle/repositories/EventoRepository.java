@@ -1,8 +1,10 @@
 package com.upc.ecocycle.repositories;
 
-import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.ComentariosEventoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package com.upc.ecocycle.services;
 
+import com.upc.ecocycle.dto.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -90,15 +91,13 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     }
 
     @Override
-    public List<EventoXVecinoDTO> listarEXVPorEvento(Integer eventoId) {
-        if (eventoId == null) {
+    public List<ComentariosEventoDTO> comentariosEvento(Integer idEvento) {
+        if (idEvento == null) {
             return null;
         }
-        else if(!eventoRepository.existsById(eventoId)) {
+        else if(!eventoRepository.existsById(idEvento)) {
             return null;
         }
-        return eventoXVecinoRepository.findAllByEvento_Id(eventoId)
-                .stream().map(exv -> modelMapper.map(exv, EventoXVecinoDTO.class))
-                .collect(Collectors.toList());
+        return eventoXVecinoRepository.comentariosEvento(idEvento);
     }
 }

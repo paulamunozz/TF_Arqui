@@ -1,5 +1,6 @@
 package com.upc.ecocycle.controllers;
 
+import com.upc.ecocycle.dto.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.services.EventoXVecinoService;
 import com.upc.ecocycle.validations.Create;
@@ -29,8 +30,8 @@ public class EventoXVecinoController {
         return eventoXVecinoService.eliminar(idEXV);
     }
 
-    @GetMapping("/ecocycle/exv/listarEXVPorEvento")
-    public List<EventoXVecinoDTO> listarEXVPorEvento(@RequestBody Integer eventoId) {
-        return eventoXVecinoService.listarEXVPorEvento(eventoId);
+    @GetMapping("/ecocycle/exv/comentariosEvento")
+    public List<ComentariosEventoDTO> comentariosEvento(@RequestBody Integer eventoId) {
+        return eventoXVecinoService.comentariosEvento(eventoId);
     }
 }
