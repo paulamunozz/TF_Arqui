@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@RestController @RequestMapping
+@RestController @RequestMapping("/ecocycle/reciclaje")
 public class ReciclajeController {
     @Autowired
     private ReciclajeService reciclajeService;
@@ -28,7 +28,7 @@ public class ReciclajeController {
     @Autowired
     private EventoService eventoService;
 
-    @PostMapping("ecocycle/reciclaje/registrar")
+    @PostMapping("/registrar")
     public ReciclajeDTO registrar(@RequestBody @Validated(Create.class) ReciclajeDTO reciclajeDTO) {
 
         ReciclajeDTO reciclaje = reciclajeService.registrar(reciclajeDTO);
@@ -41,7 +41,7 @@ public class ReciclajeController {
         return reciclaje;
     }
 
-    @PutMapping("ecocycle/reciclaje/modificar")
+    @PutMapping("/modificar")
     public ReciclajeDTO modificar(@RequestBody @Validated(Update.class) ReciclajeDTO reciclajeDTO) {
         ReciclajeDTO reciclaje = reciclajeService.modificar(reciclajeDTO);
 
@@ -53,7 +53,7 @@ public class ReciclajeController {
         return reciclaje;
     }
 
-    @DeleteMapping("ecocycle/reciclaje/eliminar")
+    @DeleteMapping("/eliminar")
     public String eliminar(@RequestBody Integer idReciclaje) {
         ReciclajeDTO reciclaje = reciclajeService.buscarPorId(idReciclaje);
 
@@ -66,12 +66,12 @@ public class ReciclajeController {
         return reciclajeService.eliminar(idReciclaje);
     }
 
-    @GetMapping("ecocycle/reciclaje/listarPorVecino")
+    @GetMapping("/listarPorVecino")
     public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody Integer vecinoId) {
         return reciclajeService.listarReciclajePorVecino(vecinoId);
     }
 
-    @GetMapping("ecocycle/reciclaje/listarReciclajeFiltrado")
+    @GetMapping("/listarReciclajeFiltrado")
     public List<ReciclajeDTO> listarReciclajeFiltrado(@RequestBody JsonNode filtros) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -86,7 +86,7 @@ public class ReciclajeController {
         return reciclajeService.listarReciclajeFiltrado(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
     }
 
-    @GetMapping("ecocycle/reciclaje/listarCantidadXTipo")
+    @GetMapping("/listarCantidadXTipo")
     public List<CantidadReciclajeDTO> listarCantidadReciclaje(@RequestBody(required = false) String distrito) {
         return reciclajeService.listarCantidadReciclaje(distrito);
     }
