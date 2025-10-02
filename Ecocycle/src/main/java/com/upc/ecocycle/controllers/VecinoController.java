@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,10 +63,19 @@ public class VecinoController {
     public List<VecinoDTO> rankingFiltrado(@RequestBody JsonNode filtros) {
         vecinoService.calcularPuestos();
 
-        String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
-        String genero = filtros.has("genero") ? filtros.get("genero").asText() : null;
-        Integer edadMin = filtros.has("edadMin") ? filtros.get("edadMin").asInt() : 0;
-        Integer edadMax = filtros.has("edadMax") ? filtros.get("edadMax").asInt() : 200;
+        String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
+                && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
+                ? filtros.get("distrito").asText() : null;
+
+        String genero = (filtros.has("genero") && !filtros.get("genero").isNull()
+                && !filtros.get("genero").asText().equalsIgnoreCase("null"))
+                ? filtros.get("genero").asText() : null;
+
+        Integer edadMin = (filtros.has("edadMin") && !filtros.get("edadMin").isNull())
+                ? filtros.get("edadMin").asInt() : null;
+
+        Integer edadMax = (filtros.has("edadMax") && !filtros.get("edadMax").isNull())
+                ? filtros.get("edadMax").asInt() : null;
 
         return vecinoService.rankingFiltrado(distrito, genero, edadMin, edadMax);
     }

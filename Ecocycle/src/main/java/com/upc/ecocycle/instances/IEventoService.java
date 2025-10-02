@@ -11,6 +11,6 @@ public interface IEventoService {
     EventoDTO buscarPorId(Integer id);
     void actualizarPesoActual();
     List<EventoDTO> buscarPorNombre(String nombre);
-    List<EventoDTO> listarEventos(String nombre, String tipo, String distrito, String estado, LocalDate fechaInicio, LocalDate fechaFin);
-    List<EventoDTO> listarEventosPorVecino(Integer idVecino);
+    List<EventoDTO> listarEventos(String distrito, String nombre, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin);
+    List<EventoDTO> listarEventosPorVecino(Integer idVecino, String nombre, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin);
 }

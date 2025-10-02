@@ -37,6 +37,7 @@ public class VecinoService implements IVecinoService {
         vecino.setPuntajetotal(0);
         vecino.setPuesto(0);
         vecino.setIcono(0);
+        vecino.setEliminado(false);
         vecinoRepository.save(vecino);
         return "Vecino registrado exitosamente";
     }
@@ -147,7 +148,6 @@ public class VecinoService implements IVecinoService {
             vecinos.add(exv.getVecino());
         }
         return vecinos.stream().map(vecino -> modelMapper.map(vecino, VecinoDTO.class)).collect(Collectors.toList());
-
     }
 
     @Override

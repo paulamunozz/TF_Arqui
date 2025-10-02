@@ -11,7 +11,9 @@ public interface IReciclajeService {
     ReciclajeDTO modificar(ReciclajeDTO reciclajeDTO);
     String eliminar(Integer id);
     ReciclajeDTO buscarPorId(Integer id);
-    List<ReciclajeDTO> listarReciclajePorVecino(Integer vecinoId);
+    List<ReciclajeDTO> listarReciclajePorVecino(
+            Integer vecinoId, String tipo, String metodo,
+            LocalDate fechaInicio, LocalDate fechaFin);
     List<ReciclajeDTO> listarReciclajeFiltrado(
             String distrito, String tipo, String metodo, LocalDate fechaInicio,
             LocalDate fechaFin, String genero, Integer edadMin, Integer edadMax);
