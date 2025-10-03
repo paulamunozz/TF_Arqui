@@ -9,7 +9,6 @@ public interface IMunicipalidadService {
     void calcularPuestos();
     MunicipalidadDTO buscarPorId(Integer id);
     MunicipalidadDTO buscarPorCodigo(String codigo);
-    MunicipalidadDTO buscarPorDistrito(String distrito);
     List<MunicipalidadDTO> listarMunicipalidades();
     List<MunicipalidadDTO> rankingMunicipalidades();
 }

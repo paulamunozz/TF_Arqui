@@ -63,7 +63,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         eventoXVecino.setEvento(evento);
         eventoXVecino.setVecino(vecino);
         eventoXVecinoRepository.save(eventoXVecino);
-        return "EXV registrado";
+        return "Registro exitoso";
     }
 
     @Override

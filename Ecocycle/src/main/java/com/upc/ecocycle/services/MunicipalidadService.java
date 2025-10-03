@@ -67,17 +67,6 @@ public class MunicipalidadService implements IMunicipalidadService {
     }
 
     @Override
-    public MunicipalidadDTO buscarPorDistrito(String distrito) {
-        Municipalidad municipalidad = municipalidadRepository.findByDistritoIgnoreCase(distrito.trim());
-        if (municipalidad == null) {
-            return null;
-        }
-        else {
-            return modelMapper.map(municipalidad, MunicipalidadDTO.class);
-        }
-    }
-
-    @Override
     public List<MunicipalidadDTO> listarMunicipalidades() {
         return municipalidadRepository.findAll().stream()
                 .map(municipalidad -> modelMapper.map(municipalidad, MunicipalidadDTO.class))

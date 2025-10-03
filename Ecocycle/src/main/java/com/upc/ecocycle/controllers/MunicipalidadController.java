@@ -23,12 +23,6 @@ public class MunicipalidadController {
         return municipalidadService.buscarPorCodigo(codigoUsuario);
     }
 
-    @GetMapping("/ecocycle/municipalidad/buscarXdistrito")
-    public MunicipalidadDTO buscarPorDistrito(@RequestBody String distrito) {
-        municipalidadService.calcularPuestos();
-        return municipalidadService.buscarPorDistrito(distrito);
-    }
-
     @GetMapping("/ecocycle/municipalidad/listar")
     public List<MunicipalidadDTO> listarMunicipalidades() {
         municipalidadService.calcularPuestos();

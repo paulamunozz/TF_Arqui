@@ -10,6 +10,4 @@ import java.util.List;
 
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
     boolean existsByNombre(String nombre);
-
-    List<Evento> findAllByNombreContainingIgnoreCase(String nombre);
 }

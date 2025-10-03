@@ -34,16 +34,14 @@ public class EventoController {
 
     @GetMapping("/ecocycle/evento/buscarXid")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
+        eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
-    }
-
-    @GetMapping("/ecocycle/evento/buscarPorNombre")
-    public List<EventoDTO> buscarPorNombre(@RequestBody String nombre) {
-        return eventoService.buscarPorNombre(nombre);
     }
 
     @GetMapping("/ecocycle/evento/listarYfiltrar")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
+        eventoService.actualizarPesoActual();
+
         String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
                 && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
                 ? filtros.get("distrito").asText() : null;
@@ -75,6 +73,7 @@ public class EventoController {
 
     @GetMapping("/ecocycle/evento/listarPorVecino")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
+        eventoService.actualizarPesoActual();
 
         Integer vecinoId = filtros.get("vecinoId").asInt();
 

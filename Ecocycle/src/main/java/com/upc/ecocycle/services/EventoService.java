@@ -81,7 +81,7 @@ public class EventoService implements IEventoService {
         } else {
             eventoXVecinoRepository.deleteAllByEvento_Id(id);
             eventoRepository.deleteById(id);
-            return "Evento eliminado correctamente";
+            return "Evento eliminado exitosamente";
         }
     }
 
@@ -107,13 +107,6 @@ public class EventoService implements IEventoService {
                 eventoRepository.save(evento);
             }
         }
-    }
-
-    @Override
-    public List<EventoDTO> buscarPorNombre(String nombre) {
-        return eventoRepository.findAllByNombreContainingIgnoreCase(nombre).stream()
-                .map(evento -> modelMapper.map(evento, EventoDTO.class))
-                .collect(Collectors.toList());
     }
 
     @Override
