@@ -1,6 +1,6 @@
 package com.upc.ecocycle.services;
 
-import com.upc.ecocycle.dto.ComentariosEventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EventoXVecinoService implements IEventoXVecinoService {

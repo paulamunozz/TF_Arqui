@@ -1,7 +1,7 @@
 package com.upc.ecocycle.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.upc.ecocycle.dto.CantidadReciclajeDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.services.EventoService;
 import com.upc.ecocycle.services.MunicipalidadService;

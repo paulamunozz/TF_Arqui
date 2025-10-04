@@ -1,6 +1,6 @@
 package com.upc.ecocycle.instances;
 
-import com.upc.ecocycle.dto.ComentariosEventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 
 import java.util.List;

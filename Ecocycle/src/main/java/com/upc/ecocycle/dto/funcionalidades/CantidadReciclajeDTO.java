@@ -1,4 +1,4 @@
-package com.upc.ecocycle.dto;
+package com.upc.ecocycle.dto.funcionalidades;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

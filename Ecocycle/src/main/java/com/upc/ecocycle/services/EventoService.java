@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadEventosLogradosDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoService;
@@ -144,5 +145,10 @@ public class EventoService implements IEventoService {
                 .filter(evento -> tipo==null || evento.getTipo().equals(tipo))
                 .filter(evento -> fechaInicio == null || !evento.getFechaFin().isBefore(fechaInicio))
                 .filter(evento -> fechaFin == null || !evento.getFechaInicio().isAfter(fechaFin)).map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CantidadEventosLogradosDTO cantidadEventosLogrados(String distrito) {
+        return eventoRepository.cantidadEventosLogrados(distrito);
     }
 }

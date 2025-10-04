@@ -2,6 +2,7 @@ package com.upc.ecocycle.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadEventosLogradosDTO;
 import com.upc.ecocycle.services.EventoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
@@ -100,5 +101,11 @@ public class EventoController {
                 ? LocalDate.parse(filtros.get("fechaFin").asText()) : null;
 
         return eventoService.listarEventosPorVecino(vecinoId, nombre, tipo, metodo, fechaInicio, fechaFin);
+    }
+
+    @GetMapping("/ecocycle/evento/cantidadEventosLogrados")
+    public CantidadEventosLogradosDTO cantidadEventosLogrados(@RequestBody(required = false) String distrito) {
+        eventoService.actualizarPesoActual();
+        return eventoService.cantidadEventosLogrados(distrito);
     }
 }

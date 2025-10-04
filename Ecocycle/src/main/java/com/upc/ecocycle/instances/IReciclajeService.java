@@ -1,6 +1,6 @@
 package com.upc.ecocycle.instances;
 
-import com.upc.ecocycle.dto.CantidadReciclajeDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 
 import java.time.LocalDate;

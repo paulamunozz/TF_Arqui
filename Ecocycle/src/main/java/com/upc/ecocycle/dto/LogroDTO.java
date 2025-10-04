@@ -21,6 +21,6 @@ public class LogroDTO {
     private Integer vecinoId;
 
     @NotBlank(groups = Create.class, message = "Ingrese el nombre")
-    @Size(groups = {Create.class, Update.class}, max = 50, message="El nombre no puede superar los 50 caracteres")
+    @Size(groups = {Create.class, Update.class}, max = 100, message="El nombre no puede superar los 100 caracteres")
     private String nombre;
 }
