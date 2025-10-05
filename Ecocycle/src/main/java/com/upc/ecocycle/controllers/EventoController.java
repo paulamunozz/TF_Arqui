@@ -14,37 +14,38 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController @RequestMapping
+@RestController
+@RequestMapping("/ecocycle/evento")
 public class EventoController {
     @Autowired
     EventoService eventoService;
 
-    @PostMapping("/ecocycle/evento/registrar")
+    @PostMapping("/registrar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
         return eventoService.registrar(eventoDTO);
     }
 
-    @PutMapping("/ecocycle/evento/modificar")
+    @PutMapping("/modificar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
         return eventoService.modificar(eventoDTO);
     }
 
-    @DeleteMapping("/ecocycle/evento/eliminar")
+    @DeleteMapping("/eliminar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String eliminar(@RequestBody Integer idEvento) {
         return eventoService.eliminar(idEvento);
     }
 
-    @GetMapping("/ecocycle/evento/buscarXid")
+    @GetMapping("/buscarXid")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
     }
 
-    @GetMapping("/ecocycle/evento/listarYfiltrar")
+    @GetMapping("/listarYfiltrar")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
         eventoService.actualizarPesoActual();
@@ -78,7 +79,7 @@ public class EventoController {
         return eventoService.listarEventos(distrito, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/ecocycle/evento/listarPorVecino")
+    @GetMapping("/listarPorVecino")
     @PreAuthorize("hasRole('VECINO')")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
         eventoService.actualizarPesoActual();
@@ -110,7 +111,7 @@ public class EventoController {
         return eventoService.listarEventosPorVecino(vecinoId, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/ecocycle/evento/cantidadEventosLogrados")
+    @GetMapping("/cantidadEventosLogrados")
     public CantidadEventosLogradosDTO cantidadEventosLogrados(@RequestBody(required = false) String distrito) {
         eventoService.actualizarPesoActual();
         return eventoService.cantidadEventosLogrados(distrito);
