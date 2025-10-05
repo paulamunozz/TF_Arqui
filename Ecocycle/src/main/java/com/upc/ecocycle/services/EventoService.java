@@ -101,13 +101,10 @@ public class EventoService implements IEventoService {
         List<Evento> eventos = eventoRepository.findAll();
 
         for (Evento evento : eventos) {
-            if ((evento.getFechaInicio().isBefore(LocalDate.now()) || evento.getFechaInicio().isEqual(LocalDate.now()))
-                    && (evento.getFechaFin().isAfter(LocalDate.now()) || evento.getFechaFin().isEqual(LocalDate.now()))) {
-                BigDecimal peso = reciclajeRepository.calcularPesoPorEvento(evento.getId());
-                evento.setPesoActual(peso);
-                evento.setSituacion(peso.compareTo(evento.getPesoObjetivo()) >= 0);
-                eventoRepository.save(evento);
-            }
+            BigDecimal peso = reciclajeRepository.calcularPesoPorEvento(evento.getId());
+            evento.setPesoActual(peso);
+            evento.setSituacion(peso.compareTo(evento.getPesoObjetivo()) >= 0);
+            eventoRepository.save(evento);
         }
     }
 
