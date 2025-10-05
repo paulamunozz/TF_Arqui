@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController @RequestMapping
+@RestController
+@RequestMapping("/ecocycle/logro")
 public class LogroController {
     @Autowired private LogroService logroService;
 
-    @PostMapping("/ecocycle/logro/registrar")
+    @PostMapping("/registrar")
     public String registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
         return logroService.registrarLogro(logroDTO);
     }
 
-    @GetMapping("/ecocycle/logro/listarPorVecino")
+    @GetMapping("/listarPorVecino")
     public List<LogroDTO> listarLogrosVecino(@RequestBody Integer vecinoId) {
         return logroService.listarLogrosPorVecino(vecinoId);
     }

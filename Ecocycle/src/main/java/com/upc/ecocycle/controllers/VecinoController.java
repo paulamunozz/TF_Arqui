@@ -18,56 +18,57 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "${ip.frontend}", allowCredentials = "true", exposedHeaders = "Authorization")
-@RestController @RequestMapping
+@RestController
+@RequestMapping("/ecocycle/vecino")
 public class VecinoController {
     @Autowired private VecinoService vecinoService;
 
-    @PostMapping("/ecocycle/vecino/registrar")
+    @PostMapping("/registrar")
     public String registrar(@RequestBody @Validated(Create.class) VecinoDTO vecinoDTO) {
         String mensaje = vecinoService.registrar(vecinoDTO);
         vecinoService.calcularPuestos();
         return mensaje;
     }
 
-    @PutMapping("/ecocycle/vecino/modificar")
+    @PutMapping("/modificar")
     @PreAuthorize("hasRole('VECINO')")
     public String modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 
-    @DeleteMapping("/ecocycle/vecino/eliminar")
+    @DeleteMapping("/eliminar")
     @PreAuthorize("hasRole('VECINO')")
     public String eliminar(@RequestBody Integer idVecino) {
         return vecinoService.eliminar(idVecino);
     }
 
-    @GetMapping("/ecocycle/vecino/buscarPorDNI")
+    @GetMapping("/buscarPorDNI")
     @PreAuthorize("hasRole('ADMIN')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {
         return vecinoService.buscarPorDni(dni);
     }
 
-    @GetMapping("/ecocycle/vecino/buscarXid")
+    @GetMapping("/buscarXid")
     @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorId(@RequestBody Integer idVecino){
         vecinoService.actualizacionPuntos(idVecino);
         return vecinoService.buscarPorId(idVecino);
     }
 
-    @GetMapping("/ecocycle/vecino/listar")
+    @GetMapping("/listar")
     @PreAuthorize("hasRole('ADMIN')")
     public List<VecinoDTO> listarVecinos() {
         vecinoService.calcularPuestos();
         return vecinoService.listarVecinos();
     }
 
-    @GetMapping("/ecocycle/vecino/listarVecinosPorEvento")
+    @GetMapping("/listarVecinosPorEvento")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public List<VecinoDTO> listarVecinosPorEvento(@RequestBody Integer idEvento) {
         return vecinoService.listarVecinosPorEvento(idEvento);
     }
 
-    @GetMapping("/ecocycle/vecino/ranking")
+    @GetMapping("/ranking")
     public List<VecinoDTO> rankingFiltrado(@RequestBody JsonNode filtros) {
         vecinoService.calcularPuestos();
 
