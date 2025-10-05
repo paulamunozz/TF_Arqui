@@ -5,10 +5,12 @@ import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
+import com.upc.ecocycle.enitites.Logro;
 import com.upc.ecocycle.enitites.Vecino;
 import com.upc.ecocycle.instances.IEventoXVecinoService;
 import com.upc.ecocycle.repositories.EventoRepository;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
+import com.upc.ecocycle.repositories.LogroRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
@@ -25,6 +27,8 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     private EventoRepository eventoRepository;
     @Autowired
     private VecinoRepository vecinoRepository;
+    @Autowired
+    private LogroRepository logroRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -63,6 +67,15 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         eventoXVecino.setEvento(evento);
         eventoXVecino.setVecino(vecino);
         eventoXVecinoRepository.save(eventoXVecino);
+
+        String nombreLogro = "Participaste en el evento " + evento.getNombre();
+        if(!logroRepository.existsByVecino_IdAndNombre(vecinoId, nombreLogro))
+        {
+            Logro logro = new Logro();
+            logro.setVecino(vecino);
+            logro.setNombre(nombreLogro);
+            logroRepository.save(logro);
+        }
         return modelMapper.map(eventoXVecino, EventoXVecinoDTO.class);
     }
 
