@@ -7,6 +7,7 @@ import com.upc.ecocycle.services.EventoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,27 +20,32 @@ public class EventoController {
     EventoService eventoService;
 
     @PostMapping("/ecocycle/evento/registrar")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
         return eventoService.registrar(eventoDTO);
     }
 
     @PutMapping("/ecocycle/evento/modificar")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
         return eventoService.modificar(eventoDTO);
     }
 
     @DeleteMapping("/ecocycle/evento/eliminar")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public String eliminar(@RequestBody Integer idEvento) {
         return eventoService.eliminar(idEvento);
     }
 
     @GetMapping("/ecocycle/evento/buscarXid")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
     }
 
     @GetMapping("/ecocycle/evento/listarYfiltrar")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
         eventoService.actualizarPesoActual();
 
@@ -73,6 +79,7 @@ public class EventoController {
     }
 
     @GetMapping("/ecocycle/evento/listarPorVecino")
+    @PreAuthorize("hasRole('VECINO')")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
         eventoService.actualizarPesoActual();
 
