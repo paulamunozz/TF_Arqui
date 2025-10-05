@@ -90,13 +90,13 @@ INSERT INTO municipalidad (distrito, puntajetotal, puesto, user_id) VALUES ('San
 INSERT INTO municipalidad (distrito, puntajetotal, puesto, user_id) VALUES ('San Miguel', 105, 0, 10);
 INSERT INTO municipalidad (distrito, puntajetotal, puesto, user_id) VALUES ('Chorrillos', 115, 0, 11);
 
-INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Vidrio Verde Abril', 'Recolecta botellas y envases de vidrio para su reciclaje.', 430.00, 0, '2025-04-01', '2025-04-28', 'Vidrio', 'Camión de reciclaje', 2.1, false);
+INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Vidrio Verde Abril', 'Recolecta botellas y envases de vidrio para su reciclaje.', 110.00, 0, '2025-04-01', '2025-04-28', 'Vidrio', 'Camión de reciclaje', 2.1, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Orgánicos Mayo', 'Promueve el compostaje de residuos domésticos.', 560.60, 0, '2025-05-01', '2025-05-26', 'Orgánico', 'En casa', 3.0, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Plástico Cero Junio', 'Reduce y recicla plásticos con esta campaña distrital.', 610.45, 0, '2025-06-01', '2025-06-27', 'Plástico', 'Camión de reciclaje', 2.9, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Metales Julio', 'Recolecta chatarra y latas para fomentar el reciclaje industrial.', 700.25, 0, '2025-07-01', '2025-07-29', 'Metal/Lata', 'Centro de reciclaje de la municipalidad', 3.2, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (1, 'Reciclaje Electrónico Agosto', 'Campaña para recolectar equipos electrónicos en desuso.', 780.50, 0, '2025-08-01', '2025-08-25', 'Electrónicos', 'Centro de reciclaje de la municipalidad', 4.5, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Reciclaje Plástico Abril', 'Campaña para recolectar botellas y envases plásticos durante abril.', 420.50, 0, '2025-04-01', '2025-04-30', 'Plástico', 'Camión de reciclaje', 2.5, false);
-INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Papel Limpio Mayo', 'Recolecta hojas, cuadernos y cartones usados para su reciclaje en mayo.', 310.20, 0, '2025-05-05', '2025-05-25', 'Papel', 'Centro de reciclaje de la municipalidad', 1.8, false);
+INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Papel Limpio Mayo', 'Recolecta hojas, cuadernos y cartones usados para su reciclaje en mayo.', 120.20, 0, '2025-05-05', '2025-05-25', 'Papel', 'Centro de reciclaje de la municipalidad', 1.8, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Orgánicos Junio', 'Separación de residuos orgánicos domiciliarios para composta.', 500.00, 0, '2025-06-01', '2025-06-20', 'Orgánico', 'En casa', 3.2, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Vidrio Responsable Julio', 'Recolecta botellas de vidrio y frascos en los puntos autorizados.', 270.75, 0, '2025-07-01', '2025-07-31', 'Vidrio', 'Camión de reciclaje', 2.1, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (2, 'Metal Solidario Agosto', 'Iniciativa para reciclar latas y metales ligeros.', 680.90, 0, '2025-08-05', '2025-08-28', 'Metal/Lata', 'Centro de reciclaje de la municipalidad', 1.9, false);
@@ -113,7 +113,7 @@ INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'E-Waste Agosto', 'Campaña para recolectar residuos electrónicos y eléctricos.', 820.20, 0, '2025-08-01', '2025-08-25', 'Electrónicos', 'Centro de reciclaje de la municipalidad', 4.2, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'Papel Limpio Septiembre', 'Recolecta papeles usados en colegios y oficinas.', 340.70, 0, '2025-09-01', '2025-09-20', 'Papel', 'Camión de reciclaje', 2.4, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'Plástico Cuidado Octubre', 'Promueve la reducción de botellas y bolsas plásticas.', 720.85, 0, '2025-10-01', '2025-10-25', 'Plástico', 'En casa', 3.6, false);
-INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'Orgánico Verde Noviembre', 'Promueve el uso de residuos orgánicos para fertilizantes.', 480.30, 0, '2025-11-01', '2025-11-25', 'Orgánico', 'Camión de reciclaje', 2.8, false);
+INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'Orgánico Verde Noviembre', 'Promueve el uso de residuos orgánicos para fertilizantes.', 230.30, 0, '2025-11-01', '2025-11-25', 'Orgánico', 'Camión de reciclaje', 2.8, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (5, 'Vidrio Circular Diciembre', 'Recolecta envases de vidrio para su reintegración industrial.', 515.00, 0, '2025-12-01', '2025-12-28', 'Vidrio', 'Centro de reciclaje de la municipalidad', 3.1, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (6, 'Plástico Responsable Enero', 'Iniciativa para recolectar plásticos domésticos y fomentar su reutilización.', 660.40, 0, '2025-01-05', '2025-01-25', 'Plástico', 'Camión de reciclaje', 2.7, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (6, 'Metal y Lata Febrero', 'Recolecta latas y otros metales reciclables.', 355.55, 0, '2025-02-01', '2025-02-22', 'Metal/Lata', 'Centro de reciclaje de la municipalidad', 2.0, false);
@@ -139,7 +139,7 @@ INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (10, 'Plástico Responsable Diciembre', 'Recolecta botellas plásticas durante diciembre.', 590.60, 0, '2025-12-01', '2025-12-28', 'Plástico', 'Camión de reciclaje', 3.1, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (10, 'Papel Futuro Enero', 'Entrega papel usado y ayuda a conservar los bosques.', 410.20, 0, '2025-01-10', '2025-01-30', 'Papel', 'Centro de reciclaje de la municipalidad', 1.7, false);
 INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (10, 'Orgánico Hogar Febrero', 'Separa tus residuos orgánicos para compostaje doméstico.', 500.00, 0, '2025-02-01', '2025-02-24', 'Orgánico', 'En casa', 2.8, false);
-INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (10, 'E-Waste Marzo', 'Entrega tus aparatos electrónicos viejos para disposición responsable.', 855.75, 0, '2025-03-01', '2025-03-27', 'Electrónicos', 'Centro de reciclaje de la municipalidad', 4.4, false);
+INSERT INTO evento ( id_municipalidad, nombre, descripcion, peso_objetivo, peso_actual, fecha_inicio, fecha_fin, tipo, metodo, bonificacion, situacion) VALUES (10, 'E-Waste Marzo', 'Entrega tus aparatos electrónicos viejos para disposición responsable.', 155.75, 0, '2025-03-01', '2025-03-27', 'Electrónicos', 'Centro de reciclaje de la municipalidad', 4.4, false);
 
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Paula Muñoz', 'F', 19, 'San Borja', 28, 0, 0, false, 12);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Carlos Rivera', 'M', 32, 'San Borja', 26, 0, 0, false, 13);
@@ -148,7 +148,7 @@ INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, 
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Lucía Vargas', 'F', 28, 'San Borja', 27, 0, 0, false, 16);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Camila Gómez', 'F', 21, 'Surco', 21, 0, 0, false, 17);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Andrés Torres', 'M', 24, 'Surco', 16, 0, 0, false, 18);
-INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Valeria Ponce', 'F', 35, 'Surco', 23, 0, 0, false, 19);
+INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Valeria Ponce', 'F', 35, 'Surco', 28, 0, 0, false, 19);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('José Ramírez', 'M', 44, 'Surco', 32, 0, 0, false, 20);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Daniela León', 'F', 29, 'Surco', 27, 0, 0, false, 21);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Andrea Soto', 'F', 22, 'Surquillo', 28, 0, 0, false, 22);
@@ -162,7 +162,7 @@ INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, 
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Sergio Delgado', 'M', 36, 'Miraflores', 22, 0, 0, false, 30);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Gabriela Torres', 'F', 30, 'Miraflores', 23, 0, 0, false, 31);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Felipe Castro', 'M', 26, 'Barranco', 17, 0, 0, false, 32);
-INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Ana Salazar', 'F', 31, 'Barranco', 18, 0, 0, false, 33);
+INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Ana Salazar', 'F', 31, 'Barranco', 24, 0, 0, false, 33);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Raúl Medina', 'M', 38, 'Barranco', 22, 0, 0, false, 34);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Patricia Flores', 'F', 27, 'Barranco', 18, 0, 0, false, 35);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Diego Cárdenas', 'M', 22, 'Barranco', 23, 0, 0, false, 36);
@@ -192,16 +192,16 @@ INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, 
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Oscar Lozano', 'M', 43, 'Chorrillos', 26, 0, 0, false, 60);
 INSERT INTO public.vecino (nombre, genero, edad, distrito, puntajetotal, icono, puesto, eliminado, user_id) VALUES ('Rosa Alarcón', 'F', 38, 'Chorrillos', 18, 0, 0, false, 61);
 
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 60.07, 'Plástico', 'En casa', '2025-12-02', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 60.07, 'Vidrio', 'Camión de reciclaje', '2025-04-05' 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 16.52, 'Plástico', 'Camión de reciclaje', '2025-08-03', 2);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 55.91, 'Metal/Lata', 'Centro de reciclaje de la municipalidad', '2025-06-07', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 50.68, 'Vidrio', 'En casa', '2025-09-16', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 68.70, 'Papel', 'En casa', '2025-07-28', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 55.91, 'Metal/Lata', 'Centro de reciclaje de la municipalidad', '2025-04-05', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 50.68, 'Vidrio', 'Camión de reciclaje', '2025-04-05', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (1, 68.70, 'Vidrio', 'Camión de reciclaje', '2025-04-05', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 32.80, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-11-13', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 27.21, 'Metal/Lata', 'Camión de reciclaje', '2025-04-20', 3);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 58.90, 'Plástico', 'En casa', '2025-11-05', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 58.90, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-11-05', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 55.08, 'Plástico', 'En casa', '2025-10-26', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 67.94, 'Plástico', 'Centro de reciclaje de la municipalidad', '2025-04-22', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (2, 67.94, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-04-22', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (3, 30.86, 'Metal/Lata', 'Camión de reciclaje', '2025-11-21', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (3, 24.18, 'Electrónicos', 'En casa', '2025-04-28', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (3, 8.36, 'Electrónicos', 'Camión de reciclaje', '2025-04-23', 1);
@@ -215,7 +215,7 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 56.60, 'Electrónicos', 'En casa', '2025-01-04', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 23.47, 'Plástico', 'Camión de reciclaje', '2025-01-25', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 36.23, 'Electrónicos', 'En casa', '2025-03-18', 4);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 72.99, 'Electrónicos', 'Camión de reciclaje', '2025-10-29', 8);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 72.99, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-10-29', 8);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (5, 55.35, 'Orgánico', 'Camión de reciclaje', '2025-06-28', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (6, 66.86, 'Plástico', 'En casa', '2025-10-08', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (6, 10.87, 'Orgánico', 'Centro de reciclaje de la municipalidad', '2025-01-05', 2);
@@ -226,8 +226,8 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (7, 4.40, 'Electrónicos', 'En casa', '2025-09-21', 1);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (7, 2.24, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-04-14', 1);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (7, 23.44, 'Vidrio', 'Camión de reciclaje', '2025-12-21', 3);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (7, 53.18, 'Electrónicos', 'Camión de reciclaje', '2025-06-28', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (8, 20.20, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-08-10', 3);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (7, 53.18, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-06-28', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (8, 70.20, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-05-16', 8);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (8, 51.25, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-11-22', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (8, 28.23, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-12-29', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (8, 66.20, 'Metal/Lata', 'Centro de reciclaje de la municipalidad', '2025-09-18', 7);
@@ -238,8 +238,8 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (9, 26.98, 'Plástico', 'Centro de reciclaje de la municipalidad', '2025-08-09', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (9, 44.04, 'Vidrio', 'Centro de reciclaje de la municipalidad', '2025-11-23', 5);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 36.64, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-07', 4);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 61.25, 'Papel', 'Camión de reciclaje', '2025-02-26', 7);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 36.78, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-22', 4);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 61.25, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-05-10', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 36.78, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-10-16', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 65.44, 'Plástico', 'En casa', '2025-11-09', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (10, 49.60, 'Plástico', 'En casa', '2025-04-14', 5);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (11, 66.31, 'Plástico', 'Centro de reciclaje de la municipalidad', '2025-05-19', 7);
@@ -299,8 +299,8 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (21, 37.35, 'Papel', 'En casa', '2025-01-03', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 5.57, 'Electrónicos', 'En casa', '2025-07-28', 1);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 42.63, 'Vidrio', 'Camión de reciclaje', '2025-05-07', 5);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 68.29, 'Vidrio', 'Centro de reciclaje de la municipalidad', '2025-01-06', 7);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 2.58, 'Orgánico', 'Centro de reciclaje de la municipalidad', '2025-10-16', 1);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 68.29, 'Orgánico', 'Camión de reciclaje', '2025-11-06', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 60.58, 'Orgánico', 'Camión de reciclaje', '2025-11-16', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (22, 33.26, 'Papel', 'En casa', '2025-11-08', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (23, 14.46, 'Electrónicos', 'En casa', '2025-10-31', 2);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (23, 51.17, 'Papel', 'Camión de reciclaje', '2025-11-21', 6);
@@ -308,8 +308,8 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (23, 50.82, 'Papel', 'Centro de reciclaje de la municipalidad', '2025-01-30', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (23, 19.66, 'Metal/Lata', 'Camión de reciclaje', '2025-02-23', 2);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 17.67, 'Electrónicos', 'Camión de reciclaje', '2025-08-19', 2);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 59.04, 'Orgánico', 'Centro de reciclaje de la municipalidad', '2025-01-11', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 51.91, 'Vidrio', 'Centro de reciclaje de la municipalidad', '2025-04-08', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 59.04, 'Orgánico', 'Camión de reciclaje', '2025-11-11', 6);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 51.91, 'Orgánico', 'Camión de reciclaje', '2025-11-08', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 1.15, 'Plástico', 'Camión de reciclaje', '2025-04-28', 1);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (24, 20.27, 'Plástico', 'Camión de reciclaje', '2025-10-20', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (25, 25.48, 'Metal/Lata', 'Centro de reciclaje de la municipalidad', '2025-05-30', 3);
@@ -424,26 +424,26 @@ INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VAL
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (46, 64.75, 'Vidrio', 'En casa', '2025-07-19', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 72.03, 'Vidrio', 'Centro de reciclaje de la municipalidad', '2025-04-10', 8);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 15.34, 'Orgánico', 'En casa', '2025-09-15', 2);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 66.79, 'Orgánico', 'Centro de reciclaje de la municipalidad', '2025-12-22', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 66.79, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-22', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 32.31, 'Plástico', 'Camión de reciclaje', '2025-05-27', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (47, 58.60, 'Plástico', 'Camión de reciclaje', '2025-06-29', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 59.56, 'Metal/Lata', 'Camión de reciclaje', '2025-07-02', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 5.19, 'Orgánico', 'Centro de reciclaje de la municipalidad', '2025-03-09', 1);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 70.07, 'Electrónicos', 'En casa', '2025-10-04', 8);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 35.25, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-09-23', 4);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 70.07, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-04', 8);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 35.25, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-23', 4);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (48, 60.68, 'Electrónicos', 'Camión de reciclaje', '2025-04-04', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 53.38, 'Orgánico', 'Camión de reciclaje', '2025-10-17', 6);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 18.09, 'Electrónicos', 'Camión de reciclaje', '2025-06-08', 2);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 18.09, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-08', 2);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 71.47, 'Plástico', 'Camión de reciclaje', '2025-03-04', 8);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 69.61, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-07-27', 7);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 69.61, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-27', 7);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (49, 22.57, 'Metal/Lata', 'Centro de reciclaje de la municipalidad', '2025-11-11', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 51.05, 'Orgánico', 'Camión de reciclaje', '2025-06-06', 6);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 1.12, 'Metal/Lata', 'En casa', '2025-06-19', 1);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 22.77, 'Electrónicos', 'Camión de reciclaje', '2025-09-10', 3);
-INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 20.76, 'Electrónicos', 'En casa', '2025-12-29', 3);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 22.77, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-10', 3);
+INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 20.76, 'Electrónicos', 'Centro de reciclaje de la municipalidad', '2025-03-29', 3);
 INSERT INTO public.reciclaje (id_vecino, peso, tipo, metodo, fecha, puntaje) VALUES (50, 45.76, 'Orgánico', 'Camión de reciclaje', '2025-10-14', 5);
 
-INSERT INTO public.evento_x_vecino (id_evento, id_vecino, comentario) VALUES (1, 1, 'Participé activamente en la campaña de reciclaje de plásticos.');
+INSERT INTO public.evento_x_vecino (id_evento, id_vecino, comentario) VALUES (1, 1, 'Participé activamente en la campaña de reciclaje de vidrio.');
 INSERT INTO public.evento_x_vecino (id_evento, id_vecino, comentario) VALUES (3, 1, NULL);
 INSERT INTO public.evento_x_vecino (id_evento, id_vecino, comentario) VALUES (5, 1, 'Fue una buena experiencia para aprender más sobre el reciclaje.');
 INSERT INTO public.evento_x_vecino (id_evento, id_vecino, comentario) VALUES (2, 2, 'Me gustó ayudar en la jornada de reciclaje del barrio.');
