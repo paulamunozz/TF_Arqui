@@ -4,9 +4,11 @@ import com.upc.ecocycle.dto.funcionalidades.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
+import com.upc.ecocycle.enitites.Logro;
 import com.upc.ecocycle.enitites.Reciclaje;
 import com.upc.ecocycle.instances.IReciclajeService;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
+import com.upc.ecocycle.repositories.LogroRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
 import jakarta.transaction.Transactional;
@@ -27,6 +29,8 @@ public class ReciclajeService implements IReciclajeService {
     private VecinoRepository  vecinoRepository;
     @Autowired
     private EventoXVecinoRepository eventoXVecinoRepository;
+    @Autowired
+    private LogroRepository logroRepository;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -60,6 +64,15 @@ public class ReciclajeService implements IReciclajeService {
         }
         reciclaje.setPuntaje(puntaje);
         reciclajeRepository.save(reciclaje);
+
+        if(!logroRepository.existsByVecino_Id(reciclajeDTO.getVecinoId()))
+        {
+            Logro logro = new Logro();
+            logro.setVecino(reciclaje.getVecino());
+            logro.setNombre("Realizaste tu primer registro");
+            logroRepository.save(logro);
+        }
+
         return modelMapper.map(reciclaje, ReciclajeDTO.class);
     }
 
