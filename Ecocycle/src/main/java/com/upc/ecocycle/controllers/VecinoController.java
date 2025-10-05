@@ -8,6 +8,7 @@ import com.upc.ecocycle.services.VecinoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "${ip.frontend}", allowCredentials = "true", exposedHeaders = "Authorization")
 @RestController @RequestMapping
 public class VecinoController {
     @Autowired private VecinoService vecinoService;
@@ -28,33 +30,39 @@ public class VecinoController {
     }
 
     @PutMapping("/ecocycle/vecino/modificar")
+    @PreAuthorize("hasRole('VECINO')")
     public String modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 
     @DeleteMapping("/ecocycle/vecino/eliminar")
+    @PreAuthorize("hasRole('VECINO')")
     public String eliminar(@RequestBody Integer idVecino) {
         return vecinoService.eliminar(idVecino);
     }
 
     @GetMapping("/ecocycle/vecino/buscarPorDNI")
+    @PreAuthorize("hasRole('ADMIN')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {
         return vecinoService.buscarPorDni(dni);
     }
 
     @GetMapping("/ecocycle/vecino/buscarXid")
+    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorId(@RequestBody Integer idVecino){
         vecinoService.actualizacionPuntos(idVecino);
         return vecinoService.buscarPorId(idVecino);
     }
 
     @GetMapping("/ecocycle/vecino/listar")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<VecinoDTO> listarVecinos() {
         vecinoService.calcularPuestos();
         return vecinoService.listarVecinos();
     }
 
     @GetMapping("/ecocycle/vecino/listarVecinosPorEvento")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public List<VecinoDTO> listarVecinosPorEvento(@RequestBody Integer idEvento) {
         return vecinoService.listarVecinosPorEvento(idEvento);
     }

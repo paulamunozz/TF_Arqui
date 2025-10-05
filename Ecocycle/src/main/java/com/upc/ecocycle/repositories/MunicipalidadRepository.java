@@ -12,5 +12,5 @@ public interface MunicipalidadRepository extends JpaRepository<Municipalidad, In
     @Query("SELECT m FROM Municipalidad m " + "ORDER BY m.puntajetotal DESC")
     List<Municipalidad> findRanking();
 
-    Municipalidad findByCodigo(String codigo);
+    Municipalidad findByUser_Username(String userUsername);
 }

@@ -1,5 +1,6 @@
 package com.upc.ecocycle.enitites;
 
+import com.upc.ecocycle.security.entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,16 +16,6 @@ public class Vecino {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_vecino", nullable = false)
     private Integer id;
-
-    @Size(max = 8)
-    @NotNull
-    @Column(name = "dni", nullable = false, length = 8)
-    private String dni;
-
-    @Size(max = 50)
-    @NotNull
-    @Column(name = "contrasena", nullable = false, length = 50)
-    private String contrasena;
 
     @Size(max = 100)
     @NotNull
@@ -60,4 +51,8 @@ public class Vecino {
     @NotNull
     @Column(name = "eliminado", nullable = false)
     private Boolean eliminado = false;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

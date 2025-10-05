@@ -1,0 +1,19 @@
+package com.upc.ecocycle.security.repositories;
+
+import com.upc.ecocycle.security.entities.User;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByUsername(String username);
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO user_roles (user_id, role_id) VALUES (:user_id, :role_id)",  nativeQuery = true)
+    public Integer insertUserRole(@Param("user_id") Integer user_id, @Param("role_id")Integer role_id);
+}

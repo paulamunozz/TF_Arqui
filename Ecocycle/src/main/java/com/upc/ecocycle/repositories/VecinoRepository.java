@@ -21,9 +21,9 @@ public interface VecinoRepository extends JpaRepository<Vecino, Integer> {
             "WHERE v.distrito = :distrito")
     Integer sumPuntosByMunicipalidad(String distrito);
 
-    Vecino findByDni(String dni);
-
-    boolean existsByDniAndEliminado(String dni, Boolean eliminado);
-
     boolean existsByIdAndEliminado(Integer id, Boolean eliminado);
+
+    boolean existsByUser_UsernameAndEliminado(String userUsername, Boolean eliminado);
+
+    Vecino findByUser_Username(String userUsername);
 }

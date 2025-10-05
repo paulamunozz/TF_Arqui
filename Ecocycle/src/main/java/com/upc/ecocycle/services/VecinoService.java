@@ -10,9 +10,13 @@ import com.upc.ecocycle.repositories.EventoRepository;
 import com.upc.ecocycle.repositories.EventoXVecinoRepository;
 import com.upc.ecocycle.repositories.ReciclajeRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
+import com.upc.ecocycle.security.entities.User;
+import com.upc.ecocycle.security.repositories.RoleRepository;
+import com.upc.ecocycle.security.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,19 +30,29 @@ public class VecinoService implements IVecinoService {
     @Autowired private EventoXVecinoRepository eventoXVecinoRepository;
     @Autowired private EventoRepository eventoRepository;
     @Autowired private ModelMapper modelMapper;
+    @Autowired private UserRepository userRepository;
+    @Autowired private PasswordEncoder bcrypt;
 
     @Override
     public String registrar(VecinoDTO vecinoDTO) {
-        if (vecinoRepository.existsByDniAndEliminado((vecinoDTO.getDni()), false))
+        if (vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false))
         {
             return "Este vecino ya existe";
         }
+        User user = new User();
+        user.setUsername(vecinoDTO.getDni());
+        user.setPassword(bcrypt.encode(vecinoDTO.getContrasena()));
+        userRepository.save(user);
+        userRepository.insertUserRole(user.getId(), 1);
+
         Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
         vecino.setPuntajetotal(0);
         vecino.setPuesto(0);
         vecino.setIcono(0);
         vecino.setEliminado(false);
+        vecino.setUser(user);
         vecinoRepository.save(vecino);
+
         return "Vecino registrado exitosamente";
     }
 
@@ -48,13 +62,15 @@ public class VecinoService implements IVecinoService {
             return "El vecino no existe";
         }
         Vecino vecino = vecinoRepository.findById(vecinoDTO.getIdVecino()).get();
-        if(vecinoRepository.existsByDniAndEliminado((vecinoDTO.getDni()), false) && !vecinoDTO.getDni().equals(vecino.getDni())) {
+        User user = vecino.getUser();
+        if(vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false) && !vecinoDTO.getDni().equals(user.getUsername())) {
             return "Este DNI ya ha sido registrado";
         }
-        vecino.setDni((vecinoDTO.getDni() != null && !vecinoDTO.getDni().isBlank())
-                ? vecinoDTO.getDni() : vecino.getDni());
-        vecino.setContrasena((vecinoDTO.getContrasena() != null && !vecinoDTO.getContrasena().isBlank())
-                ? vecinoDTO.getContrasena() : vecino.getContrasena());
+        user.setUsername((vecinoDTO.getDni() != null && !vecinoDTO.getDni().isBlank())
+                ? vecinoDTO.getDni() : user.getUsername());
+        user.setPassword((vecinoDTO.getContrasena() != null && !vecinoDTO.getContrasena().isBlank())
+                ? bcrypt.encode(vecinoDTO.getContrasena()) : user.getPassword());
+
         vecino.setNombre((vecinoDTO.getNombre() != null && !vecinoDTO.getNombre().isBlank())
                         ? vecinoDTO.getNombre() : vecino.getNombre());
         vecino.setGenero((vecinoDTO.getGenero() != null && !vecinoDTO.getGenero().isBlank())
@@ -65,6 +81,7 @@ public class VecinoService implements IVecinoService {
                         ? vecinoDTO.getDistrito() : vecino.getDistrito());
         vecino.setIcono(vecinoDTO.getIcono() != null ? vecinoDTO.getIcono() : vecino.getIcono());
 
+        userRepository.save(user);
         vecinoRepository.save(vecino);
         return "Vecino modificado exitosamente";
     }
@@ -85,11 +102,16 @@ public class VecinoService implements IVecinoService {
         if (dni.isBlank()) {
             return null;
         }
-        Vecino vecino = vecinoRepository.findByDni(dni);
+        Vecino vecino = vecinoRepository.findByUser_Username(dni);
         if (vecino == null) {
             return null;
         }
-        return modelMapper.map(vecino, VecinoDTO.class);
+
+        VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
+        User user = vecino.getUser();
+        vecinoDTO.setDni(user.getUsername());
+        vecinoDTO.setContrasena(user.getPassword());
+        return vecinoDTO;
     }
 
     @Override
@@ -101,7 +123,12 @@ public class VecinoService implements IVecinoService {
         if (vecino == null) {
             return null;
         }
-        return modelMapper.map(vecino, VecinoDTO.class);
+
+        VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
+        User user = vecino.getUser();
+        vecinoDTO.setDni(user.getUsername());
+        vecinoDTO.setContrasena(user.getPassword());
+        return vecinoDTO;
     }
 
     @Override
