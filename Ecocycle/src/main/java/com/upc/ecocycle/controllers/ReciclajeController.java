@@ -10,6 +10,7 @@ import com.upc.ecocycle.services.VecinoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class ReciclajeController {
     private EventoService eventoService;
 
     @PostMapping("/registrar")
+    @PreAuthorize("hasRole('VECINO')")
     public ReciclajeDTO registrar(@RequestBody @Validated(Create.class) ReciclajeDTO reciclajeDTO) {
 
         ReciclajeDTO reciclaje = reciclajeService.registrar(reciclajeDTO);
@@ -41,6 +43,7 @@ public class ReciclajeController {
     }
 
     @PutMapping("/modificar")
+    @PreAuthorize("hasRole('VECINO')")
     public ReciclajeDTO modificar(@RequestBody @Validated(Update.class) ReciclajeDTO reciclajeDTO) {
         ReciclajeDTO reciclaje = reciclajeService.modificar(reciclajeDTO);
 
@@ -53,6 +56,7 @@ public class ReciclajeController {
     }
 
     @DeleteMapping("/eliminar")
+    @PreAuthorize("hasRole('VECINO')")
     public String eliminar(@RequestBody Integer idReciclaje) {
         ReciclajeDTO reciclaje = reciclajeService.buscarPorId(idReciclaje);
 
@@ -66,6 +70,7 @@ public class ReciclajeController {
     }
 
     @GetMapping("/listarPorVecino")
+    @PreAuthorize("hasRole('VECINO')")
     public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody JsonNode filtros) {
         Integer vecinoId = filtros.get("vecinoId").asInt();
 
@@ -91,6 +96,7 @@ public class ReciclajeController {
     }
 
     @GetMapping("/listarReciclajeFiltrado")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public List<ReciclajeDTO> listarReciclajeFiltrado(@RequestBody JsonNode filtros) {
         String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
                 && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
