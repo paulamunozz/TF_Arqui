@@ -1,5 +1,6 @@
 package com.upc.ecocycle.services;
 
+import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EventoXVecinoService implements IEventoXVecinoService {
@@ -62,7 +62,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         eventoXVecino.setEvento(evento);
         eventoXVecino.setVecino(vecino);
         eventoXVecinoRepository.save(eventoXVecino);
-        return "EXV registrado";
+        return "Registro exitoso";
     }
 
     @Override
@@ -90,15 +90,13 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     }
 
     @Override
-    public List<EventoXVecinoDTO> listarEXVPorEvento(Integer eventoId) {
-        if (eventoId == null) {
+    public List<ComentariosEventoDTO> comentariosEvento(Integer idEvento) {
+        if (idEvento == null) {
             return null;
         }
-        else if(!eventoRepository.existsById(eventoId)) {
+        else if(!eventoRepository.existsById(idEvento)) {
             return null;
         }
-        return eventoXVecinoRepository.findAllByEvento_Id(eventoId)
-                .stream().map(exv -> modelMapper.map(exv, EventoXVecinoDTO.class))
-                .collect(Collectors.toList());
+        return eventoXVecinoRepository.comentariosEvento(idEvento);
     }
 }

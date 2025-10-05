@@ -1,12 +1,16 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.MunicipalidadDTO;
+import com.upc.ecocycle.dto.VecinoDTO;
 import com.upc.ecocycle.enitites.Municipalidad;
 import com.upc.ecocycle.instances.IMunicipalidadService;
 import com.upc.ecocycle.repositories.MunicipalidadRepository;
 import com.upc.ecocycle.repositories.VecinoRepository;
+import com.upc.ecocycle.security.entities.User;
+import com.upc.ecocycle.security.repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +21,20 @@ public class MunicipalidadService implements IMunicipalidadService {
     @Autowired private MunicipalidadRepository municipalidadRepository;
     @Autowired private VecinoRepository  vecinoRepository;
     @Autowired private ModelMapper modelMapper;
+    @Autowired private UserRepository userRepository;
+    @Autowired private PasswordEncoder bcrypt;
+
+    @Override
+    public String modificarContrasena(Integer id, String contrasena) {
+        Municipalidad municipalidad = municipalidadRepository.findById(id).orElse(null);
+        if (municipalidad == null) {
+            throw new RuntimeException("No existe la municipalidad con id: " + id);
+        }
+        User user = municipalidad.getUser();
+        user.setPassword(bcrypt.encode(contrasena));
+        userRepository.save(user);
+        return "Contraseña actualizada";
+    }
 
     @Override
     public void actualizacionPuntos(String distrito) {
@@ -50,31 +68,24 @@ public class MunicipalidadService implements IMunicipalidadService {
         if (municipalidad == null) {
             throw new RuntimeException("No existe el municipalidad con id: " + id);
         }
-        else  {
-            return modelMapper.map(municipalidad, MunicipalidadDTO.class);
-        }
+        MunicipalidadDTO municipalidadDTO =  modelMapper.map(municipalidad, MunicipalidadDTO.class);
+        User user = municipalidad.getUser();
+        municipalidadDTO.setCodigo(user.getUsername());
+        municipalidadDTO.setContrasena(user.getPassword());
+        return municipalidadDTO;
     }
 
     @Override
     public MunicipalidadDTO buscarPorCodigo(String codigo) {
-        Municipalidad municipalidad = municipalidadRepository.findByCodigo(codigo);
+        Municipalidad municipalidad = municipalidadRepository.findByUser_Username(codigo);
         if (municipalidad == null) {
             return null;
         }
-        else {
-            return modelMapper.map(municipalidad, MunicipalidadDTO.class);
-        }
-    }
-
-    @Override
-    public MunicipalidadDTO buscarPorDistrito(String distrito) {
-        Municipalidad municipalidad = municipalidadRepository.findByDistritoIgnoreCase(distrito.trim());
-        if (municipalidad == null) {
-            return null;
-        }
-        else {
-            return modelMapper.map(municipalidad, MunicipalidadDTO.class);
-        }
+        MunicipalidadDTO municipalidadDTO =  modelMapper.map(municipalidad, MunicipalidadDTO.class);
+        User user = municipalidad.getUser();
+        municipalidadDTO.setCodigo(user.getUsername());
+        municipalidadDTO.setContrasena(user.getPassword());
+        return municipalidadDTO;
     }
 
     @Override

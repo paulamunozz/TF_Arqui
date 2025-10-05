@@ -21,9 +21,9 @@ public class Logro {
     @JoinColumn(name = "id_vecino", nullable = false)
     private Vecino vecino;
 
-    @Size(max = 50)
+    @Size(max = 100)
     @NotNull
-    @Column(name = "nombre", nullable = false, length = 50)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
 }

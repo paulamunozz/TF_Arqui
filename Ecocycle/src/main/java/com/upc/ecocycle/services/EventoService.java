@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadEventosLogradosDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
 import com.upc.ecocycle.instances.IEventoService;
@@ -39,7 +40,7 @@ public class EventoService implements IEventoService {
         } else if (eventoRepository.existsByNombre(eventoDTO.getNombre())) {
             return "Este evento ya existe";
         } else if (eventoDTO.getFechaInicio().isAfter(eventoDTO.getFechaFin())) {
-            return "La fecha de inicio tiene que ser antes de la fecha de fin";
+            return "La fecha de inicio no puede ser futura a la de fin";
         } else if (eventoDTO.getBonificacion() <= 1) {
             return "La bonificación tiene que ser mayor que 1";
         } else {
@@ -81,7 +82,7 @@ public class EventoService implements IEventoService {
         } else {
             eventoXVecinoRepository.deleteAllByEvento_Id(id);
             eventoRepository.deleteById(id);
-            return "Evento eliminado correctamente";
+            return "Evento eliminado exitosamente";
         }
     }
 
@@ -110,50 +111,44 @@ public class EventoService implements IEventoService {
     }
 
     @Override
-    public List<EventoDTO> buscarPorNombre(String nombre) {
-        return eventoRepository.findAllByNombreContainingIgnoreCase(nombre).stream()
-                .map(evento -> modelMapper.map(evento, EventoDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<EventoDTO> listarEventos(String nombre, String tipo, String estado, String distrito, LocalDate fechaInicio, LocalDate fechaFin) {
-        if (fechaInicio.isAfter(fechaFin)){
-            return null;
+    public List<EventoDTO> listarEventos(String distrito, String nombre, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin) {
+        if (fechaInicio != null && fechaFin != null && fechaInicio.isAfter(fechaFin)){
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
         }
-        LocalDate hoy = LocalDate.now();
-        List<Evento> lista = eventoRepository.findAll().stream()
+        return eventoRepository.findAll().stream()
                 .filter(evento -> nombre==null || evento.getNombre().toLowerCase().contains(nombre.toLowerCase()))
                 .filter(evento -> distrito==null || evento.getMunicipalidad().getDistrito().equals(distrito))
+                .filter(evento -> metodo==null || evento.getMetodo().equals(metodo))
                 .filter(evento -> tipo==null || evento.getTipo().equals(tipo))
-                .filter(evento -> {
-                    if (estado==null) return true;
-                    return switch (estado.toLowerCase())
-                    {
-                        case "pasado" -> evento.getFechaFin().isBefore(hoy);
-                        case "activo" -> (evento.getFechaInicio().isBefore(hoy) || evento.getFechaInicio().isEqual(hoy))
-                                && (evento.getFechaFin().isAfter(hoy) || evento.getFechaFin().isEqual(hoy));
-                        case "futuro" -> evento.getFechaInicio().isAfter(hoy);
-                        default -> true;
-                    };
-                })
-                .filter(evento -> fechaInicio==null || evento.getFechaInicio().isBefore(fechaFin) || evento.getFechaInicio().isEqual(fechaFin))
-                .filter(evento -> fechaFin==null || evento.getFechaFin().isAfter(fechaInicio) || evento.getFechaFin().isEqual(fechaInicio))
-                .toList();
-
-        return lista.stream().map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+                .filter(evento -> fechaInicio == null || !evento.getFechaFin().isBefore(fechaInicio))
+                .filter(evento -> fechaFin == null || !evento.getFechaInicio().isAfter(fechaFin))
+                .map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
     }
 
     @Override
-    public List<EventoDTO> listarEventosPorVecino(Integer idVecino) {
+    public List<EventoDTO> listarEventosPorVecino(Integer idVecino, String nombre, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin) {
         if (!vecinoRepository.existsById(idVecino)) {
             throw new RuntimeException("Este vecino no existe");
+        }
+        else
+        if (fechaInicio != null && fechaFin != null && fechaInicio.isAfter(fechaFin)){
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
         }
         List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByVecino_Id(idVecino).stream().toList();
         List<Evento> eventos = new ArrayList<>();
         for(EventoXVecino exv: listaEXV) {
             eventos.add(exv.getEvento());
         }
-        return eventos.stream().map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+        return eventos.stream()
+                .filter(evento -> nombre==null || evento.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                .filter(evento -> metodo==null || evento.getMetodo().equals(metodo))
+                .filter(evento -> tipo==null || evento.getTipo().equals(tipo))
+                .filter(evento -> fechaInicio == null || !evento.getFechaFin().isBefore(fechaInicio))
+                .filter(evento -> fechaFin == null || !evento.getFechaInicio().isAfter(fechaFin)).map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public CantidadEventosLogradosDTO cantidadEventosLogrados(String distrito) {
+        return eventoRepository.cantidadEventosLogrados(distrito);
     }
 }

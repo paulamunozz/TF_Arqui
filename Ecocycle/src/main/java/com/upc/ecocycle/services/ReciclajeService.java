@@ -1,6 +1,6 @@
 package com.upc.ecocycle.services;
 
-import com.upc.ecocycle.dto.CantidadReciclajeDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -109,7 +109,7 @@ public class ReciclajeService implements IReciclajeService {
         }
         else {
             reciclajeRepository.deleteById(id);
-            return "El registro de id " + id + ", ha sido eliminado correctamente";
+            return "El registro de reciclaje ha sido eliminado exitosamente";
         }
     }
 
@@ -121,37 +121,43 @@ public class ReciclajeService implements IReciclajeService {
     }
 
     @Override
-    public List<ReciclajeDTO> listarReciclajePorVecino(Integer vecinoId) {
+    public List<ReciclajeDTO> listarReciclajePorVecino(Integer vecinoId, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin) {
         if (vecinoId == null) {
             throw new RuntimeException("Seleccione un vecino");
         }
         else if(!vecinoRepository.existsById(vecinoId)) {
             throw new RuntimeException("No existe el vecino de id " + vecinoId);
         }
+        else if (fechaInicio != null && fechaFin != null && fechaInicio.isAfter(fechaFin)){
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
+        }
 
         return reciclajeRepository.findAllByVecinoId(vecinoId)
-                .stream().map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class))
+                .stream()
+                .filter(reciclaje -> tipo==null || reciclaje.getTipo().equals(tipo))
+                .filter(reciclaje -> metodo==null || reciclaje.getMetodo().equals(metodo))
+                .filter(reciclaje -> fechaInicio == null || !reciclaje.getFecha().isBefore(fechaInicio))
+                .filter(reciclaje -> fechaFin == null || !reciclaje.getFecha().isAfter(fechaFin))
+                .map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<ReciclajeDTO> listarReciclajeFiltrado(String distrito, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin, String genero, Integer edadMin, Integer edadMax) {
-        if (fechaInicio.isAfter(fechaFin)){
+        if (fechaInicio != null && fechaFin != null && fechaInicio.isAfter(fechaFin)){
             throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
         }
 
-        List<Reciclaje> lista = reciclajeRepository.findAll().stream()
+        return reciclajeRepository.findAll().stream()
                 .filter(reciclaje -> distrito==null || reciclaje.getVecino().getDistrito().equals(distrito))
                 .filter(reciclaje -> tipo==null || reciclaje.getTipo().equals(tipo))
                 .filter(reciclaje -> metodo==null || reciclaje.getMetodo().equals(metodo))
-                .filter(reciclaje -> fechaInicio==null || reciclaje.getFecha().isBefore(fechaFin) || reciclaje.getFecha().isEqual(fechaFin))
-                .filter(reciclaje -> fechaFin==null || reciclaje.getFecha().isAfter(fechaInicio) || reciclaje.getFecha().isEqual(fechaInicio))
+                .filter(reciclaje -> fechaInicio == null || !reciclaje.getFecha().isBefore(fechaInicio))
+                .filter(reciclaje -> fechaFin == null || !reciclaje.getFecha().isAfter(fechaFin))
                 .filter(reciclaje -> genero==null || reciclaje.getVecino().getGenero().equals(genero))
                 .filter(reciclaje -> edadMin==null || reciclaje.getVecino().getEdad() >= edadMin)
                 .filter(reciclaje -> edadMax==null || reciclaje.getVecino().getEdad() <= edadMax)
-                .toList();
-
-        return lista.stream().map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class)).collect(Collectors.toList());
+                .map(reciclaje -> modelMapper.map(reciclaje, ReciclajeDTO.class)).collect(Collectors.toList());
     }
 
     @Override

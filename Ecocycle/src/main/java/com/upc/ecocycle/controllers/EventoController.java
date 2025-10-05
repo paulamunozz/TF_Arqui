@@ -2,6 +2,7 @@ package com.upc.ecocycle.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadEventosLogradosDTO;
 import com.upc.ecocycle.services.EventoService;
 import com.upc.ecocycle.validations.Create;
 import com.upc.ecocycle.validations.Update;
@@ -10,9 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController @RequestMapping
 public class EventoController {
@@ -36,30 +35,77 @@ public class EventoController {
 
     @GetMapping("/ecocycle/evento/buscarXid")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
+        eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
-    }
-
-    @GetMapping("/ecocycle/evento/buscarPorNombre")
-    public List<EventoDTO> buscarPorNombre(@RequestBody String nombre) {
-        return eventoService.buscarPorNombre(nombre);
     }
 
     @GetMapping("/ecocycle/evento/listarYfiltrar")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        eventoService.actualizarPesoActual();
 
-        String nombre = filtros.has("nombre") ? filtros.get("nombre").asText() : null;
-        String tipo = filtros.has("tipo") ? filtros.get("tipo").asText() : null;
-        String estado   = filtros.has("estado") ? filtros.get("estado").asText() : null;
-        String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
-        LocalDate fechaInicio = filtros.has("fechaInicio") ? LocalDate.parse(filtros.get("fechaInicio").asText(), formatter) : LocalDate.MIN;
-        LocalDate fechaFin = filtros.has("fechaFin") ? LocalDate.parse(filtros.get("fechaFin").asText(), formatter) : LocalDate.MAX;
+        String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
+                && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
+                ? filtros.get("distrito").asText() : null;
 
-        return eventoService.listarEventos(nombre, tipo, estado, distrito, fechaInicio, fechaFin);
+        String nombre = (filtros.has("nombre") && !filtros.get("nombre").isNull()
+                && !filtros.get("nombre").asText().equalsIgnoreCase("null"))
+                ? filtros.get("nombre").asText() : null;
+
+        String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("tipo").asText() : null;
+
+        String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("metodo").asText() : null;
+
+        LocalDate fechaInicio = (filtros.has("fechaInicio") && !filtros.get("fechaInicio").isNull()
+                && !filtros.get("fechaInicio").asText().isBlank()
+                && !filtros.get("fechaInicio").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaInicio").asText()) : null;
+
+        LocalDate fechaFin = (filtros.has("fechaFin") && !filtros.get("fechaFin").isNull()
+                && !filtros.get("fechaFin").asText().isBlank()
+                && !filtros.get("fechaFin").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaFin").asText()) : null;
+
+        return eventoService.listarEventos(distrito, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
     @GetMapping("/ecocycle/evento/listarPorVecino")
-    public List<EventoDTO> listarEventosPorVecino(@RequestBody Integer idVecino){
-        return eventoService.listarEventosPorVecino(idVecino);
+    public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
+        eventoService.actualizarPesoActual();
+
+        Integer vecinoId = filtros.get("vecinoId").asInt();
+
+        String nombre = (filtros.has("nombre") && !filtros.get("nombre").isNull()
+                && !filtros.get("nombre").asText().equalsIgnoreCase("null"))
+                ? filtros.get("nombre").asText() : null;
+
+        String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("tipo").asText() : null;
+
+        String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("metodo").asText() : null;
+
+        LocalDate fechaInicio = (filtros.has("fechaInicio") && !filtros.get("fechaInicio").isNull()
+                && !filtros.get("fechaInicio").asText().isBlank()
+                && !filtros.get("fechaInicio").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaInicio").asText()) : null;
+
+        LocalDate fechaFin = (filtros.has("fechaFin") && !filtros.get("fechaFin").isNull()
+                && !filtros.get("fechaFin").asText().isBlank()
+                && !filtros.get("fechaFin").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaFin").asText()) : null;
+
+        return eventoService.listarEventosPorVecino(vecinoId, nombre, tipo, metodo, fechaInicio, fechaFin);
+    }
+
+    @GetMapping("/ecocycle/evento/cantidadEventosLogrados")
+    public CantidadEventosLogradosDTO cantidadEventosLogrados(@RequestBody(required = false) String distrito) {
+        eventoService.actualizarPesoActual();
+        return eventoService.cantidadEventosLogrados(distrito);
     }
 }

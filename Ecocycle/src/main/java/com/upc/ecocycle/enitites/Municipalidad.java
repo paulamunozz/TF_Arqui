@@ -1,5 +1,6 @@
 package com.upc.ecocycle.enitites;
 
+import com.upc.ecocycle.security.entities.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,16 +17,6 @@ public class Municipalidad {
     @Column(name = "id_municipalidad", nullable = false)
     private Integer id;
 
-    @Size(max = 8)
-    @NotNull
-    @Column(name = "codigo", nullable = false, length = 8, unique = true)
-    private String codigo;
-
-    @Size(max = 50)
-    @NotNull
-    @Column(name = "contrasena", nullable = false, length = 50)
-    private String contrasena;
-
     @Size(max = 50)
     @NotNull
     @Column(name = "distrito", nullable = false, length = 50, unique = true)
@@ -39,4 +30,7 @@ public class Municipalidad {
     @Column(name = "puesto", nullable = false)
     private Integer puesto;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

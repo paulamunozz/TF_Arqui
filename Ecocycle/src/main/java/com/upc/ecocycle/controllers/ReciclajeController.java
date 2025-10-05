@@ -1,7 +1,7 @@
 package com.upc.ecocycle.controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.upc.ecocycle.dto.CantidadReciclajeDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadReciclajeDTO;
 import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.services.EventoService;
 import com.upc.ecocycle.services.MunicipalidadService;
@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController @RequestMapping("/ecocycle/reciclaje")
@@ -67,22 +66,63 @@ public class ReciclajeController {
     }
 
     @GetMapping("/listarPorVecino")
-    public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody Integer vecinoId) {
-        return reciclajeService.listarReciclajePorVecino(vecinoId);
+    public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody JsonNode filtros) {
+        Integer vecinoId = filtros.get("vecinoId").asInt();
+
+        String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("tipo").asText() : null;
+
+        String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("metodo").asText() : null;
+
+        LocalDate fechaInicio = (filtros.has("fechaInicio") && !filtros.get("fechaInicio").isNull()
+                && !filtros.get("fechaInicio").asText().isBlank()
+                && !filtros.get("fechaInicio").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaInicio").asText()) : null;
+
+        LocalDate fechaFin = (filtros.has("fechaFin") && !filtros.get("fechaFin").isNull()
+                && !filtros.get("fechaFin").asText().isBlank()
+                && !filtros.get("fechaFin").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaFin").asText()) : null;
+
+        return reciclajeService.listarReciclajePorVecino(vecinoId,tipo, metodo, fechaInicio, fechaFin);
     }
 
     @GetMapping("/listarReciclajeFiltrado")
     public List<ReciclajeDTO> listarReciclajeFiltrado(@RequestBody JsonNode filtros) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
+                && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
+                ? filtros.get("distrito").asText() : null;
 
-        String distrito = filtros.has("distrito") ? filtros.get("distrito").asText() : null;
-        String tipo = filtros.has("tipo") ? filtros.get("tipo").asText() : null;
-        String metodo = filtros.has("metodo") ? filtros.get("metodo").asText() : null;
-        LocalDate fechaInicio = filtros.has("fechaInicio") ? LocalDate.parse(filtros.get("fechaInicio").asText(), formatter) : LocalDate.MIN;
-        LocalDate fechaFin = filtros.has("fechaFin") ? LocalDate.parse(filtros.get("fechaFin").asText(), formatter) : LocalDate.MAX;
-        String genero = filtros.has("genero") ? filtros.get("genero").asText() : null;
-        Integer edadMin = filtros.has("edadMin") ? filtros.get("edadMin").asInt() : 0;
-        Integer edadMax = filtros.has("edadMax") ? filtros.get("edadMax").asInt() : 200;
+        String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("tipo").asText() : null;
+
+        String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
+                ? filtros.get("metodo").asText() : null;
+
+        LocalDate fechaInicio = (filtros.has("fechaInicio") && !filtros.get("fechaInicio").isNull()
+                && !filtros.get("fechaInicio").asText().isBlank()
+                && !filtros.get("fechaInicio").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaInicio").asText()) : null;
+
+        LocalDate fechaFin = (filtros.has("fechaFin") && !filtros.get("fechaFin").isNull()
+                && !filtros.get("fechaFin").asText().isBlank()
+                && !filtros.get("fechaFin").asText().equalsIgnoreCase("null"))
+                ? LocalDate.parse(filtros.get("fechaFin").asText()) : null;
+
+        String genero = (filtros.has("genero") && !filtros.get("genero").isNull()
+                && !filtros.get("genero").asText().equalsIgnoreCase("null"))
+                ? filtros.get("genero").asText() : null;
+
+        Integer edadMin = (filtros.has("edadMin") && !filtros.get("edadMin").isNull())
+                ? filtros.get("edadMin").asInt() : null;
+
+        Integer edadMax = (filtros.has("edadMax") && !filtros.get("edadMax").isNull())
+                ? filtros.get("edadMax").asInt() : null;
         return reciclajeService.listarReciclajeFiltrado(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
     }
 
