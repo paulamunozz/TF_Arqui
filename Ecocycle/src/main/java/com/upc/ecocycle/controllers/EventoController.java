@@ -13,33 +13,34 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController @RequestMapping
+@RestController
+@RequestMapping("/ecocycle/evento")
 public class EventoController {
     @Autowired
     EventoService eventoService;
 
-    @PostMapping("/ecocycle/evento/registrar")
+    @PostMapping("/registrar")
     public String registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
         return eventoService.registrar(eventoDTO);
     }
 
-    @PutMapping("/ecocycle/evento/modificar")
+    @PutMapping("/modificar")
     public String modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
         return eventoService.modificar(eventoDTO);
     }
 
-    @DeleteMapping("/ecocycle/evento/eliminar")
+    @DeleteMapping("/eliminar")
     public String eliminar(@RequestBody Integer idEvento) {
         return eventoService.eliminar(idEvento);
     }
 
-    @GetMapping("/ecocycle/evento/buscarXid")
+    @GetMapping("/buscarXid")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
     }
 
-    @GetMapping("/ecocycle/evento/listarYfiltrar")
+    @GetMapping("/listarYfiltrar")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
         eventoService.actualizarPesoActual();
 
@@ -72,7 +73,7 @@ public class EventoController {
         return eventoService.listarEventos(distrito, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/ecocycle/evento/listarPorVecino")
+    @GetMapping("/listarPorVecino")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
         eventoService.actualizarPesoActual();
 
@@ -103,7 +104,7 @@ public class EventoController {
         return eventoService.listarEventosPorVecino(vecinoId, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/ecocycle/evento/cantidadEventosLogrados")
+    @GetMapping("/cantidadEventosLogrados")
     public CantidadEventosLogradosDTO cantidadEventosLogrados(@RequestBody(required = false) String distrito) {
         eventoService.actualizarPesoActual();
         return eventoService.cantidadEventosLogrados(distrito);
