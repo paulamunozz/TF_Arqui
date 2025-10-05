@@ -15,6 +15,6 @@ public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, In
     void deleteAllByEvento_Id(Integer eventoId);
     List<EventoXVecino> findAllByVecino_IdAndEventoTipoAndEventoMetodo(int vecinoId, String tipo, String metodo);
     @Query("SELECT new com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO(exv.vecino.nombre, exv.comentario)" +
-            "FROM EventoXVecino exv WHERE exv.evento.id =:idEvento")
+            "FROM EventoXVecino exv WHERE exv.evento.id =:idEvento AND exv.comentario IS NOT NULL")
     List<ComentariosEventoDTO> comentariosEvento(@Param("idEvento") Integer idEvento);
 }
