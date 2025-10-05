@@ -39,15 +39,15 @@ public class ReciclajeService implements IReciclajeService {
         Reciclaje reciclaje = modelMapper.map(reciclajeDTO, Reciclaje.class);
         reciclaje.setFecha(LocalDate.now());
 
-        int puntaje = (int) Math.floor(
+        int puntaje = (int) Math.ceil(
                 reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
         );
 
         List<EventoXVecino> exvs = eventoXVecinoRepository.findAllByVecino_IdAndEventoTipoAndEventoMetodo(
-                        reciclajeDTO.getVecinoId(),
-                        reciclajeDTO.getTipo(),
-                        reciclajeDTO.getMetodo()
-                );
+                reciclajeDTO.getVecinoId(),
+                reciclajeDTO.getTipo(),
+                reciclajeDTO.getMetodo()
+        );
         for (EventoXVecino exv : exvs) {
             Evento evento = exv.getEvento();
             if (evento != null) {
@@ -76,13 +76,13 @@ public class ReciclajeService implements IReciclajeService {
         reciclaje.setMetodo(reciclajeDTO.getMetodo() != null && !reciclajeDTO.getMetodo().isBlank()
                 ? reciclajeDTO.getMetodo() : reciclaje.getMetodo());
 
-        int puntaje = (int) Math.floor(
+        int puntaje = (int) Math.ceil(
                 reciclajeDTO.getPeso().divide(BigDecimal.TEN).doubleValue()
         );
         List<EventoXVecino> exvs = eventoXVecinoRepository.findAllByVecino_IdAndEventoTipoAndEventoMetodo(
-                reciclajeDTO.getVecinoId(),
-                reciclajeDTO.getTipo(),
-                reciclajeDTO.getMetodo()
+                reciclaje.getId(),
+                reciclaje.getTipo(),
+                reciclaje.getMetodo()
         );
         for (EventoXVecino exv : exvs) {
             Evento evento = exv.getEvento();
