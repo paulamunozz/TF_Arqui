@@ -5,8 +5,8 @@ import com.upc.ecocycle.dto.VecinoDTO;
 import java.util.List;
 
 public interface IVecinoService {
-    String registrar(VecinoDTO vecinoDTO);
-    String modificar(VecinoDTO vecinoDTO);
+    VecinoDTO registrar(VecinoDTO vecinoDTO);
+    VecinoDTO modificar(VecinoDTO vecinoDTO);
     String eliminar(Integer id);
     VecinoDTO buscarPorDni(String dni);
     VecinoDTO buscarPorId(Integer id);

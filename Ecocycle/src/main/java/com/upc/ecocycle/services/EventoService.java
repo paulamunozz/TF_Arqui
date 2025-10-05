@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.VecinoDTO;
 import com.upc.ecocycle.dto.funcionalidades.CantidadEventosLogradosDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -34,33 +35,33 @@ public class EventoService implements IEventoService {
 
 
     @Override
-    public String registrar(EventoDTO eventoDTO) {
+    public EventoDTO registrar(EventoDTO eventoDTO) {
         if (!municipalidadRepository.existsById(eventoDTO.getMunicipalidadId())) {
-            return "Esta municipalidad no existe";
+            throw new RuntimeException("No existe una municipalidad con id " + eventoDTO.getMunicipalidadId());
         } else if (eventoRepository.existsByNombre(eventoDTO.getNombre())) {
-            return "Este evento ya existe";
+            throw new RuntimeException("El evento '" + eventoDTO.getNombre() + "' ya ha sido registrado");
         } else if (eventoDTO.getFechaInicio().isAfter(eventoDTO.getFechaFin())) {
-            return "La fecha de inicio no puede ser futura a la de fin";
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
         } else if (eventoDTO.getBonificacion() <= 1) {
-            return "La bonificación tiene que ser mayor que 1";
+            throw new RuntimeException("La bonificación tiene que ser mayor que 1");
         } else {
             Evento evento = modelMapper.map(eventoDTO, Evento.class);
             evento.setMunicipalidad(municipalidadRepository.findById(eventoDTO.getMunicipalidadId()).get());
             evento.setPesoActual(BigDecimal.ZERO);
             evento.setSituacion(false);
             eventoRepository.save(evento);
-            return "Evento registrado exitosamente";
+            return modelMapper.map(evento, EventoDTO.class);
         }
     }
 
     @Override
-    public String modificar(EventoDTO eventoDTO) {
+    public EventoDTO modificar(EventoDTO eventoDTO) {
         if (!eventoRepository.existsById(eventoDTO.getIdEvento())) {
-            return "El evento no existe";
+            throw new RuntimeException("No existe un evento con id " + eventoDTO.getIdEvento());
         }
         Evento evento = eventoRepository.findById(eventoDTO.getIdEvento()).get();
         if (eventoRepository.existsByNombre(eventoDTO.getNombre()) && !eventoDTO.getNombre().equals(evento.getNombre())) {
-            return "Este nombre ya ha sido registrado";
+            throw new RuntimeException("El evento con nombre '" +  eventoDTO.getNombre() + "' ya ha sido registrado");
         }
         evento.setNombre((eventoDTO.getNombre() != null && !eventoDTO.getNombre().isBlank())
                 ? eventoDTO.getNombre() : evento.getNombre());
@@ -70,7 +71,7 @@ public class EventoService implements IEventoService {
                 ? eventoDTO.getBonificacion() : evento.getBonificacion());
 
         eventoRepository.save(evento);
-        return "Evento modificado exitosamente";
+        return modelMapper.map(evento, EventoDTO.class);
     }
 
     @Override @Transactional

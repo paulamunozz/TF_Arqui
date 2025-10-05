@@ -17,7 +17,7 @@ public class LogroController {
 
     @PostMapping("/registrar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public String registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
+    public LogroDTO registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
         return logroService.registrarLogro(logroDTO);
     }
 

@@ -19,13 +19,13 @@ public class EventoXVecinoController {
 
     @PostMapping("/registrar")
     @PreAuthorize("hasRole('VECINO')")
-    public String registrar(@RequestBody @Validated(Create.class) EventoXVecinoDTO eventoXVecinoDTO) {
+    public EventoXVecinoDTO registrar(@RequestBody @Validated(Create.class) EventoXVecinoDTO eventoXVecinoDTO) {
         return eventoXVecinoService.registrar(eventoXVecinoDTO);
     }
 
     @PutMapping("/modificar")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
-    public String modificar(@RequestBody @Validated(Update.class) EventoXVecinoDTO eventoXVecinoDTO) {
+    public EventoXVecinoDTO modificar(@RequestBody @Validated(Update.class) EventoXVecinoDTO eventoXVecinoDTO) {
         return eventoXVecinoService.modificar(eventoXVecinoDTO);
     }
 
