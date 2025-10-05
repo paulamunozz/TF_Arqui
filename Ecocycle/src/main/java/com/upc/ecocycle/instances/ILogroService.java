@@ -5,6 +5,6 @@ import com.upc.ecocycle.dto.LogroDTO;
 import java.util.List;
 
 public interface ILogroService {
-    String registrarLogro(LogroDTO logroDTO);
+    LogroDTO registrarLogro(LogroDTO logroDTO);
     List<LogroDTO> listarLogrosPorVecino(Integer vecinoId);
 }

@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.LogroDTO;
+import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.enitites.Logro;
 import com.upc.ecocycle.instances.ILogroService;
 import com.upc.ecocycle.repositories.LogroRepository;
@@ -19,14 +20,14 @@ public class LogroService implements ILogroService {
     @Autowired private ModelMapper modelMapper;
 
     @Override
-    public String registrarLogro(LogroDTO logroDTO) {
+    public LogroDTO registrarLogro(LogroDTO logroDTO) {
         if(!vecinoRepository.existsById(logroDTO.getVecinoId())) {
-            return "Este vecino no existe";
+            throw new RuntimeException("No existe el vecino de id " + logroDTO.getVecinoId());
         }
         Logro logro =  modelMapper.map(logroDTO, Logro.class);
         logro.setVecino(vecinoRepository.findById(logroDTO.getVecinoId()).get());
         logroRepository.save(logro);
-        return "Logro registrado";
+        return modelMapper.map(logro, LogroDTO.class);
     }
 
     @Override

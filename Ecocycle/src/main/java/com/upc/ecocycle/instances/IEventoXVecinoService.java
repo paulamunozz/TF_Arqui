@@ -6,8 +6,8 @@ import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import java.util.List;
 
 public interface IEventoXVecinoService {
-    String registrar(EventoXVecinoDTO eventoXVecinoDTO);
-    String modificar(EventoXVecinoDTO eventoXVecinoDTO);
+    EventoXVecinoDTO registrar(EventoXVecinoDTO eventoXVecinoDTO);
+    EventoXVecinoDTO modificar(EventoXVecinoDTO eventoXVecinoDTO);
     String eliminar(Integer idEXV);
     List<ComentariosEventoDTO> comentariosEvento(Integer idEvento);
 }

@@ -22,13 +22,13 @@ public class EventoController {
 
     @PostMapping("/registrar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public String registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
+    public EventoDTO registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
         return eventoService.registrar(eventoDTO);
     }
 
     @PutMapping("/modificar")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public String modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
+    public EventoDTO modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
         return eventoService.modificar(eventoDTO);
     }
 

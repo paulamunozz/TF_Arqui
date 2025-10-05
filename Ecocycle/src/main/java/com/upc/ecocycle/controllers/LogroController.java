@@ -15,7 +15,7 @@ public class LogroController {
     @Autowired private LogroService logroService;
 
     @PostMapping("/registrar")
-    public String registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
+    public LogroDTO registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
         return logroService.registrarLogro(logroDTO);
     }
 

@@ -24,15 +24,15 @@ public class VecinoController {
     @Autowired private VecinoService vecinoService;
 
     @PostMapping("/registrar")
-    public String registrar(@RequestBody @Validated(Create.class) VecinoDTO vecinoDTO) {
-        String mensaje = vecinoService.registrar(vecinoDTO);
+    public VecinoDTO registrar(@RequestBody @Validated(Create.class) VecinoDTO vecinoDTO) {
+        VecinoDTO vecino = vecinoService.registrar(vecinoDTO);
         vecinoService.calcularPuestos();
-        return mensaje;
+        return vecino;
     }
 
     @PutMapping("/modificar")
     @PreAuthorize("hasRole('VECINO')")
-    public String modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
+    public VecinoDTO modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 

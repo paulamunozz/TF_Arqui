@@ -1,5 +1,6 @@
 package com.upc.ecocycle.services;
 
+import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
@@ -28,7 +29,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     private ModelMapper modelMapper;
 
     @Override
-    public String registrar(EventoXVecinoDTO eventoXVecinoDTO) {
+    public EventoXVecinoDTO registrar(EventoXVecinoDTO eventoXVecinoDTO) {
         int eventoId = eventoXVecinoDTO.getEventoId();
         int vecinoId = eventoXVecinoDTO.getVecinoId();
 
@@ -52,8 +53,8 @@ public class EventoXVecinoService implements IEventoXVecinoService {
             Evento eventoExistente = exv.getEvento();
             if (eventoExistente.getFechaFin().isAfter(evento.getFechaInicio())
                     && eventoExistente.getFechaInicio().isBefore(evento.getFechaFin())) {
-                return "El vecino ya está en un evento de tipo " + evento.getTipo() +
-                        " y método " + evento.getMetodo() + " que aún está activo";
+                throw new RuntimeException("El vecino ya está en un evento de tipo " + evento.getTipo() +
+                        " y método " + evento.getMetodo() + " que aún está activo");
             }
         }
 
@@ -62,18 +63,18 @@ public class EventoXVecinoService implements IEventoXVecinoService {
         eventoXVecino.setEvento(evento);
         eventoXVecino.setVecino(vecino);
         eventoXVecinoRepository.save(eventoXVecino);
-        return "Registro exitoso";
+        return modelMapper.map(eventoXVecino, EventoXVecinoDTO.class);
     }
 
     @Override
-    public String modificar(EventoXVecinoDTO eventoXVecinoDTO) {
+    public EventoXVecinoDTO modificar(EventoXVecinoDTO eventoXVecinoDTO) {
         EventoXVecino eventoXVecino = eventoXVecinoRepository.findById(eventoXVecinoDTO.getIdEXV())
                 .orElseThrow(() -> new RuntimeException("Este EXV no existe"));
 
         eventoXVecino.setComentario(eventoXVecinoDTO.getComentario());
         eventoXVecinoRepository.save(eventoXVecino);
 
-        return "Comentario modificado";
+        return modelMapper.map(eventoXVecino, EventoXVecinoDTO.class);
     }
 
     @Override @Transactional

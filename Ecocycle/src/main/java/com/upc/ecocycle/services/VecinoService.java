@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.EventoDTO;
+import com.upc.ecocycle.dto.ReciclajeDTO;
 import com.upc.ecocycle.dto.VecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -34,10 +35,10 @@ public class VecinoService implements IVecinoService {
     @Autowired private PasswordEncoder bcrypt;
 
     @Override
-    public String registrar(VecinoDTO vecinoDTO) {
+    public VecinoDTO registrar(VecinoDTO vecinoDTO) {
         if (vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false))
         {
-            return "Este vecino ya existe";
+            throw new RuntimeException("No existe el vecino de id " + vecinoDTO.getIdVecino());
         }
         User user = new User();
         user.setUsername(vecinoDTO.getDni());
@@ -53,18 +54,19 @@ public class VecinoService implements IVecinoService {
         vecino.setUser(user);
         vecinoRepository.save(vecino);
 
-        return "Vecino registrado exitosamente";
+        return modelMapper.map(vecino, VecinoDTO.class);
     }
 
     @Override
-    public String modificar(VecinoDTO vecinoDTO) {
+    public VecinoDTO modificar(VecinoDTO vecinoDTO) {
         if (!vecinoRepository.existsByIdAndEliminado(vecinoDTO.getIdVecino(), false)) {
-            return "El vecino no existe";
+            throw new RuntimeException("No existe el registro de id " + vecinoDTO.getIdVecino());
         }
+
         Vecino vecino = vecinoRepository.findById(vecinoDTO.getIdVecino()).get();
         User user = vecino.getUser();
         if(vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false) && !vecinoDTO.getDni().equals(user.getUsername())) {
-            return "Este DNI ya ha sido registrado";
+            throw new RuntimeException("El DNI " + vecinoDTO.getDni() + " ya ha sido registrado");
         }
         user.setUsername((vecinoDTO.getDni() != null && !vecinoDTO.getDni().isBlank())
                 ? vecinoDTO.getDni() : user.getUsername());
@@ -83,7 +85,7 @@ public class VecinoService implements IVecinoService {
 
         userRepository.save(user);
         vecinoRepository.save(vecino);
-        return "Vecino modificado exitosamente";
+        return modelMapper.map(vecino, VecinoDTO.class);
     }
 
     @Transactional
