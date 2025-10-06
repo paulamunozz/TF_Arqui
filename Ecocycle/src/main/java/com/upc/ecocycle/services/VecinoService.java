@@ -44,7 +44,7 @@ public class VecinoService implements IVecinoService {
         user.setUsername(vecinoDTO.getDni());
         user.setPassword(bcrypt.encode(vecinoDTO.getContrasena()));
         userRepository.save(user);
-        userRepository.insertUserRole(user.getId(), 1);
+        userRepository.insertUserRole(user.getId(), 3);
 
         Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
         vecino.setPuntajetotal(0);
