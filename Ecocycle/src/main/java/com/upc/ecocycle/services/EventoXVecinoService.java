@@ -46,7 +46,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
             throw new RuntimeException("Este vecino no existe");
         }
         else if (eventoXVecinoRepository.existsByEvento_IdAndVecino_Id(eventoId, vecinoId)) {
-            throw new RuntimeException("Este vecino no existe");
+            throw new RuntimeException("Ya se encuentra registrado en este evento");
         }
 
         Evento evento = eventoRepository.findById(eventoId).get();
@@ -81,7 +81,7 @@ public class EventoXVecinoService implements IEventoXVecinoService {
 
     @Override
     public EventoXVecinoDTO modificar(EventoXVecinoDTO eventoXVecinoDTO) {
-        EventoXVecino eventoXVecino = eventoXVecinoRepository.findById(eventoXVecinoDTO.getIdEXV())
+        EventoXVecino eventoXVecino = eventoXVecinoRepository.findById(eventoXVecinoDTO.getId())
                 .orElseThrow(() -> new RuntimeException("Este EXV no existe"));
 
         eventoXVecino.setComentario(eventoXVecinoDTO.getComentario());

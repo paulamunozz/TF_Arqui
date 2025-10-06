@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class EventoXVecinoDTO {
-    @NotNull(groups = Update.class, message="Tiene que ingresar el idEXV")
-    private Integer idEXV;
+    @NotNull(groups = Update.class, message="Tiene que ingresar el id del EXV")
+    private Integer id;
 
     @NotNull(groups = Create.class, message="Tiene que ingresar el eventoId")
     private Integer eventoId;
