@@ -124,6 +124,8 @@
                 </configuration>
             </plugin>
         </plugins>
+        <!-- AWS -->
+        <finalName>backend</finalName>
     </build>
 
 </project>

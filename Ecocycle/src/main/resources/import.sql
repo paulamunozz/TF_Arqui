@@ -1,6 +1,6 @@
 INSERT INTO roles (name) VALUES ('ROLE_ADMIN'), ('ROLE_MUNICIPALIDAD'), ('ROLE_VECINO');
 
-INSERT INTO users (username, password) VALUES ('admin', 'admin');
+INSERT INTO users (username, password) VALUES ('admin', '$2a$12$dHrkiS.flXpze9V6Ffzi5e4ZDak317fMJ6CkT57UXFRnJe8MoPXMS');
 INSERT INTO users (username, password) VALUES ('SB002025', '$2a$12$ce.52xZmtZ68bNMVvlLRVutUROoPiz9CO4PcG4hlIiAZlAiqaj5fu');
 INSERT INTO users (username, password) VALUES ('SR002025', '$2a$12$A.OonbkmSwuYDpEfYIJwdO/OV45KyL1hLKLeTK64rfoOcqP.jMOHm');
 INSERT INTO users (username, password) VALUES ('SQ002025', '$2a$12$pN98lrK610FBx2E5flPftuRQrlfpiRpNRbXKVPnE5KBwB89nWjOFy');
