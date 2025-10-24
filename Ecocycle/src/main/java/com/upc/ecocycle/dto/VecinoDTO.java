@@ -29,7 +29,7 @@ public class VecinoDTO {
     private String genero;
 
     @NotNull(groups = Create.class, message = "Ingrese la edad")
-    @Min(value = 0, groups = {Create.class, Update.class}, message = "La edad no puede ser menor que 0")
+    @Min(value = 15, groups = {Create.class, Update.class}, message = "La edad no puede ser menor que 15")
     @Max(value = 200, groups = {Create.class, Update.class}, message = "La edad no puede ser mayor que 200")
     private Integer edad;
 

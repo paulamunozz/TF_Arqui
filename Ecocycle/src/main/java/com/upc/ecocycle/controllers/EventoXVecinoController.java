@@ -1,5 +1,6 @@
 package com.upc.ecocycle.controllers;
 
+import com.upc.ecocycle.dto.funcionalidades.CantidadesVecinosPorEvento;
 import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.services.EventoXVecinoService;
@@ -35,9 +36,15 @@ public class EventoXVecinoController {
         return eventoXVecinoService.eliminar(idEXV);
     }
 
-    @GetMapping("/comentariosEvento")
+    @GetMapping("/comentarios")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<ComentariosEventoDTO> comentariosEvento(@RequestBody Integer eventoId) {
         return eventoXVecinoService.comentariosEvento(eventoId);
+    }
+
+    @GetMapping("/estadísticasVecinosPorEvento")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD')")
+    public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@RequestBody Integer idEvento) {
+        return eventoXVecinoService.cantidadesVecinosPorEvento(idEvento);
     }
 }

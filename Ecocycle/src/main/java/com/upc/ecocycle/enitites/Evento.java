@@ -29,7 +29,7 @@ public class Evento {
     @Column(name = "nombre", nullable = false, length = 50, unique = true)
     private String nombre;
 
-    @Size(max = 300)
+    @Size(max = 500)
     @NotNull
     @Column(name = "descripcion", nullable = false, length = 300)
     private String descripcion;

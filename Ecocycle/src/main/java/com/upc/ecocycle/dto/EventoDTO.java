@@ -30,7 +30,7 @@ public class EventoDTO {
     private String nombre;
 
     @NotBlank(groups = Create.class, message="Ingrese la descripción")
-    @Size(groups = {Create.class, Update.class}, max = 300, message="La descripción no puede superar los 300 caracteres")
+    @Size(groups = {Create.class, Update.class}, max = 500, message="La descripción no puede superar los 500 caracteres")
     private String descripcion;
 
     @NotNull(groups = Create.class, message="Tiene que ingresar el tipo de reciclaje")

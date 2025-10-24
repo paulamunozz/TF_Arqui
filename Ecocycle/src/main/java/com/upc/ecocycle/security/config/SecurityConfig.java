@@ -53,7 +53,7 @@ public class SecurityConfig {
                                         "/ecocycle/vecino/registrar",
                                         "/ecocycle/evento/cantidadEventosLogrados",
                                         "/ecocycle/municipalidad/ranking",
-                                        "/ecocycle/reciclaje/listarCantidadXTipo",
+                                        "/ecocycle/reciclaje/cantidadPorTipo",
                                         "/ecocycle/vecino/ranking"
                                         ).permitAll()
                                 //.requestMatchers("/api/proveedores").hasRole("ADMIN")

@@ -1,6 +1,7 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.ReciclajeDTO;
+import com.upc.ecocycle.dto.funcionalidades.CantidadesVecinosPorEvento;
 import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.enitites.Evento;
@@ -112,5 +113,16 @@ public class EventoXVecinoService implements IEventoXVecinoService {
             return null;
         }
         return eventoXVecinoRepository.comentariosEvento(idEvento);
+    }
+
+    @Override
+    public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(Integer idEvento) {
+        if (idEvento == null) {
+            return null;
+        }
+        else if(!eventoRepository.existsById(idEvento)) {
+            return null;
+        }
+        return eventoXVecinoRepository.cantidadesVecinosPorEvento(idEvento);
     }
 }

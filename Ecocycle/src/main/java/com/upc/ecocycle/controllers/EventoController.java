@@ -38,7 +38,7 @@ public class EventoController {
         return eventoService.eliminar(idEvento);
     }
 
-    @GetMapping("/buscarXid")
+    @GetMapping("/detalle")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
         eventoService.actualizarPesoActual();

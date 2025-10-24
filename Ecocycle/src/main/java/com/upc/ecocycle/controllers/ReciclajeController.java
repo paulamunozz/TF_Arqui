@@ -69,7 +69,7 @@ public class ReciclajeController {
         return reciclajeService.eliminar(idReciclaje);
     }
 
-    @GetMapping("/listarPorVecino")
+    @GetMapping("/vecino")
     @PreAuthorize("hasRole('VECINO')")
     public List<ReciclajeDTO> listarReciclajeVecino(@RequestBody JsonNode filtros) {
         Integer vecinoId = filtros.get("vecinoId").asInt();
@@ -95,7 +95,7 @@ public class ReciclajeController {
         return reciclajeService.listarReciclajePorVecino(vecinoId,tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/listarReciclajeFiltrado")
+    @GetMapping("/distrito")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public List<ReciclajeDTO> listarReciclajeFiltrado(@RequestBody JsonNode filtros) {
         String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
@@ -132,7 +132,7 @@ public class ReciclajeController {
         return reciclajeService.listarReciclajeFiltrado(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
     }
 
-    @GetMapping("/listarCantidadXTipo")
+    @GetMapping("/cantidadPorTipo")
     public List<CantidadReciclajeDTO> listarCantidadReciclaje(@RequestBody(required = false) String distrito) {
         return reciclajeService.listarCantidadReciclaje(distrito);
     }
