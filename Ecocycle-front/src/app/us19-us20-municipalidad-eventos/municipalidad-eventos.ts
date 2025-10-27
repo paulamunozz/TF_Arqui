@@ -1,11 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
   imports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
