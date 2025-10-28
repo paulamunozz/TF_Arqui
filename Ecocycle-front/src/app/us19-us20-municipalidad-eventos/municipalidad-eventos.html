@@ -82,7 +82,7 @@
           </div>
 
           <div class="columnaEvento columnaBtnEvento">
-            <button type="submit" class="btnEvento">Ver detalle</button>
+            <a [routerLink]="['/evento', evento.id]"><button type="submit" class="btnEvento">Ver detalle</button></a>
           </div>
         </div>
       </li>
