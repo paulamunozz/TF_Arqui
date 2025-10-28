@@ -1,0 +1,177 @@
+/*Panel de acciones-------------------------------------*/
+.panelAcciones {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 70px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 15px 50px 15px 30px;
+}
+
+.crearEvento{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  width: 10px;
+}
+
+.btnCrear{
+  height: 60px;
+}
+.btnCrear:hover{
+  height: 60px;
+}
+
+/*Panel de filtros-------------------------------------*/
+.panelFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.columnaFiltro{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 180px;
+  min-width: 100px;
+}
+
+.columnaFecha{
+  flex: 0 0 118px;
+}
+
+.columnaBtnFiltro{
+  flex: 0 0 100px;
+}
+
+.nomFiltro{
+  margin-bottom: 5px;
+}
+
+.filtro{
+  height:  30px;
+  border-radius: 6px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+}
+
+.btnFiltro{
+  background-color: #dddddd;
+}
+.btnFiltro:hover{
+  background-color: #808080;
+  color: white;
+}
+
+/*Lista de eventos-------------------------------------*/
+.panelEventos {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  line-height: 1px;
+}
+
+.evento {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ecf39e;
+  padding: 20px 40px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.evento.alterno {
+  background-color: #2f542c;
+  color: #fefef0;
+}
+
+.filasEvento{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  margin: 0 25px;
+  justify-content: space-between;
+}
+
+.columnaEvento{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 180px;
+  min-width: 100px;
+  line-height: 15px;
+}
+
+.columnaBtnEvento{
+  align-items: center;
+  align-self: center;
+}
+
+.nombreEvento{
+  font-size: 18px;
+}
+
+.btnEvento{
+  width: 180px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #4F772D;
+  color: white;
+}
+.btnEvento:hover{
+  background-color: #9bd66c;
+  color: black;
+}
+
+.evento.alterno .btnEvento{
+  background-color: #FFECBD;
+  color: black;
+}
+.evento.alterno .btnEvento:hover{
+  background-color: #8c8355;
+  color: white;
+}
+
+
+
+
+/*.filtros {*/
+/*  position: relative;*/
+/*  display: inline-block;*/
+/*}*/
+
+/*.placeholder {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  left: 10px;*/
+/*  transform: translateY(-50%);*/
+/*  color: rgba(136, 136, 136, 0.62);*/
+/*  pointer-events: none;*/
+/*  transition: opacity 0.2s ease;*/
+/*}*/
+
+/*select {*/
+/*  width: 100%;*/
+/*  padding: 10px;*/
+/*  font-size: 16px;*/
+/*  color: #333;*/
+/*  border: 1px solid #ccc;*/
+/*  border-radius: 4px;*/
+/*  background-color: white;*/
+/*}*/
+
+/*select:focus {*/
+/*  border-color: #888;*/
+/*  outline: none;*/
+/*}*/
+
+/*@if (!formFiltro.get('nombre')?.value) {*/
+/*<label for="nombre" class="porMientras">Ingrese un nombre o parte de uno</label>*/
+/*}*/
+
+/*<textarea></textarea>*/
