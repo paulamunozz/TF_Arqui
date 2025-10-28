@@ -33,12 +33,12 @@
 
       <div class="columnaFiltro columnaFecha">
         <label for="fechaInicio" class="nomFiltro">Fecha de inicio</label>
-        <input type="date" name="fechaInicio" id="fechaInicio" class="filtro">
+        <input type="date" formControlName="fechaInicio" id="fechaInicio" class="filtro">
       </div>
 
       <div class="columnaFiltro columnaFecha">
         <label for="fechaFin" class="nomFiltro">Fecha de fin</label>
-        <input type="date" name="fechaFin" id="fechaFin" class="filtro">
+        <input type="date" formControlName="fechaFin" id="fechaFin" class="filtro">
       </div>
 
       <div class="columnaFiltro columnaBtnFiltro">
@@ -82,7 +82,7 @@
           </div>
 
           <div class="columnaEvento columnaBtnEvento">
-            <button type="submit" class="btnEvento">Ver detalle</button>
+            <a [routerLink]="['/evento', evento.id]"><button type="submit" class="btnEvento">Ver detalle</button></a>
           </div>
         </div>
       </li>

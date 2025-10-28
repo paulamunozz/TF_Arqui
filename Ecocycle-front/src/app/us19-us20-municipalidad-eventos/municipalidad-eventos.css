@@ -6,7 +6,7 @@
   align-items: center;
   align-content: center;
   justify-content: center;
-  margin: 0 50px 0 30px;
+  margin: 15px 50px 15px 30px;
 }
 
 .crearEvento{
@@ -72,7 +72,6 @@
 .panelEventos {
   list-style: none;
   padding: 0;
-  margin-top: 30px;
   width: 100%;
   line-height: 1px;
 }
