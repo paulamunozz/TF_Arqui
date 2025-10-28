@@ -41,16 +41,16 @@
   min-width: 100px;
 }
 
-.nomFiltro{
-  margin-bottom: 5px;
-}
-
 .columnaFecha{
   flex: 0 0 118px;
 }
 
 .columnaBtnFiltro{
   flex: 0 0 100px;
+}
+
+.nomFiltro{
+  margin-bottom: 5px;
 }
 
 .filtro{
