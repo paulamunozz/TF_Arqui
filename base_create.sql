@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.evento
     id_evento integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     id_municipalidad integer NOT NULL,
     nombre character varying(50) COLLATE pg_catalog."default" NOT NULL UNIQUE,
-    descripcion character varying(300) COLLATE pg_catalog."default" NOT NULL,
+    descripcion character varying(500) COLLATE pg_catalog."default" NOT NULL,
     peso_objetivo numeric(5, 2) NOT NULL,
 	peso_actual numeric(5, 2) NOT NULL,
     fecha_inicio date NOT NULL,
