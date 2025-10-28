@@ -45,6 +45,8 @@
   </div>
 
   <div class="panelDatosFila panelBtnCrear">
-    <button type="submit" class="btnCrear" [disabled]="formRegistro.invalid">Crear evento</button>
+    <button type="button" class="btnCrear" [disabled]="formRegistro.invalid" (click)="registrar()">
+      Crear evento
+    </button>
   </div>
 </form>
