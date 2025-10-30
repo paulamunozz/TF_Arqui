@@ -18,17 +18,28 @@ import {
 import {
   VecinoReciclajeConfirmacion
 } from './components/us13-vecino-reciclaje-confirmacion/vecino-reciclaje-confirmacion';
+import {VecinoEventosDisponibles} from './components/us24-us25-vecino-eventos-disponibles/vecino-eventos-disponibles';
+import {VecinoDetalleEventoDisponible} from './components/us21-us31-vecino-detalle-evento-disponible/vecino-detalle-evento-disponible';
+import {VecinoEventosRegistrados} from './components/us27-vecino-eventos-registrados/vecino-eventos-registrados';
+import {
+  VecinoDetalleEventoRegistrado
+} from './components/us21-us26-us31-vecino-detalle-evento-registrado/vecino-detalle-evento-registrado';
 
 export const routes: Routes = [
-  { path: '', component: MunicipalidadEventos },
-  { path: 'eventos', component: MunicipalidadEventos },
-  { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
-  { path: 'evento/:id', component: MunicipalidadDetalleEvento },
+  { path: '', component: VecinoEventosRegistrados },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
+
+  { path: 'eventos', component: MunicipalidadEventos },
+  { path: 'evento/:id', component: MunicipalidadDetalleEvento },
+  { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
   { path: 'confirmacion-evento', component: VecinoEventoConfirmacion },
   { path: 'confirmacion-evento-mun', component: MunicipalidadEventoConfirmacion },
   { path: 'muni-evento-elim', component: MunicipalidadEventoEliminado },
   { path: 'reciclaje-confirmacion', component: VecinoReciclajeConfirmacion },
+  { path: 'eventos-disponibles', component: VecinoEventosDisponibles },
+  { path: 'detalle-evento-disponible/:id', component: VecinoDetalleEventoDisponible },
+  { path: 'mis-eventos', component: VecinoEventosRegistrados },
+  { path: 'detalle-evento-registrado/:id', component: VecinoDetalleEventoRegistrado },
   { path: '**', redirectTo: '' }
 ];

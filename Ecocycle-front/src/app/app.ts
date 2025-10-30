@@ -9,6 +9,4 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 })
 export class App {
   protected readonly title = signal('Ecocycle-front');
-  imgSrcVecino = '/icono-default-1.png';
-  imgSrcMunicipalidad = '/icono-default-1.png';
 }

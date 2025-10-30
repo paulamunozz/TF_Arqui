@@ -1,4 +1,8 @@
 <h1>{{evento.nombre}} {{id}}</h1>
+<div class="panelUnirse">
+  <h2>Detalles</h2>
+  <a [routerLink]="[]"><button type="submit" class="btnUnirse"><strong>Unirme al evento</strong></button></a>
+</div>
 
 <div class="panelDetalles">
   <div class="detalleFilas">
@@ -31,10 +35,7 @@
   @if (comentarios.length>0) {
     @for (comentario of comentarios; track comentario.id; let i = $index) {
       <li class="comentario" [class.alterno]="i % 2 !== 0">
-        <div class="comentarioColumnas">
-          <p><strong>{{comentario.nombre}}</strong></p>
-          <button type="submit" class="btnEliminarComentario"><img src="/tacho-3.png" alt="Eliminar evento" class="iconoEliminar"></button>
-        </div>
+        <p><strong>{{comentario.nombre}}</strong></p>
         <p>{{comentario.comentario}}</p>
       </li>
     }
@@ -43,24 +44,3 @@
     <p class="sinComentarios">Este evento aún no cuenta con comentarios</p>
   }
 </div>
-
-<h2>Estadísticas</h2>
-
-<div class="panelBotones">
-  <button type="button" class="botonEvento btnEditarEvento">Editar</button>
-  <button type="button" class="botonEvento btnEliminarEvento" (click)="mostrarPopUp()">Eliminar</button>
-</div>
-
-@if(popUpVisible){
-  <div class="panelPopUp">
-    <div class="popUp">
-      <h3>¿Seguro que desea eliminar este evento?</h3>
-      <p>Este será eliminado permanentemente y no habrá forma de recuperarlo.</p>
-
-      <div class="popupBotones">
-        <button class="btnCancelar botonPopUp" (click)="cerrarPopUp()">Cancelar</button>
-        <button class="btnEliminar botonPopUp" [routerLink]="['/eventos']" (click)="cerrarPopUp()">Eliminar</button>
-      </div>
-    </div>
-  </div>
-}
