@@ -1,0 +1,46 @@
+<h1>{{evento.nombre}} {{id}}</h1>
+<div class="panelUnirse">
+  <h2>Detalles</h2>
+  <a [routerLink]="[]"><button type="submit" class="btnUnirse"><strong>Unirme al evento</strong></button></a>
+</div>
+
+<div class="panelDetalles">
+  <div class="detalleFilas">
+    <p class="descripcion">{{ evento.descripcion }}</p>
+    <div class="detalleColumnas datos">
+      <div class="datosFilas">
+        <p>Tipo: {{evento.tipo}}</p>
+        <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Método: {{evento.metodo}}</p>
+        <p>Peso actual: {{evento.pesoActual}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Bonificación: {{evento.bonificacion}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Fecha de inicio: {{evento.fechaInicio}}</p>
+        <p>Fecha de fin: {{evento.fechaFin}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Comentarios</h2>
+<div class="panelComentarios">
+  @if (comentarios.length>0) {
+    @for (comentario of comentarios; track comentario.id; let i = $index) {
+      <li class="comentario" [class.alterno]="i % 2 !== 0">
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.comentario}}</p>
+      </li>
+    }
+  }
+  @else {
+    <p class="sinComentarios">Este evento aún no cuenta con comentarios</p>
+  }
+</div>

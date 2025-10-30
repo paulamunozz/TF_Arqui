@@ -6,21 +6,22 @@
   </div>
 
   <div class="columnasMenu">
-    <a href="" class="enlaceMenu">Inicio</a>
-    <a href="" class="enlaceMenu">Consejos</a>
-    <a href=""  class="enlaceMenu">Eventos</a>
-    <a href="" class="enlaceMenu">Contáctanos</a>
-    <a href="" class="enlaceMenu">Rankings</a>
-    <a href="" class="enlaceMenu">Estadísticas</a>
-    <a [routerLink]="" class="enlaceMenu enlaceIcono"
-       (mouseenter)="imgSrcVecino='/icono-default-2.png'"
-       (mouseleave)="imgSrcVecino='/icono-default-1.png'">
-      <img
-        [src]="imgSrcVecino"
-        alt="Icono"
-        class="icono"
-      />
-    </a>
+    <a href="" class="enlaceMenu"><span>Inicio</span></a>
+    <a href="" class="enlaceMenu"><span>Consejos</span></a>
+    <a [routerLink]="'/eventos-disponibles'"  class="enlaceMenu"><span>Eventos</span></a>
+    <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
+    <a href="" class="enlaceMenu"><span>Rankings</span></a>
+    <a href="" class="enlaceMenu"><span>Estadísticas</span></a>
+
+    <div class="menuPerfil">
+      <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
+      <ul class="submenuPerfil">
+        <li><a href="#">Mi perfil</a></li>
+        <li><a href="#">Mi reciclaje</a></li>
+        <li><a [routerLink]="'/mis-eventos'">Mis eventos</a></li>
+        <li><a href="#">Logros</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -33,21 +34,18 @@
   </div>
 
   <div class="columnasMenu">
-    <a href="" class="enlaceMenu">Inicio</a>
-    <a href="" class="enlaceMenu">Reciclaje</a>
-    <a [routerLink]="'/eventos'" class="enlaceMenu">Eventos</a>
-    <a href="" class="enlaceMenu">Contáctanos</a>
-    <a href="" class="enlaceMenu">Rankings</a>
-    <a href="" class="enlaceMenu">Estadísticas</a>
-    <a [routerLink]="" class="enlaceMenu enlaceIcono"
-       (mouseenter)="imgSrcMunicipalidad='/icono-default-2.png'"
-       (mouseleave)="imgSrcMunicipalidad='/icono-default-1.png'">
-      <img
-        [src]="imgSrcMunicipalidad"
-        alt="Icono"
-        class="icono"
-      />
-    </a>
+    <a href="" class="enlaceMenu"><span>Inicio</span></a>
+    <a href="" class="enlaceMenu"><span>Reciclaje</span></a>
+    <a [routerLink]="'/eventos'" class="enlaceMenu"><span>Eventos</span></a>
+    <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
+    <a href="" class="enlaceMenu"><span>Rankings</span></a>
+    <a href="" class="enlaceMenu"><span>Estadísticas</span></a>
+    <div class="menuPerfil">
+      <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
+      <ul class="submenuPerfil">
+        <li><a href="#">Actualizar contraseña</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 

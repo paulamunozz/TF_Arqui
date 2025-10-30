@@ -20,10 +20,21 @@
   text-decoration: none;
   color: white;
   background-color: #064C10;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.enlaceMenu span {
+  transition: transform 0.2s ease;
+  display: inline-block;
 }
 
 .enlaceMenu:hover {
   background-color: #90A955;
+}
+
+.enlaceMenu:hover span {
+  transform: scale(1.1);
 }
 
 .icono {
@@ -33,4 +44,55 @@
 
 .logo{
   align-items: center;
+}
+
+.menuPerfil {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.iconoPerfil {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.iconoPerfil:hover {
+  transform: scale(1.1);
+}
+
+.submenuPerfil {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #064C10;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  min-width: 150px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.submenuPerfil li {
+  padding: 10px 15px;
+}
+
+.submenuPerfil li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.submenuPerfil li:hover {
+  background-color: #90A955;
+}
+
+.menuPerfil:hover .submenuPerfil {
+  display: block;
 }

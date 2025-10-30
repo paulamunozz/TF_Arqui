@@ -1,15 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref, RouterLink } from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLinkWithHref, RouterLink],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Ecocycle');
-
-  imgSrcVecino = '/icono-default-1.png';
-  imgSrcMunicipalidad = '/icono-default-1.png';
+  protected readonly title = signal('Ecocycle-front');
 }

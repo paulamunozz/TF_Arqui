@@ -1,0 +1,82 @@
+<h1>Eventos</h1>
+
+<form [formGroup]="formFiltro">
+  <div class="panelFiltros">
+    <div class="columnaFiltro">
+      <label for="nombre" class="nomFiltro">Nombre</label>
+      <input id="nombre" type="text" formControlName="nombre" class="filtro"/>
+    </div>
+
+    <div class="columnaFiltro">
+      <label for="tipo" class="nomFiltro">Tipo</label>
+      <select id="tipo" formControlName="tipo" class="filtro">
+        <option value="">Cualquier tipo</option>
+        <option value="Vidrio">Vidrio</option>
+        <option value="Plástico">Plástico</option>
+        <option value="Papel">Papel</option>
+        <option value="Electrónicos">Electrónicos</option>
+        <option value="Orgánicos">Orgánicos</option>
+        <option value="Metal/Lata">Metal/Lata</option>
+      </select>
+    </div>
+
+    <div class="columnaFiltro">
+      <label for="metodo" class="nomFiltro">Método</label>
+      <select id="metodo" formControlName="metodo" class="filtro">
+        <option value="">Cualquier método</option>
+        <option value="Centro de reciclaje de la municipalidad">Centro de reciclaje de la municipalidad</option>
+        <option value="Camión de reciclaje">Camión de reciclaje</option>
+        <option value="En casa">En casa</option>
+      </select>
+    </div>
+
+    <div class="columnaFiltro columnaFecha">
+      <label for="fechaInicio" class="nomFiltro">Fecha de inicio</label>
+      <input type="date" formControlName="fechaInicio" id="fechaInicio" class="filtro">
+    </div>
+
+    <div class="columnaFiltro columnaFecha">
+      <label for="fechaFin" class="nomFiltro">Fecha de fin</label>
+      <input type="date" formControlName="fechaFin" id="fechaFin" class="filtro">
+    </div>
+
+    <div class="columnaFiltro columnaBtnFiltro">
+      <button type="submit" class="btnFiltro">Filtrar</button>
+    </div>
+  </div>
+</form>
+
+
+<ul class="panelEventos">
+  @if (eventos.length>0)
+  {
+    @for (evento of eventos; track evento.id; let i = $index) {
+      <li class="evento" [class.alterno]="i % 2 !== 0">
+        <div class="filasEvento">
+          <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
+          <p class="fechasEvento">Fecha inicio: {{evento.fechaInicio}} &nbsp;&nbsp; Fecha fin: {{evento.fechaFin}}</p>
+        </div>
+
+        <div class="filasEvento">
+          <div class="columnaEvento">
+            <p class="tipoEvento">Tipo: {{evento.tipo}}</p>
+            <p class="metodoEvento">Método: {{evento.metodo}}</p>
+          </div>
+
+          <div class="columnaEvento">
+            <p class="pesosEvento"><strong>Peso objectivo: {{evento.pesoObjetivo}}kg</strong></p>
+            <p class="pesosEvento"><strong>Peso actual: {{evento.pesoActual}}kg</strong></p>
+          </div>
+
+          <div class="filaBtnEvento">
+            <a [routerLink]="[]"><button type="submit" class="btnEvento btnUnirse"><strong>Unirme al evento</strong></button></a>
+            <a [routerLink]="['/detalle-evento-disponible', evento.id]"><button type="submit" class="btnEvento btnDetalle">Ver detalle</button></a>
+          </div>
+        </div>
+      </li>
+    }
+  }
+  @else {
+    <p class="sinEventos">No hay eventos disponibles en tu distrito</p>
+  }
+</ul>

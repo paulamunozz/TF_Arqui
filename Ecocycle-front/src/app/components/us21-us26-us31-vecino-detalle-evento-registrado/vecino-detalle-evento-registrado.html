@@ -1,0 +1,88 @@
+<h1>{{evento.nombre}} {{id}}</h1>
+<div class="panelUnirse">
+  <h2>Detalles</h2>
+  <button type="submit" class="btnUnirse" (click)="mostrarRetiro()"><strong>Retirarme de evento</strong></button>
+</div>
+
+<div class="panelDetalles">
+  <div class="detalleFilas">
+    <p class="descripcion">{{ evento.descripcion }}</p>
+    <div class="detalleColumnas datos">
+      <div class="datosFilas">
+        <p>Tipo: {{evento.tipo}}</p>
+        <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Método: {{evento.metodo}}</p>
+        <p>Peso actual: {{evento.pesoActual}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Bonificación: {{evento.bonificacion}}</p>
+      </div>
+
+      <div class="datosFilas">
+        <p>Fecha de inicio: {{evento.fechaInicio}}</p>
+        <p>Fecha de fin: {{evento.fechaFin}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Comentarios</h2>
+<div class="panelComentarios">
+  <div class="panelMiComentario">
+    <form [formGroup]="formComentario">
+      <textarea formControlName="comentario" id="comentario" class="miComentario" required></textarea>
+    </form>
+
+    <div class="columnaBtnComentario">
+      @if (accionesComentario){
+        <button type="submit" class="btn" (click)="editarEliminarComentario()">
+          <img [src]="imgSrcEditar"
+               (mouseenter)="imgSrcEditar='/editar-2.png'"
+               (mouseleave)="imgSrcEditar='/editar-1.png'"
+               alt="Editar comentario"
+               class="icono">
+        </button>
+        <button type="submit" class="btn" (click)="editarEliminarComentario()">
+          <img [src]="imgSrcEliminar"
+               (mouseenter)="imgSrcEliminar='/tacho-2.png'"
+               (mouseleave)="imgSrcEliminar='/tacho-1.png'"
+               alt="Eliminar evento"
+               class="icono ">
+        </button>
+      }
+      @else {
+        <button type="submit" class="btnPublicar" [disabled]="formComentario.invalid" (click)="publicarComentario()">Publicar comentario</button>
+      }
+    </div>
+  </div>
+
+  @if (comentarios.length>0) {
+    @for (comentario of comentarios; track comentario.id; let i = $index) {
+      <li class="comentario" [class.alterno]="i % 2 !== 0">
+        <p><strong>{{comentario.nombre}}</strong></p>
+        <p>{{comentario.comentario}}</p>
+      </li>
+    }
+  }
+  @else {
+    <p class="sinComentarios">Este evento aún no cuenta con comentarios</p>
+  }
+</div>
+
+@if(popUpRetiro){
+  <div class="panelPopUp">
+    <div class="popUp">
+      <h3>¿Seguro que desea retirarse este evento?</h3>
+      <p>Por favor no se vaya, su aporte será perdido :(</p>
+
+      <div class="popupBotones">
+        <button class="btnCancelar botonPopUp" (click)="cerrarRetiro()">Cancelar</button>
+        <button class="btnRetiro botonPopUp" [routerLink]="['/mis-eventos']" (click)="cerrarRetiro()">Retirarme</button>
+      </div>
+    </div>
+  </div>
+}
