@@ -1,0 +1,191 @@
+h2{
+  width: 100%;
+  text-align: center;
+  background-color: #4F772D;
+  color: white;
+  font-weight: lighter;
+  padding: 10px 0;
+  margin: 0;
+}
+
+p{
+  margin: 10px;
+}
+
+.panelUnirse{
+  display: flex;
+  justify-content: space-between;
+}
+
+.panelUnirse h2{
+  width: 30%;
+  align-content: center;
+  height: 30px;
+}
+
+.btnUnirse{
+  width: 180px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #4F772D;
+  color: white;
+}
+.btnUnirse:hover{
+  background-color: #9bd66c;
+  color: black;
+}
+
+.panelDetalles{
+  margin-bottom: 15px;
+}
+
+.detalleFilas {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ecf39e;
+  padding: 20px 40px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  border-radius: 6px;
+  gap: 5px;
+}
+
+.detalleColumnas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.datosFilas{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.datos{
+  font-weight: bold;
+}
+
+.descripcion{
+  text-align: justify;
+}
+
+/*Panel de comentarios---------------------------------*/
+.panelComentarios{
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.panelMiComentario{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.miComentario{
+  width: 100%;
+  height: 100px;
+}
+
+.columnaBtnComentario{
+  display: flex;
+  justify-content: right;
+  gap: 20px;
+}
+
+.btnPublicar{
+  background-color: #b9b9b9;
+  width: 200px;
+}
+.btnPublicar:hover{
+  background-color: #808080;
+  color: white;
+}
+
+.btn{
+  background-color: transparent;
+}
+
+.icono{
+  height: 30px;
+}
+
+.iconoEditar:hover{
+
+}
+
+.sinComentarios{
+  margin: 30px;
+}
+
+.comentario{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #e2e2e2;
+  padding: 15px 40px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 15px;
+}
+.comentario.alterno{
+  background-color: white;
+}
+
+/*Panel PopUp--------------------------------------*/
+.panelPopUp{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popUp{
+  background-color: #31572C;
+  color: white;
+  padding: 30px;
+  border-radius: 6px;
+  width: 450px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.popupBotones{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.botonPopUp{
+  width: 100%;
+  padding: 12px;
+  margin: 5px;
+}
+
+.popUp p{
+  margin: 20px;
+}
+
+.btnCancelar{
+  color: black;
+  background-color: #D9D9D9;
+}
+.btnCancelar:hover{
+  color: white;
+  background-color: #6c6c6c;
+}
+
+.btnRetiro{
+  color: white;
+  background-color: #f51313;
+}
+.btnRetiro:hover{
+  background-color: #a40000;
+}

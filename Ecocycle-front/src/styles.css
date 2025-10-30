@@ -1,0 +1,44 @@
+/* src/styles.css */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #000000;
+  font-size: 16px;
+}
+
+input, select, textarea, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+h1{
+  padding: 20px;
+  color: white;
+  background-color: rgb(49, 87, 44);
+  text-align: center;
+  font-size: 36px;
+  font-weight: lighter;
+  margin: 0;
+}
+
+select {
+  background-color: white;
+}
+
+button{
+  padding: 7px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
