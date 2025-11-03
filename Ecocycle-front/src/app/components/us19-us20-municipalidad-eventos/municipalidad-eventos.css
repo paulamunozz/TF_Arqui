@@ -147,9 +147,17 @@ p{
 }
 
 .sinEventos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   line-height: 30px;
+  padding: 20px;
+  margin: 50px auto;
+  background-color: rgb(236, 243, 158);
   text-align: center;
-  margin-top: 50px;
+  border-radius: 6px;
+  width: 40%;
+  font-weight: bold;
 }
 
 

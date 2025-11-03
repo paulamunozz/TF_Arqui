@@ -61,13 +61,15 @@
 
 
 <ul class="panelEventos">
-  @if (eventos.length>0)
+  @if (eventos.data.length>0)
   {
-    @for (evento of eventos; track evento.id; let i = $index) {
+    @for (evento of eventos.data; track evento.idEvento; let i = $index) {
       <li class="evento" [class.alterno]="i % 2 !== 0">
         <div class="filasEvento">
           <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
-          <p class="fechasEvento">Fecha inicio: {{evento.fechaInicio}} &nbsp;&nbsp; Fecha fin: {{evento.fechaFin}}</p>
+          <p class="fechasEvento">
+            Fecha inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}} &nbsp;&nbsp;
+            Fecha fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
         </div>
 
         <div class="filasEvento">
@@ -82,7 +84,7 @@
           </div>
 
           <div class="columnaEvento columnaBtnEvento">
-            <a [routerLink]="['/evento', evento.id]"><button type="submit" class="btnEvento">Ver detalle</button></a>
+            <a [routerLink]="['/evento', evento.idEvento]"><button type="submit" class="btnEvento">Ver detalle</button></a>
           </div>
         </div>
       </li>
@@ -90,6 +92,12 @@
 
   }
   @else {
-    <p class="sinEventos">Aún no cuentas con eventos<br>¡Que esperas, crea tu primer evento hoy!</p>
+    <p class="sinEventos">
+      Aún no cuentas con eventos<br>
+      ¡Que esperas, crea tu primer evento hoy!
+    </p>
   }
 </ul>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]">
+  showFirstLastButtons
+</mat-paginator>
