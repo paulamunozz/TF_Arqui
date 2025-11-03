@@ -2,7 +2,7 @@
 
 <p class="instrucciones">¡Completa todos los datos del siguiente formulario para crear un evento de reciclaje!</p>
 
-<form [formGroup]="formRegistro">
+<form [formGroup]="formRegistro" (ngSubmit)="onSubmit()">
   <div class="panelDatosFila">
     <div class="panelDatosColumna">
       <label for="nombre" class="nomDato">Nombre</label>
@@ -45,7 +45,7 @@
   </div>
 
   <div class="panelDatosFila panelBtnCrear">
-    <button type="button" class="btnCrear" [disabled]="formRegistro.invalid" (click)="registrar()">
+    <button type="button" class="btnCrear" [disabled]="formRegistro.invalid" (click)="onSubmit()">
       Crear evento
     </button>
   </div>

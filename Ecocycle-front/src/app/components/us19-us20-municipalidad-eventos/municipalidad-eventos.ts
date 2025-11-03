@@ -1,13 +1,20 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import {Evento} from '../../model/evento';
+import {DatePipe} from '@angular/common';
+import {EventoService} from '../../services/evento-service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    DatePipe,
+    MatPaginator,
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
@@ -17,8 +24,13 @@ export class MunicipalidadEventos {
 
   formFiltro: FormGroup;
   private fb = inject(FormBuilder);
+  private eventoService: EventoService = inject(EventoService);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor() {
     this.formFiltro = this.fb.group({
+      distrito:[''],
       nombre: [''],
       tipo: [''],
       metodo: [''],
@@ -27,12 +39,25 @@ export class MunicipalidadEventos {
     });
   }
 
-  eventos = [
-    {id:1, nombre:'Evento 1', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.\n' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Papel', metodo:'En casa', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'},
-    {id:2, nombre:'Evento 2', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Plástico', metodo:'Centro de reciclaje de la municipalidad', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'},
-    {id:3, nombre:'Evento 3', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.\n' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Metal/Lata', metodo:'Camión de basura', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'}
-  ]
+  eventos: MatTableDataSource<Evento> = new MatTableDataSource<Evento>();
+
+  ngOnInit() {
+    this.listarEventos();
+  }
+
+  ngAfterViewInit() {
+    this.eventos.paginator = this.paginator;
+  }
+
+  listarEventos () {
+    this.eventoService.listarPorDistrito(this.formFiltro.value).subscribe({
+      next: (data) => {
+        this.eventos.data = data;
+        console.log("Eventos cargados: ", data);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 }
