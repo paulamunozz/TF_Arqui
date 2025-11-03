@@ -1,0 +1,179 @@
+<div class="reciclaje-container">
+  <!-- Header con Toolbar de Material -->
+  <h1>Mi Reciclaje</h1>
+
+  <!-- Filtros y controles superiores -->
+  <div class="controls-section">
+    <!-- Tarjeta de puntaje -->
+    <mat-card class="puntaje-card">
+      <mat-card-content>
+        <span class="puntaje-label">Puntaje acumulado</span>
+        <span class="puntaje-value">    {{puntajeTotal}}</span>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Filtros -->
+    <div class="filters">
+      <!-- Filtro Tipo -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Tipo</mat-label>
+        <mat-select [(ngModel)]="filtroTipo" (selectionChange)="aplicarFiltros()">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="Vidrio">Vidrio</mat-option>
+          <mat-option value="Plástico">Plástico</mat-option>
+          <mat-option value="Papel">Papel</mat-option>
+          <mat-option value="Electrónicos">Electrónicos</mat-option>
+          <mat-option value="Orgánicos">Orgánicos</mat-option>
+          <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro Método -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Método</mat-label>
+        <mat-select [(ngModel)]="filtroMetodo" (selectionChange)="aplicarFiltros()">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="En centros físicos de la municipalidad">En centros físicos de la municipalidad</mat-option>
+          <mat-option value="Camión de reciclaje de la municipalidad">Camión de reciclaje de la municipalidad</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro Fecha -->
+      <div class="date-filter-group">
+        <mat-form-field appearance="outline" class="date-field">
+          <mat-label>Fecha inicio</mat-label>
+          <input matInput [matDatepicker]="pickerMin" [(ngModel)]="fechaMin"
+                 (dateChange)="aplicarFiltros()" placeholder="MIN">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerMin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerMin></mat-datepicker>
+        </mat-form-field>
+
+        <span class="date-separator">-</span>
+
+        <mat-form-field appearance="outline" class="date-field">
+          <mat-label>Fecha fin</mat-label>
+          <input matInput [matDatepicker]="pickerMax" [(ngModel)]="fechaMax"
+                 (dateChange)="aplicarFiltros()" placeholder="MAX">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
+          <mat-datepicker #pickerMax></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Botón Crear -->
+    <button class="btn-crear" (click)="abrirModalCrear()">
+      <span class="icon-plus">+</span>
+      Crear
+    </button>
+  </div>
+
+  <!-- Lista de reciclajes -->
+  <div class="reciclajes-list">
+    <!-- Tarjetas de Material -->
+    <mat-card *ngFor="let reciclaje of reciclajesFiltrados" class="reciclaje-card">
+      <mat-card-content>
+        <div class="card-content">
+          <div class="card-left">
+            <p class="card-info">
+              <strong>Peso:</strong> {{ reciclaje.peso }} kg
+            </p>
+            <p class="card-info">
+              <strong>Tipo:</strong> {{ reciclaje.tipo }}
+            </p>
+          </div>
+
+          <div class="card-center">
+            <p class="card-info">
+              <strong>Fecha:</strong> {{ reciclaje.fecha | date:'dd/MM/yyyy' }}
+            </p>
+            <p class="card-info">
+              <strong>Método:</strong> {{ reciclaje.metodo }}
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button mat-icon-button color="primary"
+                    (click)="editarReciclaje(reciclaje)"
+                    matTooltip="Editar">
+              <span class="icon-edit">✏️</span>
+            </button>
+            <button mat-icon-button color="warn"
+                    (click)="eliminarReciclaje(reciclaje.id)"
+                    matTooltip="Eliminar">
+              <span class="icon-delete">🗑️</span>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Estado vacío -->
+    <div *ngIf="reciclajesFiltrados.length === 0" class="empty-state">
+      <p>No hay reciclajes registrados</p>
+    </div>
+  </div>
+
+  <!-- Footer contador -->
+  <footer class="footer">
+    <p>Reciclaje registrado: {{ reciclajesFiltrados.length }}</p>
+  </footer>
+</div>
+
+<!-- Modal para crear/editar con Material Dialog -->
+<div *ngIf="mostrarModal" class="modal-overlay" (click)="cerrarModal()">
+  <mat-card class="modal-card" (click)="$event.stopPropagation()">
+    <mat-card-header>
+      <mat-card-title>
+        {{ modoEdicion ? 'Editar Reciclaje' : 'Nuevo Reciclaje' }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="guardarReciclaje()" #form="ngForm">
+        <!-- Peso -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Peso (kg)</mat-label>
+          <input matInput type="number" [(ngModel)]="reciclajeForm.peso"
+                 name="peso" step="0.01" required>
+        </mat-form-field>
+
+        <!-- Tipo -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tipo</mat-label>
+          <mat-select [(ngModel)]="reciclajeForm.tipo" name="tipo" required>
+            <mat-option value="Vidrio">Vidrio</mat-option>
+            <mat-option value="Plástico">Plástico</mat-option>
+            <mat-option value="Papel">Papel</mat-option>
+            <mat-option value="Electrónicos">electrónicos</mat-option>
+            <mat-option value="Orgánicos">Orgánicos</mat-option>
+            <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Método -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Método de reciclaje</mat-label>
+          <mat-select [(ngModel)]="reciclajeForm.metodo" name="metodo" required>
+            <mat-option value="En centros físicos de la municipalidad">
+              En centros físicos de la municipalidad
+            </mat-option>
+            <mat-option value="Camión de reciclaje de la municipalidad">
+              Camión de reciclaje de la municipalidad
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Botones -->
+        <mat-card-actions class="modal-actions">
+          <button mat-button type="button" (click)="cerrarModal()">
+            Cancelar
+          </button>
+          <button mat-raised-button color="primary" type="submit"
+                  [disabled]="!form.valid">
+            Guardar
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
