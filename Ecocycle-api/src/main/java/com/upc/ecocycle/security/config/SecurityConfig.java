@@ -6,6 +6,7 @@ import com.upc.ecocycle.security.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -47,6 +53,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable) // deshabilitar CSRF ya que no es necesario para una API REST
+                .cors(Customizer.withDefaults()) //esto es los de CORS q añadi
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
                                         "/security/authenticate",
@@ -54,7 +61,11 @@ public class SecurityConfig {
                                         "/ecocycle/evento/cantidadEventosLogrados",
                                         "/ecocycle/municipalidad/ranking",
                                         "/ecocycle/reciclaje/cantidadPorTipo",
-                                        "/ecocycle/vecino/ranking"
+                                        "/ecocycle/vecino/ranking",
+                                        "/ecocycle/evento/listarYfiltrar",
+                                        "/ecocycle/evento/registrar",
+                                        "/ecocycle/evento/detalle/**",
+                                        "ecocycle/evento/eliminar/**"
                                         ).permitAll()
                                 //.requestMatchers("/api/proveedores").hasRole("ADMIN")
                                 .anyRequest().authenticated() // cualquier endpoint puede ser llamado con tan solo autenticarse
@@ -69,6 +80,21 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200")); // ✅ origen Angular
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+        config.addExposedHeader("Authorization");
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
 
     //Filter opcional si se desea configurar globalmente el acceso a los endpoints sin anotaciones
     // en cada endpoint

@@ -26,7 +26,7 @@ import {
 } from './components/us21-us26-us31-vecino-detalle-evento-registrado/vecino-detalle-evento-registrado';
 
 export const routes: Routes = [
-  { path: '', component: VecinoEventosRegistrados },
+  { path: '', component: VecinoAutenticacion },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
 

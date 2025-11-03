@@ -12,7 +12,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ecocycle/evento")
@@ -21,7 +23,7 @@ public class EventoController {
     EventoService eventoService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasRole('MUNICIPALIDAD')")
+//    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public EventoDTO registrar(@RequestBody @Validated(Create.class) EventoDTO eventoDTO) {
         return eventoService.registrar(eventoDTO);
     }
@@ -32,37 +34,41 @@ public class EventoController {
         return eventoService.modificar(eventoDTO);
     }
 
-    @DeleteMapping("/eliminar")
-    @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public String eliminar(@RequestBody Integer idEvento) {
-        return eventoService.eliminar(idEvento);
+    @DeleteMapping("/eliminar/{idEvento}")
+//    @PreAuthorize("hasRole('MUNICIPALIDAD')")
+    public Map<String, String> eliminar(@PathVariable Integer idEvento) {
+        String mensaje = eventoService.eliminar(idEvento);
+        return Collections.singletonMap("mensaje", mensaje);
     }
 
-    @GetMapping("/detalle")
-    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
-    public EventoDTO buscarPorId(@RequestBody Integer idEvento) {
+    @GetMapping("/detalle/{idEvento}")
+//    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
+    public EventoDTO buscarPorId(@PathVariable Integer idEvento) {
         eventoService.actualizarPesoActual();
         return eventoService.buscarPorId(idEvento);
     }
 
-    @GetMapping("/listarYfiltrar")
-    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
+    @PostMapping("/listarYfiltrar")
+//    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<EventoDTO> listarEventos(@RequestBody JsonNode filtros) {
         eventoService.actualizarPesoActual();
-
         String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
+                && !filtros.get("distrito").asText().isBlank()
                 && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
                 ? filtros.get("distrito").asText() : null;
 
         String nombre = (filtros.has("nombre") && !filtros.get("nombre").isNull()
+                && !filtros.get("nombre").asText().isBlank()
                 && !filtros.get("nombre").asText().equalsIgnoreCase("null"))
                 ? filtros.get("nombre").asText() : null;
 
         String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().isBlank()
                 && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
                 ? filtros.get("tipo").asText() : null;
 
         String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().isBlank()
                 && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
                 ? filtros.get("metodo").asText() : null;
 
@@ -79,7 +85,7 @@ public class EventoController {
         return eventoService.listarEventos(distrito, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/listarPorVecino")
+    @PostMapping("/listarPorVecino")
     @PreAuthorize("hasRole('VECINO')")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
         eventoService.actualizarPesoActual();
@@ -111,7 +117,7 @@ public class EventoController {
         return eventoService.listarEventosPorVecino(vecinoId, nombre, tipo, metodo, fechaInicio, fechaFin);
     }
 
-    @GetMapping("/cantidadEventosLogrados")
+    @PostMapping("/cantidadEventosLogrados")
     public CantidadEventosLogradosDTO cantidadEventosLogrados(@RequestBody(required = false) String distrito) {
         eventoService.actualizarPesoActual();
         return eventoService.cantidadEventosLogrados(distrito);

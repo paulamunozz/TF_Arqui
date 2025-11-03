@@ -1,4 +1,4 @@
-<h1>{{evento.nombre}} {{id}}</h1>
+<h1>{{evento.nombre}}</h1>
 
 <div class="panelDetalles">
   <div class="detalleFilas">
@@ -59,7 +59,7 @@
 
       <div class="popupBotones">
         <button class="btnCancelar botonPopUp" (click)="cerrarPopUp()">Cancelar</button>
-        <button class="btnEliminar botonPopUp" [routerLink]="['/eventos']" (click)="cerrarPopUp()">Eliminar</button>
+        <button class="btnEliminar botonPopUp" (click)="eliminar(evento.idEvento)">Eliminar</button>
       </div>
     </div>
   </div>
