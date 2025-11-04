@@ -65,7 +65,8 @@ public class SecurityConfig {
                                         "/ecocycle/evento/listarYfiltrar",
                                         "/ecocycle/evento/registrar",
                                         "/ecocycle/evento/detalle/**",
-                                        "ecocycle/evento/eliminar/**"
+                                        "ecocycle/evento/eliminar/**",
+                                        "ecocycle/evento/modificar"
                                         ).permitAll()
                                 //.requestMatchers("/api/proveedores").hasRole("ADMIN")
                                 .anyRequest().authenticated() // cualquier endpoint puede ser llamado con tan solo autenticarse
