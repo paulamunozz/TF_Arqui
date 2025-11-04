@@ -6,6 +6,17 @@ import {DatePipe} from '@angular/common';
 import {EventoService} from '../../services/evento-service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {
+  MatDatepickerModule,
+  MatDatepickerToggle,
+  MatDatepicker,
+  MatDatepickerInput
+} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatOption} from '@angular/material/core';
+import {MatSelect} from '@angular/material/select';
+import {MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -15,6 +26,17 @@ import {MatPaginator} from '@angular/material/paginator';
     RouterLink,
     DatePipe,
     MatPaginator,
+    MatFormField,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatInput,
+    MatSuffix,
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',

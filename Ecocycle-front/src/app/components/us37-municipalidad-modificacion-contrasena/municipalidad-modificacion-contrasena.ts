@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {Router} from '@angular/router';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 
 @Component({
@@ -14,7 +13,6 @@ import {MatInput} from '@angular/material/input';
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
-    MatButton,
     MatInput
   ],
   templateUrl: './municipalidad-modificacion-contrasena.html',

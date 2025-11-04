@@ -1,0 +1,21 @@
+<h1>Ranking de municipalidades</h1>
+
+<table mat-table [dataSource]="dataSourceRanking">
+  <ng-container matColumnDef="puesto">
+    <th mat-header-cell *matHeaderCellDef>Puesto</th>
+    <td mat-cell *matCellDef = "let element">{{element.puesto}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="distrito">
+    <th mat-header-cell *matHeaderCellDef>Distrito</th>
+    <td mat-cell *matCellDef = "let element">{{element.distrito}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="puntaje">
+    <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+    <td mat-cell *matCellDef = "let element">{{element.puntaje}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef = "columnasRanking"></tr>
+  <tr mat-row *matRowDef = "let row; columns: columnasRanking;"></tr>
+</table>
