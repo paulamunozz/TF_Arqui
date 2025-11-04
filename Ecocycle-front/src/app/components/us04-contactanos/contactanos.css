@@ -1,0 +1,87 @@
+.atencion-cliente {
+  margin: 60px auto;
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.atencion-cliente .bloque {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  background-color: #9ccc65; /* verde medio */
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.atencion-cliente .imagen img {
+  width: 100%;
+  max-width: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.atencion-cliente .info {
+  background-color: #2e7d32; /* verde oscuro */
+  color: white;
+  flex: 1;
+  padding: 30px;
+}
+
+.atencion-cliente .info h3 {
+  width: 100%;
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  color: #fff;
+  background-color: #1b1b1b;
+  border-bottom: 2px solid #81c784;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  text-align: left;
+
+}
+
+.atencion-cliente .info{
+  text-align: center;
+  align-items: center;
+}
+
+.atencion-cliente ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.atencion-cliente li {
+  margin: 10px 0;
+  font-size: 1rem;
+
+}
+
+.ubicacion {
+  margin: 60px auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.banner {
+  background-color: #53762d;
+  color: black;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 4px 0 0 4px;
+  clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 50%, calc(100% - 25px) 100%, 0 100%);
+  margin-bottom: 15px;
+  text-align: center;
+  position: relative;
+  left: 27%;
+}
+
+.mapa img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}

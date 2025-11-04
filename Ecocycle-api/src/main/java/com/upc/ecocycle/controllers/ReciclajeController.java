@@ -132,7 +132,7 @@ public class ReciclajeController {
         return reciclajeService.listarReciclajeFiltrado(distrito, tipo, metodo, fechaInicio, fechaFin, genero, edadMin, edadMax);
     }
 
-    @GetMapping("/cantidadPorTipo")
+    @PostMapping("/cantidadPorTipo")
     public List<CantidadReciclajeDTO> listarCantidadReciclaje(@RequestBody(required = false) String distrito) {
         return reciclajeService.listarCantidadReciclaje(distrito);
     }

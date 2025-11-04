@@ -6,18 +6,26 @@
   </div>
 
   <div class="columnasMenu">
-    <a href="" class="enlaceMenu"><span>Inicio</span></a>
-    <a href="" class="enlaceMenu"><span>Consejos</span></a>
-    <a [routerLink]="'/eventos-disponibles'"  class="enlaceMenu"><span>Eventos</span></a>
-    <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
-    <a href="" class="enlaceMenu"><span>Rankings</span></a>
-    <a href="" class="enlaceMenu"><span>Estadísticas</span></a>
+    <a [routerLink]="'/inicio-vecino'" class="enlaceMenu"><span>Inicio</span></a>
+    <a [routerLink]="'/consejos'" class="enlaceMenu"><span>Consejos</span></a>
+    <a [routerLink]="'/eventos-disponibles'" class="enlaceMenu"><span>Eventos</span></a>
+    <a [routerLink]="'/contacto'" class="enlaceMenu"><span>Contáctanos</span></a>
+
+    <div class="menuRanking">
+      <a class="enlaceMenu enlaceMenuRanking"><span>Rankings</span></a>
+      <ul class="submenuRanking">
+        <li><a [routerLink]="'/ranking-vecinos'">Ranking de vecinos</a></li>
+        <li><a [routerLink]="'/ranking-municipalidades'">Ranking de municipalidades</a></li>
+      </ul>
+    </div>
+
+    <a [routerLink]="'/estadisticas'" class="enlaceMenu"><span>Estadísticas</span></a>
 
     <div class="menuPerfil">
       <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
       <ul class="submenuPerfil">
-        <li><a href="#">Mi perfil</a></li>
-        <li><a href="#">Mi reciclaje</a></li>
+        <li><a [routerLink]="'/perfil'">Mi perfil</a></li>
+        <li><a [routerLink]="'/mi-reciclaje'">Mi reciclaje</a></li>
         <li><a [routerLink]="'/mis-eventos'">Mis eventos</a></li>
         <li><a [routerLink]="'/logros'">Logros</a></li>
       </ul>
@@ -34,12 +42,18 @@
   </div>
 
   <div class="columnasMenu">
-    <a href="" class="enlaceMenu"><span>Inicio</span></a>
-    <a href="" class="enlaceMenu"><span>Reciclaje</span></a>
+    <a [routerLink]="'/inicio-muni'" class="enlaceMenu"><span>Inicio</span></a>
+    <a [routerLink]="'/reciclaje'" class="enlaceMenu"><span>Reciclaje</span></a>
     <a [routerLink]="'/eventos'" class="enlaceMenu"><span>Eventos</span></a>
-    <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
-    <a href="" class="enlaceMenu"><span>Rankings</span></a>
-    <a href="" class="enlaceMenu"><span>Estadísticas</span></a>
+    <a [routerLink]="'/contacto'" class="enlaceMenu"><span>Contáctanos</span></a>
+    <div class="menuRanking">
+      <a class="enlaceMenu enlaceMenuRanking"><span>Rankings</span></a>
+      <ul class="submenuRanking">
+        <li><a [routerLink]="'/ranking-vecinos'">Ranking de vecinos</a></li>
+        <li><a [routerLink]="'/ranking-municipalidades'">Ranking de municipalidades</a></li>
+      </ul>
+    </div>
+    <a [routerLink]="'/estadisticas'" class="enlaceMenu"><span>Estadísticas</span></a>
     <div class="menuPerfil">
       <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
       <ul class="submenuPerfil">

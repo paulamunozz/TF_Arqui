@@ -1,0 +1,64 @@
+<h1>Ranking de vecinos</h1>
+
+<div class="panelFiltros">
+  <mat-form-field appearance="outline" class="columnaFiltro">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)]="distrito" (selectionChange)="filtrarRanking()">
+      <mat-option class="opcion" value="">Todos</mat-option>
+      <mat-option value="San Borja">San Borja</mat-option>
+      <mat-option value="Surco">Surco</mat-option>
+      <mat-option value="Surquillo">Surquillo</mat-option>
+      <mat-option value="Miraflores">Miraflores</mat-option>
+      <mat-option value="Barranco">Barranco</mat-option>
+      <mat-option value="Villa el Salvador">Villa el Salvador</mat-option>
+      <mat-option value="Ate">Ate</mat-option>
+      <mat-option value="San Isidro">San Isidro</mat-option>
+      <mat-option value="San Miguel">San Miguel</mat-option>
+      <mat-option value="Chorrillos">Chorrillos</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="columnaFiltro">
+    <mat-label>Género</mat-label>
+    <mat-select>
+      <mat-option value="">Todos</mat-option>
+      <mat-option value="F">F</mat-option>
+      <mat-option value="M">M</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="columnaFiltro">
+    <mat-label class="nomFiltro">Edad MIN</mat-label>
+    <input matInput id="edadMin" type="text" class="filtro"/>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="columnaFiltro">
+    <mat-label class="nomFiltro">Edad MAX</mat-label>
+    <input matInput id="edadMax" type="text" class="filtro"/>
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSourceRanking">
+  <ng-container matColumnDef="puesto">
+    <th mat-header-cell *matHeaderCellDef>Puesto</th>
+    <td mat-cell *matCellDef = "let element">{{element.puesto}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef = "let element">{{element.nombre}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="puntaje">
+    <th mat-header-cell *matHeaderCellDef>Puntaje</th>
+    <td mat-cell *matCellDef = "let element">{{element.puntaje}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="distrito">
+    <th mat-header-cell *matHeaderCellDef>Distrito</th>
+    <td mat-cell *matCellDef = "let element">{{element.distrito}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef = "columnasRanking"></tr>
+  <tr mat-row *matRowDef = "let row; columns: columnasRanking;"></tr>
+</table>

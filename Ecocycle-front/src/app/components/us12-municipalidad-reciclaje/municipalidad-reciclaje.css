@@ -1,0 +1,148 @@
+.panelAcciones {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 15px 50px 15px 30px;
+}
+
+/* Tarjeta de puntaje */
+.puntaje-card {
+  background-color: #d4e8a3;
+  max-width: 200px;
+  justify-content: center;
+}
+
+.puntaje-card mat-card-content {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.puntaje-label {
+  color: #2d5016;
+}
+
+.puntaje-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2d5016;
+}
+
+/* Filtros */
+.panelFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+/* Centrado vertical real de todos los mat-form-field dentro de tu panel */
+::ng-deep .panelFiltros .mat-mdc-form-field {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px; /* altura uniforme */
+}
+
+/* Hace que el wrapper interno ocupe todo el alto del form-field */
+::ng-deep .panelFiltros .mat-mdc-text-field-wrapper {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Centra el input o el valor seleccionado */
+::ng-deep .panelFiltros input.mat-mdc-input-element,
+::ng-deep .panelFiltros .mat-mdc-select-trigger {
+  padding: 0 8px !important;
+}
+
+::ng-deep .mat-mdc-floating-label {
+  top: 23px !important;
+}
+
+.separadorFiltros {
+  display: flex;
+  flex-wrap: wrap;          /* permite que los filtros bajen si no caben */
+  gap: 16px;                /* separación entre filtros */
+  align-items: flex-end;    /* alinea los campos por la parte inferior */
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0;
+  flex: 1 1 100%;
+}
+
+.columnaFiltro{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 150px;
+  min-width: 100px;
+}
+
+.columnaBtnFiltro{
+  flex: 0 0 100px;
+}
+
+.btnFiltro{
+  background-color: #dddddd;
+}
+.btnFiltro:hover{
+  background-color: #808080;
+  color: white;
+}
+
+
+/* Lista de reciclajes */
+.reciclajes-list {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Tarjetas de reciclaje */
+.reciclaje-card {
+  background-color: #2d5016;
+  color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reciclaje-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+}
+
+.reciclaje-card mat-card-content {
+  padding: 20px;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-left,
+.card-center {
+  flex: 1;
+}
+
+.card-info {
+  margin: 12px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-info strong {
+  font-weight: 600;
+  margin-right: 8px;
+}

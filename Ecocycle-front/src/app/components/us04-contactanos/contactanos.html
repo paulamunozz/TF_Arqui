@@ -1,0 +1,26 @@
+<h1>Contáctanos</h1>
+<section class="atencion-cliente">
+  <div class="bloque">
+    <div class="imagen">
+      <img [src]="imagenEquipo" alt="Equipo Ecocycle" />
+    </div>
+
+    <div class="info">
+      <h3>Atención al cliente</h3>
+      <ul>
+        <li><b>Whatsapp:</b> {{ contacto.whatsapp }}</li>
+        <li><b>Llamadas:</b> {{ contacto.llamadas }}</li>
+        <li><b>Correo electrónico:</b> {{ contacto.correo }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="banner">
+  <span>Visítanos en {{ contacto.direccion }}</span>
+</div>
+<section class="ubicacion">
+  <div class="mapa">
+    <img [src]="imagenMapa" alt="Mapa de ubicación" />
+  </div>
+</section>

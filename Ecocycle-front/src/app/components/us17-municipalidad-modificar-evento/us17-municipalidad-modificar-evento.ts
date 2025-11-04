@@ -31,7 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './us17-municipalidad-modificar-evento.html',
   styleUrls: ['./us17-municipalidad-modificar-evento.css']
 })
-export class MunicipalidadModificarEvento implements OnInit {
+export class MunicipalidadModificarEvento{
   formModificar: FormGroup;
   guardando: boolean = false;
   eventoId: number = 0;
@@ -41,7 +41,7 @@ export class MunicipalidadModificarEvento implements OnInit {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  constructor() {
+  constructor(private r:ActivatedRoute) {
     this.formModificar = this.fb.group({
       nombre: ['', Validators.required],
       bonificacion: ['', Validators.required],
@@ -51,7 +51,9 @@ export class MunicipalidadModificarEvento implements OnInit {
 
   ngOnInit(): void {
     // Obtener el ID del evento desde la ruta
-    this.eventoId = Number(this.route.snapshot.paramMap.get('id'));
+    this.r.params.subscribe(params => {
+      this.eventoId = +params['id'];
+    })
 
     if (this.eventoId) {
       this.cargarEvento();
@@ -93,7 +95,7 @@ export class MunicipalidadModificarEvento implements OnInit {
         next: (data) => {
           console.log('Evento modificado:', data);
           alert('Evento modificado correctamente');
-          this.router.navigate(['/eventos']);
+          this.router.navigate(['/evento/' + this.eventoId]);
         },
         error: (error) => {
           console.error('Error al modificar:', error);
