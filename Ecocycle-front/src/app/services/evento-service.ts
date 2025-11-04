@@ -40,6 +40,6 @@ export class EventoService {
   }
 
   cantidadEventosLogrados(distrito:string):Observable<CantidadEventosLogradosDTO>{
-    return this.httpClient.post<CantidadEventosLogradosDTO>(this.url + '/cantidadEventosLogrados/', distrito);
+    return this.httpClient.post<CantidadEventosLogradosDTO>(this.url + '/cantidadEventosLogrados', distrito);
   }
 }

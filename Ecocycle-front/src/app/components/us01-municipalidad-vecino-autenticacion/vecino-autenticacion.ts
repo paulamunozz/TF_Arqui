@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } 
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-us1-municipalidad-vecino-autenticacion',
+  selector: 'app-us01-municipalidad-vecino-autenticacion',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './vecino-autenticacion.html',

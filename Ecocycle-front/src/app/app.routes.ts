@@ -7,7 +7,7 @@ import {
   MunicipalidadDetalleEvento
 } from './components/us21-us22-us23-municipalidad-detalle-evento/municipalidad-detalle-evento';
 import {VecinoRegistro} from './components/us05-vecino-registro/vecino-registro';
-import {VecinoAutenticacion} from './components/us1-municipalidad-vecino-autenticacion/vecino-autenticacion';
+import {VecinoAutenticacion} from './components/us01-municipalidad-vecino-autenticacion/vecino-autenticacion';
 import {VecinoEventoConfirmacion} from './components/us25-vecino-evento-confirmacion/vecino-evento-confirmacion';
 import {
   MunicipalidadEventoConfirmacion
@@ -31,6 +31,9 @@ import {
   VecinoReciclaje
 } from './components/us10-us11-us13-us14-us15-vecino-reciclaje/us10-us11-us13-us14-us15-vecino-reciclaje';
 import {MunicipalidadReciclaje} from './components/us12-municipalidad-reciclaje/municipalidad-reciclaje';
+import {
+  MunicipalidadVecinoEstadisticas
+} from './components/us34-us35-us36-municipalidad-vecino-estadisticas/municipalidad-vecino-estadisticas';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
@@ -51,5 +54,9 @@ export const routes: Routes = [
   { path: 'detalle-evento-registrado/:id', component: VecinoDetalleEventoRegistrado },
   { path: 'actualizar-contrasena', component: MunicipalidadModificacionContrasena },
   { path: 'reciclaje', component: MunicipalidadReciclaje },
+
+
+  { path: 'estadisticas', component: MunicipalidadVecinoEstadisticas },
+
   { path: '**', redirectTo: '' }
 ];
