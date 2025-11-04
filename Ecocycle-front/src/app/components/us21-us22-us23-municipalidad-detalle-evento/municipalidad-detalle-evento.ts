@@ -6,6 +6,7 @@ import {Evento} from '../../model/evento';
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
   imports: [
+    RouterLink
   ],
   templateUrl: './municipalidad-detalle-evento.html',
   styleUrl: './municipalidad-detalle-evento.css',
@@ -32,6 +33,10 @@ export class MunicipalidadDetalleEvento {
         }
       })
     })
+  }
+
+  editarEvento(): void {
+    this.router.navigate(['/modificar-evento', this.id]);
   }
 
   eliminar(id:number){

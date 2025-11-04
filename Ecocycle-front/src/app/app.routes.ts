@@ -27,6 +27,10 @@ import {
 import {
   MunicipalidadModificacionContrasena
 } from './components/us37-municipalidad-modificacion-contrasena/municipalidad-modificacion-contrasena';
+import {
+  MunicipalidadModificarEvento
+} from './components/us17-municipalidad-modificar-evento/us17-municipalidad-modificar-evento';
+import {VecinoLogros} from './components/us09-vecino-logros/us09-vecino-logros';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
@@ -36,6 +40,7 @@ export const routes: Routes = [
   { path: 'eventos', component: MunicipalidadEventos },
   { path: 'evento/:id', component: MunicipalidadDetalleEvento },
   { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
+  { path: 'modificar-evento', component: MunicipalidadModificarEvento },
   { path: 'confirmacion-evento', component: VecinoEventoConfirmacion },
   { path: 'confirmacion-evento-mun', component: MunicipalidadEventoConfirmacion },
   { path: 'muni-evento-elim', component: MunicipalidadEventoEliminado },
@@ -44,6 +49,7 @@ export const routes: Routes = [
   { path: 'detalle-evento-disponible/:id', component: VecinoDetalleEventoDisponible },
   { path: 'mis-eventos', component: VecinoEventosRegistrados },
   { path: 'detalle-evento-registrado/:id', component: VecinoDetalleEventoRegistrado },
+  { path: 'logros', component: VecinoLogros },
   { path: 'actualizar-contrasena', component: MunicipalidadModificacionContrasena },
   { path: '**', redirectTo: '' }
 ];

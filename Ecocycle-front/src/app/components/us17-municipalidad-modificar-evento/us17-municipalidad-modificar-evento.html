@@ -1,0 +1,80 @@
+<div class="modificar-evento-container">
+  <!-- Header -->
+  <mat-toolbar color="primary" class="header-toolbar">
+    <h1>Modificación de evento</h1>
+  </mat-toolbar>
+
+  <!-- Formulario -->
+  <div class="formulario-container">
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="formModificar" (ngSubmit)="onSubmit()">
+
+          <!-- Campo Nombre -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              formControlName="nombre"
+              placeholder="Ingrese el nombre del evento"
+              required>
+            <mat-icon matPrefix>event</mat-icon>
+          </mat-form-field>
+
+          <!-- Campo Bonificación -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Bonificación</mat-label>
+            <input
+              matInput
+              type="number"
+              formControlName="bonificacion"
+              placeholder="Ingrese la bonificación"
+              required>
+            <mat-icon matPrefix>stars</mat-icon>
+            <mat-hint>Puntos de bonificación del evento</mat-hint>
+          </mat-form-field>
+
+          <!-- Campo Descripción -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea
+              matInput
+              formControlName="descripcion"
+              placeholder="Ingrese la descripción del evento"
+              rows="6"
+              required>
+            </textarea>
+            <mat-icon matPrefix>description</mat-icon>
+          </mat-form-field>
+
+          <!-- Botones de acción -->
+          <div class="form-actions">
+            <button
+              mat-raised-button
+              type="button"
+              class="btn-volver"
+              (click)="volver()"
+              [disabled]="guardando">
+              Volver
+            </button>
+
+            <button
+              mat-raised-button
+              color="accent"
+              type="submit"
+              class="btn-guardar"
+              [disabled]="!formModificar.valid || guardando">
+              <mat-icon *ngIf="!guardando">save</mat-icon>
+              <mat-spinner
+                *ngIf="guardando"
+                diameter="20"
+                class="spinner-button">
+              </mat-spinner>
+              {{ guardando ? 'Guardando...' : 'Guardar' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
