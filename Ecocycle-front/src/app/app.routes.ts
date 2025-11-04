@@ -7,7 +7,6 @@ import {
   MunicipalidadDetalleEvento
 } from './components/us21-us22-us23-municipalidad-detalle-evento/municipalidad-detalle-evento';
 import {VecinoRegistro} from './components/us05-vecino-registro/vecino-registro';
-import {VecinoAutenticacion} from './components/us01-vecino-autenticacion/vecino-autenticacion';
 import {VecinoAutenticacion} from './components/us01-municipalidad-vecino-autenticacion/vecino-autenticacion';
 import {VecinoEventoConfirmacion} from './components/us25-vecino-evento-confirmacion/vecino-evento-confirmacion';
 import {
