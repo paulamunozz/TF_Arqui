@@ -1,0 +1,19 @@
+<h1>Mis logros</h1>
+<div class="logros-list">
+  <mat-card>
+    <!-- Tarjetas de Material -->
+    <mat-card *ngFor="let logro of logros" class="logro-card">
+      <mat-card-content>
+        <div class="card-content">
+          <h3 class="titulo">{{ logro.titulo }}</h3>
+          <p class="descripcion">{{ logro.descripcion }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card-footer class="footer">
+      <p>Logros registrados: {{ totalLogros }}</p>
+    </mat-card-footer>
+  </mat-card>
+</div>
+

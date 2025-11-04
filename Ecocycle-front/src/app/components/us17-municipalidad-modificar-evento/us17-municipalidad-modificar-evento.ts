@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Evento } from '../../../../../../Angular/TF_Arqui/Ecocycle-front/src/app/model/evento';
-import { EventoService } from '../../../../../../Angular/TF_Arqui/Ecocycle-front/src/app/services/evento-service';
+import { Evento } from '../../model/evento';
+import { EventoService } from '../../services/evento-service';
 
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
