@@ -27,12 +27,17 @@ import {
 import {
   MunicipalidadModificacionContrasena
 } from './components/us37-municipalidad-modificacion-contrasena/municipalidad-modificacion-contrasena';
+import {
+  VecinoReciclaje
+} from './components/us10-us11-us13-us14-us15-vecino-reciclaje/us10-us11-us13-us14-us15-vecino-reciclaje';
+import {MunicipalidadReciclaje} from './components/us12-municipalidad-reciclaje/municipalidad-reciclaje';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
 
+  { path: 'mi-reciclaje', component: VecinoReciclaje },
   { path: 'eventos', component: MunicipalidadEventos },
   { path: 'evento/:id', component: MunicipalidadDetalleEvento },
   { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
@@ -45,5 +50,6 @@ export const routes: Routes = [
   { path: 'mis-eventos', component: VecinoEventosRegistrados },
   { path: 'detalle-evento-registrado/:id', component: VecinoDetalleEventoRegistrado },
   { path: 'actualizar-contrasena', component: MunicipalidadModificacionContrasena },
+  { path: 'reciclaje', component: MunicipalidadReciclaje },
   { path: '**', redirectTo: '' }
 ];

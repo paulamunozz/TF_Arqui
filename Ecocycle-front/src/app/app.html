@@ -17,7 +17,7 @@
       <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
       <ul class="submenuPerfil">
         <li><a href="#">Mi perfil</a></li>
-        <li><a href="#">Mi reciclaje</a></li>
+        <li><a [routerLink]="'/mi-reciclaje'">Mi reciclaje</a></li>
         <li><a [routerLink]="'/mis-eventos'">Mis eventos</a></li>
         <li><a href="#">Logros</a></li>
       </ul>
@@ -35,7 +35,7 @@
 
   <div class="columnasMenu">
     <a href="" class="enlaceMenu"><span>Inicio</span></a>
-    <a href="" class="enlaceMenu"><span>Reciclaje</span></a>
+    <a [routerLink]="'/reciclaje'" class="enlaceMenu"><span>Reciclaje</span></a>
     <a [routerLink]="'/eventos'" class="enlaceMenu"><span>Eventos</span></a>
     <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
     <a href="" class="enlaceMenu"><span>Rankings</span></a>
