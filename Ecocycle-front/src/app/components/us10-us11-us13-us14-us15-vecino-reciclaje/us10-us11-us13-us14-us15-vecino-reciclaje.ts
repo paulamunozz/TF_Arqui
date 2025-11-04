@@ -43,6 +43,9 @@ interface Reciclaje {
   styleUrls: ['./us10-us11-us13-us14-us15-vecino-reciclaje.css']
 })
 export class VecinoReciclaje implements OnInit {
+  imgSrcCrear = '/btn-crear-1.png';
+
+
   // Datos
   reciclajes: Reciclaje[] = [
     {

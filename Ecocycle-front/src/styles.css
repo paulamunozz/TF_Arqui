@@ -45,3 +45,31 @@ p{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Cambiar el fondo general del panel desplegable */
+.mat-mdc-select-panel {
+  background-color: #ffffff !important;
+}
+
+/* Cambiar el fondo de cada opción */
+.mat-mdc-option {
+  background-color: #ffffff !important;
+  color: #000 !important;
+}
+
+/* Cuando pasas el mouse por encima */
+.mat-mdc-option:hover,
+.mat-mdc-option.mat-mdc-option-active {
+  background-color: #c8e6c9 !important; /* verde suave */
+}
+
+.mat-datepicker-content {
+  background-color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* También puedes ajustar el contenedor interno si lo deseas */
+.mat-calendar {
+  background-color: white !important;
+}

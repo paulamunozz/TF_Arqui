@@ -1,0 +1,111 @@
+<h1>Reciclaje</h1>
+
+<div class="panelAcciones">
+  <mat-card class="puntaje-card">
+    <mat-card-content>
+      <span class="puntaje-label">Puntaje acumulado</span>
+      <span class="puntaje-value">{{puntajeTotal}}</span>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Filtros -->
+  <div class="panelFiltros">
+    <fieldset class="separadorFiltros">
+      <legend>Datos del reciclaje</legend>
+
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label>Tipo</mat-label>
+        <mat-select>
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="Vidrio">Vidrio</mat-option>
+          <mat-option value="Plástico">Plástico</mat-option>
+          <mat-option value="Papel">Papel</mat-option>
+          <mat-option value="Electrónicos">Electrónicos</mat-option>
+          <mat-option value="Orgánicos">Orgánicos</mat-option>
+          <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Filtro Método -->
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label>Método</mat-label>
+        <mat-select >
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="En centros físicos de la municipalidad">En centros físicos de la municipalidad</mat-option>
+          <mat-option value="Camión de reciclaje de la municipalidad">Camión de reciclaje de la municipalidad</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label>Fecha inicio</mat-label>
+        <input matInput [matDatepicker]="pickerMin" placeholder="MIN">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerMin"></mat-datepicker-toggle>
+        <mat-datepicker #pickerMin></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label>Fecha fin</mat-label>
+        <input matInput [matDatepicker]="pickerMax" placeholder="MAX">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
+        <mat-datepicker #pickerMax></mat-datepicker>
+      </mat-form-field>
+    </fieldset>
+
+    <fieldset class="separadorFiltros">
+      <legend>Datos del vecino</legend>
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label>Género</mat-label>
+        <mat-select>
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="F">F</mat-option>
+          <mat-option value="M">M</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label class="nomFiltro">Edad MIN</mat-label>
+        <input matInput id="edadMIN" type="text" class="filtro"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="columnaFiltro">
+        <mat-label class="nomFiltro">Edad MAX</mat-label>
+        <input matInput id="edadMAX" type="text" class="filtro"/>
+      </mat-form-field>
+    </fieldset>
+  </div>
+</div>
+
+<div class="reciclajes-list">
+  <!-- Tarjetas de Material -->
+  @if (reciclajes.length>0){
+    @for (reciclaje of reciclajes; track reciclaje.id) {
+      <mat-card class="reciclaje-card">
+        <mat-card-content>
+          <div class="card-content">
+            <div class="card-left">
+              <p class="card-info">
+                <strong>Peso:</strong> {{ reciclaje.peso }} kg
+              </p>
+              <p class="card-info">
+                <strong>Tipo:</strong> {{ reciclaje.tipo }}
+              </p>
+            </div>
+
+            <div class="card-center">
+              <p class="card-info">
+                <strong>Fecha:</strong> {{ reciclaje.fecha | date:'dd/MM/yyyy' }}
+              </p>
+              <p class="card-info">
+                <strong>Método:</strong> {{ reciclaje.metodo }}
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  } @else {
+    <p class="sinEventos">
+      Tus ciudadanos no han realizado ningún registro<br>
+      ¡Que esperas, crea un evento para animarlos!
+    </p>
+  }
