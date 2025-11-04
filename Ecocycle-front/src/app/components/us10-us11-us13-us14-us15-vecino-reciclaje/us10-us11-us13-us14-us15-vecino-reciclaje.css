@@ -208,17 +208,16 @@
 }
 
 .modal-card {
-  max-width: 500px;
-  width: 90%;
+  max-width: 600px;
+  width: 100%;
   max-height: 90vh;
-  overflow-y: auto;
+  background-color: white;
 }
 
 .modal-card mat-card-header {
   background-color: #2d5016;
   color: white;
-  padding: 16px;
-  margin: -16px -16px 16px -16px;
+  padding: 5px;
 }
 
 .modal-card mat-card-title {
@@ -231,6 +230,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-top: 20px;
 }
 
 .full-width {
@@ -241,7 +241,6 @@
   display: flex;
   gap: 10px;
   justify-content: flex-end;
-  margin-top: 16px;
   padding: 0;
 }
 
@@ -277,4 +276,24 @@
   .header-toolbar h1 {
     font-size: 24px;
   }
+}
+
+.botonReciclaje{
+  width: 100%;
+  padding: 12px;
+  color: white;
+}
+
+.btnCancelar{
+  background-color: #9c9c9c;
+}
+.btnCancelar:hover{
+  background-color: #808080;
+}
+
+.btnGuardar{
+  background-color: #296528;
+}
+.btnGuardar:hover{
+  background-color: #122A10;
 }

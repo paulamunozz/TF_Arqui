@@ -165,15 +165,18 @@
             <mat-option value="Camión de reciclaje de la municipalidad">
               Camión de reciclaje de la municipalidad
             </mat-option>
+            <mat-option value="En casa">
+              En casa
+            </mat-option>
           </mat-select>
         </mat-form-field>
 
         <!-- Botones -->
         <mat-card-actions class="modal-actions">
-          <button mat-button type="button" (click)="cerrarModal()">
+          <button class="botonReciclaje btnCancelar" type="button" (click)="cerrarModal()">
             Cancelar
           </button>
-          <button mat-raised-button color="primary" type="submit"
+          <button class="botonReciclaje btnGuardar" type="submit"
                   [disabled]="!form.valid">
             Guardar
           </button>
