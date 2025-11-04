@@ -10,9 +10,14 @@
     <a href="" class="enlaceMenu"><span>Consejos</span></a>
     <a [routerLink]="'/eventos-disponibles'"  class="enlaceMenu"><span>Eventos</span></a>
     <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
-    <a href="" class="enlaceMenu"><span>Rankings</span></a>
+    <div class="menuRanking">
+      <a class="enlaceMenu enlaceMenuRanking"><span>Rankings</span></a>
+      <ul class="submenuRanking">
+        <li><a [routerLink]="'/ranking-vecinos'">Ranking de vecinos</a></li>
+        <li><a [routerLink]="'/ranking-municipalidades'">Ranking de municipalidades</a></li>
+      </ul>
+    </div>
     <a [routerLink]="'/estadisticas'" class="enlaceMenu"><span>Estadísticas</span></a>
-
     <div class="menuPerfil">
       <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />
       <ul class="submenuPerfil">
@@ -38,7 +43,13 @@
     <a [routerLink]="'/reciclaje'" class="enlaceMenu"><span>Reciclaje</span></a>
     <a [routerLink]="'/eventos'" class="enlaceMenu"><span>Eventos</span></a>
     <a href="" class="enlaceMenu"><span>Contáctanos</span></a>
-    <a href="" class="enlaceMenu"><span>Rankings</span></a>
+    <div class="menuRanking">
+      <a class="enlaceMenu enlaceMenuRanking"><span>Rankings</span></a>
+      <ul class="submenuRanking">
+        <li><a [routerLink]="'/ranking-vecinos'">Ranking de vecinos</a></li>
+        <li><a [routerLink]="'/ranking-municipalidades'">Ranking de municipalidades</a></li>
+      </ul>
+    </div>
     <a [routerLink]="'/estadisticas'" class="enlaceMenu"><span>Estadísticas</span></a>
     <div class="menuPerfil">
       <img src="/icono-default-2.png" alt="Perfil" class="iconoPerfil" />

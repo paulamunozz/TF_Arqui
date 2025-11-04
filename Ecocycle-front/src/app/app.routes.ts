@@ -34,11 +34,14 @@ import {MunicipalidadReciclaje} from './components/us12-municipalidad-reciclaje/
 import {
   MunicipalidadVecinoEstadisticas
 } from './components/us34-us35-us36-municipalidad-vecino-estadisticas/municipalidad-vecino-estadisticas';
+import {RankingVecino} from './components/us32-ranking-vecino/ranking-vecino';
+import {RankingMunicipalidad} from './components/us33-ranking-municipalidad/ranking-municipalidad';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
+
 
   { path: 'mi-reciclaje', component: VecinoReciclaje },
   { path: 'eventos', component: MunicipalidadEventos },
@@ -57,6 +60,8 @@ export const routes: Routes = [
 
 
   { path: 'estadisticas', component: MunicipalidadVecinoEstadisticas },
+  { path: 'ranking-vecinos', component: RankingVecino },
+  { path: 'ranking-municipalidades', component: RankingMunicipalidad },
 
   { path: '**', redirectTo: '' }
 ];
