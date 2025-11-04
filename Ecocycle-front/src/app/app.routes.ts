@@ -64,6 +64,7 @@ export const routes: Routes = [
   { path: 'detalle-evento-disponible/:id', component: VecinoDetalleEventoDisponible },
   { path: 'mis-eventos', component: VecinoEventosRegistrados },
   { path: 'detalle-evento-registrado/:id', component: VecinoDetalleEventoRegistrado },
+  { path: 'logros', component: VecinoLogros },
   { path: 'perfil', component: PerfilModificarEliminarComponent},
   { path: 'inicio-vecino', component: InicioComponent},
   { path: 'inicio-muni', component: InicioMunicipalidad},
