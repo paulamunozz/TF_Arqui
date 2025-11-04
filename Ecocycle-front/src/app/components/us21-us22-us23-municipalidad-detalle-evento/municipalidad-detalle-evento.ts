@@ -1,14 +1,14 @@
 import {Component, inject} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EventoService} from '../../services/evento-service';
 import {Evento} from '../../model/evento';
 
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
-  imports: [
-  ],
+  imports: [],
   templateUrl: './municipalidad-detalle-evento.html',
   styleUrl: './municipalidad-detalle-evento.css',
+  standalone: true
 })
 export class MunicipalidadDetalleEvento {
   private eventoService: EventoService = inject(EventoService);
@@ -32,6 +32,11 @@ export class MunicipalidadDetalleEvento {
         }
       })
     })
+  }
+
+  editarEvento(){
+    console.log('ID a editar:', this.id);
+    this.router.navigate(['/modificar-evento', this.id]);
   }
 
   eliminar(id:number){

@@ -29,7 +29,7 @@ public class EventoController {
     }
 
     @PutMapping("/modificar")
-    @PreAuthorize("hasRole('MUNICIPALIDAD')")
+//    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public EventoDTO modificar(@RequestBody @Validated(Update.class) EventoDTO eventoDTO) {
         return eventoService.modificar(eventoDTO);
     }

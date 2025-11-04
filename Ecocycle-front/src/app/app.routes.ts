@@ -41,6 +41,9 @@ import {
 } from './components/us34-us35-us36-municipalidad-vecino-estadisticas/municipalidad-vecino-estadisticas';
 import {RankingVecino} from './components/us32-ranking-vecino/ranking-vecino';
 import {RankingMunicipalidad} from './components/us33-ranking-municipalidad/ranking-municipalidad';
+import {
+  MunicipalidadModificarEvento
+} from './components/us17-municipalidad-modificar-evento/us17-municipalidad-modificar-evento';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
@@ -52,6 +55,7 @@ export const routes: Routes = [
   { path: 'eventos', component: MunicipalidadEventos },
   { path: 'evento/:id', component: MunicipalidadDetalleEvento },
   { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
+  { path: 'modificar-evento/:id', component: MunicipalidadModificarEvento },
   { path: 'confirmacion-evento', component: VecinoEventoConfirmacion },
   { path: 'confirmacion-evento-mun', component: MunicipalidadEventoConfirmacion },
   { path: 'muni-evento-elim', component: MunicipalidadEventoEliminado },
