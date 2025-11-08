@@ -102,11 +102,11 @@ public class VecinoService implements IVecinoService {
     @Override
     public VecinoDTO buscarPorDni(String dni) {
         if (dni.isBlank()) {
-            return null;
+            throw new RuntimeException("Ingrese su DNI");
         }
         Vecino vecino = vecinoRepository.findByUser_Username(dni);
         if (vecino == null) {
-            return null;
+            throw new RuntimeException("Este DNI no se encuentra registrado");
         }
 
         VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);

@@ -42,13 +42,13 @@ public class VecinoController {
         return vecinoService.eliminar(idVecino);
     }
 
-    @GetMapping("/buscarPorDNI")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/buscarPorDNI")
+//    @PreAuthorize("hasRole('ADMIN')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {
         return vecinoService.buscarPorDni(dni);
     }
 
-    @GetMapping("/buscarXid")
+    @PostMapping("/buscarPorID")
     @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorId(@RequestBody Integer idVecino){
         vecinoService.actualizacionPuntos(idVecino);
@@ -62,13 +62,13 @@ public class VecinoController {
         return vecinoService.listarVecinos();
     }
 
-    @GetMapping("/listarVecinosPorEvento")
+    @PostMapping("/listarVecinosPorEvento")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public List<VecinoDTO> listarVecinosPorEvento(@RequestBody Integer idEvento) {
         return vecinoService.listarVecinosPorEvento(idEvento);
     }
 
-    @GetMapping("/ranking")
+    @PostMapping("/ranking")
     public List<VecinoDTO> rankingFiltrado(@RequestBody JsonNode filtros) {
         vecinoService.calcularPuestos();
 

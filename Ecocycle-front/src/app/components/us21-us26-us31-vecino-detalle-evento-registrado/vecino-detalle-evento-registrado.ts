@@ -1,6 +1,8 @@
 import {Component, inject} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {EventoService} from '../../services/evento-service';
+import {Evento} from '../../model/evento';
 
 @Component({
   selector: 'app-us21-us26-us31-vecino-detalle-evento-registrado',
@@ -12,17 +14,32 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
   styleUrl: './vecino-detalle-evento-registrado.css',
 })
 export class VecinoDetalleEventoRegistrado {
+  private eventoService: EventoService = inject(EventoService);
+  private router = inject(Router);
+
+  evento: Evento = new Evento();
   id:number | undefined;
-  ngOnInit(){
-    this.route.params.subscribe(params => {
-      this.id = +params['id'];
-    })
-  }
 
   formComentario: FormGroup;
   private fb = inject(FormBuilder);
   constructor(private route:ActivatedRoute) {
     this.formComentario = this.fb.group({ comentario: ['', Validators.required] });
+  }
+
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+
+      this.eventoService.detalle(this.id).subscribe({
+        next: (data) => {
+          this.evento = data;
+          console.log("Evento cargado: ", data);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    })
   }
 
   popUpRetiro = false;
@@ -43,10 +60,6 @@ export class VecinoDetalleEventoRegistrado {
   editarEliminarComentario(){
     this.accionesComentario = false;
   }
-
-  evento =
-    {id:1, nombre:'Octuble sin papel!!', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.\n' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Papel', metodo:'En casa', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125', bonificacion:'1.5'}
 
   comentarios=[
     {id:'1', nombre:'Paula Muñoz', comentario:'Participé activamente en la campaña de reciclaje de vidrio.'},

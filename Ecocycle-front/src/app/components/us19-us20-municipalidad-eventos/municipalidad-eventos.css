@@ -69,18 +69,6 @@ p{
   min-width: 100px;
 }
 
-.columnaBtnFiltro{
-  flex: 0 0 100px;
-}
-
-.btnFiltro{
-  background-color: #dddddd;
-}
-.btnFiltro:hover{
-  background-color: #808080;
-  color: white;
-}
-
 /*Lista de eventos-------------------------------------*/
 .panelEventos {
   list-style: none;
