@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from '@angular/material/core';
 import {DatePipe} from '@angular/common';
 import {EventoService} from '../../services/evento-service';
@@ -10,6 +10,8 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
 import {MatFormField, MatSuffix} from '@angular/material/form-field';
 import {MatInput, MatLabel} from '@angular/material/input';
 import {MatSelect} from '@angular/material/select';
+import {EventoXVecino} from '../../model/evento-x-vecino';
+import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
@@ -28,6 +30,7 @@ import {MatSelect} from '@angular/material/select';
     MatSelect,
     MatSuffix,
     MatNativeDateModule,
+    DatePipe,
   ],
   templateUrl: './vecino-eventos-disponibles.html',
   styleUrl: './vecino-eventos-disponibles.css',
@@ -40,6 +43,8 @@ export class VecinoEventosDisponibles {
   formFiltro: FormGroup;
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
+  private exvService: EventoXVecinoService = inject(EventoXVecinoService);
+  private router : Router = inject(Router);
   private datePipe= inject(DatePipe);
 
   constructor(private dateAdapter: DateAdapter<Date>) {
@@ -61,7 +66,7 @@ export class VecinoEventosDisponibles {
     this.listarEventos();
   }
 
-  listarEventos () {
+  listarEventos() {
     const filtros = {...this.formFiltro.value}
 
     if (filtros.fechaInicio) {
@@ -77,6 +82,22 @@ export class VecinoEventosDisponibles {
       next: (data) => {
         this.eventos.data = data;
         console.log("Eventos cargados: ", data);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  unirseEvento(eventoId:number){
+    let exv = new EventoXVecino()
+    exv.eventoId = eventoId;
+    exv.vecinoId = 1;
+
+    this.exvService.registrar(exv).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.router.navigate(['/mis-eventos/' + eventoId]);
       },
       error: (error) => {
         console.log(error);

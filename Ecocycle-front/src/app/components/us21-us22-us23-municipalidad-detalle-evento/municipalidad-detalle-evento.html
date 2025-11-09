@@ -28,12 +28,14 @@
 
 <h2>Comentarios</h2>
 <div class="panelComentarios">
-  @if (comentarios.length>0) {
-    @for (comentario of comentarios; track comentario.id; let i = $index) {
+  @if (comentarios.data.length>0) {
+    @for (comentario of comentarios.data; track comentario.idEXV; let i = $index) {
       <li class="comentario" [class.alterno]="i % 2 !== 0">
         <div class="comentarioColumnas">
           <p><strong>{{comentario.nombre}}</strong></p>
-          <button type="submit" class="btnEliminarComentario"><img src="/tacho-3.png" alt="Eliminar evento" class="iconoEliminar"></button>
+          <button type="submit" class="btnEliminarComentario" (click)="eliminarComentario(comentario.idEXV)">
+            <img src="/tacho-3.png" alt="Eliminar comentario" class="iconoEliminar">
+          </button>
         </div>
         <p>{{comentario.comentario}}</p>
       </li>

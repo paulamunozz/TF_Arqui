@@ -54,7 +54,7 @@
       <li class="evento" [class.alterno]="i % 2 !== 0">
         <div class="filasEvento">
           <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
-          <p class="fechasEvento">Fecha inicio: {{evento.fechaInicio}} &nbsp;&nbsp; Fecha fin: {{evento.fechaFin}}</p>
+          <p class="fechasEvento">Fecha inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}} &nbsp;&nbsp; Fecha fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
         </div>
 
         <div class="filasEvento">
@@ -69,7 +69,7 @@
           </div>
 
           <div class="filaBtnEvento">
-            <a [routerLink]="[]"><button type="submit" class="btnEvento btnUnirse"><strong>Unirme al evento</strong></button></a>
+            <a [routerLink]="[]"><button type="submit" class="btnEvento btnUnirse" (click)="unirseEvento(evento.idEvento)"><strong>Unirme al evento</strong></button></a>
             <a [routerLink]="['/detalle-evento-disponible', evento.idEvento]"><button type="submit" class="btnEvento btnDetalle">Ver detalle</button></a>
           </div>
         </div>

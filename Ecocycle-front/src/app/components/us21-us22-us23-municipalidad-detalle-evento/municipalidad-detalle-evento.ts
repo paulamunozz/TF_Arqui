@@ -2,6 +2,10 @@ import {Component, inject} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventoService} from '../../services/evento-service';
 import {Evento} from '../../model/evento';
+import {MatTableDataSource} from '@angular/material/table';
+import {Comentario} from '../../model/reportes/comentario';
+import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
+import {EventoXVecino} from '../../model/evento-x-vecino';
 
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
@@ -12,11 +16,13 @@ import {Evento} from '../../model/evento';
 })
 export class MunicipalidadDetalleEvento {
   private eventoService: EventoService = inject(EventoService);
+  private exvService: EventoXVecinoService = inject(EventoXVecinoService);
   private router = inject(Router);
 
   evento: Evento = new Evento();
+  comentarios:MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
 
-  id:number | undefined;
+  id:number;
   constructor(private route:ActivatedRoute) { }
   ngOnInit(){
     this.route.params.subscribe(params => {
@@ -32,6 +38,8 @@ export class MunicipalidadDetalleEvento {
         }
       })
     })
+
+    this.listarComentarios()
   }
 
   editarEvento(){
@@ -57,9 +65,28 @@ export class MunicipalidadDetalleEvento {
     this.popUpVisible = false;
   }
 
-  comentarios=[
-    {id:'1', nombre:'Paula Muñoz', comentario:'Participé activamente en la campaña de reciclaje de vidrio.'},
-    {id:'2', nombre:'Mae Villachica', comentario:'Fue una buena experiencia para aprender más sobre el reciclaje.'},
-    {id:'3', nombre:'José', comentario:'Me gustó ayudar en la jornada de reciclaje del barrio.'}]
+  listarComentarios(){
+    this.exvService.comentarios(this.id).subscribe({
+      next: (data) => {
+        this.comentarios.data = data;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 
+  eliminarComentario(idEXV:number){
+    let exv = new EventoXVecino();
+    exv.id = idEXV;
+    exv.comentario = null;
+    this.exvService.modificar(exv).subscribe({
+      next: (data) => {
+        this.listarComentarios();
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 }

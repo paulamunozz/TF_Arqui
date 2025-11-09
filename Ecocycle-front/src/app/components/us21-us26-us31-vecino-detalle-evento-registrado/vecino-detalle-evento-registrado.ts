@@ -3,6 +3,10 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EventoService} from '../../services/evento-service';
 import {Evento} from '../../model/evento';
+import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
+import {MatTableDataSource} from '@angular/material/table';
+import {Comentario} from '../../model/reportes/comentario';
+import {EventoXVecino} from '../../model/evento-x-vecino';
 
 @Component({
   selector: 'app-us21-us26-us31-vecino-detalle-evento-registrado',
@@ -15,10 +19,17 @@ import {Evento} from '../../model/evento';
 })
 export class VecinoDetalleEventoRegistrado {
   private eventoService: EventoService = inject(EventoService);
+  private exvService:EventoXVecinoService = inject(EventoXVecinoService);
   private router = inject(Router);
 
   evento: Evento = new Evento();
-  id:number | undefined;
+  exv:EventoXVecino = new EventoXVecino();
+  comentarios : MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
+  id:number;
+  accionesComentario:boolean = false;
+
+  imgSrcEditar='/editar-1.png';
+  imgSrcEliminar='/tacho-1.png';
 
   formComentario: FormGroup;
   private fb = inject(FormBuilder);
@@ -40,6 +51,73 @@ export class VecinoDetalleEventoRegistrado {
         }
       })
     })
+
+    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+      next: (data) => {
+        this.exv = data;
+        if(this.exv.comentario != null){
+          this.accionesComentario = true;
+          this.formComentario.patchValue({ comentario: data.comentario });
+        }
+      }
+    })
+
+    this.listarComentarios()
+  }
+
+  listarComentarios() {
+    this.exvService.comentarios(this.id).subscribe({
+      next: (data) => {
+        this.comentarios.data = data;
+      }
+    })
+  }
+
+  publicarComentario(){
+    console.log('Valor del comentario:', this.formComentario.value);
+
+    let exv = new EventoXVecino();
+    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+      next: (data) => {
+        exv = data;
+        exv.comentario = this.formComentario.value.comentario;
+        this.exvService.modificar(exv).subscribe({
+          next: (data) => {
+            this.listarComentarios();
+            this.accionesComentario = true;
+          },
+          error: (error) => {
+            console.log(error);
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  eliminarComentario(){
+    let exv = new EventoXVecino();
+    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+      next: (data) => {
+        exv = data;
+        exv.comentario = null;
+        this.exvService.modificar(exv).subscribe({
+          next: (data) => {
+            this.listarComentarios();
+            this.formComentario.patchValue({ comentario: null });
+            this.accionesComentario = false;
+          },
+          error: (error) => {
+            console.log(error);
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   popUpRetiro = false;
@@ -50,19 +128,15 @@ export class VecinoDetalleEventoRegistrado {
     this.popUpRetiro = false;
   }
 
-  imgSrcEditar='/editar-1';
-  imgSrcEliminar='/tacho-1';
-
-  accionesComentario = false;
-  publicarComentario(){
-    this.accionesComentario = true;
+  retiroEvento(){
+    this.exvService.eliminar(this.exv.id).subscribe({
+      next: (data) => {
+        alert(data)
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
-  editarEliminarComentario(){
-    this.accionesComentario = false;
-  }
 
-  comentarios=[
-    {id:'1', nombre:'Paula Muñoz', comentario:'Participé activamente en la campaña de reciclaje de vidrio.'},
-    {id:'2', nombre:'Mae Villachica', comentario:'Fue una buena experiencia para aprender más sobre el reciclaje.'},
-    {id:'3', nombre:'José', comentario:'Me gustó ayudar en la jornada de reciclaje del barrio.'}]
 }

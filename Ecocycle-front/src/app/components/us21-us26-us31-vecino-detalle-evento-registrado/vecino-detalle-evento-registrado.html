@@ -34,34 +34,37 @@
 <div class="panelComentarios">
   <div class="panelMiComentario">
     <form [formGroup]="formComentario">
-      <textarea formControlName="comentario" id="comentario" class="miComentario" required></textarea>
-    </form>
 
-    <div class="columnaBtnComentario">
       @if (accionesComentario){
-        <button type="submit" class="btn" (click)="editarEliminarComentario()">
-          <img [src]="imgSrcEditar"
-               (mouseenter)="imgSrcEditar='/editar-2.png'"
-               (mouseleave)="imgSrcEditar='/editar-1.png'"
-               alt="Editar comentario"
-               class="icono">
-        </button>
-        <button type="submit" class="btn" (click)="editarEliminarComentario()">
-          <img [src]="imgSrcEliminar"
-               (mouseenter)="imgSrcEliminar='/tacho-2.png'"
-               (mouseleave)="imgSrcEliminar='/tacho-1.png'"
-               alt="Eliminar evento"
-               class="icono ">
-        </button>
+        <div class="columnaBtnComentario">
+          <button type="submit" class="btn" (click)="accionesComentario=false">
+            <img [src]="imgSrcEditar"
+                 (mouseenter)="imgSrcEditar='/editar-2.png'"
+                 (mouseleave)="imgSrcEditar='/editar-1.png'"
+                 alt="Editar comentario"
+                 class="icono">
+          </button>
+          <button type="submit" class="btn" (click)="eliminarComentario()">
+            <img [src]="imgSrcEliminar"
+                 (mouseenter)="imgSrcEliminar='/tacho-2.png'"
+                 (mouseleave)="imgSrcEliminar='/tacho-1.png'"
+                 alt="Eliminar evento"
+                 class="icono ">
+          </button>
+        </div>
       }
       @else {
-        <button type="submit" class="btnPublicar" [disabled]="formComentario.invalid" (click)="publicarComentario()">Publicar comentario</button>
+        <textarea formControlName="comentario" id="comentario" class="miComentario" required>kjs</textarea>
+        <div class="columnaBtnComentario">
+          <button type="submit" class="btnPublicar" [disabled]="formComentario.invalid" (click)="publicarComentario()">
+            Publicar comentario</button>
+        </div>
       }
-    </div>
+    </form>
   </div>
 
-  @if (comentarios.length>0) {
-    @for (comentario of comentarios; track comentario.id; let i = $index) {
+  @if (comentarios.data.length>0) {
+    @for (comentario of comentarios.data; track i; let i = $index) {
       <li class="comentario" [class.alterno]="i % 2 !== 0">
         <p><strong>{{comentario.nombre}}</strong></p>
         <p>{{comentario.comentario}}</p>
@@ -81,7 +84,7 @@
 
       <div class="popupBotones">
         <button class="btnCancelar botonPopUp" (click)="cerrarRetiro()">Cancelar</button>
-        <button class="btnRetiro botonPopUp" [routerLink]="['/mis-eventos']" (click)="cerrarRetiro()">Retirarme</button>
+        <button class="btnRetiro botonPopUp" [routerLink]="['/mis-eventos']" (click)="retiroEvento()">Retirarme</button>
       </div>
     </div>
   </div>

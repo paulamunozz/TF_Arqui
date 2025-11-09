@@ -1,6 +1,6 @@
 export class EventoXVecino {
-  idEXV: number;
+  id: number;
   eventoId: number;
   vecinoId: number;
-  comentario: string;
+  comentario: string | null;
 }
