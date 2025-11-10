@@ -6,7 +6,7 @@ export class Vecino {
   genero: string;
   edad: number;
   distrito: string;
-  puntajeTotal: number;
+  puntajetotal: number;
   icono: number;
   puesto: number;
   eliminado: boolean;

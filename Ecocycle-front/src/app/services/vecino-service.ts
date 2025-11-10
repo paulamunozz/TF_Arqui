@@ -19,12 +19,12 @@ export class VecinoService {
     return this.httpClient.post<Vecino>(this.url + '/registrar', vecino);
   }
 
-  modificar(perfilData: any): Observable<any> {
-    return this.httpClient.put(this.url + '/modificar', perfilData);
+  modificar(vecino: Vecino) {
+    return this.httpClient.put<Vecino>(this.url + '/modificar', vecino);
   }
 
-  eliminarCuenta(): Observable<any> {
-    return this.httpClient.delete(this.url + '/eliminar');
+  eliminarCuenta(id:number) {
+    return this.httpClient.delete(this.url + '/eliminar/' + id,  { responseType: 'text' as 'json' });
   }
 
   buscarPorDNI(dni:string){
@@ -33,10 +33,6 @@ export class VecinoService {
 
   buscarPorID(id:number){
     return this.httpClient.post<Vecino>(this.url + '/buscarPorID', id);
-  }
-
-  listarVecinosPorEvento(idEvento:number){
-    return this.httpClient.post<Vecino[]>(this.url + '/listarVecinosPorEvento', idEvento);
   }
 
   ranking(filtros:any){

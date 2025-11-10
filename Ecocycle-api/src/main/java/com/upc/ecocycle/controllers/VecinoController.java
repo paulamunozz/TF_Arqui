@@ -31,17 +31,16 @@ public class VecinoController {
     }
 
     @PutMapping("/modificar")
-    @PreAuthorize("hasRole('VECINO')")
+//    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 
-    @DeleteMapping("/eliminar")
-    @PreAuthorize("hasRole('VECINO')")
-    public String eliminar(@RequestBody Integer idVecino) {
+    @DeleteMapping("/eliminar/{idVecino}")
+//    @PreAuthorize("hasRole('VECINO')")
+    public String eliminar(@PathVariable Integer idVecino) {
         return vecinoService.eliminar(idVecino);
     }
-
     @PostMapping("/buscarPorDNI")
 //    @PreAuthorize("hasRole('ADMIN')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {
@@ -49,23 +48,10 @@ public class VecinoController {
     }
 
     @PostMapping("/buscarPorID")
-    @PreAuthorize("hasRole('VECINO')")
+//    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorId(@RequestBody Integer idVecino){
         vecinoService.actualizacionPuntos(idVecino);
         return vecinoService.buscarPorId(idVecino);
-    }
-
-    @GetMapping("/listar")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<VecinoDTO> listarVecinos() {
-        vecinoService.calcularPuestos();
-        return vecinoService.listarVecinos();
-    }
-
-    @PostMapping("/listarVecinosPorEvento")
-    @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public List<VecinoDTO> listarVecinosPorEvento(@RequestBody Integer idEvento) {
-        return vecinoService.listarVecinosPorEvento(idEvento);
     }
 
     @PostMapping("/ranking")
@@ -73,17 +59,21 @@ public class VecinoController {
         vecinoService.calcularPuestos();
 
         String distrito = (filtros.has("distrito") && !filtros.get("distrito").isNull()
+                && !filtros.get("distrito").asText().isBlank()
                 && !filtros.get("distrito").asText().equalsIgnoreCase("null"))
                 ? filtros.get("distrito").asText() : null;
 
         String genero = (filtros.has("genero") && !filtros.get("genero").isNull()
+                && !filtros.get("genero").asText().isBlank()
                 && !filtros.get("genero").asText().equalsIgnoreCase("null"))
                 ? filtros.get("genero").asText() : null;
 
         Integer edadMin = (filtros.has("edadMin") && !filtros.get("edadMin").isNull())
+                && !filtros.get("edadMin").asText().isBlank()
                 ? filtros.get("edadMin").asInt() : null;
 
         Integer edadMax = (filtros.has("edadMax") && !filtros.get("edadMax").isNull())
+                && !filtros.get("edadMax").asText().isBlank()
                 ? filtros.get("edadMax").asInt() : null;
 
         return vecinoService.rankingFiltrado(distrito, genero, edadMin, edadMax);

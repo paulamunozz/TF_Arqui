@@ -1,0 +1,191 @@
+.perfil-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  gap: 20px;
+}
+
+.action-buttons button[color="warn"] {
+  background-color: #d9534f;
+  color: white;
+  border-radius: 6px;
+}
+
+.action-buttons button[color="warn"]:hover {
+  background-color: #982c29;
+}
+
+.action-buttons .right-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-buttons button[color="primary"] {
+  background-color: #d9d9d9;
+  border-radius: 6px;
+}
+
+.action-buttons button[color="primary"]:hover {
+  background-color: #8e8e8e;
+  color: white;
+}
+
+.action-buttons button[color="accent"] {
+  background-color: #9bd66c;
+  border-radius: 6px;
+}
+
+.action-buttons button[color="accent"]:hover {
+  background-color: #31572c;
+  color: white;
+}
+
+.perfil-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 6px;
+}
+
+.profile-photo {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 4px solid #9bd66c;
+}
+
+.profile-photo-area button {
+  background-color: #9bd66c;
+  color: black;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.profile-photo-area button:hover {
+  background-color: #7fc65a;
+}
+
+.profile-details-view{
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 12px;
+}
+
+
+mat-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.panelDatos{
+  padding: 10px;
+}
+
+mat-card-content p {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+
+.stats-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  display: flex;
+  flex: 1 1 180px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  padding: 10px;
+}
+
+.stat-box h3{
+  margin:0;
+}
+
+.stat-box.puesto {
+  background-color: #9bd66c;
+  color: black;
+}
+
+.stat-box.puntaje {
+  background-color: #31572c;
+}
+
+.panelPopUp{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.popUp{
+  background-color: #31572C;
+  color: white;
+  padding: 30px;
+  border-radius: 6px;
+  width: 450px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.popupBotones{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.botonPopUp{
+  width: 100%;
+  padding: 12px;
+  margin: 5px;
+}
+
+.btnCancelar{
+  color: black;
+  background-color: #D9D9D9;
+}
+.btnCancelar:hover{
+  color: white;
+  background-color: #6c6c6c;
+}
+
+.btnEliminar{
+  color: white;
+  background-color: #f51313;
+}
+.btnEliminar:hover{
+  background-color: #a40000;
+}
+
+.btnCerrar{
+  background-color: #47843e;
+}
+.btnCerrar:hover{
+  background-color: #264119;
+}
