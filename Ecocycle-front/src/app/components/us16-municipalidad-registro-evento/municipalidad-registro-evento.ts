@@ -29,18 +29,6 @@ export class MunicipalidadRegistroEvento {
     });
   }
 
-  registrar() {
-    if (this.formRegistro.valid) {
-      const nombreEvento = this.formRegistro.value.nombre;
-
-      this.router.navigate(['/evento-confirmacion'], {
-        state: { nombreEvento: nombreEvento },
-      });
-    } else {
-      alert('Por favor, complete todos los campos requeridos.');
-    }
-  }
-
   onSubmit(){
     if(this.formRegistro.valid){
       let evento = new Evento();

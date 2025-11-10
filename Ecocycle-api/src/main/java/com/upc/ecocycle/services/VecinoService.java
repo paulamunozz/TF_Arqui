@@ -102,11 +102,13 @@ public class VecinoService implements IVecinoService {
     @Override
     public VecinoDTO buscarPorDni(String dni) {
         if (dni.isBlank()) {
-            return null;
+            throw new RuntimeException("Ingrese su DNI");
         }
         Vecino vecino = vecinoRepository.findByUser_Username(dni);
         if (vecino == null) {
-            return null;
+            throw new RuntimeException("Este DNI no se encuentra registrado");
+        } else if (vecino.getEliminado()==true) {
+            throw new RuntimeException("Este vecino no existe");
         }
 
         VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
@@ -124,6 +126,8 @@ public class VecinoService implements IVecinoService {
         Vecino vecino = vecinoRepository.findById(id).orElse(null);
         if (vecino == null) {
             return null;
+        }else if (vecino.getEliminado()==true) {
+            throw new RuntimeException("Este vecino no existe");
         }
 
         VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
@@ -157,26 +161,6 @@ public class VecinoService implements IVecinoService {
             vecinoRepository.save(v);
             puesto++;
         }
-    }
-
-    @Override
-    public List<VecinoDTO> listarVecinos() {
-        return vecinoRepository.findAll().stream()
-                .map(vecino -> modelMapper.map(vecino, VecinoDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<VecinoDTO> listarVecinosPorEvento(Integer idEvento) {
-        if (!eventoRepository.existsById(idEvento)) {
-            throw new RuntimeException("Este evento no existe");
-        }
-        List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByEvento_Id(idEvento).stream().toList();
-        List<Vecino> vecinos = new ArrayList<>();
-        for(EventoXVecino exv: listaEXV) {
-            vecinos.add(exv.getVecino());
-        }
-        return vecinos.stream().map(vecino -> modelMapper.map(vecino, VecinoDTO.class)).collect(Collectors.toList());
     }
 
     @Override

@@ -86,21 +86,24 @@ public class EventoController {
     }
 
     @PostMapping("/listarPorVecino")
-    @PreAuthorize("hasRole('VECINO')")
+//    @PreAuthorize("hasRole('VECINO')")
     public List<EventoDTO> listarEventosPorVecino(@RequestBody JsonNode filtros){
         eventoService.actualizarPesoActual();
 
         Integer vecinoId = filtros.get("vecinoId").asInt();
 
         String nombre = (filtros.has("nombre") && !filtros.get("nombre").isNull()
+                && !filtros.get("nombre").asText().isBlank()
                 && !filtros.get("nombre").asText().equalsIgnoreCase("null"))
                 ? filtros.get("nombre").asText() : null;
 
         String tipo = (filtros.has("tipo") && !filtros.get("tipo").isNull()
+                && !filtros.get("tipo").asText().isBlank()
                 && !filtros.get("tipo").asText().equalsIgnoreCase("null"))
                 ? filtros.get("tipo").asText() : null;
 
         String metodo = (filtros.has("metodo") && !filtros.get("metodo").isNull()
+                && !filtros.get("metodo").asText().isBlank()
                 && !filtros.get("metodo").asText().equalsIgnoreCase("null"))
                 ? filtros.get("metodo").asText() : null;
 

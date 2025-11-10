@@ -7,8 +7,6 @@ import {MatSelect} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule, MatOption} from '@angular/material/core';
 import {DatePipe} from '@angular/common';
-import {MatIconButton} from '@angular/material/button';
-import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-us12-municipalidad-reciclaje',
@@ -27,8 +25,6 @@ import {MatTooltip} from '@angular/material/tooltip';
     MatSuffix,
     ReactiveFormsModule,
     DatePipe,
-    MatIconButton,
-    MatTooltip
   ],
   templateUrl: './municipalidad-reciclaje.html',
   styleUrl: './municipalidad-reciclaje.css',

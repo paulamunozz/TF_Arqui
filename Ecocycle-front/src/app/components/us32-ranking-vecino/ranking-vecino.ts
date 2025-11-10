@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatSelect} from '@angular/material/select';
 import {MatOption} from '@angular/material/core';
@@ -10,10 +10,10 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef, MatTable,
   MatTableDataSource
 } from '@angular/material/table';
-import {CantidadResiduosDTO} from '../../model/reportes/cantidad-residuos-dto';
 import {Vecino} from '../../model/vecino';
-import {FormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
+import {VecinoService} from '../../services/vecino-service';
 
 @Component({
   selector: 'app-us32-ranking-vecino',
@@ -33,25 +33,45 @@ import {MatInput} from '@angular/material/input';
     MatRow,
     MatRowDef,
     MatTable,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    ReactiveFormsModule
   ],
   templateUrl: './ranking-vecino.html',
   styleUrl: './ranking-vecino.css',
 })
 export class RankingVecino {
-  columnasRanking: string[]=["puesto", "nombre", "puntaje", "distrito"];
-  dataSourceRanking:MatTableDataSource<Vecino>=new MatTableDataSource<Vecino>();
+  private vecinoService : VecinoService = inject(VecinoService);
+  private fb = inject(FormBuilder);
+  formFiltro: FormGroup;
 
-  distrito: string = '';
-  genero: string = '';
-  edadMin: number;
-  edadMax: number;
+  constructor() {
+    this.formFiltro = this.fb.group({
+      distrito:[''],
+      genero:[''],
+      edadMin:[''],
+      edadMax:['']
+    });
+  }
+
+  columnasRanking: string[]=["puesto", "nombre", "puntajetotal", "distrito"];
+  dataSourceRanking:MatTableDataSource<Vecino>=new MatTableDataSource<Vecino>();
 
   ngOnInit() {
     this.filtrarRanking();
   }
 
   filtrarRanking(){
+    const filtros = {...this.formFiltro.value}
 
+    console.log(filtros);
+    this.vecinoService.ranking(filtros).subscribe({
+      next: data => {
+        console.log(data)
+        this.dataSourceRanking.data = data;
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
   }
 }

@@ -4,6 +4,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Vecino} from '../model/vecino';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,27 @@ export class VecinoService {
 
   constructor() {}
 
-  obtenerPerfil(): Observable<any> {
-    // URL ejemplo: /api/vecino/detalle
-    return this.httpClient.get<any>(this.url + '/detalle');
+  registrar(vecino: Vecino){
+    return this.httpClient.post<Vecino>(this.url + '/registrar', vecino);
   }
 
-  modificarPerfil(perfilData: any): Observable<any> {
-    // URL ejemplo: /api/vecino/modificar
-    return this.httpClient.put(this.url + '/modificar', perfilData);
+  modificar(vecino: Vecino) {
+    return this.httpClient.put<Vecino>(this.url + '/modificar', vecino);
   }
 
-  eliminarCuenta(): Observable<any> {
-    // URL ejemplo: /api/vecino/eliminar
-    // Asumimos que el backend identifica al vecino por la sesión/token para eliminarlo.
-    return this.httpClient.delete(this.url + '/eliminar');
+  eliminarCuenta(id:number) {
+    return this.httpClient.delete(this.url + '/eliminar/' + id,  { responseType: 'text' as 'json' });
+  }
+
+  buscarPorDNI(dni:string){
+    return this.httpClient.post<Vecino>(this.url + '/buscarPorDNI', dni);
+  }
+
+  buscarPorID(id:number){
+    return this.httpClient.post<Vecino>(this.url + '/buscarPorID', id);
+  }
+
+  ranking(filtros:any){
+    return this.httpClient.post<Vecino[]>(this.url + '/ranking', filtros);
   }
 }

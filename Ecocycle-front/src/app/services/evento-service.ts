@@ -11,7 +11,6 @@ import {CantidadEventosLogradosDTO} from '../model/reportes/cantidad-eventos-log
 export class EventoService {
   private url = environment.apiUrl + '/evento';
   private httpClient: HttpClient = inject(HttpClient);
-  private eventos: Subject<Evento[]> = new Subject<Evento[]>();
 
   constructor() {}
 
