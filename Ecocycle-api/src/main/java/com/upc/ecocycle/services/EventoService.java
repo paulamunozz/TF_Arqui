@@ -147,6 +147,40 @@ public class EventoService implements IEventoService {
     }
 
     @Override
+    public List<EventoDTO> listarEventosDisponiblesParaVecino(Integer idVecino, String distrito, String nombre, String tipo, String metodo, LocalDate fechaInicio, LocalDate fechaFin) {
+        if (!vecinoRepository.existsById(idVecino)) {
+            throw new RuntimeException("Este vecino no existe");
+        }
+        else
+        if (fechaInicio != null && fechaFin != null && fechaInicio.isAfter(fechaFin)){
+            throw new RuntimeException("La fecha de inicio no puede ser futura a la de fin");
+        }
+        List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByVecino_Id(idVecino).stream().toList();
+        List<Evento> todosEventos = eventoRepository.findAllByMunicipalidad_Distrito(distrito).stream().toList();
+        List<Evento> eventos = new ArrayList<>();
+        for (Evento evento : todosEventos) {
+            boolean participo = false;
+            for (EventoXVecino exv : listaEXV) {
+                if (exv.getEvento().getId().equals(evento.getId())) {
+                    participo = true;
+                    break;
+                }
+            }
+            if (!participo) {
+                eventos.add(evento);
+            }
+        }
+        return eventos.stream()
+                .filter(evento -> !evento.getFechaFin().isBefore(LocalDate.now()))
+                .filter(evento -> nombre==null || evento.getNombre().toLowerCase().contains(nombre.toLowerCase()))
+                .filter(evento -> metodo==null || evento.getMetodo().equals(metodo))
+                .filter(evento -> tipo==null || evento.getTipo().equals(tipo))
+                .filter(evento -> fechaInicio == null || !evento.getFechaInicio().isBefore(fechaInicio))
+                .filter(evento -> fechaFin == null || !evento.getFechaFin().isAfter(fechaFin))
+                .map(evento -> modelMapper.map(evento, EventoDTO.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public CantidadEventosLogradosDTO cantidadEventosLogrados(String distrito) {
         return eventoRepository.cantidadEventosLogrados(distrito);
     }

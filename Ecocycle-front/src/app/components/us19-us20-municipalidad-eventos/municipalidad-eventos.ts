@@ -16,6 +16,7 @@ import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/materi
 import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {MatInput} from '@angular/material/input';
+import {Municipalidad} from '../../model/municipalidad';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -51,6 +52,8 @@ export class MunicipalidadEventos {
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
   private datePipe= inject(DatePipe);
+  private userId = Number(localStorage.getItem('userId'));
+  private municipalidad:Municipalidad = new Municipalidad();
 
   constructor(private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-PE');

@@ -5,6 +5,10 @@ import {EventoService} from '../../services/evento-service';
 import {VecinoService} from '../../services/vecino-service';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
+import {User} from '../../model/user';
+import {Auth} from '../../model/auth';
+import {MunicipalidadService} from '../../services/municipalidad-service';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-us01-municipalidad-vecino-autenticacion',
@@ -17,7 +21,8 @@ export class VecinoAutenticacion {
   formLogin: FormGroup;
   private fb = inject(FormBuilder);
   private vecinoService : VecinoService = inject(VecinoService);
-  private securityService: EventoService = inject(EventoService);
+  private municipalidadService: MunicipalidadService = inject(MunicipalidadService);
+  private loginService : LoginService = inject(LoginService);
   private router = inject(Router);
 
   constructor() {
@@ -27,18 +32,47 @@ export class VecinoAutenticacion {
     });
   }
 
+  ngOnInit() {
+    if(localStorage.getItem('token')!=null){
+      localStorage.clear();
+    }
+  }
+
   onSubmit() {
     if (this.formLogin.valid) {
-      this.vecinoService.buscarPorDNI(this.formLogin.controls['dni'].value).subscribe({
-        next: vecino => {
-          console.log(vecino);
-          this.router.navigate(['inicio-muni']);
+      const user : User = new User();
+      user.username = this.formLogin.value.dni;
+      user.password = this.formLogin.value.contrasena;
+
+      this.loginService.login(user).subscribe({
+        next: (data:Auth) => {
+          console.log("Login response ROLs:", data.roles);
+          console.log("Login response ROL:", data.roles[0]);
+          localStorage.setItem('rol', data.roles[0]);
+
+          if(localStorage.getItem('rol')=="ROLE_VECINO"){
+            this.vecinoService.buscarPorDNI(this.formLogin.controls['dni'].value).subscribe({
+              next: vecino => {
+                console.log(vecino);
+                localStorage.setItem('userId', String(vecino.idVecino));
+                console.log(localStorage.getItem('rol'));
+                console.log(localStorage.getItem('userId'));
+                console.log(localStorage.getItem('token'));
+                this.router.navigate(['inicio-vecino']);
+              },
+              error: (err) => {
+                console.error('Error al buscar usuario:', err);
+                alert('No se pudo iniciar sesión. Verifica el DNI.');
+              }
+            });
+          }
+          if(localStorage.getItem('rol')=="ROLE_MUNICIPALIDAD"){
+          }
         },
         error: (err) => {
-          console.error('Error al buscar usuario:', err);
-          alert('No se pudo iniciar sesión. Verifica el DNI.');
+          console.log("Login response ROL:", err);
         }
-      });
+      })
 
     } else {
       alert('Por favor, ingresa un DNI válido (8 dígitos) y una contraseña.');

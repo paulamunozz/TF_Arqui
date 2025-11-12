@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, Integer> {
@@ -38,4 +39,8 @@ public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, In
     CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@Param("idEvento") Integer idEvento);
 
     EventoXVecino findAllByEvento_IdAndVecino_Id(Integer eventoId, Integer vecinoId);
+
+    List<EventoXVecino> findAllByVecino_IdAndVecino_Distrito(Integer idVecino, String distrito);
+
+    Collection<Object> findAllByVecino_IdAndEvento_Municipalidad_Distrito(Integer idVecino, String distrito);
 }

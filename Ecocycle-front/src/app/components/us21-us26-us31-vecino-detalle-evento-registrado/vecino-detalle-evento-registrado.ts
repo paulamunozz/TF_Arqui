@@ -7,12 +7,14 @@ import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
 import {EventoXVecino} from '../../model/evento-x-vecino';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-us21-us26-us31-vecino-detalle-evento-registrado',
   imports: [
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DatePipe
   ],
   templateUrl: './vecino-detalle-evento-registrado.html',
   styleUrl: './vecino-detalle-evento-registrado.css',
@@ -21,6 +23,7 @@ export class VecinoDetalleEventoRegistrado {
   private eventoService: EventoService = inject(EventoService);
   private exvService:EventoXVecinoService = inject(EventoXVecinoService);
   private router = inject(Router);
+  private userId = Number(localStorage.getItem('userId'));
 
   evento: Evento = new Evento();
   exv:EventoXVecino = new EventoXVecino();
@@ -52,7 +55,7 @@ export class VecinoDetalleEventoRegistrado {
       })
     })
 
-    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+    this.exvService.buscarPorEventoYVecino(this.id, this.userId).subscribe({
       next: (data) => {
         this.exv = data;
         if(this.exv.comentario != null){
@@ -77,7 +80,7 @@ export class VecinoDetalleEventoRegistrado {
     console.log('Valor del comentario:', this.formComentario.value);
 
     let exv = new EventoXVecino();
-    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+    this.exvService.buscarPorEventoYVecino(this.id, this.userId).subscribe({
       next: (data) => {
         exv = data;
         exv.comentario = this.formComentario.value.comentario;
@@ -99,7 +102,7 @@ export class VecinoDetalleEventoRegistrado {
 
   eliminarComentario(){
     let exv = new EventoXVecino();
-    this.exvService.buscarPorEventoYVecino(this.id, 1).subscribe({
+    this.exvService.buscarPorEventoYVecino(this.id, this.userId).subscribe({
       next: (data) => {
         exv = data;
         exv.comentario = null;
@@ -132,6 +135,7 @@ export class VecinoDetalleEventoRegistrado {
     this.exvService.eliminar(this.exv.id).subscribe({
       next: (data) => {
         alert(data)
+        this.router.navigate(['/mis-eventos']);
       },
       error: (error) => {
         console.log(error);

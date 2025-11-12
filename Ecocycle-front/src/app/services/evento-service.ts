@@ -38,6 +38,10 @@ export class EventoService {
     return this.httpClient.post<Evento[]>(this.url + '/listarPorVecino', filtros);
   }
 
+  listarDisponibleParaVecino(filtros:any):Observable<Evento[]>{
+    return this.httpClient.post<Evento[]>(this.url + '/listarDisponibleParaVecino', filtros);
+  }
+
   cantidadEventosLogrados(distrito:string):Observable<CantidadEventosLogradosDTO>{
     return this.httpClient.post<CantidadEventosLogradosDTO>(this.url + '/cantidadEventosLogrados', distrito);
   }
