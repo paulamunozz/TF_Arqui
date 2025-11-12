@@ -7,6 +7,9 @@ import {MatSelect} from '@angular/material/select';
 import {MatOption} from '@angular/material/core';
 import {VecinoService} from '../../services/vecino-service';
 import {Vecino} from '../../model/vecino';
+import {User} from '../../model/user';
+import {Auth} from '../../model/auth';
+import {LoginService} from '../../services/login-service';
 
 @Component({
   selector: 'app-us05-vecino-registro',
@@ -17,7 +20,9 @@ import {Vecino} from '../../model/vecino';
 })
 export class VecinoRegistro {
   private vecinoService: VecinoService = inject(VecinoService);
+  private loginService: LoginService = inject(LoginService);
   private router: Router = inject(Router);
+  private user: User = new User();
 
   formRegistro: FormGroup;
   private fb = inject(FormBuilder);
@@ -41,7 +46,16 @@ export class VecinoRegistro {
       this.vecinoService.registrar(vecino).subscribe({
         next: data => {
           console.log(data);
-          this.router.navigate(['/inicio-vecino']);
+          this.user.username = vecino.dni;
+          this.user.password = vecino.contrasena;
+
+          this.loginService.login(this.user).subscribe({
+            next: (auth:Auth) => {
+              localStorage.setItem('rol', auth.roles[0]);
+              localStorage.setItem('userId', String(data.idVecino));
+              this.router.navigate(['inicio-vecino']);
+            }
+          })
           alert('Cuenta creada exitosamente 🎉');
         },
         error: error => {

@@ -31,26 +31,27 @@ public class VecinoController {
     }
 
     @PutMapping("/modificar")
-//    @PreAuthorize("hasRole('VECINO')")
+    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO modificar(@RequestBody @Validated(Update.class) VecinoDTO vecinoDTO) {
         return vecinoService.modificar(vecinoDTO);
     }
 
     @DeleteMapping("/eliminar/{idVecino}")
-//    @PreAuthorize("hasRole('VECINO')")
+    @PreAuthorize("hasRole('VECINO')")
     public String eliminar(@PathVariable Integer idVecino) {
         return vecinoService.eliminar(idVecino);
     }
     @PostMapping("/buscarPorDNI")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {
         return vecinoService.buscarPorDni(dni);
     }
 
     @PostMapping("/buscarPorID")
-//    @PreAuthorize("hasRole('VECINO')")
+    @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorId(@RequestBody Integer idVecino){
         vecinoService.actualizacionPuntos(idVecino);
+        vecinoService.calcularPuestos();
         return vecinoService.buscarPorId(idVecino);
     }
 

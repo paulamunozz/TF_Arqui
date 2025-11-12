@@ -40,12 +40,13 @@ export class VecinoEventosRegistrados {
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
   private datePipe= inject(DatePipe);
+  private userId = Number(localStorage.getItem('userId'));
 
   constructor(private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-PE');
 
     this.formFiltro = this.fb.group({
-      vecinoId:[1],
+      vecinoId:[this.userId],
       nombre: [''],
       tipo: [''],
       metodo: [''],

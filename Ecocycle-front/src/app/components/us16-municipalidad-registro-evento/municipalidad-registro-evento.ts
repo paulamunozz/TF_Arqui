@@ -15,6 +15,7 @@ export class MunicipalidadRegistroEvento {
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
   private router = inject(Router);
+  private userId = Number(localStorage.getItem('userId'));
 
   constructor() {
     this.formRegistro = this.fb.group({
@@ -33,7 +34,7 @@ export class MunicipalidadRegistroEvento {
     if(this.formRegistro.valid){
       let evento = new Evento();
       evento = this.formRegistro.value;
-      evento.municipalidadId = 1;
+      evento.municipalidadId = this.userId;
 
       console.log("Datos leidos del form:",evento);
       this.eventoService.registrar(evento).subscribe({

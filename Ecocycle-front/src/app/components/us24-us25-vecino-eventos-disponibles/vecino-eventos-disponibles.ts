@@ -12,6 +12,8 @@ import {MatInput, MatLabel} from '@angular/material/input';
 import {MatSelect} from '@angular/material/select';
 import {EventoXVecino} from '../../model/evento-x-vecino';
 import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
+import {Vecino} from '../../model/vecino';
+import {VecinoService} from '../../services/vecino-service';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
@@ -44,14 +46,17 @@ export class VecinoEventosDisponibles {
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
   private exvService: EventoXVecinoService = inject(EventoXVecinoService);
+  private vecinoService: VecinoService = inject(VecinoService);
+
   private router : Router = inject(Router);
   private datePipe= inject(DatePipe);
+  private userId:number = Number(localStorage.getItem('userId'));
+  private vecino:Vecino = new Vecino();
 
   constructor(private dateAdapter: DateAdapter<Date>) {
     this.dateAdapter.setLocale('es-PE');
 
     this.formFiltro = this.fb.group({
-      distrito:[''],
       nombre: [''],
       tipo: [''],
       metodo: [''],
@@ -63,11 +68,21 @@ export class VecinoEventosDisponibles {
   eventos: MatTableDataSource<Evento> = new MatTableDataSource<Evento>();
 
   ngOnInit() {
-    this.listarEventos();
+    this.vecinoService.buscarPorID(this.userId).subscribe({
+      next: (data) => {
+        this.vecino = data;
+        this.listarEventos();
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
   listarEventos() {
     const filtros = {...this.formFiltro.value}
+    filtros.vecinoId = this.userId;
+    filtros.distrito = this.vecino.distrito;
 
     if (filtros.fechaInicio) {
       filtros.fechaInicio = this.datePipe.transform(filtros.fechaInicio, 'yyyy-MM-dd');
@@ -77,7 +92,7 @@ export class VecinoEventosDisponibles {
     }
 
     console.log(filtros);
-    this.eventoService.listarPorDistrito(filtros).subscribe({
+    this.eventoService.listarDisponibleParaVecino(filtros).subscribe({
 
       next: (data) => {
         this.eventos.data = data;
@@ -92,7 +107,7 @@ export class VecinoEventosDisponibles {
   unirseEvento(eventoId:number){
     let exv = new EventoXVecino()
     exv.eventoId = eventoId;
-    exv.vecinoId = 1;
+    exv.vecinoId = this.userId;
 
     this.exvService.registrar(exv).subscribe({
       next: (data) => {

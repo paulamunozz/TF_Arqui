@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 public class VecinoService implements IVecinoService {
     @Autowired private VecinoRepository vecinoRepository;
     @Autowired private ReciclajeRepository reciclajeRepository;
-    @Autowired private EventoXVecinoRepository eventoXVecinoRepository;
-    @Autowired private EventoRepository eventoRepository;
     @Autowired private ModelMapper modelMapper;
     @Autowired private UserRepository userRepository;
     @Autowired private PasswordEncoder bcrypt;
@@ -38,12 +36,12 @@ public class VecinoService implements IVecinoService {
     public VecinoDTO registrar(VecinoDTO vecinoDTO) {
         if (vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false))
         {
-            throw new RuntimeException("No existe el vecino de id " + vecinoDTO.getIdVecino());
+            throw new RuntimeException("Ya existe el vecino de DNI " + vecinoDTO.getDni());
         }
         User user = new User();
         user.setUsername(vecinoDTO.getDni());
         user.setPassword(bcrypt.encode(vecinoDTO.getContrasena()));
-        userRepository.save(user);
+        user = userRepository.save(user);
         userRepository.insertUserRole(user.getId(), 3);
 
         Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
@@ -52,7 +50,7 @@ public class VecinoService implements IVecinoService {
         vecino.setIcono(0);
         vecino.setEliminado(false);
         vecino.setUser(user);
-        vecinoRepository.save(vecino);
+        vecino = vecinoRepository.save(vecino);
 
         return modelMapper.map(vecino, VecinoDTO.class);
     }

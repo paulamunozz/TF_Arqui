@@ -56,29 +56,12 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults()) //esto es los de CORS q añadi
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(
-                                        "/security/authenticate",
+                                        "/ecocycle/security/authenticate",
                                         "/ecocycle/vecino/registrar",
                                         "/ecocycle/evento/cantidadEventosLogrados",
                                         "/ecocycle/municipalidad/ranking",
                                         "/ecocycle/reciclaje/cantidadPorTipo",
-                                        "/ecocycle/vecino/ranking",
-                                        //estos de abajo hay q quitar dsps
-                                        "/ecocycle/evento/listarYfiltrar",
-                                        "/ecocycle/evento/registrar",
-                                        "/ecocycle/evento/detalle/**",
-                                        "/ecocycle/evento/eliminar/**",
-                                        "/ecocycle/evento/modificar",
-                                        "/ecocycle/vecino/buscarPorDNI",
-                                        "/ecocycle/evento/listarPorVecino",
-                                        "/ecocycle/exv/registrar",
-                                        "/ecocycle/exv/modificar",
-                                        "/ecocycle/exv/eliminar/**",
-                                        "/ecocycle/exv/comentarios",
-                                        "/ecocycle/exv/estadisticasVecinosPorEvento",
-                                        "/ecocycle/exv/buscarPorEventoYVecino/**",
-                                        "/ecocycle/vecino/modificar",
-                                        "/ecocycle/vecino/eliminar/**",
-                                        "/ecocycle/vecino/buscarPorID"
+                                        "/ecocycle/vecino/ranking"
                                         ).permitAll()
                                 //.requestMatchers("/api/proveedores").hasRole("ADMIN")
                                 .anyRequest().authenticated() // cualquier endpoint puede ser llamado con tan solo autenticarse

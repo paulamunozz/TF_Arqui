@@ -35,29 +35,20 @@ import {Vecino} from '../../model/vecino';
 })
 export class VecinoPerfil {
 
-  perfilForm: FormGroup;
-  private fb: FormBuilder = inject(FormBuilder);
   private snackBar: MatSnackBar =inject(MatSnackBar);
   private router: Router = inject(Router);
   private vecinoService: VecinoService = inject(VecinoService);
+  private userId = Number(localStorage.getItem('userId'));
   vecino = new Vecino();
 
-  constructor() {
-    this.perfilForm = this.fb.group({
-      dni: [{ value: '', disabled: true }, [Validators.required, Validators.pattern(/^\d{8}$/)]], // DNI no debería ser editable
-      nombre: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(18)]],
-      genero: ['', Validators.required],
-      distrito: ['', Validators.required]
-    });
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.cargarPerfil();
   }
 
   cargarPerfil(): void {
-    this.vecinoService.buscarPorID(1).subscribe({
+    this.vecinoService.buscarPorID(this.userId).subscribe({
       next: (data) => {
         this.vecino = data;
         console.log(this.vecino);
@@ -91,7 +82,7 @@ export class VecinoPerfil {
   }
 
   eliminarCuenta(){
-    this.vecinoService.eliminarCuenta(1).subscribe({
+    this.vecinoService.eliminarCuenta(this.userId).subscribe({
       next: () => {
         this.snackBar.open('Cuenta eliminada correctamente.', 'Cerrar', { duration: 2000 });
         this.router.navigate(['/registro']);

@@ -7,6 +7,7 @@ import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {EventoXVecino} from '../../model/evento-x-vecino';
 import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
+import {Vecino} from '../../model/vecino';
 
 @Component({
   selector: 'app-us21-us31-vecino-detalle-evento-disponible',
@@ -21,6 +22,7 @@ export class VecinoDetalleEventoDisponible {
   private eventoService: EventoService = inject(EventoService);
   private exvService: EventoXVecinoService = inject(EventoXVecinoService);
   private router = inject(Router);
+  private userId:number = Number(localStorage.getItem('userId'));
 
   evento: Evento = new Evento();
   comentarios: MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
@@ -56,7 +58,7 @@ export class VecinoDetalleEventoDisponible {
   unirseEvento(){
     let exv = new EventoXVecino()
     exv.eventoId = this.id;
-    exv.vecinoId = 1;
+    exv.vecinoId = this.userId;
 
     this.exvService.registrar(exv).subscribe({
       next: (data) => {

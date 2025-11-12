@@ -19,19 +19,19 @@ public class EventoXVecinoController {
     @Autowired private EventoXVecinoService eventoXVecinoService;
 
     @PostMapping("/registrar")
-//    @PreAuthorize("hasRole('VECINO')")
+    @PreAuthorize("hasRole('VECINO')")
     public EventoXVecinoDTO registrar(@RequestBody @Validated(Create.class) EventoXVecinoDTO eventoXVecinoDTO) {
         return eventoXVecinoService.registrar(eventoXVecinoDTO);
     }
 
     @PutMapping("/modificar")
-//    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public EventoXVecinoDTO modificar(@RequestBody @Validated(Update.class) EventoXVecinoDTO eventoXVecinoDTO) {
         return eventoXVecinoService.modificar(eventoXVecinoDTO);
     }
 
     @DeleteMapping("/eliminar/{idEXV}")
-//    @PreAuthorize("hasRole('VECINO')")
+    @PreAuthorize("hasRole('VECINO')")
     public String eliminar(@PathVariable Integer idEXV) {
         return eventoXVecinoService.eliminar(idEXV);
     }
@@ -42,13 +42,13 @@ public class EventoXVecinoController {
     }
 
     @PostMapping("/comentarios")
-//    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<ComentariosEventoDTO> comentariosEvento(@RequestBody Integer eventoId) {
         return eventoXVecinoService.comentariosEvento(eventoId);
     }
 
     @PostMapping("/estadisticasVecinosPorEvento")
-//    @PreAuthorize("hasAnyRole('MUNICIPALIDAD')")
+    @PreAuthorize("hasAnyRole('MUNICIPALIDAD')")
     public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@RequestBody Integer eventoId) {
         return eventoXVecinoService.cantidadesVecinosPorEvento(eventoId);
     }

@@ -23,8 +23,8 @@
       </div>
 
       <div class="datosFilas">
-        <p>Fecha de inicio: {{evento.fechaInicio}}</p>
-        <p>Fecha de fin: {{evento.fechaFin}}</p>
+        <p>Fecha de inicio: {{evento.fechaInicio  | date:'dd/MM/yyyy'}}</p>
+        <p>Fecha de fin: {{evento.fechaFin| date:'dd/MM/yyyy'}}</p>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@
 
       <div class="popupBotones">
         <button class="btnCancelar botonPopUp" (click)="cerrarRetiro()">Cancelar</button>
-        <button class="btnRetiro botonPopUp" [routerLink]="['/mis-eventos']" (click)="retiroEvento()">Retirarme</button>
+        <button class="btnRetiro botonPopUp" (click)="retiroEvento()">Retirarme</button>
       </div>
     </div>
   </div>

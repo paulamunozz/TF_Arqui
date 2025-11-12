@@ -7,6 +7,12 @@ import {MatSelect} from '@angular/material/select';
 import {VecinoService} from '../../services/vecino-service';
 import {Router, RouterLink} from '@angular/router';
 import {Vecino} from '../../model/vecino';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-us06-vecino-modificar',
@@ -19,6 +25,12 @@ import {Vecino} from '../../model/vecino';
     MatSelect,
     ReactiveFormsModule,
     RouterLink,
+    MatIcon,
+    MatIconButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './vecino-modificar.html',
   styleUrl: './vecino-modificar.css',
@@ -26,6 +38,7 @@ import {Vecino} from '../../model/vecino';
 export class VecinoModificar {
   private vecinoService: VecinoService = inject(VecinoService);
   private router: Router = inject(Router);
+  private userId:number = Number(localStorage.getItem('userId'));
 
   formModificar: FormGroup;
   private fb = inject(FormBuilder);
@@ -42,9 +55,10 @@ export class VecinoModificar {
   }
 
   ngOnInit() {
-    this.vecinoService.buscarPorID(1).subscribe({
+    this.vecinoService.buscarPorID(this.userId).subscribe({
       next: data => {
-        this.formModificar.patchValue(data);
+        const { contrasena, ...vecinoSinContrasena } = data;
+        this.formModificar.patchValue(vecinoSinContrasena);
       }
     })
   }
@@ -52,7 +66,7 @@ export class VecinoModificar {
   modificar(){
     let vecino = new Vecino();
     vecino = this.formModificar.value;
-    vecino.idVecino=1;
+    vecino.idVecino=this.userId;
     this.vecinoService.modificar(vecino).subscribe({
       next: data => {
         console.log(data);
@@ -62,5 +76,11 @@ export class VecinoModificar {
         console.log(err);
       }
     })
+  }
+
+  hidePassword = true;
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }
