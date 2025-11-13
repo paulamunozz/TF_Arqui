@@ -1,7 +1,6 @@
 package com.upc.ecocycle.services;
 
 import com.upc.ecocycle.dto.MunicipalidadDTO;
-import com.upc.ecocycle.dto.VecinoDTO;
 import com.upc.ecocycle.enitites.Municipalidad;
 import com.upc.ecocycle.instances.IMunicipalidadService;
 import com.upc.ecocycle.repositories.MunicipalidadRepository;
@@ -88,12 +87,6 @@ public class MunicipalidadService implements IMunicipalidadService {
         return municipalidadDTO;
     }
 
-    @Override
-    public List<MunicipalidadDTO> listarMunicipalidades() {
-        return municipalidadRepository.findAll().stream()
-                .map(municipalidad -> modelMapper.map(municipalidad, MunicipalidadDTO.class))
-                .collect(Collectors.toList());
-    }
 
     @Override
     public List<MunicipalidadDTO> rankingMunicipalidades() {

@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import {MatCard, MatCardContent, MatCardFooter, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {Component, inject} from '@angular/core';
+import {OnInit} from '@angular/core';
+import {MatCard, MatCardContent, MatCardFooter} from '@angular/material/card';
 import {NgForOf} from '@angular/common';
-
-interface Logro {
-  titulo: string;
-  descripcion: string;
-}
+import {LogroService} from '../../services/logro-service';
+import {Logro} from '../../model/logro';
 
 @Component({
   selector: 'app-us09-vecino-logros',
@@ -19,23 +17,35 @@ interface Logro {
   styleUrl: './us09-vecino-logros.css',
 })
 export class VecinoLogros {
-  logros: Logro[] = [
-    {
-      titulo: 'La más contribuidora',
-      descripcion: 'Se obtuvo cuando recicló por 30 días seguidos'
-    },
-    {
-      titulo: 'Mis primeros 100',
-      descripcion: 'Se obtuvo cuando registró sus primeros 100 desechos'
-    },
-    {
-      titulo: 'La más recicladora',
-      descripcion: 'Se obtuvo cuando recicló por 5 días seguidos'
+  private logroService: LogroService = inject(LogroService);
+
+  logros: Logro[] = [];
+
+  ngOnInit() {
+    this.cargarLogros();
+  }
+
+  cargarLogros(): void {
+    const vecinoId = Number(localStorage.getItem('userId'));
+
+    if (vecinoId) {
+      console.log('Cargando logros para ID:', vecinoId);
+
+      this.logroService.listarLogrosPorVecino(vecinoId).subscribe({
+        next: (data) => {
+          this.logros = data;
+        },
+        error: (err) => {
+          console.error('Error al cargar los logros. ¿Token JWT válido?', err);
+          this.logros = [];
+        }
+      });
+    } else {
+      console.warn('ID de usuario no encontrado en localStorage');
     }
-  ];
+  }
 
   get totalLogros(): number {
     return this.logros.length;
   }
-
 }
