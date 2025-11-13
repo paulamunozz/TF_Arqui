@@ -8,6 +8,7 @@ import {User} from '../../model/user';
 import {Auth} from '../../model/auth';
 import {MunicipalidadService} from '../../services/municipalidad-service';
 import {LoginService} from '../../services/login-service';
+import {catchError} from 'rxjs';
 
 @Component({
   selector: 'app-us01-municipalidad-vecino-autenticacion',
@@ -77,11 +78,13 @@ export class VecinoAutenticacion {
                 this.router.navigate(['inicio-muni']);
               },
               error: (err) => {
-                console.error('Error al buscar municipalidad:', err);
+                console.log('Error capturado en componente:', err.message);
+                //console.error('Error al buscar municipalidad:', err);
                 alert('No se pudo iniciar sesión. Verifica el código.');
               }
             });
           }
+
         },
         error: (err) => {
           console.log("Login response ROL:", err);
