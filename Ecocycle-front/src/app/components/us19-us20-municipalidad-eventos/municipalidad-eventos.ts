@@ -17,6 +17,7 @@ import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {MatInput} from '@angular/material/input';
 import {Municipalidad} from '../../model/municipalidad';
+import {MunicipalidadService} from '../../services/municipalidad-service';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -52,6 +53,7 @@ export class MunicipalidadEventos {
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
   private datePipe= inject(DatePipe);
+  private municipalidadService: MunicipalidadService = inject(MunicipalidadService);
   private userId = Number(localStorage.getItem('userId'));
   private municipalidad:Municipalidad = new Municipalidad();
 
@@ -71,12 +73,23 @@ export class MunicipalidadEventos {
   eventos: MatTableDataSource<Evento> = new MatTableDataSource<Evento>();
 
   ngOnInit() {
-    this.listarEventos();
+    this.municipalidadService.buscarPorId(this.userId).subscribe({
+      next: data => {
+        this.municipalidad = data;
+        this.listarEventos();
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+
+
   }
 
 
   listarEventos () {
     const filtros = {...this.formFiltro.value}
+    filtros.distrito = this.municipalidad.distrito;
 
     if (filtros.fechaInicio) {
       filtros.fechaInicio = this.datePipe.transform(filtros.fechaInicio, 'yyyy-MM-dd');
