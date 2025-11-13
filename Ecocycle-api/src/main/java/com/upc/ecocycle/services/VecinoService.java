@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 public class VecinoService implements IVecinoService {
     @Autowired private VecinoRepository vecinoRepository;
     @Autowired private ReciclajeRepository reciclajeRepository;
-    @Autowired private EventoXVecinoRepository eventoXVecinoRepository;
-    @Autowired private EventoRepository eventoRepository;
     @Autowired private ModelMapper modelMapper;
     @Autowired private UserRepository userRepository;
     @Autowired private PasswordEncoder bcrypt;
@@ -38,12 +36,12 @@ public class VecinoService implements IVecinoService {
     public VecinoDTO registrar(VecinoDTO vecinoDTO) {
         if (vecinoRepository.existsByUser_UsernameAndEliminado((vecinoDTO.getDni()), false))
         {
-            throw new RuntimeException("No existe el vecino de id " + vecinoDTO.getIdVecino());
+            throw new RuntimeException("Ya existe el vecino de DNI " + vecinoDTO.getDni());
         }
         User user = new User();
         user.setUsername(vecinoDTO.getDni());
         user.setPassword(bcrypt.encode(vecinoDTO.getContrasena()));
-        userRepository.save(user);
+        user = userRepository.save(user);
         userRepository.insertUserRole(user.getId(), 3);
 
         Vecino vecino = modelMapper.map(vecinoDTO, Vecino.class);
@@ -52,7 +50,7 @@ public class VecinoService implements IVecinoService {
         vecino.setIcono(0);
         vecino.setEliminado(false);
         vecino.setUser(user);
-        vecinoRepository.save(vecino);
+        vecino = vecinoRepository.save(vecino);
 
         return modelMapper.map(vecino, VecinoDTO.class);
     }
@@ -102,11 +100,13 @@ public class VecinoService implements IVecinoService {
     @Override
     public VecinoDTO buscarPorDni(String dni) {
         if (dni.isBlank()) {
-            return null;
+            throw new RuntimeException("Ingrese su DNI");
         }
         Vecino vecino = vecinoRepository.findByUser_Username(dni);
         if (vecino == null) {
-            return null;
+            throw new RuntimeException("Este DNI no se encuentra registrado");
+        } else if (vecino.getEliminado()==true) {
+            throw new RuntimeException("Este vecino no existe");
         }
 
         VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
@@ -124,6 +124,8 @@ public class VecinoService implements IVecinoService {
         Vecino vecino = vecinoRepository.findById(id).orElse(null);
         if (vecino == null) {
             return null;
+        }else if (vecino.getEliminado()==true) {
+            throw new RuntimeException("Este vecino no existe");
         }
 
         VecinoDTO vecinoDTO =  modelMapper.map(vecino, VecinoDTO.class);
@@ -157,26 +159,6 @@ public class VecinoService implements IVecinoService {
             vecinoRepository.save(v);
             puesto++;
         }
-    }
-
-    @Override
-    public List<VecinoDTO> listarVecinos() {
-        return vecinoRepository.findAll().stream()
-                .map(vecino -> modelMapper.map(vecino, VecinoDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<VecinoDTO> listarVecinosPorEvento(Integer idEvento) {
-        if (!eventoRepository.existsById(idEvento)) {
-            throw new RuntimeException("Este evento no existe");
-        }
-        List<EventoXVecino> listaEXV = eventoXVecinoRepository.findAllByEvento_Id(idEvento).stream().toList();
-        List<Vecino> vecinos = new ArrayList<>();
-        for(EventoXVecino exv: listaEXV) {
-            vecinos.add(exv.getVecino());
-        }
-        return vecinos.stream().map(vecino -> modelMapper.map(vecino, VecinoDTO.class)).collect(Collectors.toList());
     }
 
     @Override

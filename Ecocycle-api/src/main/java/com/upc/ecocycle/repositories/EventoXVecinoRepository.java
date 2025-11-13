@@ -1,5 +1,6 @@
 package com.upc.ecocycle.repositories;
 
+import com.upc.ecocycle.dto.EventoXVecinoDTO;
 import com.upc.ecocycle.dto.funcionalidades.CantidadesVecinosPorEvento;
 import com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO;
 import com.upc.ecocycle.enitites.EventoXVecino;
@@ -7,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, Integer> {
@@ -20,7 +22,7 @@ public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, In
 
     List<EventoXVecino> findAllByVecino_IdAndEventoTipoAndEventoMetodo(int vecinoId, String tipo, String metodo);
 
-    @Query("SELECT new com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO(exv.vecino.nombre, exv.comentario)" +
+    @Query("SELECT new com.upc.ecocycle.dto.funcionalidades.ComentariosEventoDTO(exv.id, exv.vecino.nombre, exv.comentario)" +
             "FROM EventoXVecino exv WHERE exv.evento.id =:idEvento AND exv.comentario IS NOT NULL")
     List<ComentariosEventoDTO> comentariosEvento(@Param("idEvento") Integer idEvento);
 
@@ -35,4 +37,10 @@ public interface EventoXVecinoRepository extends JpaRepository<EventoXVecino, In
             "SUM(CASE WHEN exv.vecino.edad >= 65 THEN 1 ELSE 0 END))" +
             "FROM EventoXVecino exv WHERE exv.evento.id =:idEvento")
     CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@Param("idEvento") Integer idEvento);
+
+    EventoXVecino findAllByEvento_IdAndVecino_Id(Integer eventoId, Integer vecinoId);
+
+    List<EventoXVecino> findAllByVecino_IdAndVecino_Distrito(Integer idVecino, String distrito);
+
+    Collection<Object> findAllByVecino_IdAndEvento_Municipalidad_Distrito(Integer idVecino, String distrito);
 }

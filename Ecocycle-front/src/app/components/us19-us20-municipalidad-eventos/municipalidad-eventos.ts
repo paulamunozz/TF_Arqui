@@ -1,11 +1,10 @@
-import {Component, inject, ViewChild} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {Evento} from '../../model/evento';
 import {DatePipe} from '@angular/common';
 import {EventoService} from '../../services/evento-service';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
 import {MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
 import {
   MatDatepickerModule,
@@ -13,19 +12,20 @@ import {
   MatDatepicker,
   MatDatepickerInput
 } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {MatInput} from '@angular/material/input';
+import {Municipalidad} from '../../model/municipalidad';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
+  standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
     DatePipe,
-    MatPaginator,
     MatFormField,
     MatDatepickerToggle,
     MatDatepicker,
@@ -40,6 +40,10 @@ import {MatInput} from '@angular/material/input';
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
+    DatePipe
+  ]
 })
 export class MunicipalidadEventos {
   imgSrc = '/btn-crear-1.png';
@@ -47,10 +51,13 @@ export class MunicipalidadEventos {
   formFiltro: FormGroup;
   private fb = inject(FormBuilder);
   private eventoService: EventoService = inject(EventoService);
+  private datePipe= inject(DatePipe);
+  private userId = Number(localStorage.getItem('userId'));
+  private municipalidad:Municipalidad = new Municipalidad();
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es-PE');
 
-  constructor() {
     this.formFiltro = this.fb.group({
       distrito:[''],
       nombre: [''],
@@ -67,12 +74,20 @@ export class MunicipalidadEventos {
     this.listarEventos();
   }
 
-  ngAfterViewInit() {
-    this.eventos.paginator = this.paginator;
-  }
 
   listarEventos () {
-    this.eventoService.listarPorDistrito(this.formFiltro.value).subscribe({
+    const filtros = {...this.formFiltro.value}
+
+    if (filtros.fechaInicio) {
+      filtros.fechaInicio = this.datePipe.transform(filtros.fechaInicio, 'yyyy-MM-dd');
+    }
+    if (filtros.fechaFin) {
+      filtros.fechaFin = this.datePipe.transform(filtros.fechaFin, 'yyyy-MM-dd');
+    }
+
+    console.log(filtros);
+    this.eventoService.listarPorDistrito(filtros).subscribe({
+
       next: (data) => {
         this.eventos.data = data;
         console.log("Eventos cargados: ", data);

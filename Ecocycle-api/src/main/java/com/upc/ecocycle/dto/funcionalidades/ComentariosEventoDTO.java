@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ComentariosEventoDTO {
+    private Integer idEXV;
     private String nombre;
     private String comentario;
 }

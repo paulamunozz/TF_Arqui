@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface EventoRepository extends JpaRepository<Evento, Integer> {
@@ -16,4 +17,6 @@ public interface EventoRepository extends JpaRepository<Evento, Integer> {
             "COUNT (CASE WHEN e.situacion = false THEN 1 END)) " +
             "FROM Evento e WHERE(:distrito IS NULL OR e.municipalidad.distrito = :distrito)")
     CantidadEventosLogradosDTO cantidadEventosLogrados(@Param("distrito") String distrito);
+
+    List<Evento> findAllByMunicipalidad_Distrito(String distrito);
 }

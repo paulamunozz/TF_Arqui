@@ -1,7 +1,7 @@
-<h1>{{evento.nombre}} {{id}}</h1>
+<h1>{{evento.nombre}}</h1>
 <div class="panelUnirse">
   <h2>Detalles</h2>
-  <a [routerLink]="[]"><button type="submit" class="btnUnirse"><strong>Unirme al evento</strong></button></a>
+  <a [routerLink]="[]"><button type="submit" class="btnUnirse" (click)="unirseEvento()"><strong>Unirme al evento</strong></button></a>
 </div>
 
 <div class="panelDetalles">
@@ -23,8 +23,8 @@
       </div>
 
       <div class="datosFilas">
-        <p>Fecha de inicio: {{evento.fechaInicio}}</p>
-        <p>Fecha de fin: {{evento.fechaFin}}</p>
+        <p>Fecha de inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}}</p>
+        <p>Fecha de fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
       </div>
     </div>
   </div>
@@ -32,8 +32,8 @@
 
 <h2>Comentarios</h2>
 <div class="panelComentarios">
-  @if (comentarios.length>0) {
-    @for (comentario of comentarios; track comentario.id; let i = $index) {
+  @if (comentarios.data.length>0) {
+    @for (comentario of comentarios.data; track i; let i = $index) {
       <li class="comentario" [class.alterno]="i % 2 !== 0">
         <p><strong>{{comentario.nombre}}</strong></p>
         <p>{{comentario.comentario}}</p>

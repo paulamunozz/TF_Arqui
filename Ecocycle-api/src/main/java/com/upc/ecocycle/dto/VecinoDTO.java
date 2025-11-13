@@ -30,7 +30,7 @@ public class VecinoDTO {
 
     @NotNull(groups = Create.class, message = "Ingrese la edad")
     @Min(value = 15, groups = {Create.class, Update.class}, message = "La edad no puede ser menor que 15")
-    @Max(value = 200, groups = {Create.class, Update.class}, message = "La edad no puede ser mayor que 200")
+    @Max(value = 150, groups = {Create.class, Update.class}, message = "La edad no puede ser mayor que 150")
     private Integer edad;
 
     @NotBlank(groups = Create.class, message="Ingrese el distrito")

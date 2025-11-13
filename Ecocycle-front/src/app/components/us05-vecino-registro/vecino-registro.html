@@ -6,54 +6,51 @@
     </div>
 
   <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" class="formRegistro">
-    <div class="campoFormulario">
-      <label for="dni">DNI</label>
-      <input id="dni" type="text" formControlName="dni" placeholder="Ingresa tu DNI (8 dígitos)" />
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput maxlength="8" formControlName="dni"/>
+    </mat-form-field>
 
-    <div class="campoFormulario">
-      <label for="nombre">Nombre completo</label>
-      <input id="nombre" type="text" formControlName="nombre" placeholder="Tu nombre y apellido" />
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="contrasena"/>
+    </mat-form-field>
 
-    <div class="campoFormulario">
-      <label for="edad">Edad</label>
-      <input id="edad" type="number" formControlName="edad" placeholder="Edad (mayor de 18)" />
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label >Nombre completo</mat-label>
+      <input matInput formControlName="nombre"/>
+    </mat-form-field>
 
-    <div class="campoFormulario">
-      <label for="genero">Género</label>
-      <select id="genero" formControlName="genero">
-        <option value="">Selecciona género</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Otro</option>
-      </select>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Edad</mat-label>
+      <input matInput type="number" formControlName="edad" />
+    </mat-form-field>
 
-    <div class="campoFormulario">
-      <label for="distrito">Distrito</label>
-      <select id="distrito" formControlName="distrito">
-        <option value="">Selecciona distrito</option>
-        <option>San Borja</option>
-        <option>Surquillo</option>
-        <option>Surco</option>
-        <option>Miraflores</option>
-        <option>Barranco</option>
-        <option>Villa El Salvador</option>
-        <option>Ate</option>
-        <option>San Isidro</option>
-        <option>San Miguel</option>
-        <option>Chosica</option>
-      </select>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Género</mat-label>
+      <mat-select id="genero" formControlName="genero">
+        <mat-option value="M">Masculino</mat-option>
+        <mat-option value="F">Femenino</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <div class="campoFormulario">
-      <label for="contrasena">Contraseña</label>
-      <input id="contrasena" type="password" formControlName="contrasena" placeholder="Crea una contraseña" />
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Distrito</mat-label>
+      <mat-select id="distrito" formControlName="distrito">
+        <mat-option value="San Borja">San Borja</mat-option>
+        <mat-option value="Surquillo">Surquillo</mat-option>
+        <mat-option value="Surco">Surco</mat-option>
+        <mat-option value="Miraflores">Miraflores</mat-option>
+        <mat-option value="Barranco">Barranco</mat-option>
+        <mat-option value="Villa el Salvador">Villa el Salvador</mat-option>
+        <mat-option value="Ate">Ate</mat-option>
+        <mat-option value="San Isidro">San Isidro</mat-option>
+        <mat-option value="San Miguel">San Miguel</mat-option>
+        <mat-option value="Chorrillos">Chorrillos</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <button type="submit" class="btnCrearCuenta">Crear cuenta</button>
+    <button type="submit" class="btnCrearCuenta" [disabled]="formRegistro.invalid">Crear cuenta</button>
   </form>
 
   <p class="textoLogin">

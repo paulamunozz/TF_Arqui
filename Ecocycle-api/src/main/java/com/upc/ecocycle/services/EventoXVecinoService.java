@@ -105,12 +105,24 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     }
 
     @Override
+    public EventoXVecinoDTO buscarPorEventoYVecino(Integer idEvento, Integer idVecino) {
+        if (idEvento == null || idVecino == null) {
+            throw new RuntimeException("Seleccione un EXV");
+        }
+        else if(!eventoRepository.existsById(idEvento) || !vecinoRepository.existsById(idVecino)) {
+            throw new RuntimeException("Seleccione un EXV");
+        }
+        EventoXVecino exv = eventoXVecinoRepository.findAllByEvento_IdAndVecino_Id(idEvento, idVecino);
+        return modelMapper.map(exv, EventoXVecinoDTO.class);
+    }
+
+    @Override
     public List<ComentariosEventoDTO> comentariosEvento(Integer idEvento) {
         if (idEvento == null) {
-            return null;
+            throw new RuntimeException("Seleccione un EXV");
         }
         else if(!eventoRepository.existsById(idEvento)) {
-            return null;
+            throw new RuntimeException("Seleccione un EXV");
         }
         return eventoXVecinoRepository.comentariosEvento(idEvento);
     }
@@ -118,10 +130,10 @@ public class EventoXVecinoService implements IEventoXVecinoService {
     @Override
     public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(Integer idEvento) {
         if (idEvento == null) {
-            return null;
+            throw new RuntimeException("Seleccione un EXV");
         }
         else if(!eventoRepository.existsById(idEvento)) {
-            return null;
+            throw new RuntimeException("Seleccione un EXV");
         }
         return eventoXVecinoRepository.cantidadesVecinosPorEvento(idEvento);
     }

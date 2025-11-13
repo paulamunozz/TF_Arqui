@@ -12,7 +12,5 @@ public interface IVecinoService {
     VecinoDTO buscarPorId(Integer id);
     void actualizacionPuntos(Integer id);
     void calcularPuestos();
-    List<VecinoDTO> listarVecinos();
-    List<VecinoDTO> listarVecinosPorEvento(Integer idEvento);
     List<VecinoDTO> rankingFiltrado(String distrito, String genero, Integer edadMin, Integer edadMax);
 }

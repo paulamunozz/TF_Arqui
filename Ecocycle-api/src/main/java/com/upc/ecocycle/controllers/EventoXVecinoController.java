@@ -30,21 +30,26 @@ public class EventoXVecinoController {
         return eventoXVecinoService.modificar(eventoXVecinoDTO);
     }
 
-    @DeleteMapping("/eliminar")
+    @DeleteMapping("/eliminar/{idEXV}")
     @PreAuthorize("hasRole('VECINO')")
-    public String eliminar(@RequestBody Integer idEXV) {
+    public String eliminar(@PathVariable Integer idEXV) {
         return eventoXVecinoService.eliminar(idEXV);
     }
 
-    @GetMapping("/comentarios")
+    @GetMapping("/buscarPorEventoYVecino/{idEvento}/{idVecino}")
+    public EventoXVecinoDTO buscarPorEventoYVecino(@PathVariable Integer idEvento, @PathVariable Integer idVecino) {
+        return eventoXVecinoService.buscarPorEventoYVecino(idEvento, idVecino);
+    }
+
+    @PostMapping("/comentarios")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD', 'VECINO')")
     public List<ComentariosEventoDTO> comentariosEvento(@RequestBody Integer eventoId) {
         return eventoXVecinoService.comentariosEvento(eventoId);
     }
 
-    @GetMapping("/estadísticasVecinosPorEvento")
+    @PostMapping("/estadisticasVecinosPorEvento")
     @PreAuthorize("hasAnyRole('MUNICIPALIDAD')")
-    public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@RequestBody Integer idEvento) {
-        return eventoXVecinoService.cantidadesVecinosPorEvento(idEvento);
+    public CantidadesVecinosPorEvento cantidadesVecinosPorEvento(@RequestBody Integer eventoId) {
+        return eventoXVecinoService.cantidadesVecinosPorEvento(eventoId);
     }
 }

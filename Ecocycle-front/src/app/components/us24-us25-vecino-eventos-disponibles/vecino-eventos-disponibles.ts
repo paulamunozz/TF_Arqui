@@ -1,21 +1,61 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from '@angular/material/core';
+import {DatePipe} from '@angular/common';
+import {EventoService} from '../../services/evento-service';
+import {MatTableDataSource} from '@angular/material/table';
+import {Evento} from '../../model/evento';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {MatFormField, MatSuffix} from '@angular/material/form-field';
+import {MatInput, MatLabel} from '@angular/material/input';
+import {MatSelect} from '@angular/material/select';
+import {EventoXVecino} from '../../model/evento-x-vecino';
+import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
+import {Vecino} from '../../model/vecino';
+import {VecinoService} from '../../services/vecino-service';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
+  standalone: true,
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    MatDatepicker,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatSuffix,
+    MatNativeDateModule,
+    DatePipe,
   ],
   templateUrl: './vecino-eventos-disponibles.html',
   styleUrl: './vecino-eventos-disponibles.css',
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
+    DatePipe
+  ]
 })
 export class VecinoEventosDisponibles {
   formFiltro: FormGroup;
   private fb = inject(FormBuilder);
-  constructor() {
+  private eventoService: EventoService = inject(EventoService);
+  private exvService: EventoXVecinoService = inject(EventoXVecinoService);
+  private vecinoService: VecinoService = inject(VecinoService);
+
+  private router : Router = inject(Router);
+  private datePipe= inject(DatePipe);
+  private userId:number = Number(localStorage.getItem('userId'));
+  private vecino:Vecino = new Vecino();
+
+  constructor(private dateAdapter: DateAdapter<Date>) {
+    this.dateAdapter.setLocale('es-PE');
+
     this.formFiltro = this.fb.group({
       nombre: [''],
       tipo: [''],
@@ -25,12 +65,58 @@ export class VecinoEventosDisponibles {
     });
   }
 
-  eventos = [
-    {id:1, nombre:'Evento 1', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.\n' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Papel', metodo:'En casa', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'},
-    {id:2, nombre:'Evento 2', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Plástico', metodo:'Centro de reciclaje de la municipalidad', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'},
-    {id:3, nombre:'Evento 3', descripcion:'Nuestra meta con este desafío es lograr para el fin de mes de septiembre recolectar como mínimo 500 kg de todo tipo de plásticos para poder transformarlos en nuevos materiales útiles como bolsas o botellas y reducir la cantidad de desechos que acaban contaminando los mares y las calles de nuestro país.\n' +
-        'Asegúrese al momento de reciclar los plásticos que no tengan ningún tipo de desecho orgánico ya que podría causar generación de bacterias y ser riesgoso para nuestro personal que trata con el reciclaje.', tipo:'Metal/Lata', metodo:'Camión de basura', fechaInicio:'26/10/2025', fechaFin:'26/10/2025', pesoObjetivo:'500',pesoActual:'125'}
-  ]
+  eventos: MatTableDataSource<Evento> = new MatTableDataSource<Evento>();
+
+  ngOnInit() {
+    this.vecinoService.buscarPorID(this.userId).subscribe({
+      next: (data) => {
+        this.vecino = data;
+        this.listarEventos();
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
+  listarEventos() {
+    const filtros = {...this.formFiltro.value}
+    filtros.vecinoId = this.userId;
+    filtros.distrito = this.vecino.distrito;
+
+    if (filtros.fechaInicio) {
+      filtros.fechaInicio = this.datePipe.transform(filtros.fechaInicio, 'yyyy-MM-dd');
+    }
+    if (filtros.fechaFin) {
+      filtros.fechaFin = this.datePipe.transform(filtros.fechaFin, 'yyyy-MM-dd');
+    }
+
+    console.log(filtros);
+    this.eventoService.listarDisponibleParaVecino(filtros).subscribe({
+
+      next: (data) => {
+        this.eventos.data = data;
+        console.log("Eventos cargados: ", data);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  unirseEvento(eventoId:number){
+    let exv = new EventoXVecino()
+    exv.eventoId = eventoId;
+    exv.vecinoId = this.userId;
+
+    this.exvService.registrar(exv).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.router.navigate(['/mis-eventos/' + eventoId]);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 }
