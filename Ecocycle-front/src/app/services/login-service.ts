@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
-import {Auth} from '../model/auth';
 import {map, Observable} from 'rxjs';
 
 @Injectable({
@@ -27,10 +26,13 @@ export class LoginService {
         localStorage.setItem('token', token);
         return body;
       }
-    ));
+    ),
+    );
   }
 
-  getToken(){
+
+
+    getToken(){
     return localStorage.getItem('token');
   }
 }
