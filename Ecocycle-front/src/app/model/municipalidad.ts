@@ -3,6 +3,6 @@ export class Municipalidad {
   codigo: string;
   contrasena: string;
   distrito: string;
-  puntajeTotal: number;
+  puntajetotal: number;
   puesto: number;
 }
