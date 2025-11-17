@@ -16,7 +16,9 @@
         <input matInput type="password" formControlName="contrasena">
       </mat-form-field>
 
-      <button type="submit" class="btnIngresar" [disabled]="formLogin.invalid">Ingresar</button>
+      <button matButton type="submit" class="btnIngresar">
+        Ingresar
+      </button>
 
       <div class="textoRegistro">
         <p>¿No tienes cuenta? <a href="/registro">Regístrate</a></p>
