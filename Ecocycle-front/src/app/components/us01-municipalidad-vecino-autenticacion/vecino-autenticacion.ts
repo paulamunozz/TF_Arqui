@@ -8,12 +8,12 @@ import {User} from '../../model/user';
 import {Auth} from '../../model/auth';
 import {MunicipalidadService} from '../../services/municipalidad-service';
 import {LoginService} from '../../services/login-service';
-import {catchError} from 'rxjs';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-us01-municipalidad-vecino-autenticacion',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput],
+  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatButtonModule],
   templateUrl: './vecino-autenticacion.html',
   styleUrl: './vecino-autenticacion.css',
 })
