@@ -26,25 +26,18 @@ public class MunicipalidadController {
         return  municipalidadService.modificarContrasena(id, contrasena);
     }
 
-    @GetMapping("/buscarXid")
+    @PostMapping("/buscarXid")
     @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public MunicipalidadDTO buscarPorId(@RequestBody Integer idUsuario) {
         municipalidadService.calcularPuestos();
         return municipalidadService.buscarPorId(idUsuario);
     }
 
-    @GetMapping("/buscarXcodigo")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/buscarXcodigo")
+    @PreAuthorize("hasRole('MUNICIPALIDAD')")
     public MunicipalidadDTO buscarPorCodigo(@RequestBody String codigoUsuario) {
         municipalidadService.calcularPuestos();
         return municipalidadService.buscarPorCodigo(codigoUsuario);
-    }
-
-    @GetMapping("/listar")
-    @PreAuthorize("hasRole('ADMIN')")
-    public List<MunicipalidadDTO> listarMunicipalidades() {
-        municipalidadService.calcularPuestos();
-        return municipalidadService.listarMunicipalidades();
     }
 
     @GetMapping("/ranking")

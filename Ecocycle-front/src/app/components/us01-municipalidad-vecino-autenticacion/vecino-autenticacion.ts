@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {Router} from '@angular/router';
-import {EventoService} from '../../services/evento-service';
 import {VecinoService} from '../../services/vecino-service';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
@@ -9,11 +8,12 @@ import {User} from '../../model/user';
 import {Auth} from '../../model/auth';
 import {MunicipalidadService} from '../../services/municipalidad-service';
 import {LoginService} from '../../services/login-service';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-us01-municipalidad-vecino-autenticacion',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput],
+  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatButtonModule],
   templateUrl: './vecino-autenticacion.html',
   styleUrl: './vecino-autenticacion.css',
 })
@@ -27,7 +27,7 @@ export class VecinoAutenticacion {
 
   constructor() {
     this.formLogin = this.fb.group({
-      dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
+      dni: ['', [Validators.required]],
       contrasena: ['', Validators.required]
     });
   }
@@ -67,7 +67,24 @@ export class VecinoAutenticacion {
             });
           }
           if(localStorage.getItem('rol')=="ROLE_MUNICIPALIDAD"){
+            console.log(this.formLogin.value);
+            this.municipalidadService.buscarPorCodigo(this.formLogin.controls['dni'].value).subscribe({
+              next: municipalidad => {
+                console.log(municipalidad);
+                localStorage.setItem('userId', String(municipalidad.idMunicipalidad));
+                console.log(localStorage.getItem('rol'));
+                console.log(localStorage.getItem('userId'));
+                console.log(localStorage.getItem('token'));
+                this.router.navigate(['inicio-muni']);
+              },
+              error: (err) => {
+                console.log('Error capturado en componente:', err.message);
+                //console.error('Error al buscar municipalidad:', err);
+                alert('No se pudo iniciar sesión. Verifica el código.');
+              }
+            });
           }
+
         },
         error: (err) => {
           console.log("Login response ROL:", err);

@@ -41,6 +41,7 @@ public class VecinoController {
     public String eliminar(@PathVariable Integer idVecino) {
         return vecinoService.eliminar(idVecino);
     }
+
     @PostMapping("/buscarPorDNI")
     @PreAuthorize("hasRole('VECINO')")
     public VecinoDTO buscarPorDni(@RequestBody String dni) {

@@ -10,6 +10,5 @@ public interface IMunicipalidadService {
     void calcularPuestos();
     MunicipalidadDTO buscarPorId(Integer id);
     MunicipalidadDTO buscarPorCodigo(String codigo);
-    List<MunicipalidadDTO> listarMunicipalidades();
     List<MunicipalidadDTO> rankingMunicipalidades();
 }

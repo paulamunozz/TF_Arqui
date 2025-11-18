@@ -15,13 +15,7 @@ import java.util.List;
 public class LogroController {
     @Autowired private LogroService logroService;
 
-    @PostMapping("/registrar")
-    @PreAuthorize("hasRole('MUNICIPALIDAD')")
-    public LogroDTO registrarLogro(@RequestBody @Validated(Create.class) LogroDTO logroDTO) {
-        return logroService.registrarLogro(logroDTO);
-    }
-
-    @GetMapping("/listarPorVecino")
+    @PostMapping("/listarPorVecino")
     @PreAuthorize("hasRole('VECINO')")
     public List<LogroDTO> listarLogrosVecino(@RequestBody Integer vecinoId) {
         return logroService.listarLogrosPorVecino(vecinoId);

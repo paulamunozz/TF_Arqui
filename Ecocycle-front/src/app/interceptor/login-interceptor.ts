@@ -23,6 +23,7 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
         alert("NO TIENES PERMISOS!")
         return EMPTY;
       } else {
+        alert("Error, datos inválidos");
         return throwError(() => error);
       }
     })
