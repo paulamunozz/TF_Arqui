@@ -6,13 +6,24 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
 import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {EventoXVecino} from '../../model/evento-x-vecino';
+import {ChartDataset, ChartOptions} from 'chart.js';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import {MatIconModule} from '@angular/material/icon';
+import {MatCard, MatCardContent} from '@angular/material/card';
 
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
-  imports: [],
+  imports: [
+    BaseChartDirective,
+    MatIconModule,
+    MatCard,
+    MatCardContent,
+
+  ],
   templateUrl: './municipalidad-detalle-evento.html',
   styleUrl: './municipalidad-detalle-evento.css',
-  standalone: true
+  standalone: true,
+  providers: [provideCharts(withDefaultRegisterables())],
 })
 export class MunicipalidadDetalleEvento {
   private eventoService: EventoService = inject(EventoService);
@@ -21,6 +32,24 @@ export class MunicipalidadDetalleEvento {
 
   evento: Evento = new Evento();
   comentarios:MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
+
+  hasData = false;
+  opcionesGraficoGenero: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend:{position: 'left'}
+    }
+  }
+  opcionesGraficoEdad: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend:{position: 'right'}
+    }
+  }
+  labelsGraficoGenero= ['Mujeres', 'Hombres'];
+  labelsGraficoEdad= ['15-24', '25-34', '35-44', '45-54', '55-64', '65+'];
+  dataGraficoGenero: ChartDataset[];
+  dataGraficoEdad: ChartDataset[];
 
   id:number;
   constructor(private route:ActivatedRoute) { }
@@ -40,6 +69,7 @@ export class MunicipalidadDetalleEvento {
     })
 
     this.listarComentarios()
+    this.mostrarGraficos()
   }
 
   editarEvento(){
@@ -88,5 +118,49 @@ export class MunicipalidadDetalleEvento {
         console.log(error);
       }
     })
+  }
+
+  mostrarGraficos() {
+    this.exvService.estadisticasVecinosPorEvento(this.id).subscribe({
+      next: (data) => {
+        if (data) {
+          this.hasData = true;
+
+          this.dataGraficoGenero = [{
+            data: [
+              data.mujeres,
+              data.hombres
+            ],
+            label: 'Cantidad de vecinos',
+            backgroundColor: [
+              '#ff31a9',
+              '#5c55ff'
+            ]
+            }]
+
+          this.dataGraficoEdad = [{
+            data: [
+              data._15_24_,
+              data._25_34_,
+              data._35_44_,
+              data._45_54_,
+              data._55_64_,
+              data._65_mas_
+            ],
+            label: 'Cantidad de vecinos',
+            backgroundColor: [
+              '#ff2222',
+              '#ff9422',
+              '#fff822',
+              '#4fff23',
+              '#22ffcb',
+              '#b623ff',
+            ]
+            }];
+        } else {
+          this.hasData = false;
+        }
+      }
+    });
   }
 }
