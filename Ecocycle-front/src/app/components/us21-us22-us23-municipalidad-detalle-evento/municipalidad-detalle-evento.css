@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  background-color: #ecf39e;
+}
+
+
 h2{
   width: 100%;
   text-align: center;
@@ -13,18 +19,17 @@ p{
 }
 
 .panelDetalles{
-  margin: 15px;
+  margin: 20px;
+  background-color: white;
 }
 
 .detalleFilas {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ecf39e;
-  padding: 20px 40px;
+  padding: 0 20px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  border-radius: 6px;
   gap: 5px;
 }
 
@@ -90,6 +95,37 @@ p{
   height: 24px;
 }
 
+/*Panel estadísticas--------------------------------*/
+.cardGraficos{
+  margin: 20px;
+}
+
+.containerGraficos{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.graficos {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+canvas{
+  margin: 0;
+  padding: 0;
+}
+
+.graficoTitulo{
+  padding: 0;
+  margin: 0;
+}
 /*Panel botones-------------------------------------*/
 .panelBotones{
   display: flex;

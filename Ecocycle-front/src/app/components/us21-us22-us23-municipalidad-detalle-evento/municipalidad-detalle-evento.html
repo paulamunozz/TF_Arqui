@@ -1,30 +1,32 @@
 <h1>{{evento.nombre}}</h1>
 
-<div class="panelDetalles">
-  <div class="detalleFilas">
-    <p class="descripcion">{{ evento.descripcion }}</p>
-    <div class="detalleColumnas datos">
-      <div class="datosFilas">
-        <p>Tipo: {{evento.tipo}}</p>
-        <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
-      </div>
+<mat-card class="panelDetalles">
+  <mat-card-content>
+    <div class="detalleFilas">
+      <p class="descripcion">{{ evento.descripcion }}</p>
+      <div class="detalleColumnas datos">
+        <div class="datosFilas">
+          <p>Tipo: {{evento.tipo}}</p>
+          <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Método: {{evento.metodo}}</p>
-        <p>Peso actual: {{evento.pesoActual}}</p>
-      </div>
+        <div class="datosFilas">
+          <p>Método: {{evento.metodo}}</p>
+          <p>Peso actual: {{evento.pesoActual}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Bonificación: {{evento.bonificacion}}</p>
-      </div>
+        <div class="datosFilas">
+          <p>Bonificación: {{evento.bonificacion}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Fecha de inicio: {{evento.fechaInicio}}</p>
-        <p>Fecha de fin: {{evento.fechaFin}}</p>
+        <div class="datosFilas">
+          <p>Fecha de inicio: {{evento.fechaInicio}}</p>
+          <p>Fecha de fin: {{evento.fechaFin}}</p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
 
 <h2>Comentarios</h2>
 <div class="panelComentarios">
@@ -46,7 +48,40 @@
   }
 </div>
 
-<h2>Estadísticas</h2>
+<h2>Estadísticas de vecinos</h2>
+<mat-card class="cardGraficos">
+  <mat-card-content class="containerGraficos">
+    @if(hasData){
+      <div class="graficos genero">
+        <h3 class="graficoTitulo">Cantidad de vecinos por género</h3>
+        <canvas
+          baseChart
+          [datasets]="dataGraficoGenero"
+          [labels]="labelsGraficoGenero"
+          [options]="opcionesGraficoGenero"
+          type="pie">
+        </canvas>
+      </div>
+
+      <div class="graficos edad">
+        <h3 class="graficoTitulo">Cantidad de vecinos por edad</h3>
+        <canvas
+          baseChart
+          [datasets]="dataGraficoEdad"
+          [labels]="labelsGraficoEdad"
+          [options]="opcionesGraficoEdad"
+          type="pie">
+        </canvas>
+      </div>
+    } @else{
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
+
 
 <div class="panelBotones">
   <button type="button" class="botonEvento btnEditarEvento" (click)="editarEvento()">Editar</button>
