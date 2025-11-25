@@ -2,7 +2,7 @@
 
 <div class="panelDistrito">
   <mat-form-field appearance="outline" class="filtroDistrito">
-    <mat-label>Tipo</mat-label>
+    <mat-label>Distrito</mat-label>
     <mat-select [(ngModel)]="distrito" (selectionChange)="filtrarDistrito()">
       <mat-option class="opcion" value="">Todos</mat-option>
       <mat-option value="San Borja">San Borja</mat-option>
@@ -19,36 +19,22 @@
   </mat-form-field>
 </div>
 
-<div class="panelEventoLogrados">
-  <div class="cantidadEventos">
-    <p class="tipoCantidad">Eventos logrados</p>
-    <p class="cantidadTipoEventos">{{cantidadEventos.cantidadEventosLogrados}}</p>
+<div class="panelGraficos">
+  <div class="grafico pie">
+    <canvas baseChart
+            [datasets]="eventosPieChartDataset"
+            [labels]="eventosPieChartLabels"
+            [options]="eventosPieChartOptions"
+            [type]="'pie'">
+    </canvas>
   </div>
 
-  <div class="cantidadEventos">
-    <p class="tipoCantidad">Eventos sin lograr</p>
-    <p class="cantidadTipoEventos">{{cantidadEventos.cantidadEventosSinLograr}}</p>
+  <div class="grafico dual">
+    <canvas baseChart
+            [data]="dualAxisChartData"
+            [options]="dualAxisChartOptions"
+            [type]="'bar'">
+    </canvas>
   </div>
 </div>
 
-<div class="panelTablaResiduos">
-  <table mat-table [dataSource]="dataSourceTablaResiduos">
-    <ng-container matColumnDef="tipo">
-      <th mat-header-cell *matHeaderCellDef>Tipo de residuo</th>
-      <td mat-cell *matCellDef = "let element">{{element.tipo}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="cantidad">
-      <th mat-header-cell *matHeaderCellDef>Cantidad de registros</th>
-      <td mat-cell *matCellDef = "let element">{{element.cantidad}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="peso">
-      <th mat-header-cell *matHeaderCellDef>Peso total (kg)</th>
-      <td mat-cell *matCellDef = "let element">{{element.peso}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef = "columnasTablaResiduos"></tr>
-    <tr mat-row *matRowDef = "let row; columns: columnasTablaResiduos;"></tr>
-  </table>
-</div>

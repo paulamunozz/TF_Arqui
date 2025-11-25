@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {EventoXVecino} from '../model/evento-x-vecino';
 import {Comentario} from '../model/reportes/comentario';
+import {CantidadesVecinosPorEventoDTO} from '../model/reportes/cantidades-vecinos-por-evento-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,6 @@ export class EventoXVecinoService {
   }
 
   estadisticasVecinosPorEvento(eventoId:number){
-    return this.httpClient.post(this.url + '/estadísticasVecinosPorEvento', eventoId);
+    return this.httpClient.post<CantidadesVecinosPorEventoDTO>(this.url + '/estadisticasVecinosPorEvento', eventoId);
   }
 }
