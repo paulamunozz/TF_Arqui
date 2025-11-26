@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -9,6 +9,7 @@ import {
 } from '@angular/material/table';
 import {Municipalidad} from '../../model/municipalidad';
 import {MunicipalidadService} from '../../services/municipalidad-service';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us33-ranking-municipalidad',
@@ -22,7 +23,8 @@ import {MunicipalidadService} from '../../services/municipalidad-service';
     MatRow,
     MatRowDef,
     MatTable,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatPaginator
   ],
   templateUrl: './ranking-municipalidad.html',
   styleUrl: './ranking-municipalidad.css',
@@ -35,17 +37,17 @@ export class RankingMunicipalidad {
   ngOnInit() {
     this.mostrarRanking();
   }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  ngAfterViewInit() {
+    this.dataSourceRanking.paginator = this.paginator;
+  }
 
-  mostrarRanking(){
+  mostrarRanking() {
     this.municipalidadService.rankingMunicipalidades().subscribe({
       next: (data: Municipalidad[]) => {
-        const rankingConPuestos = data.map((muni, index) => ({
-          ...muni,
-          puesto: index + 1,
-        }));
-
-        this.dataSourceRanking.data = rankingConPuestos;
-        console.log('Ranking cargado exitosamente:', rankingConPuestos);
+        const datosOrdenados = data.sort((a, b) => a.puesto - b.puesto);
+        this.dataSourceRanking.data = datosOrdenados;
+        console.log('Ranking cargado exitosamente:', datosOrdenados);
       },
       error: (err) => {
         console.error('Error al cargar el ranking. Verifique el token y la conexión al backend.', err);

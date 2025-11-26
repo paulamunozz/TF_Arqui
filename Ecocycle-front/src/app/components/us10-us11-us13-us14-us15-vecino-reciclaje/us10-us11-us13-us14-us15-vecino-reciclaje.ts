@@ -19,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginator, PageEvent} from '@angular/material/paginator';
 import { Router } from '@angular/router';
 
 import { Reciclaje } from '../../model/reciclaje';
@@ -59,10 +59,7 @@ import { VecinoService } from '../../services/vecino-service';
   ]
 })
 export class VecinoReciclaje{
-  // ViewChild para acceder al paginador
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  // Formularios
+    // Formularios
   formRegistro: FormGroup;
   formFiltro: FormGroup;
 
@@ -130,34 +127,10 @@ export class VecinoReciclaje{
         this.cargando = false;
       }
     });
+
+
   }
 
-  /**
-   * Después de cargar la vista, conectar el paginador
-   */
-  ngAfterViewInit(): void {
-    this.reciclajes.paginator = this.paginator;
-
-    // Configurar labels en español
-    if (this.paginator) {
-      this.paginator._intl.itemsPerPageLabel = 'Elementos por página:';
-      this.paginator._intl.nextPageLabel = 'Siguiente página';
-      this.paginator._intl.previousPageLabel = 'Página anterior';
-      this.paginator._intl.firstPageLabel = 'Primera página';
-      this.paginator._intl.lastPageLabel = 'Última página';
-      this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-        if (length === 0 || pageSize === 0) {
-          return `0 de ${length}`;
-        }
-        length = Math.max(length, 0);
-        const startIndex = page * pageSize;
-        const endIndex = startIndex < length ?
-          Math.min(startIndex + pageSize, length) :
-          startIndex + pageSize;
-        return `${startIndex + 1} - ${endIndex} de ${length}`;
-      };
-    }
-  }
 
   /**
    * Carga los datos del vecino actual
@@ -422,5 +395,23 @@ export class VecinoReciclaje{
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+
+
+  // ==================== PAGINATOR ====================
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.reciclajes.paginator = this.paginator;
+
+    this.paginator.page.subscribe((event: PageEvent) => {
+    });
+  }
+
+  get reciclajesPaginados() {
+    if (!this.paginator) return this.reciclajes.data.slice(0, 5); // fallback
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    return this.reciclajes.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
   }
 }

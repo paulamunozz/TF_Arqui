@@ -10,12 +10,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {VecinoService} from '../../services/vecino-service';
 import {Vecino} from '../../model/vecino';
+import {VecinoRetiroEvento} from '../us26-vecino-retiro-evento/vecino-retiro-evento';
+import {VecinoEliminacionCuenta} from '../us07-vecino-eliminacion-cuenta/vecino-eliminacion-cuenta';
+import {VecinoCerrarSesion} from '../us02-vecino-cerrar-sesion/vecino-cerrar-sesion';
 
 @Component({
-  selector: 'app-us07-vecino-perfil',
+  selector: 'app-us08-vecino-perfil',
   templateUrl: './vecino-perfil.html',
   standalone: true,
   imports: [
@@ -40,6 +43,7 @@ export class VecinoPerfil {
   private vecinoService: VecinoService = inject(VecinoService);
   private userId = Number(localStorage.getItem('userId'));
   vecino = new Vecino();
+  dialog : MatDialog = inject(MatDialog);
 
   fotos = [
     '/icono-default.png',
@@ -66,37 +70,33 @@ export class VecinoPerfil {
     })
   }
 
-  eliminarVisible = false;
-  mostrarEliminar()
-  {
-    this.eliminarVisible = true;
-  }
-  cerrarEliminar(){
-    this.eliminarVisible = false;
-  }
-
-  cerrarVisible = false;
-  mostrarCerrar()
-  {
-    this.cerrarVisible = true;
-  }
-  cerrarCerrar(){
-    this.cerrarVisible = false;
-  }
-
-  cerrarSesion() {
-    this.router.navigate(['/login']);
+  cerrarSesion(){
+    const dialogoCerrar=this.dialog.open(VecinoCerrarSesion);
+    dialogoCerrar.afterClosed().subscribe({
+      next: (data) => {
+        if (data){
+          this.router.navigate(['/']);
+        }
+      }
+    })
   }
 
   eliminarCuenta(){
-    this.vecinoService.eliminarCuenta(this.userId).subscribe({
-      next: () => {
-        this.snackBar.open('Cuenta eliminada correctamente.', 'Cerrar', { duration: 2000 });
-        this.router.navigate(['/registro']);
-      },
-      error: (error: any) => {
-        console.error('Error al eliminar la cuenta:', error);
+    const dialogoEliminar=this.dialog.open(VecinoEliminacionCuenta);
+    dialogoEliminar.afterClosed().subscribe({
+      next: (data) => {
+        if (data){
+          this.vecinoService.eliminarCuenta(this.userId).subscribe({
+            next: data => {
+              this.snackBar.open('Cuenta eliminada correctamente.', 'Cerrar', { duration: 2000 });
+              this.router.navigate(['/registro']);
+            },
+            error: error => {
+              console.log(error);
+            }
+          })
+        }
       }
-    });
+    })
   }
 }

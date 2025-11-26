@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatSelect} from '@angular/material/select';
 import {MatOption} from '@angular/material/core';
@@ -14,6 +14,7 @@ import {Vecino} from '../../model/vecino';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {VecinoService} from '../../services/vecino-service';
+import {MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us32-ranking-vecino',
@@ -34,7 +35,8 @@ import {VecinoService} from '../../services/vecino-service';
     MatRowDef,
     MatTable,
     MatHeaderCellDef,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginator,
   ],
   templateUrl: './ranking-vecino.html',
   styleUrl: './ranking-vecino.css',
@@ -60,6 +62,11 @@ export class RankingVecino {
     this.filtrarRanking();
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  ngAfterViewInit() {
+    this.dataSourceRanking.paginator = this.paginator;
+  }
+
   filtrarRanking(){
     const filtros = {...this.formFiltro.value}
 
@@ -67,7 +74,7 @@ export class RankingVecino {
     this.vecinoService.ranking(filtros).subscribe({
       next: data => {
         console.log(data)
-        this.dataSourceRanking.data = data;
+        this.dataSourceRanking.data = data.sort((a, b) => a.puesto - b.puesto);
       },
       error: error => {
         console.log(error);

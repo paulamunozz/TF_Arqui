@@ -2,12 +2,12 @@
 <div class="perfil-container">
 
   <div class="action-buttons">
-    <button mat-raised-button color="warn" (click)="mostrarEliminar()">
+    <button mat-raised-button color="warn" (click)="eliminarCuenta()">
       <mat-icon>delete_forever</mat-icon> Eliminar cuenta
     </button>
 
     <div class="right-buttons">
-      <button mat-raised-button color="primary" (click)="mostrarCerrar()">
+      <button mat-raised-button color="primary" (click)="cerrarSesion()">
         <mat-icon>logout</mat-icon> Cerrar sesión
       </button>
       <button mat-raised-button color="accent" [routerLink]="'/editar-perfil'">
@@ -45,31 +45,3 @@
     </div>
 </div>
 </div>
-
-@if(eliminarVisible){
-  <div class="panelPopUp">
-    <div class="popUp">
-      <h3>¿Seguro que desea eliminar su cuenta?</h3>
-      <p>¡No lo haga, el planeta lo necesita! :(</p> &nbsp;
-
-      <div class="popupBotones">
-        <button class="btnCancelar botonPopUp" (click)="cerrarEliminar()">Cancelar</button>
-        <button class="btnEliminar botonPopUp" (click)="eliminarCuenta()">Eliminar</button>
-      </div>
-    </div>
-  </div>
-}
-
-@if(cerrarVisible){
-  <div class="panelPopUp">
-    <div class="popUp">
-      <h3>¿Seguro que desea cerrar sesion?</h3>
-      <p>Siga reciclando y haciendo al Perú un país más limpio</p> &nbsp;
-
-      <div class="popupBotones">
-        <button class="btnCancelar botonPopUp" (click)="cerrarCerrar()">Cancelar</button>
-        <button class="btnCerrar botonPopUp" (click)="cerrarSesion()">Cerrar sesión</button>
-      </div>
-    </div>
-  </div>
-}
