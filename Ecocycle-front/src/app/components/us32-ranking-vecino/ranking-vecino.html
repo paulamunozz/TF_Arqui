@@ -64,3 +64,6 @@
   <tr mat-header-row *matHeaderRowDef = "columnasRanking"></tr>
   <tr mat-row *matRowDef = "let row; columns: columnasRanking;"></tr>
 </table>
+
+<mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButtons>
+</mat-paginator>

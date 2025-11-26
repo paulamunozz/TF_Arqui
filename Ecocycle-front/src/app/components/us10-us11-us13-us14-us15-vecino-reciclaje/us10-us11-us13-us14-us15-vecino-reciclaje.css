@@ -4,36 +4,25 @@
   background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
   padding-bottom: 80px;
 }
-
-/* ==================== TÍTULO ==================== */
-.page-title {
-  text-align: center;
-  color: white;
-  font-size: 36px;
-  font-weight: 700;
-  margin: 0;
-  padding: 30px 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 /* ==================== PANEL DE ACCIONES ==================== */
 .panelAcciones {
   background-color: white;
-  padding: 24px;
-  margin: 0 20px 30px;
+  padding: 20px;
+  padding-bottom: 0;
+  margin: 20px;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
 }
 
 /* ==================== TARJETA DE PUNTAJE ==================== */
 .puntaje-card {
   background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%) !important;
   color: white !important;
-  min-width: 220px;
+  width: 250px;
   border-radius: 12px !important;
   box-shadow: 0 6px 16px rgba(124, 179, 66, 0.3) !important;
   transition: transform 0.3s ease;
@@ -61,6 +50,7 @@
 .puntaje-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .puntaje-label {
@@ -69,6 +59,7 @@
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .puntaje-value {
@@ -81,14 +72,13 @@
 /* ==================== PANEL DE FILTROS ==================== */
 .panelFiltros {
   display: flex;
-  gap: 16px;
+  gap: 10px;
   flex: 1;
   flex-wrap: wrap;
-  align-items: flex-end;
 }
 
 .columnaFiltro {
-  min-width: 180px;
+  min-width: 250px;
   flex: 1;
 }
 
@@ -113,17 +103,23 @@
   margin-right: 8px;
 }
 
+.botonesAccion{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
 /* ==================== BOTONES DE FILTRO ==================== */
 .btnLimpiar {
   display: flex;
   gap: 12px;
-  margin-bottom: 22px;
   height: 56px !important;
   font-weight: 600 !important;
   text-transform: none !important;
   letter-spacing: 0.5px;
   border-color: #757575 !important;
   color: #757575 !important;
+  width: 100%;
 }
 
 .btnLimpiar:hover {
@@ -298,7 +294,6 @@
 .paginator-container {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
   padding: 20px 0;
 }
 

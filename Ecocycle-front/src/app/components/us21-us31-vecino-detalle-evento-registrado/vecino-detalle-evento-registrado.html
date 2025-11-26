@@ -1,7 +1,7 @@
 <h1>{{evento.nombre}}</h1>
 <div class="panelUnirse">
   <h3>Detalles</h3>
-  <button mat-raised-button type="submit" class="btnUnirse" (click)="mostrarRetiro()"><strong>Retirarme de evento</strong></button>
+  <button mat-raised-button type="submit" class="btnUnirse" (click)="openDialog()"><strong>Retirarme de evento</strong></button>
 </div>
 
 <mat-card class="panelDetalles">
@@ -69,17 +69,3 @@
     <p class="sinComentarios">Este evento aún no cuenta con comentarios</p>
   }
 </div>
-
-@if(popUpRetiro){
-  <div class="panelPopUp">
-    <div class="popUp">
-      <h3>¿Seguro que desea retirarse este evento?</h3>
-      <p>Por favor no se vaya, su aporte será perdido :(</p>
-
-      <div class="popupBotones">
-        <button class="btnCancelar botonPopUp" (click)="cerrarRetiro()">Cancelar</button>
-        <button class="btnRetiro botonPopUp" (click)="retiroEvento()">Retirarme</button>
-      </div>
-    </div>
-  </div>
-}
