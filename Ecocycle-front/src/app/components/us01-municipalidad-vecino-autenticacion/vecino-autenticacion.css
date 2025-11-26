@@ -8,7 +8,7 @@
 
 .login-container {
   width: 400px;
-  margin: 60px auto;
+  margin: 40px auto;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -20,12 +20,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25px;
 }
 
 .logoEmpresa {
   width: 90px;
-  margin-bottom: 10px;
 }
 
 .login-container h2 {
@@ -78,19 +76,14 @@ form {
 }
 
 .btnIngresar {
-  background-color: #4F772D;
-  color: white;
+  background-color: #4F772D !important;
+  color: white !important;
   border: none;
   padding: 10px;
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
   width: 100%;
-}
-
-.btnIngresar:hover {
-  background-color: #9bd66c;
-  color: black;
 }
 
 .textoRegistro {

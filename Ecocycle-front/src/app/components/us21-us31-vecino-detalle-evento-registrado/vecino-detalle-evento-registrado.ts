@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EventoService} from '../../services/evento-service';
 import {Evento} from '../../model/evento';
@@ -8,13 +8,22 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
 import {EventoXVecino} from '../../model/evento-x-vecino';
 import {DatePipe} from '@angular/common';
+import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+import {MatFormField, MatInput} from '@angular/material/input';
+import {MatDialog} from '@angular/material/dialog';
+import {VecinoRetiroEvento} from '../us26-vecino-retiro-evento/vecino-retiro-evento';
 
 @Component({
-  selector: 'app-us21-us26-us31-vecino-detalle-evento-registrado',
+  selector: 'app-us21-us31-vecino-detalle-evento-registrado',
   imports: [
-    RouterLink,
     ReactiveFormsModule,
-    DatePipe
+    DatePipe,
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatInput,
+    MatFormField
   ],
   templateUrl: './vecino-detalle-evento-registrado.html',
   styleUrl: './vecino-detalle-evento-registrado.css',
@@ -30,10 +39,7 @@ export class VecinoDetalleEventoRegistrado {
   comentarios : MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
   id:number;
   accionesComentario:boolean = false;
-
-  imgSrcEditar='/editar-1.png';
-  imgSrcEliminar='/tacho-1.png';
-
+  dialog : MatDialog = inject(MatDialog);
   formComentario: FormGroup;
   private fb = inject(FormBuilder);
   constructor(private route:ActivatedRoute) {
@@ -123,24 +129,22 @@ export class VecinoDetalleEventoRegistrado {
     })
   }
 
-  popUpRetiro = false;
-  mostrarRetiro() {
-    this.popUpRetiro = true;
-  }
-  cerrarRetiro(){
-    this.popUpRetiro = false;
-  }
-
-  retiroEvento(){
-    this.exvService.eliminar(this.exv.id).subscribe({
+  openDialog() {
+    const dialogoEliminar=this.dialog.open(VecinoRetiroEvento);
+    dialogoEliminar.afterClosed().subscribe({
       next: (data) => {
-        alert(data)
-        this.router.navigate(['/mis-eventos']);
-      },
-      error: (error) => {
-        console.log(error);
+        if (data){
+          this.exvService.eliminar(this.exv.id).subscribe({
+            next: data => {
+              alert(data)
+              this.router.navigate(['/mis-eventos']);
+            },
+            error: error => {
+              console.log(error);
+            }
+          })
+        }
       }
     })
   }
-
 }

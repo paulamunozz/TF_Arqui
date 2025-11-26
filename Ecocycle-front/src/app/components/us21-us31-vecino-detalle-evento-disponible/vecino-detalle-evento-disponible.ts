@@ -8,12 +8,17 @@ import {EventoXVecino} from '../../model/evento-x-vecino';
 import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
 import {Vecino} from '../../model/vecino';
+import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us21-us31-vecino-detalle-evento-disponible',
   imports: [
     RouterLink,
-    DatePipe
+    DatePipe,
+    MatCard,
+    MatCardContent,
+    MatButton
   ],
   templateUrl: './vecino-detalle-evento-disponible.html',
   styleUrl: './vecino-detalle-evento-disponible.css',

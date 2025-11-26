@@ -13,8 +13,8 @@ import {VecinoDetalleEventoDisponible} from './components/us21-us31-vecino-detal
 import {VecinoEventosRegistrados} from './components/us27-vecino-eventos-registrados/vecino-eventos-registrados';
 import {
   VecinoDetalleEventoRegistrado
-} from './components/us21-us26-us31-vecino-detalle-evento-registrado/vecino-detalle-evento-registrado';
-import {VecinoPerfil} from './components/us07-vecino-perfil/vecino-perfil';
+} from './components/us21-us31-vecino-detalle-evento-registrado/vecino-detalle-evento-registrado';
+import {VecinoPerfil} from './components/us08-vecino-perfil/vecino-perfil';
 import {InicioComponent} from './components/us04-inicio-vecino/inicio-vecino';
 import {InicioMunicipalidad} from './components/us04-inicio-municipalidad/inicio-municipalidad';
 import {Contactanos} from './components/us04-contactanos/contactanos';

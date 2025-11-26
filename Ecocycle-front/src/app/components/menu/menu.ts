@@ -1,5 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
+import {VecinoService} from '../../services/vecino-service';
+import {Vecino} from '../../model/vecino';
 
 @Component({
   selector: 'app-menu',
@@ -10,8 +12,19 @@ import {Router, RouterLink} from '@angular/router';
   styleUrl: './menu.css',
 })
 export class Menu {
-  private router : Router = inject(Router);
   private rol:any;
+  icono = 0;
+
+  fotos = [
+    '/icono-default.png',
+    '/icono-1.png',
+    '/icono-2.png',
+    '/icono-3.png'
+  ];
+
+  constructor(private vecinoService: VecinoService) {
+    this.vecinoService.icono$.subscribe(i => this.icono = i);
+  }
 
   esVecino(): boolean{
     let siEs = false;

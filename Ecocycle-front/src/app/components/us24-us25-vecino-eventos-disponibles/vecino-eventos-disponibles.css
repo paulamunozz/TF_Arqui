@@ -8,7 +8,7 @@ p{
   flex-wrap: wrap;
   gap: 20px;
   align-items: center;
-  margin: 30px;
+  margin: 20px;
 }
 
 /* Centrado vertical real de todos los mat-form-field dentro de tu panel */
@@ -55,14 +55,14 @@ p{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ecf39e;
+  background-color: #ecf396;
   padding: 20px 40px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .evento.alterno {
-  background-color: #2f542c;
+  background-color: #326a2c;
   color: #fefef0;
 }
 
@@ -100,21 +100,16 @@ p{
   width: 180px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #4F772D;
-  color: white;
-}
-.btnEvento:hover{
-  background-color: #9bd66c;
-  color: black;
 }
 
-.evento.alterno .btnEvento{
-  background-color: #FFECBD;
-  color: black;
+.btnUnirse{
+  background-color: #4F772D !important;
+  color: white !important;
 }
-.evento.alterno .btnEvento:hover{
-  background-color: #8c8355;
-  color: white;
+
+.evento.alterno .btnUnirse{
+  background-color: #FFECBD !important;
+  color: black;
 }
 
 .sinEventos{

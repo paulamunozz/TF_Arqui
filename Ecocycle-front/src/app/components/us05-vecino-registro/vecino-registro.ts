@@ -10,11 +10,12 @@ import {Vecino} from '../../model/vecino';
 import {User} from '../../model/user';
 import {Auth} from '../../model/auth';
 import {LoginService} from '../../services/login-service';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us05-vecino-registro',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, MatFormField, MatLabel, MatInput, MatSelect, MatOption],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, MatFormField, MatLabel, MatInput, MatSelect, MatOption, MatButton],
   templateUrl: './vecino-registro.html',
   styleUrl: './vecino-registro.css',
 })

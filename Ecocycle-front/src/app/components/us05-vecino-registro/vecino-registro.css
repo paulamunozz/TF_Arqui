@@ -64,19 +64,8 @@ form {
 }
 
 .btnCrearCuenta {
-  margin-top: 20px;
-  background-color: #4F772D;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btnCrearCuenta:hover {
-  background-color: #9bd66c;
-  color: black;
+  background-color: #4F772D !important;
+  color: white !important;
 }
 
 .textoLogin {

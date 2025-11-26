@@ -73,7 +73,9 @@
         <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
         <mat-datepicker #pickerMax></mat-datepicker>
       </mat-form-field>
+    </form>
 
+    <div class="botonesAccion">
       <!-- Botón limpiar filtro -->
       <button
         mat-stroked-button
@@ -83,13 +85,13 @@
         <mat-icon>clear</mat-icon>
         Limpiar
       </button>
-    </form>
 
-    <!-- Botón Crear -->
-    <button mat-fab extended color="accent" class="btnCrearFab" (click)="abrirModalCrear()">
-      <mat-icon>add</mat-icon>
-      Crear
-    </button>
+      <!-- Botón Crear -->
+      <button mat-fab extended color="accent" class="btnCrearFab" (click)="abrirModalCrear()">
+        <mat-icon>add</mat-icon>
+        Crear
+      </button>
+    </div>
   </div>
 
   <!-- Indicador de carga -->
@@ -102,7 +104,7 @@
   <div class="reciclajes-list">
     @if (reciclajes.data.length > 0) {
       <!-- Cards de reciclajes paginados -->
-      @for (reciclaje of reciclajes.data; track reciclaje.idReciclaje) {
+      @for (reciclaje of reciclajesPaginados; track reciclaje.idReciclaje) {
         <mat-card class="reciclaje-card">
           <mat-card-content>
             <div class="card-content">
@@ -163,10 +165,8 @@
       <div class="paginator-container">
         <mat-paginator
           [length]="reciclajes.data.length"
-          [pageSize]="5"
           [pageSizeOptions]="[5, 10, 25, 50]"
-          showFirstLastButtons
-          aria-label="Seleccione página de reciclajes">
+          showFirstLastButtons>
         </mat-paginator>
       </div>
     } @else {

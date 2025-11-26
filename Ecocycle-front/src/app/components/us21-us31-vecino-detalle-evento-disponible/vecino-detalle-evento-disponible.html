@@ -1,36 +1,38 @@
 <h1>{{evento.nombre}}</h1>
 <div class="panelUnirse">
-  <h2>Detalles</h2>
-  <a [routerLink]="[]"><button type="submit" class="btnUnirse" (click)="unirseEvento()"><strong>Unirme al evento</strong></button></a>
+  <h3>Detalles</h3>
+  <a [routerLink]="[]"><button mat-raised-button type="submit" class="btnUnirse" (click)="unirseEvento()"><strong>Unirme al evento</strong></button></a>
 </div>
 
-<div class="panelDetalles">
-  <div class="detalleFilas">
-    <p class="descripcion">{{ evento.descripcion }}</p>
-    <div class="detalleColumnas datos">
-      <div class="datosFilas">
-        <p>Tipo: {{evento.tipo}}</p>
-        <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
-      </div>
+<mat-card class="panelDetalles">
+  <mat-card-content>
+    <div class="detalleFilas">
+      <p class="descripcion">{{ evento.descripcion }}</p>
+      <div class="detalleColumnas datos">
+        <div class="datosFilas">
+          <p>Tipo: {{evento.tipo}}</p>
+          <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Método: {{evento.metodo}}</p>
-        <p>Peso actual: {{evento.pesoActual}}</p>
-      </div>
+        <div class="datosFilas">
+          <p>Método: {{evento.metodo}}</p>
+          <p>Peso actual: {{evento.pesoActual}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Bonificación: {{evento.bonificacion}}</p>
-      </div>
+        <div class="datosFilas">
+          <p>Bonificación: {{evento.bonificacion}}</p>
+        </div>
 
-      <div class="datosFilas">
-        <p>Fecha de inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}}</p>
-        <p>Fecha de fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
+        <div class="datosFilas">
+          <p>Fecha de inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}}</p>
+          <p>Fecha de fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
 
-<h2>Comentarios</h2>
+<h3 class="tituloComentario">Comentarios</h3>
 <div class="panelComentarios">
   @if (comentarios.data.length>0) {
     @for (comentario of comentarios.data; track i; let i = $index) {

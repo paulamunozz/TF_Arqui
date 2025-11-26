@@ -69,8 +69,8 @@
           </div>
 
           <div class="filaBtnEvento">
-            <a [routerLink]="[]"><button type="submit" class="btnEvento btnUnirse" (click)="unirseEvento(evento.idEvento)"><strong>Unirme al evento</strong></button></a>
-            <a [routerLink]="['/detalle-evento-disponible', evento.idEvento]"><button type="submit" class="btnEvento btnDetalle">Ver detalle</button></a>
+            <a [routerLink]="[]"><button mat-raised-button type="submit" class="btnEvento btnUnirse" (click)="unirseEvento(evento.idEvento)"><strong>Unirme al evento</strong></button></a>
+            <a [routerLink]="['/detalle-evento-disponible', evento.idEvento]"><button mat-raised-button type="submit" class="btnEvento btnDetalle">Ver detalle</button></a>
           </div>
         </div>
       </li>
