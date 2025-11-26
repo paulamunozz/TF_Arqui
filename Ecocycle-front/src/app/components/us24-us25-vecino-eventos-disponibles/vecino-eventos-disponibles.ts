@@ -14,6 +14,7 @@ import {EventoXVecino} from '../../model/evento-x-vecino';
 import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {Vecino} from '../../model/vecino';
 import {VecinoService} from '../../services/vecino-service';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
@@ -33,6 +34,7 @@ import {VecinoService} from '../../services/vecino-service';
     MatSuffix,
     MatNativeDateModule,
     DatePipe,
+    MatButton,
   ],
   templateUrl: './vecino-eventos-disponibles.html',
   styleUrl: './vecino-eventos-disponibles.css',

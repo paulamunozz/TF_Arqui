@@ -2,14 +2,21 @@
 
 <div class="perfil-container">
   <div class="action-buttons">
-    <button type="submit" class="btnVolver" [routerLink]="'/perfil'">Volver</button>
+    <button mat-raised-button type="submit" class="btnVolver" [routerLink]="'/perfil'">Volver</button>
   </div>
 
    <div class="perfil-info">
 
-    <div class="profile-photo-area">
-      <img src="/icono-default-1.png" alt="Foto de Perfil" class="profile-photo" />
-    </div>
+     <div class="profile-photo-area">
+       @for (foto of fotos; track $index; let i = $index){
+         <button type="button" class="btnFotoPerfil"
+                 (click)="seleccionarFoto(i)"
+                 [class.selected]="formModificar.controls['icono']?.value === i">
+           <img [src]="foto" alt="Foto de Perfil" class="profile-photo"/>
+         </button>
+       }
+     </div>
+
      <div class="panelForm">
        <form [formGroup]="formModificar"  class="formRegistro" (ngSubmit)="modificar()">
          <mat-form-field appearance="fill">
@@ -59,7 +66,7 @@
            </mat-select>
          </mat-form-field>
 
-         <button type="submit" class="btnGuardar" [disabled]="formModificar.invalid">Guardar</button>
+         <button mat-raised-button type="submit" class="btnGuardar" [disabled]="formModificar.invalid">Guardar</button>
        </form>
      </div>
   </div>

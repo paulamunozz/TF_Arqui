@@ -10,6 +10,7 @@ import {ChartDataset, ChartOptions} from 'chart.js';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
@@ -18,6 +19,7 @@ import {MatCard, MatCardContent} from '@angular/material/card';
     MatIconModule,
     MatCard,
     MatCardContent,
+    MatButton,
 
   ],
   templateUrl: './municipalidad-detalle-evento.html',
@@ -37,13 +39,23 @@ export class MunicipalidadDetalleEvento {
   opcionesGraficoGenero: ChartOptions = {
     responsive: true,
     plugins: {
-      legend:{position: 'left'}
+      legend:{position: 'top'},
+      title: {
+        display: true,
+        text: 'Cantidad de vecinos por género',
+        font:{size: 20}
+      }
     }
   }
   opcionesGraficoEdad: ChartOptions = {
     responsive: true,
     plugins: {
-      legend:{position: 'right'}
+      legend:{position: 'top'},
+      title: {
+        display: true,
+        text: 'Cantidad de vecinos por edad',
+        font:{size: 20}
+      }
     }
   }
   labelsGraficoGenero= ['Mujeres', 'Hombres'];

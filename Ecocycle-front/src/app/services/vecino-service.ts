@@ -3,7 +3,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Vecino} from '../model/vecino';
 
 @Injectable({
@@ -37,5 +37,15 @@ export class VecinoService {
 
   ranking(filtros:any){
     return this.httpClient.post<Vecino[]>(this.url + '/ranking', filtros);
+  }
+
+  /*----*/
+
+  private _icono = new BehaviorSubject<number>(Number(localStorage.getItem('icono') || 0));
+  icono$ = this._icono.asObservable();
+
+  setIcono(icono: number) {
+    localStorage.setItem('icono', String(icono));
+    this._icono.next(icono);
   }
 }
