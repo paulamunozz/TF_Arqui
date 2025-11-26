@@ -15,7 +15,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController @RequestMapping("/ecocycle/reciclaje")
 public class ReciclajeController {
@@ -55,9 +57,9 @@ public class ReciclajeController {
         return reciclaje;
     }
 
-    @DeleteMapping("/eliminar")
+    @DeleteMapping("/eliminar/{idReciclaje}")
     @PreAuthorize("hasRole('VECINO')")
-    public String eliminar(@RequestBody Integer idReciclaje) {
+    public Map<String, String> eliminar(@PathVariable Integer idReciclaje) {
         ReciclajeDTO reciclaje = reciclajeService.buscarPorId(idReciclaje);
 
         vecinoService.actualizacionPuntos(reciclaje.getVecinoId());
@@ -66,7 +68,9 @@ public class ReciclajeController {
         municipalidadService.calcularPuestos();
         eventoService.actualizarPesoActual();
 
-        return reciclajeService.eliminar(idReciclaje);
+        String mensaje = reciclajeService.eliminar(idReciclaje);
+
+        return Collections.singletonMap("mensaje", mensaje);
     }
 
     @PostMapping("/vecino")

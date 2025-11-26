@@ -4,5 +4,6 @@ export class Reciclaje {
   peso: number;
   tipo: string;
   metodo: string;
+  fecha: string;
   puntaje: number;
 }
