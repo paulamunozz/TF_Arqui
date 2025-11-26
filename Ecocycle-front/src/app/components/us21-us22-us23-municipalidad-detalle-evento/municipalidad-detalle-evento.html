@@ -1,5 +1,13 @@
 <h1>{{evento.nombre}}</h1>
 
+<div class="panelAcciones">
+  <h2>Detalles</h2>
+  <div class="botones">
+    <button mat-raised-button type="button" class="botonEvento btnEditarEvento" (click)="editarEvento()">Editar</button>
+    <button mat-raised-button color="warn" type="button" class="botonEvento btnEliminarEvento" (click)="mostrarPopUp()">Eliminar</button>
+  </div>
+</div>
+
 <mat-card class="panelDetalles">
   <mat-card-content>
     <div class="detalleFilas">
@@ -53,7 +61,6 @@
   <mat-card-content class="containerGraficos">
     @if(hasData){
       <div class="graficos genero">
-        <h3 class="graficoTitulo">Cantidad de vecinos por género</h3>
         <canvas
           baseChart
           [datasets]="dataGraficoGenero"
@@ -64,7 +71,6 @@
       </div>
 
       <div class="graficos edad">
-        <h3 class="graficoTitulo">Cantidad de vecinos por edad</h3>
         <canvas
           baseChart
           [datasets]="dataGraficoEdad"
@@ -81,12 +87,6 @@
     }
   </mat-card-content>
 </mat-card>
-
-
-<div class="panelBotones">
-  <button type="button" class="botonEvento btnEditarEvento" (click)="editarEvento()">Editar</button>
-  <button type="button" class="botonEvento btnEliminarEvento" (click)="mostrarPopUp()">Eliminar</button>
-</div>
 
 @if(popUpVisible){
   <div class="panelPopUp">

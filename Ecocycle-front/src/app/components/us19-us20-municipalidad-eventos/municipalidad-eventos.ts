@@ -82,8 +82,6 @@ export class MunicipalidadEventos {
         console.log(err);
       }
     })
-
-
   }
 
 

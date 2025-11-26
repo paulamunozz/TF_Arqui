@@ -35,7 +35,12 @@ export class MunicipalidadVecinoEstadisticas {
   eventosPieChartOptions: ChartOptions = {
     responsive: true,
     plugins: {
-      legend:{position: 'top'}
+      legend:{position: 'top'},
+      title: {
+        display: true,
+        text: 'Cantidad de eventos logrados vs. sin lograr',
+        font:{size: 20}
+      }
     }
   }
 
@@ -44,7 +49,12 @@ export class MunicipalidadVecinoEstadisticas {
     responsive: true,
     plugins: {
       legend: { position: 'top' },
-      tooltip: { mode: 'index', intersect: false }
+      tooltip: { mode: 'index', intersect: false },
+      title: {
+        display: true,
+        text: 'Cantidad de registros y peso total de cada tipo de reciclaje por distrito',
+        font:{size: 20}
+      }
     },
     scales: {
       y: {

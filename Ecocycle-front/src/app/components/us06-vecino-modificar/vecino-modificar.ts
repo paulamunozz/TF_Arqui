@@ -43,14 +43,22 @@ export class VecinoModificar {
   formModificar: FormGroup;
   private fb = inject(FormBuilder);
 
+  fotos = [
+    '/icono-default.png',
+    '/icono-1.png',
+    '/icono-2.png',
+    '/icono-3.png'
+  ];
+
   constructor() {
     this.formModificar = this.fb.group({
-      dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
-      nombre: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(15)]],
-      genero: ['', Validators.required],
-      distrito: ['', Validators.required],
-      contrasena: ['', Validators.required]
+      dni: ['', Validators.pattern('^[0-9]{8}$')],
+      nombre: [''],
+      edad: ['', Validators.min(15)],
+      genero: [''],
+      distrito: [''],
+      contrasena: [''],
+      icono: ['']
     });
   }
 
@@ -70,6 +78,7 @@ export class VecinoModificar {
     this.vecinoService.modificar(vecino).subscribe({
       next: data => {
         console.log(data);
+        this.vecinoService.setIcono(data.icono);
         this.router.navigate(['/perfil']);
       },
       error: err => {
@@ -82,5 +91,9 @@ export class VecinoModificar {
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+  seleccionarFoto(index: number) {
+    this.formModificar.controls['icono'].setValue(index);
   }
 }

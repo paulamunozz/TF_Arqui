@@ -8,13 +8,21 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Comentario} from '../../model/reportes/comentario';
 import {EventoXVecino} from '../../model/evento-x-vecino';
 import {DatePipe} from '@angular/common';
+import {MatCard, MatCardContent} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+import {MatFormField, MatInput} from '@angular/material/input';
 
 @Component({
   selector: 'app-us21-us26-us31-vecino-detalle-evento-registrado',
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    DatePipe
+    DatePipe,
+    MatCard,
+    MatCardContent,
+    MatButton,
+    MatInput,
+    MatFormField
   ],
   templateUrl: './vecino-detalle-evento-registrado.html',
   styleUrl: './vecino-detalle-evento-registrado.css',

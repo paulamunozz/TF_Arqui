@@ -1,11 +1,19 @@
-h2{
-  width: 100%;
+:host {
+  display: block;
+  background-color: #ecf39e;
+}
+
+
+h3{
+  width: 30%;
+  align-content: center;
+  height: 25px;
   text-align: center;
   background-color: #4F772D;
   color: white;
-  font-weight: lighter;
   padding: 10px 0;
   margin: 0;
+  border-radius: 0 0 10px 0;
 }
 
 p{
@@ -17,18 +25,13 @@ p{
   justify-content: space-between;
 }
 
-.panelUnirse h2{
-  width: 30%;
-  align-content: center;
-  height: 30px;
-}
-
 .btnUnirse{
   width: 180px;
   padding: 10px;
-  margin: 10px;
-  background-color: #4F772D;
-  color: white;
+  margin-right: 10px;
+  margin-top: 10px;
+  background-color: #4F772D !important;
+  color: white !important;
 }
 .btnUnirse:hover{
   background-color: #9bd66c;
@@ -36,18 +39,16 @@ p{
 }
 
 .panelDetalles{
-  margin-bottom: 15px;
+  margin: 20px 10px;
 }
 
 .detalleFilas {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #ecf39e;
-  padding: 20px 40px;
+  padding: 0 20px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  border-radius: 6px;
   gap: 5px;
 }
 
@@ -72,6 +73,23 @@ p{
 }
 
 /*Panel de comentarios---------------------------------*/
+.panelComentarioAcciones{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.panelComentarioAcciones h3{
+  border-radius: 0 10px 10px 0;
+}
+
+.columnaBtnComentario{
+  display: flex;
+  gap: 20px;
+  margin-right: 10px;
+  justify-content: right;
+}
+
 .panelComentarios{
   list-style: none;
   padding: 0;
@@ -81,26 +99,19 @@ p{
 .panelMiComentario{
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  margin: 10px;
 }
 
 .miComentario{
   width: 100%;
-  height: 100px;
-}
-
-.columnaBtnComentario{
-  display: flex;
-  justify-content: right;
-  gap: 20px;
+  margin: 0;
 }
 
 .btnPublicar{
-  background-color: #b9b9b9;
   width: 200px;
 }
 .btnPublicar:hover{
-  background-color: #808080;
+  background-color: #a8a8a8;
   color: white;
 }
 
@@ -124,14 +135,14 @@ p{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #e2e2e2;
+  background-color: #d7dd81;
   padding: 15px 40px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   line-height: 15px;
 }
 .comentario.alterno{
-  background-color: white;
+  background-color: #f8ffa7;
 }
 
 /*Panel PopUp--------------------------------------*/

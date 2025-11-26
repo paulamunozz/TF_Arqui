@@ -1,21 +1,30 @@
-import { Component, inject } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {Router} from '@angular/router';
 import {VecinoService} from '../../services/vecino-service';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import {User} from '../../model/user';
 import {Auth} from '../../model/auth';
 import {MunicipalidadService} from '../../services/municipalidad-service';
 import {LoginService} from '../../services/login-service';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-us01-municipalidad-vecino-autenticacion',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatButtonModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule
+  ],
   templateUrl: './vecino-autenticacion.html',
   styleUrl: './vecino-autenticacion.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VecinoAutenticacion {
   formLogin: FormGroup;
@@ -58,6 +67,15 @@ export class VecinoAutenticacion {
                 console.log(localStorage.getItem('rol'));
                 console.log(localStorage.getItem('userId'));
                 console.log(localStorage.getItem('token'));
+
+                this.vecinoService.buscarPorID(vecino.idVecino).subscribe({
+                  next: result => {
+                    this.vecinoService.setIcono(result.icono);
+                  },
+                  error: error => {
+                    console.log(error);
+                  }
+                })
                 this.router.navigate(['inicio-vecino']);
               },
               error: (err) => {
@@ -94,5 +112,11 @@ export class VecinoAutenticacion {
     } else {
       alert('Por favor, ingresa un DNI válido (8 dígitos) y una contraseña.');
     }
+  }
+
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    event.stopPropagation();
+    this.hide.set(!this.hide());
   }
 }

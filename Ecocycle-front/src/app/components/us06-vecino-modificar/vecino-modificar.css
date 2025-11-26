@@ -14,12 +14,9 @@
 }
 
 .btnVolver{
-  background-color: #d9d9d9;
+  background-color: #9f9f9f !important;
+  color: white !important;
   padding: 10px 30px;
-}
-.btnVolver:hover{
-  background-color: #808080;
-  color: white;
 }
 
 .perfil-info {
@@ -32,11 +29,44 @@
   border-radius: 6px;
 }
 
-.profile-photo {
+.profile-photo-area{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnFotoPerfil {
+  border-radius: 50%;
   width: 230px;
   height: 230px;
-  border-radius: 50%;
-  border: 4px solid #9bd66c;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnFotoPerfil.selected {
+  background-color: #9bd66c;
+}
+
+.profile-photo {
+  width: 93%;               /* ocupa todo el botón */
+  height: 93%;
+  border-radius: 50%;        /* redondeo de la imagen */
+  object-fit: cover;
+  display: block;
+}
+.btnFotoPerfil:hover{
+  background-color: rgba(155, 214, 108, 0.43);
+}
+
+.btnFotoPerfil.selected {
+  background-color: #9bd66c;
 }
 
 .panelForm{
@@ -62,8 +92,8 @@
 }
 
 .btnGuardar{
-  background-color: #46783c;
-  color: white;
+  background-color: #46783c !important;
+  color: white !important;
   padding: 10px 30px;
 }
 .btnGuardar:hover{

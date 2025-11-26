@@ -41,6 +41,13 @@ export class VecinoPerfil {
   private userId = Number(localStorage.getItem('userId'));
   vecino = new Vecino();
 
+  fotos = [
+    '/icono-default.png',
+    '/icono-1.png',
+    '/icono-2.png',
+    '/icono-3.png'
+  ];
+
   constructor() {}
 
   ngOnInit(): void {

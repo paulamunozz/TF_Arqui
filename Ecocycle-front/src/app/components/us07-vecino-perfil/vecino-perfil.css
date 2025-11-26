@@ -18,34 +18,19 @@
   color: white;
   border-radius: 6px;
 }
-
-.action-buttons button[color="warn"]:hover {
-  background-color: #982c29;
-}
-
 .action-buttons .right-buttons {
   display: flex;
   gap: 10px;
 }
 
 .action-buttons button[color="primary"] {
-  background-color: #d9d9d9;
+  background-color: #878787;
   border-radius: 6px;
-}
-
-.action-buttons button[color="primary"]:hover {
-  background-color: #8e8e8e;
-  color: white;
 }
 
 .action-buttons button[color="accent"] {
-  background-color: #9bd66c;
+  background-color: #7bb04b;
   border-radius: 6px;
-}
-
-.action-buttons button[color="accent"]:hover {
-  background-color: #31572c;
-  color: white;
 }
 
 .perfil-info {
@@ -63,7 +48,7 @@
   width: 230px;
   height: 230px;
   border-radius: 50%;
-  border: 4px solid #9bd66c;
+  border: 8px solid #9bd66c;
 }
 
 .profile-photo-area button {
