@@ -28,7 +28,7 @@ export class ReciclajeService {
     return this.httpClient.post<Reciclaje[]>(this.url + '/vecino', filtros);
   }
 
-  listarPorDistrito(filtros: any){
+  listarReciclajeFiltrado(filtros: any){
     return this.httpClient.post<Reciclaje[]>(this.url + '/distrito', filtros);
   }
 
