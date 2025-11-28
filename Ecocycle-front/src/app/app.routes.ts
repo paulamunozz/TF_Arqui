@@ -36,36 +36,36 @@ import {
 } from './components/us17-municipalidad-modificar-evento/us17-municipalidad-modificar-evento';
 import {VecinoLogros} from './components/us09-vecino-logros/us09-vecino-logros';
 import {VecinoModificar} from './components/us06-vecino-modificar/vecino-modificar';
+import {authGuard} from './guards/auth-guards';
 
 export const routes: Routes = [
   { path: '', component: VecinoAutenticacion },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
 
-
-  { path: 'mi-reciclaje', component: VecinoReciclaje },
-  { path: 'eventos', component: MunicipalidadEventos },
-  { path: 'evento/:id', component: MunicipalidadDetalleEvento },
-  { path: 'nuevo-evento', component: MunicipalidadRegistroEvento },
-  { path: 'modificar-evento/:id', component: MunicipalidadModificarEvento },
-  { path: 'eventos-disponibles', component: VecinoEventosDisponibles },
-  { path: 'detalle-evento-disponible/:id', component: VecinoDetalleEventoDisponible },
-  { path: 'mis-eventos', component: VecinoEventosRegistrados },
-  { path: 'mis-eventos/:id', component: VecinoDetalleEventoRegistrado },
-  { path: 'logros', component: VecinoLogros },
-  { path: 'perfil', component: VecinoPerfil },
-  { path: 'editar-perfil', component: VecinoModificar },
-  { path: 'inicio-vecino', component: InicioComponent},
-  { path: 'inicio-muni', component: InicioMunicipalidad},
   { path: 'contacto', component: Contactanos},
-  { path: 'consejos', component: Consejos},
-  { path: 'actualizar-contrasena', component: MunicipalidadModificacionContrasena },
-  { path: 'reciclaje', component: MunicipalidadReciclaje },
-
-
   { path: 'estadisticas', component: MunicipalidadVecinoEstadisticas },
   { path: 'ranking-vecinos', component: RankingVecino },
   { path: 'ranking-municipalidades', component: RankingMunicipalidad },
+
+  { path: 'inicio-vecino', component: InicioComponent, canActivate:[authGuard]},
+  { path: 'consejos', component: Consejos, canActivate:[authGuard]},
+  { path: 'mi-reciclaje', component: VecinoReciclaje, canActivate:[authGuard] },
+  { path: 'eventos-disponibles', component: VecinoEventosDisponibles, canActivate:[authGuard] },
+  { path: 'detalle-evento-disponible/:id', component: VecinoDetalleEventoDisponible, canActivate:[authGuard] },
+  { path: 'mis-eventos', component: VecinoEventosRegistrados, canActivate:[authGuard] },
+  { path: 'mis-eventos/:id', component: VecinoDetalleEventoRegistrado, canActivate:[authGuard] },
+  { path: 'logros', component: VecinoLogros, canActivate:[authGuard] },
+  { path: 'perfil', component: VecinoPerfil, canActivate:[authGuard] },
+  { path: 'editar-perfil', component: VecinoModificar, canActivate:[authGuard] },
+
+  { path: 'inicio-muni', component: InicioMunicipalidad, canActivate:[authGuard]},
+  { path: 'eventos', component: MunicipalidadEventos, canActivate:[authGuard] },
+  { path: 'evento/:id', component: MunicipalidadDetalleEvento, canActivate:[authGuard] },
+  { path: 'nuevo-evento', component: MunicipalidadRegistroEvento, canActivate:[authGuard] },
+  { path: 'modificar-evento/:id', component: MunicipalidadModificarEvento, canActivate:[authGuard] },
+  { path: 'actualizar-contrasena', component: MunicipalidadModificacionContrasena, canActivate:[authGuard] },
+  { path: 'reciclaje', component: MunicipalidadReciclaje, canActivate:[authGuard] },
 
   { path: '**', redirectTo: '' }
 ];

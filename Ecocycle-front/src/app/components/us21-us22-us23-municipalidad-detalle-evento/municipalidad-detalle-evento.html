@@ -1,10 +1,10 @@
 <h1>{{evento.nombre}}</h1>
 
 <div class="panelAcciones">
-  <h2>Detalles</h2>
+  <h3>Detalles</h3>
   <div class="botones">
     <button mat-raised-button type="button" class="botonEvento btnEditarEvento" (click)="editarEvento()">Editar</button>
-    <button mat-raised-button color="warn" type="button" class="botonEvento btnEliminarEvento" (click)="mostrarPopUp()">Eliminar</button>
+    <button mat-raised-button color="warn" type="button" class="botonEvento btnEliminarEvento" (click)="eliminar()">Eliminar</button>
   </div>
 </div>
 
@@ -36,7 +36,7 @@
   </mat-card-content>
 </mat-card>
 
-<h2>Comentarios</h2>
+<h3 class="tituloComentario">Comentarios</h3>
 <div class="panelComentarios">
   @if (comentarios.data.length>0) {
     @for (comentario of comentarios.data; track comentario.idEXV; let i = $index) {
@@ -56,7 +56,7 @@
   }
 </div>
 
-<h2>Estadísticas de vecinos</h2>
+<h3 class="tituloComentario">Estadísticas de vecinos</h3>
 <mat-card class="cardGraficos">
   <mat-card-content class="containerGraficos">
     @if(hasData){
@@ -87,17 +87,3 @@
     }
   </mat-card-content>
 </mat-card>
-
-@if(popUpVisible){
-  <div class="panelPopUp">
-    <div class="popUp">
-      <h3>¿Seguro que desea eliminar este evento?</h3>
-      <p>Este será eliminado permanentemente y no habrá forma de recuperarlo.</p>
-
-      <div class="popupBotones">
-        <button class="btnCancelar botonPopUp" (click)="cerrarPopUp()">Cancelar</button>
-        <button class="btnEliminar botonPopUp" (click)="eliminar(evento.idEvento)">Eliminar</button>
-      </div>
-    </div>
-  </div>
-}

@@ -107,6 +107,6 @@ export class MunicipalidadModificarEvento{
   }
 
   volver(): void {
-    this.router.navigate(['/eventos']);
+    this.router.navigate(['/evento/' + this.eventoId]);
   }
 }

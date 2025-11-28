@@ -1,52 +1,82 @@
 <h1>Nuevo evento</h1>
 
-<p class="instrucciones">¡Completa todos los datos del siguiente formulario para crear un evento de reciclaje!</p>
+<mat-card class="instrucciones">
+  <mat-card-content>
+    <p>¡Completa todos los datos del siguiente formulario para crear un evento de reciclaje!</p>
+  </mat-card-content>
+</mat-card>
 
-<form [formGroup]="formRegistro" (ngSubmit)="onSubmit()">
-  <div class="panelDatosFila">
-    <div class="panelDatosColumna">
-      <label for="nombre" class="nomDato">Nombre</label>
-      <input id="nombre" type="text" formControlName="nombre" class="dato" required/>
-      <label for="pesoObjetivo" class="nomDato">Peso objetivo (kg)</label>
-      <input id="pesoObjetivo" type="number" formControlName="pesoObjetivo" class="dato" required/>
-      <label for="bonificacion" class="nomDato">Bonificación</label>
-      <input id="bonificacion" type="number" formControlName="bonificacion" class="dato" required/>
-    </div>
+<mat-card class="panelForm">
+  <mat-card-content>
+    <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()">
+      <div class="panelDatosFila">
+        <div class="panelDatosColumna">
+          <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput  type="text" formControlName="nombre" required/>
+          </mat-form-field>
 
-    <div class="panelDatosColumna">
-        <label for="tipo" class="nomDato">Tipo</label>
-        <select id="tipo" formControlName="tipo" class="dato" required>
-          <option value="Vidrio">Vidrio</option>
-          <option value="Plástico">Plástico</option>
-          <option value="Papel">Papel</option>
-          <option value="Electrónicos">Electrónicos</option>
-          <option value="Orgánicos">Orgánicos</option>
-          <option value="Metal/Lata">Metal/Lata</option>
-        </select>
+          <mat-form-field>
+            <mat-label>Peso objetivo (kg)</mat-label>
+            <input matInput type="number" formControlName="pesoObjetivo"required/>
+          </mat-form-field>
 
-        <label for="metodo" class="nomDato">Método</label>
-        <select id="metodo" formControlName="metodo" class="dato" required>
-          <option value="Centro de reciclaje de la municipalidad">Centro de reciclaje de la municipalidad</option>
-          <option value="Camión de reciclaje">Camión de reciclaje</option>
-          <option value="En casa">En casa</option>
-        </select>
+          <mat-form-field>
+            <mat-label>Bonificación</mat-label>
+            <input matInput type="number" formControlName="bonificacion" required/>
+          </mat-form-field>
+        </div>
 
-        <label for="fechaInicio" class="nomDato">Fecha de inicio</label>
-        <input type="date" formControlName="fechaInicio" id="fechaInicio" class="dato" required>
+        <div class="panelDatosColumna">
+          <mat-form-field>
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="tipo" required>
+              <mat-option value="Vidrio">Vidrio</mat-option>
+              <mat-option value="Plástico">Plástico</mat-option>
+              <mat-option value="Papel">Papel</mat-option>
+              <mat-option value="Electrónicos">Electrónicos</mat-option>
+              <mat-option value="Orgánicos">Orgánicos</mat-option>
+              <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <label for="fechaFin" class="nomDato">Fecha de fin</label>
-        <input type="date" formControlName="fechaFin" id="fechaFin" class="dato" required>
-    </div>
-  </div>
+          <mat-form-field>
+            <mat-label>Método</mat-label>
+            <mat-select formControlName="metodo" required>
+              <mat-option value="Centro de reciclaje de la municipalidad">Centro de reciclaje de la municipalidad</mat-option>
+              <mat-option value="Camión de reciclaje">Camión de reciclaje</mat-option>
+              <mat-option value="En casa">En casa</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-  <div class="panelDatosFila panelDescripcion">
-    <label for="descripcion" class="nomDato">Descripción</label>
-    <textarea id="descripcion" type="text" formControlName="descripcion" class="dato descripcion" required></textarea>
-  </div>
+          <mat-form-field class="columnaFiltro columnaFecha">
+            <mat-label>Fecha inicio</mat-label>
+            <input matInput [matDatepicker]="pickerMin" formControlName="fechaInicio">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerMin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerMin></mat-datepicker>
+          </mat-form-field>
 
-  <div class="panelDatosFila panelBtnCrear">
-    <button type="button" class="btnCrear" [disabled]="formRegistro.invalid" (click)="onSubmit()">
-      Crear evento
-    </button>
-  </div>
-</form>
+          <mat-form-field class="columnaFiltro columnaFecha">
+            <mat-label>Fecha fin</mat-label>
+            <input matInput [matDatepicker]="pickerMax" formControlName="fechaFin">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
+            <mat-datepicker #pickerMax></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="panelDatosFila panelDescripcion">
+        <mat-form-field  class="descripcion">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="descripcion" required></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<div class="panelDatosFila panelBtnCrear">
+  <button mat-raised-button type="button" class="btnCrear" [disabled]="formRegistro.invalid" (click)="onSubmit()">
+    Crear evento
+  </button>
+</div>

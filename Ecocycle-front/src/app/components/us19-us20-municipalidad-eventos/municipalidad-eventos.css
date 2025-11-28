@@ -126,21 +126,13 @@ p{
   width: 180px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #4F772D;
-  color: white;
-}
-.btnEvento:hover{
-  background-color: #9bd66c;
-  color: black;
+  background-color: #4F772D !important;
+  color: white !important;
 }
 
 .evento.alterno .btnEvento{
-  background-color: #FFECBD;
-  color: black;
-}
-.evento.alterno .btnEvento:hover{
-  background-color: #8c8355;
-  color: white;
+  background-color: #FFECBD !important;
+  color: black !important;
 }
 
 .sinEventos{
