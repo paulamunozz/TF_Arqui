@@ -55,12 +55,12 @@
           <span class="fecha-label">Fecha</span>
           <div class="fecha-inputs">
             <mat-form-field appearance="outline" class="fecha-field">
-              <mat-label>MIN</mat-label>
+              <mat-label>Inicio</mat-label>
               <input
                 matInput
                 [matDatepicker]="pickerMinReciclaje"
                 formControlName="fechaInicio"
-                placeholder="MIN">
+                (dateChange)="aplicarFiltros()">
               <mat-datepicker-toggle matIconSuffix [for]="pickerMinReciclaje"></mat-datepicker-toggle>
               <mat-datepicker #pickerMinReciclaje></mat-datepicker>
             </mat-form-field>
@@ -68,12 +68,12 @@
             <span class="fecha-separator">-</span>
 
             <mat-form-field appearance="outline" class="fecha-field">
-              <mat-label>MAX</mat-label>
+              <mat-label>Fin</mat-label>
               <input
                 matInput
                 [matDatepicker]="pickerMaxReciclaje"
                 formControlName="fechaFin"
-                placeholder="MAX">
+                (dateChange)="aplicarFiltros()">
               <mat-datepicker-toggle matIconSuffix [for]="pickerMaxReciclaje"></mat-datepicker-toggle>
               <mat-datepicker #pickerMaxReciclaje></mat-datepicker>
             </mat-form-field>
@@ -101,25 +101,25 @@
           <span class="edad-label">Edad</span>
           <div class="edad-inputs">
             <mat-form-field appearance="outline" class="edad-field">
-              <mat-label>MIN</mat-label>
+              <mat-label>Mínima</mat-label>
               <input
                 matInput
                 type="number"
                 formControlName="edadMin"
                 min="0"
-                placeholder="MIN">
+                (input)="aplicarFiltros()">
             </mat-form-field>
 
             <span class="edad-separator">-</span>
 
             <mat-form-field appearance="outline" class="edad-field">
-              <mat-label>MAX</mat-label>
+              <mat-label>Máxima</mat-label>
               <input
                 matInput
                 type="number"
                 formControlName="edadMax"
                 min="0"
-                placeholder="MAX">
+                (input)="aplicarFiltros()">
             </mat-form-field>
           </div>
         </div>

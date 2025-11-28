@@ -109,7 +109,7 @@ p{
 
 .evento.alterno .btnUnirse{
   background-color: #FFECBD !important;
-  color: black;
+  color: black !important;
 }
 
 .sinEventos{

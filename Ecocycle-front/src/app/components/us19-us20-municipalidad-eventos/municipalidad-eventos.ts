@@ -18,6 +18,7 @@ import {MatSelect} from '@angular/material/select';
 import {MatInput} from '@angular/material/input';
 import {Municipalidad} from '../../model/municipalidad';
 import {MunicipalidadService} from '../../services/municipalidad-service';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -38,6 +39,7 @@ import {MunicipalidadService} from '../../services/municipalidad-service';
     MatSelect,
     MatInput,
     MatSuffix,
+    MatButton,
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
