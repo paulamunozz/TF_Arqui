@@ -1,0 +1,103 @@
+<h1>{{evento.nombre}}</h1>
+
+<div class="panelAcciones">
+  <h2>Detalles</h2>
+  <div class="botones">
+    <button mat-raised-button type="button" class="botonEvento btnEditarEvento" (click)="editarEvento()">Editar</button>
+    <button mat-raised-button color="warn" type="button" class="botonEvento btnEliminarEvento" (click)="mostrarPopUp()">Eliminar</button>
+  </div>
+</div>
+
+<mat-card class="panelDetalles">
+  <mat-card-content>
+    <div class="detalleFilas">
+      <p class="descripcion">{{ evento.descripcion }}</p>
+      <div class="detalleColumnas datos">
+        <div class="datosFilas">
+          <p>Tipo: {{evento.tipo}}</p>
+          <p>Peso objetivo: {{evento.pesoObjetivo}}</p>
+        </div>
+
+        <div class="datosFilas">
+          <p>Método: {{evento.metodo}}</p>
+          <p>Peso actual: {{evento.pesoActual}}</p>
+        </div>
+
+        <div class="datosFilas">
+          <p>Bonificación: {{evento.bonificacion}}</p>
+        </div>
+
+        <div class="datosFilas">
+          <p>Fecha de inicio: {{evento.fechaInicio}}</p>
+          <p>Fecha de fin: {{evento.fechaFin}}</p>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<h2>Comentarios</h2>
+<div class="panelComentarios">
+  @if (comentarios.data.length>0) {
+    @for (comentario of comentarios.data; track comentario.idEXV; let i = $index) {
+      <li class="comentario" [class.alterno]="i % 2 !== 0">
+        <div class="comentarioColumnas">
+          <p><strong>{{comentario.nombre}}</strong></p>
+          <button type="submit" class="btnEliminarComentario" (click)="eliminarComentario(comentario.idEXV)">
+            <img src="/tacho-3.png" alt="Eliminar comentario" class="iconoEliminar">
+          </button>
+        </div>
+        <p>{{comentario.comentario}}</p>
+      </li>
+    }
+  }
+  @else {
+    <p class="sinComentarios">Este evento aún no cuenta con comentarios</p>
+  }
+</div>
+
+<h2>Estadísticas de vecinos</h2>
+<mat-card class="cardGraficos">
+  <mat-card-content class="containerGraficos">
+    @if(hasData){
+      <div class="graficos genero">
+        <canvas
+          baseChart
+          [datasets]="dataGraficoGenero"
+          [labels]="labelsGraficoGenero"
+          [options]="opcionesGraficoGenero"
+          type="pie">
+        </canvas>
+      </div>
+
+      <div class="graficos edad">
+        <canvas
+          baseChart
+          [datasets]="dataGraficoEdad"
+          [labels]="labelsGraficoEdad"
+          [options]="opcionesGraficoEdad"
+          type="pie">
+        </canvas>
+      </div>
+    } @else{
+      <div class="no-data">
+        <mat-icon class="no-data-icon">info_outline</mat-icon>
+        <p class="no-data-message">No hay datos disponibles para mostrar.</p>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
+
+@if(popUpVisible){
+  <div class="panelPopUp">
+    <div class="popUp">
+      <h3>¿Seguro que desea eliminar este evento?</h3>
+      <p>Este será eliminado permanentemente y no habrá forma de recuperarlo.</p>
+
+      <div class="popupBotones">
+        <button class="btnCancelar botonPopUp" (click)="cerrarPopUp()">Cancelar</button>
+        <button class="btnEliminar botonPopUp" (click)="eliminar(evento.idEvento)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+}

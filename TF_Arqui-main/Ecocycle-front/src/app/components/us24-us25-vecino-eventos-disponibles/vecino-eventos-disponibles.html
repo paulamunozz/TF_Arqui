@@ -1,0 +1,82 @@
+<h1>Eventos</h1>
+
+<form [formGroup]="formFiltro">
+  <div class="panelFiltros">
+    <mat-form-field appearance="outline" class="columnaFiltro">
+      <mat-label class="nomFiltro">Nombre</mat-label>
+      <input matInput id="nombre" type="text" formControlName="nombre" (input)="listarEventos()" class="filtro"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="columnaFiltro">
+      <mat-label class="nomFiltro">Tipo</mat-label>
+      <mat-select id="tipo" formControlName="tipo" class="filtro" (selectionChange)="listarEventos()">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="Vidrio">Vidrio</mat-option>
+        <mat-option value="Plástico">Plástico</mat-option>
+        <mat-option value="Papel">Papel</mat-option>
+        <mat-option value="Electrónicos">Electrónicos</mat-option>
+        <mat-option value="Orgánico">Orgánico</mat-option>
+        <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="columnaFiltro">
+      <mat-label class="nomFiltro">Método</mat-label>
+      <mat-select id="metodo" formControlName="metodo" class="filtro" (selectionChange)="listarEventos()">
+        <mat-option value="">Todos</mat-option>
+        <mat-option value="Centro de reciclaje de la municipalidad">Centro de reciclaje de la municipalidad</mat-option>
+        <mat-option value="Camión de reciclaje">Camión de reciclaje</mat-option>
+        <mat-option value="En casa">En casa</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="columnaFiltro columnaFecha">
+      <mat-label>Fecha inicio</mat-label>
+      <input matInput [matDatepicker]="pickerMin" formControlName="fechaInicio" (dateChange)="listarEventos()">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerMin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMin></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="columnaFiltro columnaFecha">
+      <mat-label>Fecha fin</mat-label>
+      <input matInput [matDatepicker]="pickerMax" formControlName="fechaFin" (dateChange)="listarEventos()">
+      <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
+      <mat-datepicker #pickerMax></mat-datepicker>
+    </mat-form-field>
+  </div>
+</form>
+
+
+<ul class="panelEventos">
+  @if (eventos.data.length>0)
+  {
+    @for (evento of eventos.data; track evento.idEvento; let i = $index) {
+      <li class="evento" [class.alterno]="i % 2 !== 0">
+        <div class="filasEvento">
+          <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
+          <p class="fechasEvento">Fecha inicio: {{evento.fechaInicio | date:'dd/MM/yyyy'}} &nbsp;&nbsp; Fecha fin: {{evento.fechaFin | date:'dd/MM/yyyy'}}</p>
+        </div>
+
+        <div class="filasEvento">
+          <div class="columnaEvento">
+            <p class="tipoEvento">Tipo: {{evento.tipo}}</p>
+            <p class="metodoEvento">Método: {{evento.metodo}}</p>
+          </div>
+
+          <div class="columnaEvento">
+            <p class="pesosEvento"><strong>Peso objectivo: {{evento.pesoObjetivo}}kg</strong></p>
+            <p class="pesosEvento"><strong>Peso actual: {{evento.pesoActual}}kg</strong></p>
+          </div>
+
+          <div class="filaBtnEvento">
+            <a [routerLink]="[]"><button mat-raised-button type="submit" class="btnEvento btnUnirse" (click)="unirseEvento(evento.idEvento)"><strong>Unirme al evento</strong></button></a>
+            <a [routerLink]="['/detalle-evento-disponible', evento.idEvento]"><button mat-raised-button type="submit" class="btnEvento btnDetalle">Ver detalle</button></a>
+          </div>
+        </div>
+      </li>
+    }
+  }
+  @else {
+    <p class="sinEventos">No hay eventos disponibles en tu distrito</p>
+  }
+</ul>

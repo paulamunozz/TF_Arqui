@@ -1,0 +1,1405 @@
+{
+	"info": {
+		"_postman_id": "415a1570-2cc1-4070-bcdd-3a7498dca450",
+		"name": "Ecocycle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48181431",
+		"_collection_link": "https://u202312321-1040848.postman.co/workspace/Paula's-Workspace~a2481e86-8b0c-4d85-8095-f2f46b78846e/collection/48181431-415a1570-2cc1-4070-bcdd-3a7498dca450?action=share&source=collection_link&creator=48181431"
+	},
+	"item": [
+		{
+			"name": "Vecino",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dni\":12345678,\r\n    \"contrasena\":123,\r\n    \"nombre\":\"Dayana Gómez\",\r\n    \"genero\":\"F\",\r\n    \"edad\": \"18\",\r\n    \"distrito\": \"Barranco\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYxODk2NiwiZXhwIjoxNzU5NjIyNTY2fQ.HU6xzhx0hB3GhDu0Q3eNx_vITvtGyq7Lgr_ckVs3qUGi7gMzVlaWa8B5rt4ccykrfLyqbfbMghzhpo8SunimCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idVecino\":6,\r\n    \"dni\":70390511,\r\n    \"contrasena\":12345,\r\n    \"nombre\":\"Silvana Salcedo\",\r\n    \"genero\":\"F\",\r\n    \"edad\": null,\r\n    \"distrito\": \"San Borja\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxMSIsImlhdCI6MTc1OTYyNzY1MiwiZXhwIjoxNzU5NzE0MDUyfQ.TvA700J2opKtW5RM5ka0tYzBF6s1gwQjtGTJyY36-AdX6ZwL1tWG4UeRBBYKCpqxISDyqVZmKIrMuoRbBhy0Bw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "5",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por DNI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyMjAyNSwiZXhwIjoxNzU5NjI1NjI1fQ.qRMWBdF2y6LAHbwiTBPDiDOk-ausiCOZlKSmiuk05a4aVrvHkUqxfh2ghZYW4bBb1S3LsK_vyDDpfWY-41Jn2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "70390517",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/buscarPorDNI",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"buscarPorDNI"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxMSIsImlhdCI6MTc1OTYyMjQ1NywiZXhwIjoxNzU5NjI2MDU3fQ.EXxI0M1AxRLV1tjpMKnlVuoa1qFM9oE3WlXsRsLCBj1kV2SGXE-oroNkxrlTWj-VzSlZjFjuVJyr1nDaYmKMAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "6",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyMjAyNSwiZXhwIjoxNzU5NjI1NjI1fQ.qRMWBdF2y6LAHbwiTBPDiDOk-ausiCOZlKSmiuk05a4aVrvHkUqxfh2ghZYW4bBb1S3LsK_vyDDpfWY-41Jn2w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"distrito\": null, \r\n    \"genero\": null, \r\n    \"edadMin\": null, \r\n    \"edadMax\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/ranking",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"ranking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lista vecinos por evento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "4",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/vecino/listarVecinosPorEvento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"vecino",
+								"listarVecinosPorEvento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reciclaje",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\": 7,\r\n    \"peso\": 200,\r\n    \"tipo\": \"Plástico\",\r\n    \"metodo\": \"En centro de reciclaje\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idReciclaje\": 4,\r\n    \"peso\": 5,\r\n    \"tipo\": \"Vidrio\",\r\n    \"metodo\": \"En centro de reciclaje\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\":6, \r\n    \"tipo\": \"null\", \r\n    \"metodo\": null, \r\n    \"fechaInicio\": null, \r\n    \"fechaFin\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar reciclaje filtrado",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"distrito\":\"San Borja\", \r\n    \"tipo\": null, \r\n    \"metodo\": null, \r\n    \"fechaInicio\": null, \r\n    \"fechaFin\": null, \r\n    \"genero\": null, \r\n    \"edadMin\": null, \r\n    \"edadMax\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarReciclajeFiltrado",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarReciclajeFiltrado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar cantidad y peso total por tipo de reciclaje",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/reciclaje/listarCantidadXTipo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"reciclaje",
+								"listarCantidadXTipo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Logro",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\":3,\r\n    \"nombre\":\"Participaste en el evento Septiembre sin Plástico 2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/logro/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"logro",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImlhdCI6MTc1OTY5MTIwNSwiZXhwIjoxNzU5Nzc3NjA1fQ.ySQ0FybWaS3_SJ7Lbj_8IpeKZqhd-mrYgG5b0axAtQUiz1HOqgKyUc2QvQL9X7V81UUkfBa6q03VNQ1JykGQqg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "7",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/logro/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"logro",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Municipalidad",
+			"item": [
+				{
+					"name": "Modificar contraseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"contrasena\":\"Barranco\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/modificarContrasena",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"modificarContrasena"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por código",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyNDg4MSwiZXhwIjoxNzU5NzExMjgxfQ.OW3ojfgXxRyAiRIpi0MTxbxoN-AssH5v7GUeZQeu_1wK2WiY-2igPK6UlRtYc3Gss9oLSPScVTlQil6_QcwAGw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "SB002025",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/buscarXcodigo",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"buscarXcodigo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyNDg4MSwiZXhwIjoxNzU5NzExMjgxfQ.OW3ojfgXxRyAiRIpi0MTxbxoN-AssH5v7GUeZQeu_1wK2WiY-2igPK6UlRtYc3Gss9oLSPScVTlQil6_QcwAGw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/listar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ranking",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/municipalidad/ranking",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"municipalidad",
+								"ranking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evento",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"municipalidadId\":1,\r\n    \"nombre\":\"Fuera plástico 2025-2\",\r\n    \"descripcion\":\"Recicle todos sus electronicos malogrados que ya no le sirvan\",\r\n    \"pesoObjetivo\": 200,\r\n    \"fechaInicio\": \"2025-10-18\",\r\n    \"fechaFin\": \"2025-10-28\",\r\n    \"tipo\":\"Plástico\",\r\n    \"bonificacion\": 4.5,\r\n    \"metodo\": \"En centro de reciclaje\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEvento\": 1,\r\n    \"descripcion\": \"Recicle todo el plástico que pueda durante este mes!!!\",\r\n    \"bonificacion\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImlhdCI6MTc1OTY4ODg4NiwiZXhwIjoxNzU5Nzc1Mjg2fQ.EjGWwHo9OXZLxNPt0EGQFa29iO0yRV_JqKKCRmZjjsp2E0EMSMwWYTCJuxTMDUd_xmdADTV5ZnEeBDLVYEY23Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/buscarXid",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"buscarXid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar y filtrar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTQjAwMjAyNSIsImlhdCI6MTc1OTYyNDgyNiwiZXhwIjoxNzU5NzExMjI2fQ.pUB8PAHKCNYvoE9f0E_H9Kvo1N55JqmwYIsitPNehUtdiYkC-_2JN0rXeJHLqAUcz84eeAFpDaC5XBmMf_pUeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"distrito\":null, \r\n    \"nombre\": null, \r\n    \"tipo\":null, \r\n    \"metodo\":null, \r\n    \"fechaInicio\":null, \r\n    \"fechaFin\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/listarYfiltrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"listarYfiltrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar por vecino",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImlhdCI6MTc1OTY4ODg4NiwiZXhwIjoxNzU5Nzc1Mjg2fQ.EjGWwHo9OXZLxNPt0EGQFa29iO0yRV_JqKKCRmZjjsp2E0EMSMwWYTCJuxTMDUd_xmdADTV5ZnEeBDLVYEY23Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vecinoId\":5, \r\n    \"nombre\": null, \r\n    \"tipo\":null, \r\n    \"metodo\":null, \r\n    \"fechaInicio\":null, \r\n    \"fechaFin\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/listarPorVecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"listarPorVecino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cantidad de eventos logrados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/evento/cantidadEventosLogrados",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"evento",
+								"cantidadEventosLogrados"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evento x Vecino",
+			"item": [
+				{
+					"name": "Registrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"eventoId\":1,\r\n    \"vecinoId\":5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idEXV\":1,\r\n    \"comentario\":null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/modificar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"modificar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/eliminar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comentario de evento",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjM0NTY3OCIsImlhdCI6MTc1OTY4ODg4NiwiZXhwIjoxNzU5Nzc1Mjg2fQ.EjGWwHo9OXZLxNPt0EGQFa29iO0yRV_JqKKCRmZjjsp2E0EMSMwWYTCJuxTMDUd_xmdADTV5ZnEeBDLVYEY23Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "50",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ecocycle/exv/comentariosEvento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ecocycle",
+								"exv",
+								"comentariosEvento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "Prueba admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyMTcxNiwiZXhwIjoxNzU5NjI1MzE2fQ.rZEtoBY0FTqmB09161TVBX-AXbrw13Y_H0GBwT-MWln6Xbc5gZiMMVFA3VEUe82IxjUTJr3FreO21BUEp5pxQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/security/prueba/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"security",
+								"prueba",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba vecino",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MDM5MDUxNyIsImlhdCI6MTc1OTYyNzc0MiwiZXhwIjoxNzU5NzE0MTQyfQ._mDDnicC29pDSTImLi5CycNcVji1AP5jq9dMiEmmM6e9_CJTFlBrj51Na_UgGR03_VGamCgsxsPdwUZYHmQ20g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/security/prueba/vecino",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"security",
+								"prueba",
+								"vecino"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba municipalidad",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyMTcxNiwiZXhwIjoxNzU5NjI1MzE2fQ.rZEtoBY0FTqmB09161TVBX-AXbrw13Y_H0GBwT-MWln6Xbc5gZiMMVFA3VEUe82IxjUTJr3FreO21BUEp5pxQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/security/prueba/municipalidad",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"security",
+								"prueba",
+								"municipalidad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prueba user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1OTYyMTcxNiwiZXhwIjoxNzU5NjI1MzE2fQ.rZEtoBY0FTqmB09161TVBX-AXbrw13Y_H0GBwT-MWln6Xbc5gZiMMVFA3VEUe82IxjUTJr3FreO21BUEp5pxQA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/security/prueba/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"security",
+								"prueba",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"12345678\",\r\n    \"password\":\"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/security/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"security",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

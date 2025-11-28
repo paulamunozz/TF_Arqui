@@ -1,0 +1,77 @@
+/* src/styles.css */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: #000000;
+  font-size: 16px;
+}
+
+input, select, textarea, button, label {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+h1{
+  padding: 20px;
+  color: white;
+  background-color: rgb(49, 87, 44);
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0;
+}
+
+select {
+  background-color: white;
+}
+
+button{
+  padding: 7px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Cambiar el fondo general del panel desplegable */
+.mat-mdc-select-panel {
+  background-color: #ffffff !important;
+}
+
+/* Cambiar el fondo de cada opción */
+.mat-mdc-option {
+  background-color: #ffffff !important;
+  color: #000 !important;
+}
+
+/* Cuando pasas el mouse por encima */
+.mat-mdc-option:hover,
+.mat-mdc-option.mat-mdc-option-active {
+  background-color: #c8e6c9 !important; /* verde suave */
+}
+
+.mat-datepicker-content {
+  background-color: white !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* También puedes ajustar el contenedor interno si lo deseas */
+.mat-calendar {
+  background-color: white !important;
+}

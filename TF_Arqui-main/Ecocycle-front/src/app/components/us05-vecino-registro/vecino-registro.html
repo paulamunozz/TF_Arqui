@@ -1,0 +1,61 @@
+<div class="contenedorRegistro">
+  <div class="registro-container">
+    <div class="registro-header">
+      <img src="/logo-ecocycle.png" alt="Logo EcoCycle" class="logoEmpresa">
+      <h2>Regístrate</h2>
+    </div>
+
+  <form [formGroup]="formRegistro" (ngSubmit)="onSubmit()" class="formRegistro">
+    <mat-form-field appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput maxlength="8" formControlName="dni"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="contrasena"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label >Nombre completo</mat-label>
+      <input matInput formControlName="nombre"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Edad</mat-label>
+      <input matInput type="number" formControlName="edad" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Género</mat-label>
+      <mat-select id="genero" formControlName="genero">
+        <mat-option value="M">Masculino</mat-option>
+        <mat-option value="F">Femenino</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Distrito</mat-label>
+      <mat-select id="distrito" formControlName="distrito">
+        <mat-option value="San Borja">San Borja</mat-option>
+        <mat-option value="Surquillo">Surquillo</mat-option>
+        <mat-option value="Surco">Surco</mat-option>
+        <mat-option value="Miraflores">Miraflores</mat-option>
+        <mat-option value="Barranco">Barranco</mat-option>
+        <mat-option value="Villa el Salvador">Villa el Salvador</mat-option>
+        <mat-option value="Ate">Ate</mat-option>
+        <mat-option value="San Isidro">San Isidro</mat-option>
+        <mat-option value="San Miguel">San Miguel</mat-option>
+        <mat-option value="Chorrillos">Chorrillos</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" class="btnCrearCuenta" [disabled]="formRegistro.invalid">Crear cuenta</button>
+  </form>
+
+  <p class="textoLogin">
+    ¿Ya tienes cuenta?
+    <a routerLink="/login">Iniciar sesión</a>
+  </p>
+</div>
+</div>

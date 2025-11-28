@@ -1,0 +1,43 @@
+.panelFiltros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Centrado vertical real de todos los mat-form-field dentro de tu panel */
+::ng-deep .panelFiltros .mat-mdc-form-field {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px; /* altura uniforme */
+}
+
+/* Hace que el wrapper interno ocupe todo el alto del form-field */
+::ng-deep .panelFiltros .mat-mdc-text-field-wrapper {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Centra el input o el valor seleccionado */
+::ng-deep .panelFiltros input.mat-mdc-input-element,
+::ng-deep .panelFiltros .mat-mdc-select-trigger {
+  padding: 0 8px !important;
+}
+
+::ng-deep .mat-mdc-floating-label {
+  top: 23px !important;
+}
+
+.columnaFiltro{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 150px;
+  min-width: 100px;
+}
+
+.mat-mdc-header-row {
+  background-color: #90A955;
+  color: white;
+}

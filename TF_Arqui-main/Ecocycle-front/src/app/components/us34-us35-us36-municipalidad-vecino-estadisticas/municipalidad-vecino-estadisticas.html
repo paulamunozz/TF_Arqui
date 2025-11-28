@@ -1,0 +1,40 @@
+<h1>Estadísticas</h1>
+
+<div class="panelDistrito">
+  <mat-form-field appearance="outline" class="filtroDistrito">
+    <mat-label>Distrito</mat-label>
+    <mat-select [(ngModel)]="distrito" (selectionChange)="filtrarDistrito()">
+      <mat-option class="opcion" value="">Todos</mat-option>
+      <mat-option value="San Borja">San Borja</mat-option>
+      <mat-option value="Surco">Surco</mat-option>
+      <mat-option value="Surquillo">Surquillo</mat-option>
+      <mat-option value="Miraflores">Miraflores</mat-option>
+      <mat-option value="Barranco">Barranco</mat-option>
+      <mat-option value="Villa el Salvador">Villa el Salvador</mat-option>
+      <mat-option value="Ate">Ate</mat-option>
+      <mat-option value="San Isidro">San Isidro</mat-option>
+      <mat-option value="San Miguel">San Miguel</mat-option>
+      <mat-option value="Chorrillos">Chorrillos</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div class="panelGraficos">
+  <div class="grafico pie">
+    <canvas baseChart
+            [datasets]="eventosPieChartDataset"
+            [labels]="eventosPieChartLabels"
+            [options]="eventosPieChartOptions"
+            [type]="'pie'">
+    </canvas>
+  </div>
+
+  <div class="grafico dual">
+    <canvas baseChart
+            [data]="dualAxisChartData"
+            [options]="dualAxisChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </div>
+</div>
+

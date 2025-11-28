@@ -1,0 +1,554 @@
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.reciclaje-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+  padding-bottom: 80px;
+}
+/* ==================== PANEL DE ACCIONES ==================== */
+.panelAcciones {
+  background-color: white;
+  padding: 20px;
+  padding-bottom: 0;
+  margin: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ==================== TARJETA DE PUNTAJE ==================== */
+.puntaje-card {
+  background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%) !important;
+  color: white !important;
+  width: 250px;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 16px rgba(124, 179, 66, 0.3) !important;
+  transition: transform 0.3s ease;
+}
+
+.puntaje-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(124, 179, 66, 0.4) !important;
+}
+
+.puntaje-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px !important;
+}
+
+.puntaje-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #ffd700;
+}
+
+.puntaje-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.puntaje-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.puntaje-value {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+/* ==================== PANEL DE FILTROS ==================== */
+.panelFiltros {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.columnaFiltro {
+  min-width: 250px;
+  flex: 1;
+}
+
+.columnaBtnFiltro {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end; /* Alinear botones al final */
+  margin-bottom: 4px; /* Pequeño ajuste para alinear con los campos */
+}
+
+/* Estilos de Material Form Fields */
+::ng-deep .columnaFiltro .mat-mdc-form-field {
+  width: 100%;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #f8f9fa !important;
+}
+
+::ng-deep .mat-mdc-form-field-icon-prefix {
+  color: #558b2f !important;
+  margin-right: 8px;
+}
+
+.botonesAccion{
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* ==================== BOTONES DE FILTRO ==================== */
+.btnLimpiar {
+  display: flex;
+  gap: 12px;
+  height: 56px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px;
+  border-color: #757575 !important;
+  color: #757575 !important;
+  width: 100%;
+}
+
+.btnLimpiar:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* ==================== BOTÓN CREAR FAB ==================== */
+.btnCrearFab {
+  background-color: #7cb342 !important;
+  color: white !important;
+  height: 48px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 12px rgba(124, 179, 66, 0.4) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btnCrearFab:hover {
+  background-color: #689f38 !important;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(124, 179, 66, 0.5) !important;
+}
+
+.btnCrearFab mat-icon {
+  margin-right: 8px;
+}
+
+/* ==================== LOADING ==================== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 24px;
+}
+
+.loading-text {
+  color: #558b2f;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+::ng-deep .loading-container .mat-mdc-progress-spinner circle {
+  stroke: #7cb342 !important;
+}
+
+/* ==================== LISTA DE RECICLAJES ==================== */
+.reciclajes-list {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ==================== CARDS DE RECICLAJE ==================== */
+.reciclaje-card {
+  background-color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease;
+  border-left: 4px solid #7cb342;
+}
+
+.reciclaje-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.reciclaje-card mat-card-content {
+  padding: 24px !important;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ==================== INFO SECTION ==================== */
+.card-info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-icon {
+  color: #558b2f;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #757575;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #2d5016;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ==================== ACCIONES DE CARD ==================== */
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.btn-action {
+  width: 48px !important;
+  height: 48px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-action:hover {
+  transform: scale(1.1);
+}
+
+/* ==================== ESTADO VACÍO ==================== */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  font-size: 120px;
+  width: 120px;
+  height: 120px;
+  color: #bdbdbd;
+  margin-bottom: 24px;
+}
+
+.empty-title {
+  color: #2d5016;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.empty-text {
+  color: #757575;
+  font-size: 16px;
+  margin: 0 0 32px 0;
+}
+
+/* ==================== PAGINADOR ==================== */
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: white !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+::ng-deep .mat-mdc-paginator-container {
+  justify-content: center !important;
+  padding: 16px !important;
+}
+
+::ng-deep .mat-mdc-paginator-page-size-label,
+::ng-deep .mat-mdc-paginator-range-label {
+  color: #2d5016;
+  font-weight: 500;
+}
+
+::ng-deep .mat-mdc-icon-button {
+  color: #558b2f !important;
+}
+
+::ng-deep .mat-mdc-icon-button:hover:not(:disabled) {
+  background-color: rgba(124, 179, 66, 0.1) !important;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px solid #e8f5e9;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+::ng-deep .footer mat-chip {
+  background-color: #7cb342 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding: 8px 16px !important;
+}
+
+/* ==================== MODAL ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-card {
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3) !important;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #558b2f 0%, #33691e 100%);
+  color: white !important;
+  padding: 24px !important;
+  margin: -16px -16px 24px -16px;
+}
+
+.modal-header mat-card-title {
+  color: white !important;
+  margin: 0 !important;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-header mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.modal-body {
+  padding: 24px !important;
+}
+
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Estilos de opciones en select */
+::ng-deep .mat-mdc-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+::ng-deep .mat-mdc-option mat-icon {
+  color: #558b2f;
+}
+
+/* ==================== ACCIONES DEL MODAL ==================== */
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 32px !important;
+  padding: 0 !important;
+}
+
+.modal-actions button {
+  min-width: 120px;
+  height: 48px;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.spinner-button {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+::ng-deep .spinner-button .mat-mdc-progress-spinner circle {
+  stroke: white !important;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .card-info-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 28px;
+    padding: 20px;
+  }
+
+  .panelAcciones {
+    flex-direction: column;
+    padding: 16px;
+    margin: 0 12px 20px;
+  }
+
+  .panelFiltros {
+    flex-direction: column;
+  }
+
+  .columnaFiltro {
+    width: 100%;
+  }
+
+  .columnaBtnFiltro {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnFiltro,
+  .btnLimpiar {
+    width: 100%;
+  }
+
+  .btnCrearFab {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-info-section {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .modal-card {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  .footer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 24px;
+  }
+
+  .puntaje-value {
+    font-size: 36px;
+  }
+
+  .info-value {
+    font-size: 14px;
+  }
+}

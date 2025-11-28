@@ -1,0 +1,84 @@
+.contenedorRegistro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f4f3;
+}
+
+.registro-container {
+  width: 400px;
+  margin: 60px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  text-align: center; }
+
+
+.registro-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.logoEmpresa {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.registro-container h2 {
+  margin-bottom: 20px;
+  color: #2e7d32;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.campoFormulario {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.campoFormulario label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.campoFormulario input,
+.campoFormulario select {
+  height: 32px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+
+.btnCrearCuenta {
+  background-color: #4F772D !important;
+  color: white !important;
+}
+
+.textoLogin {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.textoLogin a {
+  color: #2f542c;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.textoLogin a:hover {
+  text-decoration: underline;
+}

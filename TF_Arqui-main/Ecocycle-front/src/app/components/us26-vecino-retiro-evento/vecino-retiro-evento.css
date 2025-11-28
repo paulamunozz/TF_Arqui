@@ -1,0 +1,29 @@
+div{
+  padding:20px;
+  background-color: #367632;
+  color: white;
+}
+
+mat-dialog-content {
+  color: white !important;
+}
+
+p[mat-dialog-title]  {
+  color: white !important;
+}
+
+mat-dialog-actions{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 5px;
+}
+
+button{
+  width: 100%;
+}
+
+p{
+  text-align: center;
+  align-self: center;
+}

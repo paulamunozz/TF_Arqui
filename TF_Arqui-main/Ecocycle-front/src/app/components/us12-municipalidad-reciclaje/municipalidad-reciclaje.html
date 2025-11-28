@@ -1,0 +1,218 @@
+<div class="reciclaje-container">
+  <!-- Título principal -->
+  <h1 class="page-title">Reciclaje</h1>
+
+  <!-- Panel superior: Puntaje -->
+  <div class="puntaje-section">
+    <mat-card class="puntaje-card">
+      <mat-card-content>
+        <mat-icon class="puntaje-icon">emoji_events</mat-icon>
+        <div class="puntaje-info">
+          <span class="puntaje-label">Puntaje acumulado</span>
+          <span class="puntaje-value">{{ puntajeTotal || 0 }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Sección de filtros -->
+  <div class="filtros-section">
+    <!-- Filtros por registro de reciclaje -->
+    <div class="filtro-grupo">
+      <h3 class="filtro-titulo">Filtros por registro de reciclaje</h3>
+      <form [formGroup]="formFiltrosReciclaje" class="filtros-form">
+        <!-- Tipo -->
+        <mat-form-field appearance="outline" class="filtro-field">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="tipo" (selectionChange)="aplicarFiltros()">
+            <mat-option [value]="null">Todos</mat-option>
+            <mat-option value="Vidrio">Vidrio</mat-option>
+            <mat-option value="Plástico">Plástico</mat-option>
+            <mat-option value="Papel">Papel</mat-option>
+            <mat-option value="Electrónicos">Electrónicos</mat-option>
+            <mat-option value="Orgánicos">Orgánicos</mat-option>
+            <mat-option value="Metal/Lata">Metal/Lata</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Método -->
+        <mat-form-field appearance="outline" class="filtro-field">
+          <mat-label>Método</mat-label>
+          <mat-select formControlName="metodo" (selectionChange)="aplicarFiltros()">
+            <mat-option [value]="null">Todos</mat-option>
+            <mat-option value="Centro de reciclaje de la municipalidad">
+              En centros de reciclaje de la municipalidad
+            </mat-option>
+            <mat-option value="Camión de reciclaje">
+              Camión de reciclaje
+            </mat-option>
+            <mat-option value="En casa">En casa</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Fecha -->
+        <div class="fecha-group">
+          <span class="fecha-label">Fecha</span>
+          <div class="fecha-inputs">
+            <mat-form-field appearance="outline" class="fecha-field">
+              <mat-label>MIN</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerMinReciclaje"
+                formControlName="fechaInicio"
+                placeholder="MIN">
+              <mat-datepicker-toggle matIconSuffix [for]="pickerMinReciclaje"></mat-datepicker-toggle>
+              <mat-datepicker #pickerMinReciclaje></mat-datepicker>
+            </mat-form-field>
+
+            <span class="fecha-separator">-</span>
+
+            <mat-form-field appearance="outline" class="fecha-field">
+              <mat-label>MAX</mat-label>
+              <input
+                matInput
+                [matDatepicker]="pickerMaxReciclaje"
+                formControlName="fechaFin"
+                placeholder="MAX">
+              <mat-datepicker-toggle matIconSuffix [for]="pickerMaxReciclaje"></mat-datepicker-toggle>
+              <mat-datepicker #pickerMaxReciclaje></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Filtros por vecino -->
+    <div class="filtro-grupo">
+      <h3 class="filtro-titulo">Filtros por vecino</h3>
+      <form [formGroup]="formFiltrosVecino" class="filtros-form">
+        <!-- Género -->
+        <mat-form-field appearance="outline" class="filtro-field">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="genero" (selectionChange)="aplicarFiltros()">
+            <mat-option [value]="null">Todos</mat-option>
+            <mat-option value="M">Masculino</mat-option>
+            <mat-option value="F">Femenino</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Edad -->
+        <div class="edad-group">
+          <span class="edad-label">Edad</span>
+          <div class="edad-inputs">
+            <mat-form-field appearance="outline" class="edad-field">
+              <mat-label>MIN</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="edadMin"
+                min="0"
+                placeholder="MIN">
+            </mat-form-field>
+
+            <span class="edad-separator">-</span>
+
+            <mat-form-field appearance="outline" class="edad-field">
+              <mat-label>MAX</mat-label>
+              <input
+                matInput
+                type="number"
+                formControlName="edadMax"
+                min="0"
+                placeholder="MAX">
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Botones de acción de filtros -->
+  <div class="filtros-actions">
+    <button mat-stroked-button class="btn-limpiar" (click)="limpiarFiltros()">
+      <mat-icon>clear</mat-icon>
+      Limpiar
+    </button>
+  </div>
+
+  <!-- Indicador de carga -->
+  <div *ngIf="cargando" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p class="loading-text">Cargando reciclajes...</p>
+  </div>
+
+  <!-- Lista de reciclajes -->
+  <div class="reciclajes-list">
+    @if (reciclajes.data.length > 0) {
+      <!-- Cards de reciclajes -->
+      @for (reciclaje of reciclajes.data; track reciclaje.idReciclaje) {
+        <mat-card class="reciclaje-card">
+          <mat-card-content>
+            <div class="card-content">
+              <div class="card-info-section">
+                <div class="info-item">
+                  <mat-icon class="info-icon">scale</mat-icon>
+                  <div class="info-text">
+                    <span class="info-label">Peso</span>
+                    <span class="info-value">{{ reciclaje.peso }} kg</span>
+                  </div>
+                </div>
+
+                <div class="info-item">
+                  <mat-icon class="info-icon">category</mat-icon>
+                  <div class="info-text">
+                    <span class="info-label">Tipo</span>
+                    <span class="info-value">{{ reciclaje.tipo }}</span>
+                  </div>
+                </div>
+
+                <div class="info-item">
+                  <mat-icon class="info-icon">event</mat-icon>
+                  <div class="info-text">
+                    <span class="info-label">Fecha</span>
+                    <span class="info-value">{{ reciclaje.fecha | date:'dd/MM/yyyy' }}</span>
+                  </div>
+                </div>
+
+                <div class="info-item">
+                  <mat-icon class="info-icon">recycling</mat-icon>
+                  <div class="info-text">
+                    <span class="info-label">Método</span>
+                    <span class="info-value">{{ reciclaje.metodo }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <!-- Paginador -->
+      <div class="paginator-container">
+        <mat-paginator
+          [length]="reciclajes.data.length"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          showFirstLastButtons
+          aria-label="Seleccione página de reciclajes">
+        </mat-paginator>
+      </div>
+    } @else {
+      <div class="empty-state">
+        <mat-icon class="empty-icon">inbox</mat-icon>
+        <h2 class="empty-title">No hay reciclajes registrados</h2>
+        <p class="empty-text">No se encontraron reciclajes con los filtros aplicados</p>
+      </div>
+    }
+  </div>
+
+  <!-- Footer contador -->
+  <footer class="footer">
+    <mat-chip-set>
+      <mat-chip highlighted>
+        <mat-icon matChipAvatar>inventory_2</mat-icon>
+        Reciclajes: {{ reciclajes.data.length }}
+      </mat-chip>
+    </mat-chip-set>
+  </footer>
+</div>

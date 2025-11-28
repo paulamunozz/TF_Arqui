@@ -1,0 +1,47 @@
+<h1>Mi Perfil</h1>
+<div class="perfil-container">
+
+  <div class="action-buttons">
+    <button mat-raised-button color="warn" (click)="eliminarCuenta()">
+      <mat-icon>delete_forever</mat-icon> Eliminar cuenta
+    </button>
+
+    <div class="right-buttons">
+      <button mat-raised-button color="primary" (click)="cerrarSesion()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
+      </button>
+      <button mat-raised-button color="accent" [routerLink]="'/editar-perfil'">
+        <mat-icon>edit</mat-icon> Editar Perfil
+      </button>
+    </div>
+  </div>
+
+  <div class="perfil-info">
+
+    <div class="profile-photo-area">
+      <img src="{{fotos[vecino.icono]}}" alt="Foto de Perfil" class="profile-photo" />
+    </div>
+
+    <div class="profile-details-view">
+      <mat-card class="panelDatos">
+        <mat-card-content>
+          <p><strong>DNI:</strong> {{ vecino.dni }}</p>
+          <p><strong>Nombre:</strong> {{ vecino.nombre }}</p>
+          <p><strong>Edad:</strong> {{ vecino.edad }}</p>
+          <p><strong>Género:</strong> {{ vecino.genero }}</p>
+          <p><strong>Distrito:</strong> {{ vecino.distrito }}</p>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="stats-container">
+        <mat-card class="stat-box puesto">
+          <p>Puesto</p><h3> {{ vecino.puesto }}</h3>
+        </mat-card>
+
+        <mat-card class="stat-box puntaje">
+          <p>Puntaje</p><h3>{{ vecino.puntajetotal }}</h3>
+        </mat-card>
+      </div>
+    </div>
+</div>
+</div>

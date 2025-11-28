@@ -1,0 +1,413 @@
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.reciclaje-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+  padding-bottom: 80px;
+}
+
+/* ==================== TÍTULO ==================== */
+.page-title {
+  text-align: center;
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+  padding: 30px 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== SECCIÓN DE PUNTAJE ==================== */
+.puntaje-section {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 20px;
+}
+
+.puntaje-card {
+  background: linear-gradient(135deg, #7cb342 0%, #558b2f 100%) !important;
+  color: white !important;
+  min-width: 250px;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 16px rgba(124, 179, 66, 0.3) !important;
+  transition: transform 0.3s ease;
+}
+
+.puntaje-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(124, 179, 66, 0.4) !important;
+}
+
+.puntaje-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px !important;
+}
+
+.puntaje-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #ffd700;
+}
+
+.puntaje-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.puntaje-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.puntaje-value {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+/* ==================== SECCIÓN DE FILTROS ==================== */
+.filtros-section {
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filtro-grupo {
+  flex: 1;
+  min-width: 400px;
+  background-color: white;
+  border: 2px solid #2d5016;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filtro-titulo {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d5016;
+  text-align: center;
+}
+
+.filtros-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filtro-field {
+  width: 100%;
+}
+
+/* Grupos de fecha y edad */
+.fecha-group,
+.edad-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fecha-label,
+.edad-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d5016;
+}
+
+.fecha-inputs,
+.edad-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fecha-field,
+.edad-field {
+  flex: 1;
+}
+
+.fecha-separator,
+.edad-separator {
+  font-weight: bold;
+  color: #2d5016;
+  margin-top: -10px;
+}
+
+/* ==================== BOTONES DE FILTROS ==================== */
+.filtros-actions {
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.btn-limpiar {
+  height: 56px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0.5px;
+  padding: 0 32px !important;
+  border-color: #757575 !important;
+  color: #757575 !important;
+}
+
+.btn-limpiar:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* ==================== LOADING ==================== */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 24px;
+}
+
+.loading-text {
+  color: #558b2f;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+::ng-deep .loading-container .mat-mdc-progress-spinner circle {
+  stroke: #7cb342 !important;
+}
+
+/* ==================== LISTA DE RECICLAJES ==================== */
+.reciclajes-list {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ==================== CARDS DE RECICLAJE ==================== */
+.reciclaje-card {
+  background-color: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease;
+  border-left: 4px solid #7cb342;
+}
+
+.reciclaje-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.reciclaje-card mat-card-content {
+  padding: 24px !important;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ==================== INFO SECTION ==================== */
+.card-info-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-icon {
+  color: #558b2f;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 12px;
+  color: #757575;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 16px;
+  color: #2d5016;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ==================== ESTADO VACÍO ==================== */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+  font-size: 120px;
+  width: 120px;
+  height: 120px;
+  color: #bdbdbd;
+  margin-bottom: 24px;
+}
+
+.empty-title {
+  color: #2d5016;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.empty-text {
+  color: #757575;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* ==================== PAGINADOR ==================== */
+.paginator-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: white !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+::ng-deep .mat-mdc-paginator-container {
+  justify-content: center !important;
+  padding: 16px !important;
+}
+
+::ng-deep .mat-mdc-paginator-page-size-label,
+::ng-deep .mat-mdc-paginator-range-label {
+  color: #2d5016;
+  font-weight: 500;
+}
+
+::ng-deep .mat-mdc-icon-button {
+  color: #558b2f !important;
+}
+
+::ng-deep .mat-mdc-icon-button:hover:not(:disabled) {
+  background-color: rgba(124, 179, 66, 0.1) !important;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px solid #e8f5e9;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}
+
+::ng-deep .footer mat-chip {
+  background-color: #7cb342 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  padding: 8px 16px !important;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 1024px) {
+  .filtros-section {
+    flex-direction: column;
+  }
+
+  .filtro-grupo {
+    min-width: 100%;
+  }
+
+  .card-info-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 28px;
+    padding: 20px;
+  }
+
+  .filtros-section {
+    padding: 0 15px;
+  }
+
+  .fecha-inputs,
+  .edad-inputs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fecha-separator,
+  .edad-separator {
+    display: none;
+  }
+
+  .card-info-section {
+    grid-template-columns: 1fr;
+  }
+
+  .filtros-actions {
+    flex-direction: column;
+  }
+
+  .btn-limpiar {
+    width: 100%;
+  }
+
+  .footer {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .puntaje-value {
+    font-size: 36px;
+  }
+
+  .info-value {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  background-color: #ecf39e;
+}
+
+h3{
+  width: 30%;
+  align-content: center;
+  height: 25px;
+  text-align: center;
+  background-color: #4F772D;
+  color: white;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 0 0 10px 0;
+}
+
+p{
+  margin: 10px;
+}
+
+.panelUnirse{
+  display: flex;
+  justify-content: space-between;
+}
+
+.panelUnirse h2{
+  width: 30%;
+  align-content: center;
+  height: 30px;
+}
+
+.btnUnirse{
+  width: 180px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #4F772D !important;
+  color: white !important;
+}
+
+.panelDetalles{
+  margin: 10px;
+}
+
+.detalleFilas {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  gap: 5px;
+}
+
+.detalleColumnas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.datosFilas{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.datos{
+  font-weight: bold;
+}
+
+.descripcion{
+  text-align: justify;
+}
+
+/*Panel de comentarios---------------------------------*/
+.panelComentarios{
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.tituloComentario{
+  border-radius: 0 10px 10px 0;
+}
+
+.sinComentarios{
+  margin: 30px;
+}
+
+.comentario{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #d7dd81;
+  padding: 15px 40px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 15px;
+}
+.comentario.alterno{
+  background-color: #f8ffa7;
+}
