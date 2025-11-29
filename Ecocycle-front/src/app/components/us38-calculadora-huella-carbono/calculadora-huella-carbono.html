@@ -1,0 +1,36 @@
+<h1>Calculadora de huella de carbono</h1>
+
+<div>
+  <mat-card class="panelForm">
+    <mat-card-content class="containerForm">
+      <form [formGroup]="formHuella" (ngSubmit)="onSubmit()" class="formRegistro">
+        <mat-form-field appearance="fill" class="dato">
+          <mat-label>Método de transporte</mat-label>
+          <mat-select formControlName="transporte">
+            <mat-option value="bus">Transporte público (bus)</mat-option>
+            <mat-option value="auto">Automóvil</mat-option>
+            <mat-option value="avion">Vuelo comercial</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill" class="dato">
+          <mat-label>Distancia (km)</mat-label>
+          <input matInput type="number" formControlName="distancia" />
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" class="btnCrearCuenta" [disabled]="formHuella.invalid">Calcular huella de carbono</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+
+
+  <mat-card class="panelHuella">
+    <mat-card-content class="conteinerHuella">
+      <p>Tu huella de carbono es de</p>
+      <h2>{{huella}}</h2>
+    </mat-card-content>
+  </mat-card>
+
+</div>

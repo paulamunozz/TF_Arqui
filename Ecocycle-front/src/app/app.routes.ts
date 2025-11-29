@@ -37,14 +37,20 @@ import {
 import {VecinoLogros} from './components/us09-vecino-logros/us09-vecino-logros';
 import {VecinoModificar} from './components/us06-vecino-modificar/vecino-modificar';
 import {authGuard} from './guards/auth-guards';
+import {EstadisticasMundiales} from './components/us38-estadisticas-mundiales/estadisticas-mundiales';
+import {CalculadoraHuellaCarbono} from './components/us38-calculadora-huella-carbono/calculadora-huella-carbono';
 
 export const routes: Routes = [
-  { path: '', component: VecinoAutenticacion },
+  { path: '', component: EstadisticasMundiales },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
 
   { path: 'contacto', component: Contactanos},
+
   { path: 'estadisticas', component: MunicipalidadVecinoEstadisticas },
+  { path: 'estadisticas-mundiales', component: EstadisticasMundiales },
+  { path: 'calculadora-huella-carbono', component: CalculadoraHuellaCarbono },
+
   { path: 'ranking-vecinos', component: RankingVecino },
   { path: 'ranking-municipalidades', component: RankingMunicipalidad },
 

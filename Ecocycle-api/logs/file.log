@@ -237,3 +237,8 @@ Unconditional classes:
 2025-11-28 15:22:27 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
 2025-11-28 15:22:27 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
 2025-11-28 15:22:27 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2025-11-28 17:32:55 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-28 17:32:55 INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-11-28 17:32:55 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-11-28 17:32:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2025-11-28 17:32:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
