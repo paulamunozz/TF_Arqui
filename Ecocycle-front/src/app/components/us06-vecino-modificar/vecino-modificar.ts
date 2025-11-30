@@ -83,6 +83,7 @@ export class VecinoModificar {
       },
       error: err => {
         console.log(err);
+        alert(err.error?.message || 'Error desconocido');
       }
     })
   }

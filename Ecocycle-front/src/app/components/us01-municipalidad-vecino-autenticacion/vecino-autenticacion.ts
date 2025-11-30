@@ -74,13 +74,14 @@ export class VecinoAutenticacion {
                   },
                   error: error => {
                     console.log(error);
+                    alert(error.error?.message || 'Error desconocido');
                   }
                 })
                 this.router.navigate(['inicio-vecino']);
               },
               error: (err) => {
                 console.error('Error al buscar usuario:', err);
-                alert('No se pudo iniciar sesión. Verifica el DNI.');
+                alert(err.error?.message || 'Error desconocido');
               }
             });
           }
@@ -98,7 +99,7 @@ export class VecinoAutenticacion {
               error: (err) => {
                 console.log('Error capturado en componente:', err.message);
                 //console.error('Error al buscar municipalidad:', err);
-                alert('No se pudo iniciar sesión. Verifica el código.');
+                alert(err.error?.message || 'Error desconocido');
               }
             });
           }
@@ -106,6 +107,7 @@ export class VecinoAutenticacion {
         },
         error: (err) => {
           console.log("Login response ROL:", err);
+          alert(err.error?.message || 'Error desconocido');
         }
       })
 
