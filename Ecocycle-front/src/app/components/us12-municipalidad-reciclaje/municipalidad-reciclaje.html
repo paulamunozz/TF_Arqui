@@ -2,19 +2,6 @@
   <!-- Título principal -->
   <h1 class="page-title">Reciclaje</h1>
 
-  <!-- Panel superior: Puntaje -->
-  <div class="puntaje-section">
-    <mat-card class="puntaje-card">
-      <mat-card-content>
-        <mat-icon class="puntaje-icon">emoji_events</mat-icon>
-        <div class="puntaje-info">
-          <span class="puntaje-label">Puntaje acumulado</span>
-          <span class="puntaje-value">{{ puntajeTotal || 0 }}</span>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
   <!-- Sección de filtros -->
   <div class="filtros-section">
     <!-- Filtros por registro de reciclaje -->
@@ -145,7 +132,7 @@
   <div class="reciclajes-list">
     @if (reciclajes.data.length > 0) {
       <!-- Cards de reciclajes -->
-      @for (reciclaje of reciclajes.data; track reciclaje.idReciclaje) {
+      @for (reciclaje of reciclajesPaginados; track reciclaje.idReciclaje) {
         <mat-card class="reciclaje-card">
           <mat-card-content>
             <div class="card-content">
@@ -191,10 +178,8 @@
       <div class="paginator-container">
         <mat-paginator
           [length]="reciclajes.data.length"
-          [pageSize]="5"
           [pageSizeOptions]="[5, 10, 25, 50]"
-          showFirstLastButtons
-          aria-label="Seleccione página de reciclajes">
+          showFirstLastButtons>
         </mat-paginator>
       </div>
     } @else {
@@ -205,14 +190,4 @@
       </div>
     }
   </div>
-
-  <!-- Footer contador -->
-  <footer class="footer">
-    <mat-chip-set>
-      <mat-chip highlighted>
-        <mat-icon matChipAvatar>inventory_2</mat-icon>
-        Reciclajes: {{ reciclajes.data.length }}
-      </mat-chip>
-    </mat-chip-set>
-  </footer>
 </div>

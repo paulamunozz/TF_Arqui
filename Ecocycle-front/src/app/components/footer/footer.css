@@ -1,0 +1,45 @@
+.ecocycle-footer {
+  background-color: #064C10;
+  color: #ecf0f1;
+  padding: 20px 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.footer-left h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.footer-left p {
+  margin: 5px 0 0;
+}
+
+.footer-center p {
+  margin: 2px 0;
+}
+
+.footer-right a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-right a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #bdc3c7;
+}

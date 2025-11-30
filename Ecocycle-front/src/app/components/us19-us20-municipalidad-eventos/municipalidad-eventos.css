@@ -75,6 +75,7 @@ p{
   padding: 0;
   width: 100%;
   line-height: 1px;
+  margin: 0;
 }
 
 .evento {
@@ -148,42 +149,3 @@ p{
   width: 40%;
   font-weight: bold;
 }
-
-
-/*.filtros {*/
-/*  position: relative;*/
-/*  display: inline-block;*/
-/*}*/
-
-/*.placeholder {*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  left: 10px;*/
-/*  transform: translateY(-50%);*/
-/*  color: rgba(136, 136, 136, 0.62);*/
-/*  pointer-events: none;*/
-/*  transition: opacity 0.2s ease;*/
-/*}*/
-
-/*select {*/
-/*  width: 100%;*/
-/*  padding: 10px;*/
-/*  font-size: 16px;*/
-/*  color: #333;*/
-/*  border: 1px solid #ccc;*/
-/*  border-radius: 4px;*/
-/*  background-color: white;*/
-/*}*/
-
-/*select:focus {*/
-/*  border-color: #888;*/
-/*  outline: none;*/
-/*}*/
-
-/*@if (!formFiltro.get('nombre')?.value) {*/
-/*<label for="nombre" class="porMientras">Ingrese un nombre o parte de uno</label>*/
-/*}*/
-
-/*<textarea></textarea>*/
-
-

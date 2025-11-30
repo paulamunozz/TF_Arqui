@@ -1,0 +1,21 @@
+.ciudades{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+.ciudad{
+  width: 100%;
+  border-radius: 0;
+  margin: 10px 0;
+}
+
+.mapa{
+  height: 400px;
+  width: 100%;
+  z-index: 0;
+}
+
+table{
+  margin-bottom: 10px;
+}

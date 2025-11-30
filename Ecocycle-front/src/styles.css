@@ -1,5 +1,6 @@
 /* src/styles.css */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'leaflet/dist/leaflet.css';
 
 body {
   font-family: 'Inter', sans-serif;

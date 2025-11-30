@@ -1,0 +1,55 @@
+:host{
+  display: block;
+  background-color: #7bb04b;
+}
+
+div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 50px;
+  gap: 200px;
+  flex-wrap: wrap;
+}
+
+.panelForm{
+  min-width: 400px;
+  padding: 20px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.dato{
+  width: 100%;
+}
+
+button{
+  background-color: #264119 !important;
+  color: white !important;
+}
+
+.panelHuella{
+  width: 250px;
+  height: 150px;
+  background-color: #ecf39e !important;
+}
+
+.conteinerHuella{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  margin: 10px;
+}
+
+h2{
+  font-size: 35px;
+}

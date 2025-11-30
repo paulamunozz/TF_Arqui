@@ -1,0 +1,40 @@
+<h1>Calidad del aire</h1>
+
+<div class="ciudades">
+  <span class="ciudad" *ngFor="let city of [0, 1, 2, 3, 4, 5]"
+        id="city-aqi-container-{{city}}">
+  </span>
+</div>
+
+<div class="mapa" id="leafletMap"></div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width:100%;">
+
+  <!-- AQI Column -->
+  <ng-container matColumnDef="aqi">
+    <th mat-header-cell *matHeaderCellDef> AQI </th>
+    <td mat-cell *matCellDef="let element"> {{element.aqi}} </td>
+  </ng-container>
+
+  <!-- Nivel de Contaminación Column -->
+  <ng-container matColumnDef="nivelContaminacion">
+    <th mat-header-cell *matHeaderCellDef> Nivel </th>
+    <td mat-cell *matCellDef="let element"> {{element.nivelContaminacion}} </td>
+  </ng-container>
+
+  <!-- Salud Column -->
+  <ng-container matColumnDef="implicacionesSalud">
+    <th mat-header-cell *matHeaderCellDef> Implicaciones para la salud </th>
+    <td mat-cell *matCellDef="let element"> {{element.implicacionesSalud}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="recomendaciones">
+    <th mat-header-cell *matHeaderCellDef> Recomendaciones </th>
+    <td mat-cell *matCellDef="let element"> {{element.recomendaciones}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngStyle]="{'background-color': row.color, 'color': row.color === '#fddd33' ? 'black' : 'white'}">
+  </tr>
+</table>
