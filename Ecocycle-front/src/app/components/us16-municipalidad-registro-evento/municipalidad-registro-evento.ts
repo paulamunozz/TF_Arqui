@@ -55,6 +55,10 @@ export class MunicipalidadRegistroEvento {
         next: data => {
           console.log("Data insertada:",data);
           this.router.navigate(['/eventos']);
+        },
+        error: err => {
+          console.log(err);
+          alert(err.error?.message || 'Error desconocido');
         }
       });
     }

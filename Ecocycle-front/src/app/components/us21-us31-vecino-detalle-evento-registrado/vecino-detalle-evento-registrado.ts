@@ -97,6 +97,7 @@ export class VecinoDetalleEventoRegistrado {
           },
           error: (error) => {
             console.log(error);
+            alert(error.error?.message || 'Error desconocido');
           }
         })
       },

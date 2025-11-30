@@ -19,6 +19,7 @@ import {MatInput} from '@angular/material/input';
 import {Municipalidad} from '../../model/municipalidad';
 import {MunicipalidadService} from '../../services/municipalidad-service';
 import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -40,6 +41,7 @@ import {MatButton} from '@angular/material/button';
     MatInput,
     MatSuffix,
     MatButton,
+    MatIcon,
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
@@ -107,7 +109,19 @@ export class MunicipalidadEventos {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      nombre: '',
+      tipo: '',
+      metodo: '',
+      fechaInicio: '',
+      fechaFin: ''
+    });
+    this.listarEventos();
   }
 }

@@ -6,10 +6,11 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
   const token = localStorage.getItem('token');
   console.log("Token recuperado:", token)
   let authReq = req;
-  // Clona la solicitud y añade el encabezado de autorización
-  if (token) {
+  const isClimatiq = req.url.startsWith('https://api.climatiq.io');
+
+  if (token && !isClimatiq) {
     authReq = req.clone({
-      withCredentials: true, // ojo add
+      withCredentials: true,
       headers: req.headers.set('Authorization', "Bearer "+
         localStorage.getItem("token")?.toString())
     });
@@ -23,7 +24,7 @@ export const loginInterceptor: HttpInterceptorFn = (req, next) => {
         alert("NO TIENES PERMISOS!")
         return EMPTY;
       } else {
-        alert("Error, datos inválidos");
+        console.log("Error, datos inválidos");
         return throwError(() => error);
       }
     })

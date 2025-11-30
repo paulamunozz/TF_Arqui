@@ -43,6 +43,15 @@
       <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
       <mat-datepicker #pickerMax></mat-datepicker>
     </mat-form-field>
+
+    <button
+      mat-stroked-button
+      type="button"
+      class="btnLimpiar"
+      (click)="limpiarFiltros()">
+      <mat-icon>clear</mat-icon>
+      Limpiar
+    </button>
   </div>
 </form>
 

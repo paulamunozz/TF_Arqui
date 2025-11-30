@@ -61,6 +61,7 @@ export class VecinoRegistro {
         },
         error: error => {
           console.log(error);
+          alert(error.error?.message || 'Error desconocido');
         }
       })
     }

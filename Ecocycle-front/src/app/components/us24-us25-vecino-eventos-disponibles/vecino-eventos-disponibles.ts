@@ -15,6 +15,7 @@ import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {Vecino} from '../../model/vecino';
 import {VecinoService} from '../../services/vecino-service';
 import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
@@ -35,6 +36,7 @@ import {MatButton} from '@angular/material/button';
     MatNativeDateModule,
     DatePipe,
     MatButton,
+    MatIcon,
   ],
   templateUrl: './vecino-eventos-disponibles.html',
   styleUrl: './vecino-eventos-disponibles.css',
@@ -102,6 +104,7 @@ export class VecinoEventosDisponibles {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
   }
@@ -118,7 +121,19 @@ export class VecinoEventosDisponibles {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      nombre: '',
+      tipo: '',
+      metodo: '',
+      fechaInicio: '',
+      fechaFin: ''
+    });
+    this.listarEventos();
   }
 }

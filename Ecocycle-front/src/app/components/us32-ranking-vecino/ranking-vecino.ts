@@ -15,6 +15,8 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {MatInput} from '@angular/material/input';
 import {VecinoService} from '../../services/vecino-service';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-us32-ranking-vecino',
@@ -37,6 +39,8 @@ import {MatPaginator} from '@angular/material/paginator';
     MatHeaderCellDef,
     ReactiveFormsModule,
     MatPaginator,
+    MatButton,
+    MatIcon,
   ],
   templateUrl: './ranking-vecino.html',
   styleUrl: './ranking-vecino.css',
@@ -78,7 +82,18 @@ export class RankingVecino {
       },
       error: error => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      distrito:'',
+      genero:'',
+      edadMin:'',
+      edadMax:''
+    });
+    this.filtrarRanking();
   }
 }

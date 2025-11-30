@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-us27-vecino-eventos-registrados',
@@ -29,6 +30,7 @@ import {MatButton} from '@angular/material/button';
     MatNativeDateModule,
     DatePipe,
     MatButton,
+    MatIcon,
   ],
   templateUrl: './vecino-eventos-registrados.html',
   styleUrl: './vecino-eventos-registrados.css',
@@ -82,7 +84,20 @@ export class VecinoEventosRegistrados {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      vecinoId: this.userId,
+      nombre: '',
+      tipo: '',
+      metodo: '',
+      fechaInicio: '',
+      fechaFin: ''
+    });
+    this.listarEventos();
   }
 }
