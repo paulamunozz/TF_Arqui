@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {EventoService} from '../../services/evento-service';
@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us27-vecino-eventos-registrados',
@@ -31,6 +32,7 @@ import {MatIcon} from '@angular/material/icon';
     DatePipe,
     MatButton,
     MatIcon,
+    MatPaginator,
   ],
   templateUrl: './vecino-eventos-registrados.html',
   styleUrl: './vecino-eventos-registrados.css',
@@ -99,5 +101,21 @@ export class VecinoEventosRegistrados {
       fechaFin: ''
     });
     this.listarEventos();
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  get eventosPaginados() {
+    if (!this.paginator) return this.eventos.data.slice(0, 5); // fallback
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    return this.eventos.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
+  }
+
+  ngAfterViewInit(): void {
+    this.eventos.paginator = this.paginator;
+
+    this.paginator.page.subscribe((event: PageEvent) => {
+    });
   }
 }

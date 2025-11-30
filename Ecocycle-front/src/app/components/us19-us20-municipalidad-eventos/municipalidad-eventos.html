@@ -72,7 +72,7 @@
 <ul class="panelEventos">
   @if (eventos.data.length>0)
   {
-    @for (evento of eventos.data; track evento.idEvento; let i = $index) {
+    @for (evento of eventosPaginados; track evento.idEvento; let i = $index) {
       <li class="evento" [class.alterno]="i % 2 !== 0">
         <div class="filasEvento">
           <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
@@ -98,7 +98,13 @@
         </div>
       </li>
     }
-
+    <div class="paginator-container">
+      <mat-paginator
+        [length]="eventos.data.length"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
   }
   @else {
     <p class="sinEventos">
