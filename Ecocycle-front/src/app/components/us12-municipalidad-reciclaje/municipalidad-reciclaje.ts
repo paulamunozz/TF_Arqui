@@ -15,7 +15,7 @@ import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/materi
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
+import {MatPaginatorModule, MatPaginator, PageEvent} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { Router } from '@angular/router';
@@ -54,8 +54,15 @@ import {MunicipalidadService} from '../../services/municipalidad-service';
   ]
 })
 export class MunicipalidadReciclaje {
-  // ViewChild para acceder al paginador
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  // ==================== PAGINATOR ====================
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  get reciclajesPaginados() {
+    if (!this.paginator) return this.reciclajes.data.slice(0, 5); // fallback
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    return this.reciclajes.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
+  }
 
   // Formularios
   formFiltrosReciclaje: FormGroup;
@@ -121,25 +128,8 @@ export class MunicipalidadReciclaje {
   ngAfterViewInit(): void {
     this.reciclajes.paginator = this.paginator;
 
-    // Configurar labels en español
-    if (this.paginator) {
-      this.paginator._intl.itemsPerPageLabel = 'Elementos por página:';
-      this.paginator._intl.nextPageLabel = 'Siguiente página';
-      this.paginator._intl.previousPageLabel = 'Página anterior';
-      this.paginator._intl.firstPageLabel = 'Primera página';
-      this.paginator._intl.lastPageLabel = 'Última página';
-      this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-        if (length === 0 || pageSize === 0) {
-          return `0 de ${length}`;
-        }
-        length = Math.max(length, 0);
-        const startIndex = page * pageSize;
-        const endIndex = startIndex < length ?
-          Math.min(startIndex + pageSize, length) :
-          startIndex + pageSize;
-        return `${startIndex + 1} - ${endIndex} de ${length}`;
-      };
-    }
+    this.paginator.page.subscribe((event: PageEvent) => {
+    });
   }
 
   /**
@@ -195,12 +185,6 @@ export class MunicipalidadReciclaje {
     this.reciclajeService.listarReciclajeFiltrado(filtros).subscribe({
       next: (data) => {
         this.reciclajes.data = data;
-
-        // Reconectar el paginador después de actualizar los datos
-        if (this.paginator) {
-          this.reciclajes.paginator = this.paginator;
-          this.paginator.firstPage();
-        }
 
         this.calcularPuntajeTotal();
         console.log('Reciclajes del distrito cargados:', data);

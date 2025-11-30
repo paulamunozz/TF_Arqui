@@ -41,7 +41,7 @@ import {EstadisticasMundiales} from './components/us38-estadisticas-mundiales/es
 import {CalculadoraHuellaCarbono} from './components/us38-calculadora-huella-carbono/calculadora-huella-carbono';
 
 export const routes: Routes = [
-  { path: '', component: EstadisticasMundiales },
+  { path: '', component: VecinoAutenticacion },
   { path: 'registro', component: VecinoRegistro },
   { path: 'login', component: VecinoAutenticacion},
 

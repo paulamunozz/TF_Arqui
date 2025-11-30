@@ -118,8 +118,8 @@ p{
 
 /*Panel estadísticas--------------------------------*/
 .cardGraficos{
-  margin: 20px;
-  margin-top: 0;
+  margin: 0 20px;
+  padding-bottom: 20px;
 }
 
 .containerGraficos{
