@@ -7,7 +7,10 @@
     <form [formGroup]="formConstrasena" class="form-container" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="contrasena" placeholder="Ingrese su nueva contraseña" />
+        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="contrasena" placeholder="Ingrese su nueva contraseña" />
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
       </mat-form-field>
       <div class="panelBotones">
         <button class="boton btnCancelar" type="submit" (click)="onCancel()">Cancelar</button>
