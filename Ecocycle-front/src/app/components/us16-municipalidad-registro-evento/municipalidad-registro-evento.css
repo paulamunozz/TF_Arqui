@@ -1,9 +1,18 @@
+:host {
+  display: block;
+  background-color: #ecf39e;
+}
+
 .instrucciones{
-  padding: 20px;
-  margin: 20px 20px;
-  background-color: rgb(236, 243, 158);
+  padding: 10px;
+  margin: 20px;
+  background-color: white !important;
   text-align: center;
   border-radius: 6px;
+}
+
+.panelForm{
+  margin: 20px;
 }
 
 .panelDatosFila {
@@ -39,16 +48,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .btnCrear {
-  background-color: rgb(144, 169, 85);
-  color: white;
-  margin: 20px;
+  background-color: rgb(144, 169, 85) !important;
+  color: white !important;
   padding: 12px 50px;
-}
-.btnCrear:hover {
-  background-color: rgb(38, 65, 25);
-  color: white;
 }
 

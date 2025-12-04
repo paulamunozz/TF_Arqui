@@ -11,6 +11,9 @@ import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2
 import {MatIconModule} from '@angular/material/icon';
 import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
+import {VecinoEliminacionCuenta} from '../us07-vecino-eliminacion-cuenta/vecino-eliminacion-cuenta';
+import {MatDialog} from '@angular/material/dialog';
+import {MunicipalidadEliminarEvento} from '../us18-municipalidad-eliminar-evento/municipalidad-eliminar-evento';
 
 @Component({
   selector: 'app-us21-us22-us23-municipalidad-detalle-evento',
@@ -31,6 +34,7 @@ export class MunicipalidadDetalleEvento {
   private eventoService: EventoService = inject(EventoService);
   private exvService: EventoXVecinoService = inject(EventoXVecinoService);
   private router = inject(Router);
+  dialog : MatDialog = inject(MatDialog);
 
   evento: Evento = new Evento();
   comentarios:MatTableDataSource<Comentario> = new MatTableDataSource<Comentario>();
@@ -89,22 +93,23 @@ export class MunicipalidadDetalleEvento {
     this.router.navigate(['/modificar-evento', this.id]);
   }
 
-  eliminar(id:number){
-    this.eventoService.eliminar(id).subscribe({
+  eliminar(){
+    const dialogoEliminar=this.dialog.open(MunicipalidadEliminarEvento);
+    dialogoEliminar.afterClosed().subscribe({
       next: (data) => {
-        console.log(data);
-        this.router.navigate(['/eventos']);
+        if (data){
+          this.eventoService.eliminar(this.id).subscribe({
+            next: (data) => {
+              console.log(data);
+              this.router.navigate(['/eventos']);
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          })
+        }
       }
     })
-  }
-
-  popUpVisible = false;
-  mostrarPopUp()
-  {
-    this.popUpVisible = true;
-  }
-  cerrarPopUp(){
-    this.popUpVisible = false;
   }
 
   listarComentarios(){
@@ -148,7 +153,7 @@ export class MunicipalidadDetalleEvento {
               '#ff31a9',
               '#5c55ff'
             ]
-            }]
+          }]
 
           this.dataGraficoEdad = [{
             data: [
@@ -168,7 +173,7 @@ export class MunicipalidadDetalleEvento {
               '#22ffcb',
               '#b623ff',
             ]
-            }];
+          }];
         } else {
           this.hasData = false;
         }

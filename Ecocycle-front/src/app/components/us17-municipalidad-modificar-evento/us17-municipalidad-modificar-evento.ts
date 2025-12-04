@@ -97,7 +97,7 @@ export class MunicipalidadModificarEvento{
         },
         error: (error) => {
           console.error('Error al modificar:', error);
-          alert('Error al modificar el evento. Intente nuevamente.');
+          alert(error.error?.message || 'Error desconocido');
           this.guardando = false;
         }
       });
@@ -107,6 +107,6 @@ export class MunicipalidadModificarEvento{
   }
 
   volver(): void {
-    this.router.navigate(['/eventos']);
+    this.router.navigate(['/evento/' + this.eventoId]);
   }
 }

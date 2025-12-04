@@ -1,0 +1,10 @@
+<div>
+  <p mat-dialog-title>¿Seguro que desea eliminar este evento?</p>
+  <mat-dialog-content>
+    <p>Este será eliminado permanentemente y no habrá forma de recuperarlo.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="false">Cancelar</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true">Eliminar</button>
+  </mat-dialog-actions>
+</div>

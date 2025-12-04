@@ -131,10 +131,6 @@ export class VecinoReciclaje{
 
   }
 
-
-  /**
-   * Carga los datos del vecino actual
-   */
   /**
    * Registra un nuevo reciclaje
    */

@@ -183,16 +183,6 @@
     }
   </div>
 
-  <!-- Footer contador -->
-  <footer class="footer">
-    <mat-chip-set>
-      <mat-chip highlighted>
-        <mat-icon matChipAvatar>inventory_2</mat-icon>
-        Reciclajes: {{ reciclajes.data.length }}
-      </mat-chip>
-    </mat-chip-set>
-  </footer>
-
   <!-- Modal para crear/editar -->
   <div *ngIf="mostrarModal" class="modal-overlay" (click)="cerrarModal()">
     <mat-card class="modal-card" (click)="$event.stopPropagation()">

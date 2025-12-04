@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {Evento} from '../../model/evento';
@@ -18,6 +18,10 @@ import {MatSelect} from '@angular/material/select';
 import {MatInput} from '@angular/material/input';
 import {Municipalidad} from '../../model/municipalidad';
 import {MunicipalidadService} from '../../services/municipalidad-service';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatPaginator} from '@angular/material/paginator';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us19-us20-municipalidad-eventos',
@@ -38,6 +42,9 @@ import {MunicipalidadService} from '../../services/municipalidad-service';
     MatSelect,
     MatInput,
     MatSuffix,
+    MatButton,
+    MatIcon,
+    MatPaginator,
   ],
   templateUrl: './municipalidad-eventos.html',
   styleUrl: './municipalidad-eventos.css',
@@ -105,7 +112,35 @@ export class MunicipalidadEventos {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      nombre: '',
+      tipo: '',
+      metodo: '',
+      fechaInicio: '',
+      fechaFin: ''
+    });
+    this.listarEventos();
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  get eventosPaginados() {
+    if (!this.paginator) return this.eventos.data.slice(0, 5); // fallback
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    return this.eventos.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
+  }
+
+  ngAfterViewInit(): void {
+    this.eventos.paginator = this.paginator;
+
+    this.paginator.page.subscribe((event: PageEvent) => {
+    });
   }
 }

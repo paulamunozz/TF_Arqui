@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule, MatOption} from '@angular/material/core';
@@ -15,6 +15,8 @@ import {EventoXVecinoService} from '../../services/evento-x-vecino-service';
 import {Vecino} from '../../model/vecino';
 import {VecinoService} from '../../services/vecino-service';
 import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-us24-us25-vecino-eventos-disponibles',
@@ -35,6 +37,8 @@ import {MatButton} from '@angular/material/button';
     MatNativeDateModule,
     DatePipe,
     MatButton,
+    MatIcon,
+    MatPaginator,
   ],
   templateUrl: './vecino-eventos-disponibles.html',
   styleUrl: './vecino-eventos-disponibles.css',
@@ -102,6 +106,7 @@ export class VecinoEventosDisponibles {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
   }
@@ -118,7 +123,35 @@ export class VecinoEventosDisponibles {
       },
       error: (error) => {
         console.log(error);
+        alert(error.error?.message || 'Error desconocido');
       }
     })
+  }
+
+  limpiarFiltros(): void {
+    this.formFiltro.reset({
+      nombre: '',
+      tipo: '',
+      metodo: '',
+      fechaInicio: '',
+      fechaFin: ''
+    });
+    this.listarEventos();
+  }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  get eventosPaginados() {
+    if (!this.paginator) return this.eventos.data.slice(0, 5); // fallback
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    return this.eventos.data.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize);
+  }
+
+  ngAfterViewInit(): void {
+    this.eventos.paginator = this.paginator;
+
+    this.paginator.page.subscribe((event: PageEvent) => {
+    });
   }
 }

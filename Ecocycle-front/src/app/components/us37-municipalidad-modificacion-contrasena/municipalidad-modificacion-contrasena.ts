@@ -2,9 +2,11 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MunicipalidadService} from '../../services/municipalidad-service';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-us37-municipalidad-modificacion-contrasena',
@@ -14,7 +16,10 @@ import {MunicipalidadService} from '../../services/municipalidad-service';
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
-    MatInput
+    MatInput,
+    MatIcon,
+    MatIconButton,
+    MatSuffix
   ],
   templateUrl: './municipalidad-modificacion-contrasena.html',
   styleUrl: './municipalidad-modificacion-contrasena.css',
@@ -65,5 +70,11 @@ export class MunicipalidadModificacionContrasena {
 
   onCancel(): void {
     this.router.navigate(['/inicio-muni']); // Reemplaza con tu ruta de destino
+  }
+
+  hidePassword = true;
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 }

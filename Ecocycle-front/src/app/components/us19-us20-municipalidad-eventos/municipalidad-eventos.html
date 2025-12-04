@@ -44,6 +44,15 @@
         <mat-datepicker-toggle matIconSuffix [for]="pickerMax"></mat-datepicker-toggle>
         <mat-datepicker #pickerMax></mat-datepicker>
       </mat-form-field>
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="btnLimpiar"
+        (click)="limpiarFiltros()">
+        <mat-icon>clear</mat-icon>
+        Limpiar
+      </button>
     </div>
   </form>
 
@@ -63,7 +72,7 @@
 <ul class="panelEventos">
   @if (eventos.data.length>0)
   {
-    @for (evento of eventos.data; track evento.idEvento; let i = $index) {
+    @for (evento of eventosPaginados; track evento.idEvento; let i = $index) {
       <li class="evento" [class.alterno]="i % 2 !== 0">
         <div class="filasEvento">
           <p class="nombreEvento"><strong>{{evento.nombre}}</strong></p>
@@ -84,12 +93,18 @@
           </div>
 
           <div class="columnaEvento columnaBtnEvento">
-            <a [routerLink]="['/evento', evento.idEvento]"><button type="submit" class="btnEvento">Ver detalle</button></a>
+            <a [routerLink]="['/evento', evento.idEvento]"><button mat-raised-button type="submit" class="btnEvento">Ver detalle</button></a>
           </div>
         </div>
       </li>
     }
-
+    <div class="paginator-container">
+      <mat-paginator
+        [length]="eventos.data.length"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        showFirstLastButtons>
+      </mat-paginator>
+    </div>
   }
   @else {
     <p class="sinEventos">
